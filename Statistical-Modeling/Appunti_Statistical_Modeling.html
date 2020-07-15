@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appunti - Statistical Modeling</title>
+  <meta name="description" content="Appunti - Statistical Modeling" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appunti - Statistical Modeling" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appunti - Statistical Modeling" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Data Management </a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Modello Lineare</b></span></li>
+<li class="chapter" data-level="1" data-path=""><a href="#modello-lineare-classico"><i class="fa fa-check"></i><b>1</b> Modello Lineare Classico</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#criterio-dei-minimi-quadrati-ordinari"><i class="fa fa-check"></i><b>1.1</b> Criterio dei Minimi Quadrati Ordinari</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#ipotesi-modello-lineare"><i class="fa fa-check"></i><b>1.2</b> Ipotesi Modello Lineare</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#proprietà-degli-stimatori"><i class="fa fa-check"></i><b>1.3</b> Proprietà degli stimatori</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#test-dipotesi"><i class="fa fa-check"></i><b>1.4</b> Test d’Ipotesi</a><ul>
+<li class="chapter" data-level="1.4.1" data-path=""><a href="#test-normale-con-varianza-nota"><i class="fa fa-check"></i><b>1.4.1</b> Test Normale con varianza nota:</a></li>
+<li class="chapter" data-level="1.4.2" data-path=""><a href="#test-normale-con-varianza-ignota"><i class="fa fa-check"></i><b>1.4.2</b> Test Normale con varianza ignota:</a></li>
+<li class="chapter" data-level="1.4.3" data-path=""><a href="#test-f-per-il-modello"><i class="fa fa-check"></i><b>1.4.3</b> Test F per il modello</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#violazione-degli-errori"><i class="fa fa-check"></i><b>2</b> Violazione degli Errori</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#errori-eteroschedastici"><i class="fa fa-check"></i><b>2.1</b> Errori eteroschedastici</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#errori-autocorrelati"><i class="fa fa-check"></i><b>2.2</b> Errori Autocorrelati</a></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#metodo-di-stima-wls"><i class="fa fa-check"></i><b>2.3</b> Metodo di stima WLS</a></li>
+<li class="chapter" data-level="2.4" data-path=""><a href="#modello-di-stima-gls"><i class="fa fa-check"></i><b>2.4</b> Modello di stima GLS</a></li>
+<li class="chapter" data-level="2.5" data-path=""><a href="#stimatore-gls"><i class="fa fa-check"></i><b>2.5</b> Stimatore GLS</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#violazioni-del-modello-lineare"><i class="fa fa-check"></i><b>3</b> Violazioni del modello lineare</a><ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#multicollinearità"><i class="fa fa-check"></i><b>3.1</b> Multicollinearità</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#linearità"><i class="fa fa-check"></i><b>3.2</b> Linearità</a></li>
+<li class="chapter" data-level="3.3" data-path=""><a href="#non-normalità"><i class="fa fa-check"></i><b>3.3</b> Non Normalità</a></li>
+<li class="chapter" data-level="3.4" data-path=""><a href="#outlier"><i class="fa fa-check"></i><b>3.4</b> Outlier</a></li>
+</ul></li>
+<li class="part"><span><b>II Modello Multivariato</b></span></li>
+<li class="chapter" data-level="4" data-path=""><a href="#modello-lineare-multivariato"><i class="fa fa-check"></i><b>4</b> Modello Lineare Multivariato</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#inferenza"><i class="fa fa-check"></i><b>4.1</b> Inferenza</a><ul>
+<li class="chapter" data-level="4.1.1" data-path=""><a href="#test-di-wilks"><i class="fa fa-check"></i><b>4.1.1</b> Test di Wilks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#modello-lineare-generalizzato"><i class="fa fa-check"></i><b>5</b> Modello Lineare Generalizzato</a><ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#soluzione-dei-minimi-quadrati-generalizzati"><i class="fa fa-check"></i><b>5.1</b> Soluzione dei minimi quadrati generalizzati</a></li>
+<li class="chapter" data-level="5.2" data-path=""><a href="#forme-della-matrice-di-var-cov-degli-errori"><i class="fa fa-check"></i><b>5.2</b> Forme della matrice di var-cov degli errori</a></li>
+<li class="chapter" data-level="5.3" data-path=""><a href="#soluzioni-fgls"><i class="fa fa-check"></i><b>5.3</b> Soluzioni FGLS</a></li>
+<li class="chapter" data-level="5.4" data-path=""><a href="#modello-sure"><i class="fa fa-check"></i><b>5.4</b> Modello SURE</a></li>
+</ul></li>
+<li class="part"><span><b>III Modello Multilevel</b></span></li>
+<li class="chapter" data-level="6" data-path=""><a href="#modello-lineare-multilevel"><i class="fa fa-check"></i><b>6</b> Modello Lineare Multilevel</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#regressione-multilevel"><i class="fa fa-check"></i><b>6.1</b> Regressione Multilevel</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#modello-multilevel-definizione-e-significato"><i class="fa fa-check"></i><b>6.2</b> Modello Multilevel: definizione e significato</a></li>
+<li class="chapter" data-level="6.3" data-path=""><a href="#modello-multilevel-ols-empty-mixed-total-effects"><i class="fa fa-check"></i><b>6.3</b> Modello Multilevel: OLS, Empty , Mixed, Total Effects</a></li>
+<li class="chapter" data-level="6.4" data-path=""><a href="#metodi-di-stima-e-verifica-di-ipotesi"><i class="fa fa-check"></i><b>6.4</b> Metodi di Stima e Verifica di Ipotesi</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Appunti - Statistical Modeling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Appunti - Statistical Modeling</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>30/6/2020</em></p>
+</div>
+<div style="page-break-after: always;"></div>
+
+
+
+<div id="modello-lineare-classico" class="section level1">
+<h1><span class="header-section-number">1</span> Modello Lineare Classico</h1>
+<p>I <strong><em>modelli</em></strong> esplicitano la relazione statistica e matematica tra le variabili tramite un compromesso tra l’adattamento dei dati ed il principio di parsimonia degli stessi. La differenza tra questi due modelli è che quello matematico approssima in termini esatti i dati, mentre un modello statistico è caratterizzato da errori che possono dipendere da variazioni individuali, errori di misura oppure nel caso stocastico per rapporto campione-popolazione. Il modello è specificato in riferimento alle unità statistiche di una data popolazione:</p>
+<p><span class="math display">\[y_i = f(x_{1i}, \dots, x_{ki}) +e_i \ \ \ \ \forall i = 1, \dots n\]</span></p>
+<p>Le fasi per procedere alla stima di un modello partono da considerazioni teoriche, che stanno alla base dell’ipotesi che vogliamo verificare, passando dalla verifica pratica di quanto ipotizzato. Le fasi di stima e verifica del modello possono essere fatte fino all’identificazione del modello migliore.</p>
+<p>Un modello di regressione è una relazione che lega la variabile dipendente a determinate variabili esplicative. All’interno di un modello sono presenti le seguenti variabili:</p>
+<ul>
+<li>Variabile <em>dipendente</em>, chiamata anche risposta, (<span class="math inline">\(y\)</span>) la colonna di un dataset che si vuole predire;</li>
+<li>Variabile <em>esplicativa/e</em>, chiamata anche covariata/e, (<span class="math inline">\(x_1, x_2, ..., x_k\)</span>) le variabili utilizzate per spiegare il fenomeno che rappresentano la componente sistematica del modello con natura deterministica;</li>
+<li>Variabile <em>errore</em>, solitamente stocastica, (<span class="math inline">\(\varepsilon\)</span>) che sintetizza l’errore circa la relazione che lega la variabile risposta alle esplicative.</li>
+</ul>
+<p>I modelli che possono essere specificati sono molteplici e dipendono non solo dalle variabile risposta ed esplicative, ma anche dal tipo di relazione, che può essere lineare o non lineare. I modelli possono essere:</p>
+<ul>
+<li><em>Semplici</em>, nella quale sono presenti una sola variabile dipendente ed una sola esplicativa:
+<span class="math display">\[y = \beta_0 + \beta_1 x_1 + \varepsilon\]</span></li>
+<li><em>Multipli</em>, nella quale sono presenti solo una variabile dipendente e più di una variabile esplicativa:
+<span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k + \varepsilon = X \beta + \varepsilon\]</span></li>
+<li><em>Multivariati</em>, nella quale sono presenti più di una variabile dipendente e più di una variabile esplicativa:
+<span class="math display">\[Y = X B + E\]</span></li>
+</ul>
+<p>Nel momento in cui si specifica un modello lineare, bisogna tenere in considerazione una componente stocastica dell’errore commessa al variare del campione spiegando la variabile risposta tramite le covariate. Sia <span class="math inline">\(y = X \beta + \varepsilon\)</span> la costruzione del modello lineare, si presenta il modello in forma matriciale:</p>
+<center>
+<p><span class="math inline">\(\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \begin{bmatrix} 1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1k} \\ 1 &amp; x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2k} \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{nk} \\ \end{bmatrix} \times \begin{bmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_k \end{bmatrix} + \begin{bmatrix} \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n \end{bmatrix}\)</span></p>
+</center>
+<p>dove:</p>
+<ul>
+<li><span class="math inline">\(y\)</span> rappresenta il vettore dei valori della variabile casuale dipendente;</li>
+<li><span class="math inline">\(X\)</span> rappresenta la matrice costituita dall’insieme ordinato delle <span class="math inline">\(n\)</span> osservazioni sulle <span class="math inline">\(k\)</span> variabili esplicative;</li>
+<li><span class="math inline">\(\beta\)</span> rappresenta il vettore dei parametri ignoti da stimare;</li>
+<li><span class="math inline">\(\varepsilon\)</span> rappresenta il vettore degli errori casuali non osservabili.</li>
+</ul>
+<div id="criterio-dei-minimi-quadrati-ordinari" class="section level2">
+<h2><span class="header-section-number">1.1</span> Criterio dei Minimi Quadrati Ordinari</h2>
+<p>Per poter stimare il vettore dei parametri <span class="math inline">\(\beta\)</span> uno degli approcci utilizzati nel contesto lineare è il Metodo dei Minimi Quadrati Lineari, chiamato anche in inglese <strong><em>O</em></strong>rdinary <strong><em>L</em></strong>east <strong><em>S</em></strong>quare (<strong>OLS</strong>). Si formula il problema di ricerca del vettore <span class="math inline">\(\beta\)</span> che minimizza la norma del vettore degli scarti <span class="math inline">\(\varepsilon\)</span>:</p>
+<p><span class="math display">\[\min \sum_{i=1}^k(y_i-{x_i}^t \beta)^2 = \min \sum_{i=1}^k{\varepsilon_i}^2 = \\
+\min \varepsilon^t \varepsilon = \min (y-X\beta)^t(y-X\beta)\]</span></p>
+<p>Lo stimatore <span class="math inline">\(\beta\)</span> minimizza la somma dei quadrati degli scarti fra i valori osservati <span class="math inline">\(y_i\)</span> sulla variabile <span class="math inline">\(y\)</span> mediante la combinazione lineare degli elementi di <span class="math inline">\(\beta\)</span> moltiplicati per i valori osservati <span class="math inline">\(x_i\)</span> delle variabili esplicative. Procedendo al calcolo del gradiente tramite delle derivate parziali della funzione obiettivo rispetto al vettore <span class="math inline">\(\beta\)</span> si ottiene:</p>
+<p><span class="math display">\[\frac{\partial (\varepsilon^t \varepsilon)}{\partial \beta} = -2X^t(y-X \beta)\]</span></p>
+<p>La condizione per l’esistenza di un minimo impone la nullità del gradiente <span class="math inline">\(X^t(y-X\beta) = 0\)</span> che conduce al sistema di equazioni normali <span class="math inline">\(X^t X \beta = X^t y\)</span>. Se la matrice dei coefficienti sotto condizioni generali è di rango pieno, il sistema possiede un’unica soluzione che è rappresentata da <span class="math inline">\(\beta^t = (X^t X)^{-1} X^t y\)</span> e se le variabili sono centrate si ha:</p>
+<p><span class="math display">\[y_1 = y^t = X \beta + \varepsilon^t = y^t + \varepsilon^t\]</span></p>
+<p>dove <span class="math inline">\(y^t = (X^t X)^{-1} X^t y\)</span> e <span class="math inline">\(\varepsilon^t = (I - X {(X^t X)}^{-1}X^ty)\)</span></p>
+<p>Lo stimatore rappresenta quindi lo stimatore dei minimi quadrati del vettore dei parametri; ogni parametro <span class="math inline">\(b_{1j}\)</span> indica la variazione di <span class="math inline">\(y\)</span> al variare unitario di <span class="math inline">\(x_j\)</span> mentre rimangono invariati i restanti, con <span class="math inline">\(i \neq j\)</span>. Sia <span class="math inline">\(D_x\)</span> la matrice diagonale i cui elementi diagonali sono le varianze delle variabili <span class="math inline">\(X\)</span> e le <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> sono standardizzate cioè divise per il loro scarto quadratico medio <span class="math inline">\(X^*=X {D_x}^{-1/2}\)</span>, <span class="math inline">\(y^*= \frac{y}{\sigma_y}\)</span> il coefficiente standardizzato è il coefficiente di regressione fra <span class="math inline">\(X^*\)</span> e <span class="math inline">\(y^*\)</span> che misura la relazione tra <span class="math inline">\(X\)</span> ed <span class="math inline">\(y\)</span> al netto dell’ordine di grandezza:</p>
+<p><span class="math display">\[B^*={(X^{*t} X^*)}^{-1} X^{*t} y^*\]</span></p>
+</div>
+<div id="ipotesi-modello-lineare" class="section level2">
+<h2><span class="header-section-number">1.2</span> Ipotesi Modello Lineare</h2>
+<p>Per specificare e stimare il modello bisogna considerare le seguenti <strong><em>assunzioni</em></strong>, senza la validità delle quali il modello costruito potrebbe risultare non valido:</p>
+<ol style="list-style-type: decimal">
+<li><em>Linearità</em>: un modello di regressione è lineare quando tutti i termini sono la costante o un parametro moltiplicato per una variabile indipendente. Per soddisfare questa ipotesi, il modello deve adattarsi al modello lineare;</li>
+<li><em>Non sistematicità degli Errori</em>: la casualità determina i valori del termine di errore. Affinchè il modello sia imparziale il valore medio dell’errore <span class="math inline">\(E(\varepsilon | X) = 0\)</span>; altrimenti la parte del termine di errore sarebbe prevedibile e bisognerebbe aggiungere le informazioni al modello. In questo caso, si impone che la media dei residui è nulla:
+<span class="math display">\[E(y | X) = X \beta \\
+E(y) = E(X \beta + \varepsilon) = E(X \beta) + E(\varepsilon) = X \beta\]</span></li>
+<li><em>Sfericità degli Errori</em>: la varianza è omoschedastica, ovvero non cambia per ogni osservazione:
+<span class="math display">\[E(\varepsilon) = E(y - X \beta) = (X \beta - X \beta) = 0 \\
+\implies Var(\varepsilon_i) = (E({\varepsilon_i}^2)) = \sigma^2 \ \ \ \ \ 
+Cov(\varepsilon_i, \varepsilon_j) = E(\varepsilon_i, \varepsilon_j) = 0\]</span></li>
+<li><em>Non stocasticità delle covariate</em>: i valori delle <span class="math inline">\(x_j\)</span> covariate non sono soggetti a fluttuazioni stocatiche da campione a campione, perciò <span class="math inline">\(E(X) = X\)</span> e <span class="math inline">\(Cov(X,\varepsilon) = 0\)</span>. La parte non fissa delle <span class="math inline">\(x_j\)</span> finisce in <span class="math inline">\(\varepsilon\)</span>;</li>
+<li><em>Non collinearità delle covariate</em>: le variabili della matrice <span class="math inline">\(X\)</span> sono linearmente indipendenti. <span class="math inline">\(X\)</span> ha rango uguale al numero delle colonne (più una costante), per cui <span class="math inline">\(X^t X\)</span> non è singolare: in caso contrario <span class="math inline">\(X^t X\)</span> non è invertibile ed il modello non risolvibile;</li>
+<li><em>Numerosità della popolazione</em>: il numero di osservazioni è sempre maggiore del numero di caratteri osservati: <span class="math inline">\(n \geq p + 1\)</span>. Se questa proprietà non è soddisfatta, la matrice delle covariate non è invertibile e dunque non è possibile costruire alcun modello.</li>
+</ol>
+<p>A queste assunzioni se ne aggiunge un’ultima, relativa agli stimatori che permette di costruire test ed intervalli di confidenza:</p>
+<ol start="7" style="list-style-type: decimal">
+<li><em>Normalità degli errori</em>: il soddisfacimento dell’ipotesi che <span class="math inline">\(\varepsilon_i \sim N(0, \sigma^2)\)</span> provoca anche la normalità nella distribuzione di <span class="math inline">\(y\)</span> e di <span class="math inline">\(\hat{\beta}\)</span>. Per il teorema del limite centrale <span class="math inline">\(\varepsilon_i\)</span>, <span class="math inline">\(y\)</span> e <span class="math inline">\(B^{\land}\)</span> sono distribuite come una Normale:</li>
+</ol>
+<p><span class="math display">\[y \sim N(X \beta, \sigma^2 I_n) \\
+\implies B^{\land} = {(X^t X)}^{-1} X^t y \sim N (\beta, \sigma^2 {(X^t X)}^{-1})\]</span></p>
+</div>
+<div id="proprietà-degli-stimatori" class="section level2">
+<h2><span class="header-section-number">1.3</span> Proprietà degli stimatori</h2>
+<p>Per valutare l’affidabilità di uno stimatore si considerano tre <strong><em>proprietà degli stimatori</em></strong>:</p>
+<ol style="list-style-type: decimal">
+<li><em>Correttezza</em>, o anche chiamata non distorsione, ovvero la differenza tra valore atteso e valore reale deve essere nulla:</li>
+</ol>
+<p><span class="math display">\[E[B] = \beta \implies E[B] - \beta = 0\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><em>Efficienza</em>, ovvero minimizzare l’errore quadratico medio. Uno stimatore corretto è relativamente efficiente rispetto ad un altro corretto se la sua varianza è più piccola;</p></li>
+<li><p><em>Consistenza</em>, ovvero se la probabilità che cada in un intervallo del valore vero tende a una al crescere dell’ampiezza campionaria:</p></li>
+</ol>
+<p><span class="math display">\[n \rightarrow \infty \implies P(|B-\beta| &lt; k) \rightarrow 1\]</span></p>
+<p>Si dimostra che lo stimatore OLS è <strong><em>B</em></strong>est <strong><em>L</em></strong>inear <strong><em>U</em></strong>nbiased <strong><em>E</em></strong>stimator (<strong>BLUE</strong>); in particolare, non è solo corretto, ma anche consistente.</p>
+</div>
+<div id="test-dipotesi" class="section level2">
+<h2><span class="header-section-number">1.4</span> Test d’Ipotesi</h2>
+<p>Generalmente uno stimatore segue una distribuzione normale, <span class="math inline">\(\beta_j \sim N(\mu,\sigma^2)\)</span>; si effettua un <strong><em>test d’ipotesi</em></strong> con probabilità dell’errore di primo grado <span class="math inline">\(\alpha\)</span> arbitrario per verificare la significatività di un parametro <span class="math inline">\(\beta_j\)</span> con varianza <span class="math inline">\(\sigma^2\)</span> nota:</p>
+<p>Se il valore del parametro ricavato dal campione ricade nell’area di accettazione, si accetta l’ipotesi nulla legata al valore del campione, altrimenti la si rifiuta. Solitamente nel modello lineare tale ipotesi assume che il parametro sia nullo e quindi si vuole minimizzare l’ipotesi di rifiutare <span class="math inline">\(H_0\)</span> quando è vera.</p>
+<p>Esiste una relazione tra i test d’ipotesi e gli intervalli di confidenza: per i primi si rifiuta <span class="math inline">\(H_0\)</span> se il <span class="math inline">\(p\)</span>-<span class="math inline">\(value\)</span> ha poca probabilità che il parametro nel campione ha un valore estremo anche se <span class="math inline">\(H_0\)</span> è vero; per i secondi, invece, con confidenza al 95% fornisce un intervallo di valori plausibili per il coefficiente angolare in cui il 95% degli intervalli comprende il vero valore del coefficiente angolare stesso.</p>
+<div id="test-normale-con-varianza-nota" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Test Normale con varianza nota:</h3>
+<p>Si considera <span class="math inline">\(N \sim (\beta_j, \frac{\sigma^2}{n\sigma^{-1}_{jj}})\)</span> e si verifichi l’ipotesi <span class="math inline">\(H_0: \beta_j = 0\)</span> contro l’ipotesi <span class="math inline">\(H_1: \beta_j \neq 0\)</span>. L’intervallo di confidenza è definito nel seguente modo:</p>
+<p><span class="math display">\[P[-Z_{\frac{\alpha}{2}} &lt; \frac{\beta_j}{\frac{\sigma}{\sqrt{n\sigma^{-1}_{j.j}}}} &lt; +Z_{\frac{\alpha}{2}}] = P[-Z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n\sigma^{-1}_{j.j}}} &lt; \beta_j &lt; Z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n\sigma^{-1}_{j.j}}}] = 1 - \alpha\]</span></p>
+<p>Si rifiuta <span class="math inline">\(H_0\)</span> se l’intervallo centrale non comprende il valore di <span class="math inline">\(\beta_j\)</span> ricavato dal campione</p>
+</div>
+<div id="test-normale-con-varianza-ignota" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Test Normale con varianza ignota:</h3>
+<p>L’assunzione di conoscenza della varianza della popolazione è però raramente verificata nella realtà. Per verificare il test d’ipotesi si introduce una nuova variabile, chiamata <span class="math inline">\(t\)</span> di Student, definita come il rapporto tra una variabile standardizzata ed una <span class="math inline">\(\chi^2_{n-k-1}\)</span>. Anche in questo caso si ha
+interesse a verificare il seguente sistema di ipotesi: <span class="math inline">\(H_0: \beta_j = 0\)</span> contro l’ipotesi <span class="math inline">\(H_1: \beta_j \neq 0\)</span> con varianza ignota:</p>
+<p><span class="math display">\[P[-t_{\frac{\alpha}{2}} &lt; \frac{\hat{\beta_j}- \beta_j}{\frac{s}{\sqrt{n\sigma^{-1}_{j.j}}}} &lt; +t_{\frac{\alpha}{2}}] = P[\hat{\beta_j}-t_{\frac{\alpha}{2}} \frac{s}{\sqrt{n\sigma^{-1}_{j.j}}} &lt; \beta_j &lt; \hat{\beta_j} + t_{\frac{\alpha}{2}} \frac{s}{\sqrt{n\sigma^{-1}_{j.j}}}] = 1 - \alpha\]</span></p>
+</div>
+<div id="test-f-per-il-modello" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Test F per il modello</h3>
+<p>Per verificare la significatività del modello complessivamente, è necessario adottare un altro tipo di test. In questo caso si fa riferimento alla devianza complessiva e alla devianza residua. Per verificare il test d’ipotesi si introduce la distribuzione <span class="math inline">\(F\)</span> di Snedecor:</p>
+<p><span class="math display">\[\frac{Dev_{Tot} / k}{Dev_{Res} / (n-k-1)} \sim F_{k, n-k-1}\]</span></p>
+<p>In questo caso il sistema di ipotesi da verificare è <span class="math inline">\(H_0: \beta_1 = \ldots = \beta_k = 0\)</span> contro l’ipotesi <span class="math inline">\(H_1:\)</span> almeno un <span class="math inline">\(\beta_j \neq 0\)</span></p>
+<p>Per compiere il test F su <em>uno o più parametri</em>, si ipotizza che <span class="math inline">\(q &lt; k\)</span> siano nulli: <span class="math inline">\(H_0: \beta_1, \ldots , \beta_q = 0\)</span>. Si considerino <span class="math inline">\(Dev_{Spieg \ 1}\)</span> e <span class="math inline">\(Dev_{Res \ 1}\)</span> delle ultime <span class="math inline">\(k - q\)</span> variabili di <span class="math inline">\(X\)</span> ed il seguente rapporto:</p>
+<p><span class="math display">\[\frac{(Dev_{Spieg} - Dev_{Spieg \ 1})/(k-q)}{Dev_{Res}/(n-p-1)} \sim F_{k-q, n-k-1}\]</span></p>
+<p>Se <span class="math inline">\(q=k-1\)</span> il test F può essere effettuato sui singoli parametri, costruendo le seguenti ipotesi: <span class="math inline">\(H_0: \beta_j = 0\)</span> contro <span class="math inline">\(H_1: \beta_j \neq 0\)</span>. La funzione F diventa:</p>
+<p><span class="math display">\[\frac{\chi^2/1}{\chi^2/(n-p-1)} = \frac{{\beta_j}^2}{s^2/n \sigma_{jj}^{-1}} \sim F_{1, n-p-1} = t_{\alpha/2}(n-k-1)\]</span></p>
+<!-- METTERE Stima di max verosimiglianza-->
+<!-- METTERE Variabili Dummy-->
+</div>
+</div>
+</div>
+<div id="violazione-degli-errori" class="section level1">
+<h1><span class="header-section-number">2</span> Violazione degli Errori</h1>
+<p>Dato che <em>tutti i modelli sono falsi</em>, le ipotesi classiche non sono scorrette, tuttavia semplificano in modo eccessivo: in circostanze reali è difficile trovare fenomeni che le soddisfino tutte. Si possono però eliminare tutte le ipotesi classiche (a eccezione delle ultime due elencate precedentemente) in modo tale da ottenere un modello più veritiero.</p>
+<div id="errori-eteroschedastici" class="section level2">
+<h2><span class="header-section-number">2.1</span> Errori eteroschedastici</h2>
+<p>Si consideri il modello lineare classico <span class="math inline">\(y_j = X_j \hat B + \hat \varepsilon_j\)</span>. Per ottenere stime efficienti per i parametri del modello lineare gli errori devono essere omoschedastici, ovvero la varianza degli errori deve essere costante e non dipendere dal valore delle variabili indipendenti:</p>
+<p><span class="math display">\[Var(\varepsilon_i) = E({\varepsilon_i}^2) = \sigma^2 \\
+\implies E(\varepsilon_i) = E(\varepsilon_i | x_i)\]</span></p>
+<p>Questo si verifica dal momento che il valore atteso del singolo errore è pari a zero: <span class="math inline">\(E(\varepsilon_i) = 0\)</span>. Nel momento in cui ciò non avviene, si è in presenza di errori <strong><em>eteroschedastici</em></strong>: <span class="math inline">\(Var(\varepsilon_i) = \sigma_i^2\)</span>. In termini matriciali, la matrice di varianza-covarianza degli errori <span class="math inline">\(\Sigma_E\)</span> avrà sulla diagonale valori di varianza diversi.</p>
+<p>Le proprietà di linearità, consistenza e correttezza rimangono valide:</p>
+<p><span class="math display">\[\begin{align}
+   \text{E}(B^*) &amp;= \text{E}((X^t X)^{-1}X^ty) \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(y) \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(Xb + e^*) \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(b) = b
+\end{align}\]</span></p>
+<p>ma lo stimatore <span class="math inline">\(B^*\)</span> non è più BLUE e quindi non efficiente:</p>
+<p><span class="math display">\[\begin{align}
+   Var(B^*) &amp;= \text{E}[(B^* - b)(B^* - b)^t] \\
+            &amp;= \text{E}[((X^t X)^{-1} X^t y - b)((X^t X)^{-1} X^t y - b)^t] \\
+            &amp;= [(X^tX)^{-1}X^t] \text{E}(e^* e^{*t}) [(X^tX)^{-1}X^t]^t \\
+            &amp;= [(X^tX)^{-1}X^t] \Sigma_{e^*} [(X^tX)^{-1}X^t]^t
+\end{align}\]</span></p>
+<p>Inoltre, la stima campionaria <span class="math inline">\(s^2\)</span> di <span class="math inline">\(\sigma^2\)</span> sottostima il vero valore della distribuzione, dato che si è in presenza di molteplici variabili casuali. Il test t-Student mostra dei valori erroneamente più elevati e di conseguenza gli intervalli di confidenza diventano più stretti e non affidabili. I test di significatività sui parametri <span class="math inline">\(b_j\)</span> risultano più permissivi del dovuto. Analogamente si compiono gli stessi discorsi per i test basati sulla F di Snedecor.</p>
+<p>La violazione dell’ipotesi di omoschedasticità è rilevabile attraverso due modalità: una di ispezione grafica ed una orientata verso dei test su misura. Per quanto riguarda l’ispezione grafica, preferibile come primo approccio, è necessario ricorrere a visualizzazioni quale lo Scatterplot: con quest’ultimo è possibile mettere a confronto diverse coppie di elementi sugli assi, tutte egualmente valide, tra cui le più utilizzate sono:</p>
+<ul>
+<li>La variabile risposta <em>vs</em> le covariate;</li>
+<li>I residui stimati <em>vs</em> i residui predetti sula risposta;</li>
+<li>I residui al quadrato <em>vs</em> i residui predetti;</li>
+<li>I valori osservati <em>vs</em> i valori predetti;</li>
+<li>I residui <em>vs</em> ogni regressore.</li>
+</ul>
+<p>Per quanto riguarda invece i test di misura, il primo utile allo scopo è il <em>Test di White</em>, basato sull’ipotesi nulla che vi sia omoschedasticità tra i residui e che quindi <span class="math inline">\(H_0: Var(\varepsilon|X) = \sigma^2I_n\)</span>. Il meccanismo del test prevede i seguenti passaggi:</p>
+<ol style="list-style-type: decimal">
+<li>Si regredisce <span class="math inline">\(Y\)</span> rispetto alle covariate <span class="math inline">\(X_j\)</span> e si ricava l’errore <span class="math inline">\(\varepsilon_i\)</span>;</li>
+<li>Si regredisce <span class="math inline">\(\varepsilon_i\)</span> rispetto alle covariate <span class="math inline">\(x_j\)</span>, al loro quadrato <span class="math inline">\({X_j}^2\)</span> e alle loro interazioni;</li>
+<li>Si determina il coefficiente <span class="math inline">\(R^2\)</span> della regressione e si procede alla costruzione del valore (considerando <span class="math inline">\(n\)</span> il numero di regressori):
+<span class="math inline">\(LM = n R^2 \sim \chi^2_n\)</span></li>
+<li>Se <span class="math inline">\(LM \notin IC\)</span> allora <span class="math inline">\(\varepsilon_i^2\)</span> varia al variare delle <span class="math inline">\(x_j\)</span> e sarà quindi da confermare la presenza di eteroschedasticità (ovvero si rifiuta <span class="math inline">\(H_0\)</span>).</li>
+</ol>
+<p>Un altro test utilizzato è chiamato <em>Test di Breusch-Pagan</em>, che che invece di regredire su <span class="math inline">\(\varepsilon_i^2\)</span> effettua la regressione su una diversa funzione:</p>
+<p><span class="math display">\[S^2 = \frac{\sum_{i}^n \varepsilon_i^2}{n} \sim \chi^2_k\]</span></p>
+<p>Questo meccanismo punta alla normalizzazione dei residui <span class="math inline">\(\varepsilon_i^2\)</span>, per cui se <span class="math inline">\(S^2\)</span> ed <span class="math inline">\(\varepsilon^2\)</span> divergono significa che è presente eteroschedasticità.</p>
+</div>
+<div id="errori-autocorrelati" class="section level2">
+<h2><span class="header-section-number">2.2</span> Errori Autocorrelati</h2>
+<p>Si consideri il modello lineare classico <span class="math inline">\(y_j = X_j \hat B + \hat \varepsilon_j\)</span>. Per garantire stime efficienti, è necessario verificare che gli errori <span class="math inline">\(\varepsilon\)</span> non siano tra di loro incorrelati, o chiamati anche <strong><em>autocorrelati</em></strong>. Infatti si ipotizza che la correlazione tra gli errori è nulla:</p>
+<p><span class="math display">\[Cor(\varepsilon_i, \varepsilon_j) = E(\varepsilon_j \varepsilon_i) = 0 \ \ \ \forall i \neq j\]</span></p>
+<p>Molte volte capita, soprattutto durante lo studio di serie storiche, che sia presente una correlazione tra errori in momenti successivi. Gli errori si possono dividere in errori ritardati in un tempo, <span class="math inline">\(\varepsilon_i^\#\)</span>, ed errori omoschedastici <strong><em>i</em></strong>dentici ed <strong><em>i</em></strong>denticamente <strong><em>d</em></strong>istribuiti (<strong>iid</strong>) come una Normale, <span class="math inline">\(\eta_i\)</span>. L’autocorrelazione può essere <strong><em>positiva</em></strong>, ovvero i residui consecutivi sono positivi, quindi con stesso segno e simili valori, oppure <strong><em>negativa</em></strong>. È possibile classificare l’autocorrelazione in base al suo grado; in particolare, un’autocorrelazione di primo grado indica errori correlati con il loro valore ritardato di un tempo, mentre un’autocorrelazione di s-esimo grado quando gli errori sono correlati con il loro valore ritardato di s gradi:</p>
+<p><span class="math display">\[\varepsilon_i^\# = \rho {\hat \varepsilon_{i-1}}^\# + \eta_i \\
+\vdots \\
+\varepsilon_i^\# = \rho {\hat \varepsilon_{i-s}}^\# + \eta_i\]</span></p>
+<p>Essi non incidono sulle proprietà di linearità, correttezza e consistenza degli stimatori OLS:</p>
+<p><span class="math display">\[\begin{align}
+   \text{E}(B^*) &amp;= \text{E}(X^t X)^{-1}X^ty \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(y) \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(Xb + e^\#) \\
+                 &amp;= (X^t X)^{-1}X^t \text{E}(b) = b
+\end{align}\]</span></p>
+<p>Tuttavia, lo stimatore non è più BLUE in quanto lo stimatore non è efficiente:</p>
+<p><span class="math display">\[\begin{align}
+   Var(B^\#) &amp;= \text{E}[(B^* - b)(B^* - b)^t] \\
+            &amp;= \text{E}[((X^t X)^{-1} X^t y - b)((X^t X)^{-1} X^t y - b)^t] \\
+            &amp;= [(X^tX)^{-1}X^t] \text{E}(e^\# e^{\#t}) [(X^tX)^{-1}X^t]^t \\
+            &amp;= [(X^tX)^{-1}X^t] \Sigma_{e^\#} [(X^tX)^{-1}X^t]^t
+\end{align}\]</span></p>
+<p>Inoltre, le stime della varianza dei parametri non sono più corrette ed affidabili; di conseguenza, la t-Student ottiene valori erroneamente più elevati ed i relativi intervalli di confidenza diventano più stretti con un’area di rifiuto più ampia.</p>
+<p>Per individuare nelle osservazioni la caratteristica di autocorrelazione si costruiscono diversi grafici:</p>
+<ul>
+<li>Scatterplot della risposta con le covariate: <span class="math inline">\(y \sim x_j \ \ \forall j\)</span>;</li>
+<li>Scatterplot dei residui con le covariate: <span class="math inline">\(\varepsilon \sim x_j \ \ \forall j\)</span>;</li>
+<li>Scatterplot dei residui con i residui ritardati: <span class="math inline">\(\varepsilon \sim \varepsilon_{-1}\)</span>;</li>
+<li><em>Correlogramma</em>, nella quale si visualizzano le correlazioni a diversi gradi. Analizzando la funzione di autocorrelazione dei residui (<strong>ACF</strong>) si determina il tipo di modello autoregressivo.</li>
+</ul>
+<p>Il <em>Test di Durbin-Watson</em> offre uno strumento analitico per verificare la presenza di autocorrelazione a diversi gradi. Il test considera come ipotesi nulla la mancanza di autocorrelazione: <span class="math inline">\(H_0: \rho = Corr({\varepsilon_{i}}^\#, {\varepsilon_{i-1}}^\#) = 0\)</span>, mentre l’ipotesi alternativa può essere verificata su entrambe le code della distribuzione od in modo unidirezionale: <span class="math inline">\(H_1: \rho \neq, &gt;, &lt; 0\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+DW &amp;= \frac{\sum^n_{i=1} ({\varepsilon_{i}}^\#- {\varepsilon_{i-1}}^\#)^2}{\sum^n_{i=1} {\varepsilon_{i}}^{\#2}} = \\
+   &amp;= \frac{E({\varepsilon_{i}}^\#)^2 + E({\varepsilon_{i-1}}^\#)^2 - 2E({\varepsilon_{i}}^\#, {\varepsilon_{i-1}}^\#)}{E({\varepsilon_{i}}^\#)^2} = \\
+   &amp;= \frac{2 \sigma^2 - 2 \rho \sigma^2}{\sigma^2} = \\
+   &amp;= 2(1-\rho) \in [0,4]
+\end{align}\]</span></p>
+<p>Il valore tende a 2 in caso di assenza di autocorrelazione, a 0 in caso di autocorrelazione positiva e 4 in caso di autocorrelazione negativa. Convenzionalmente se <span class="math inline">\(DW \in [0,3]\)</span> non è presente autocorrelazione.</p>
+</div>
+<div id="metodo-di-stima-wls" class="section level2">
+<h2><span class="header-section-number">2.3</span> Metodo di stima WLS</h2>
+<p>Nel momento in cui si presentano errori eteroschedastici ed incorrelati, ovvero la varianza dell’errore del modello non è costante, si violano delle ipotesi del modello lineare classico. Di conseguenza non è possibile utilizzare lo stimatore OLS, in quanto non più efficiente, ma lo stimatore <strong><em>W</em></strong>eighted <strong><em>L</em></strong>east <strong><em>S</em></strong>quares (<strong>WLS</strong>). Esso permette di stimare la varianza delle singole componenti d’errore <span class="math inline">\(\varepsilon_i\)</span> dati <span class="math inline">\(x_i\)</span>. Da un modello <span class="math inline">\(y_i = x_i B^* + \varepsilon_i^*\)</span>, si passa ad un modello per riportare la varianza degli errori ad una costante:</p>
+<p><span class="math display">\[Y^+ = X^+ B + \varepsilon^+\]</span></p>
+<p>con variabili:</p>
+<p><span class="math display">\[y_i \rightarrow y^+_i = \frac{y_i}{\sqrt{s_i}} \ \ \ \
+x_{ij} \rightarrow x_{ij}^+ = \frac{x_{ij}}{\sqrt{s_i}} \ \ \ \
+\varepsilon_i \rightarrow \varepsilon_i^+ = \frac{\varepsilon_i^*}{\sqrt{s_i}}\]</span></p>
+<p>In caso di eteroschedasticità ed incorrelazione, la matrice inversa degli errori è quindi più semplice, <span class="math inline">\(S_\varepsilon^{-1} = diag(1/s_1^2, \dots, 1/s_k^2)\)</span>. Tuttavia, esistono dei problemi di ordine computazionale nella quale le varianze diventano negative per alcune osservazione. Per correggere l’eteroschedasticità si utilizza la funzione esponenziale e successivamente lo si riporta alla normalità con il logaritmo.</p>
+</div>
+<div id="modello-di-stima-gls" class="section level2">
+<h2><span class="header-section-number">2.4</span> Modello di stima GLS</h2>
+<p>Nel caso in cui gli errori siano autocorrelati ed eteroschedastici, si ipotizza che esista una correlazione fra errori in momenti successivi. Si parla di autocorrelazione se al variare di <span class="math inline">\(X\)</span> si osserva una fluttuazione dei valori di <span class="math inline">\(Y\)</span> con lo stesso segno (autocorrelazione positiva) o di segno opposto (autocorrelazione negativa), oltre un certo intervallo di confidenza. È possibile ricavare stime per errori correlati tramite una stima dei parametri in una equazione che tenga conto della struttura di autocorrelazione seriale, ovvero il metodo proposto da Durbin.</p>
+<p>Il metodo di stima <strong><em>G</em></strong>eneralized <strong><em>L</em></strong>east <strong><em>S</em></strong>quare (<strong>GLS</strong>) consiste nello stimare il coefficiente di autocorrelazione di i-esimo ordine attraverso un modello lineare semplice con errori correlati di tempo <span class="math inline">\(t\)</span>, <span class="math inline">\(y_t = \beta_0 + \beta_1 x_t + \hat \varepsilon_t^\#\)</span> per stimare il coefficiente di correlazione <span class="math inline">\(\rho\)</span> del t-esimo ordine:</p>
+<p><span class="math display">\[\hat \varepsilon^\#_i = a_0 + a_1^\#x_1 + \dots + a_k^\#x_k + \rho \hat \varepsilon^\#_{i-1}\]</span></p>
+<p>Si moltiplica ogni elemento dell’equazione ritardata per <span class="math inline">\(\rho\)</span>, ottenendo:</p>
+<p><span class="math display">\[\rho y_{t-i} = \rho X_{t-i} \beta + \rho \hat \varepsilon_{t-i}\]</span></p>
+<p>Infine si sottrae l’equazione precedente all’equazione in forma normale <span class="math inline">\(Y-t - \rho y_{t-i}\)</span>, ottenendo un modello OLS per i parametri trasformati e con errori incorrelati:</p>
+<p><span class="math display">\[\begin{align}
+y_t^\# &amp;= X_t^\# \beta + \varepsilon_t^\# \\
+(y_t - \rho y_{t-i}) &amp;= (X_t - \rho X_{t-i}) \beta + (\varepsilon_t - \rho \varepsilon_{t-i})
+\end{align}\]</span></p>
+<p>Il modello rispetta tutte le proprietà classiche di correttezza, consistenza ed efficienza. Dato che <span class="math inline">\(\text{E}(w_i) = \text{E}(\hat \varepsilon_i^{\#} - \rho \hat \varepsilon_{i-1}^{\#}) = 0\)</span>, si ha:</p>
+<p><span class="math display">\[\begin{align}
+   \text{cov}(w_i, w_{i-1}) &amp;= \text{cov}(\hat \varepsilon_i^{\#} - \rho \hat \varepsilon_{i-1}^{\#}, \hat \varepsilon_{i-1}^{\#} - \rho \hat \varepsilon_{i-2}^{\#}) \\
+                            &amp;= \text{cov}(\hat \varepsilon_{i}^{\#}, \hat \varepsilon_{i-1}^{\#}) - \rho \text{cov}(\hat \varepsilon_{i}^{\#}, \hat \varepsilon_{i-2}^{\#}) - \rho \text{cov}(\hat \varepsilon_{i-1}^{\#}, \hat \varepsilon_{i-1}^{\#}) + \rho^2 \text{cov}(\hat \varepsilon_{i-1}^{\#}, \hat \varepsilon_{i-2}^{\#}) \\
+                            &amp;= \rho - \rho^3 - \rho + \rho^3 = 0
+\end{align}\]</span></p>
+<p>In alternativa, è possibile utilizzare un modello autoregressivo per la quale si inserisce nell’equazione iniziale un errore ritardato che tiene conto dell’autocorrelazione dell’i-esimo ordine:</p>
+<p><span class="math display">\[y = X \beta + AR_i + \varepsilon\]</span></p>
+<p>con <span class="math inline">\(AR_i + \varepsilon\)</span> e <span class="math inline">\(\rho_{v_j, v_k} = 0 \ \ \forall j \neq k\)</span></p>
+</div>
+<div id="stimatore-gls" class="section level2">
+<h2><span class="header-section-number">2.5</span> Stimatore GLS</h2>
+<p>Nel caso in cui gli errori non siano sferici in quanto eteroschedastici e correlati con correlazione diversa tra diversi errori si utilizza lo stimatore GLS, interpretabile come stimatore OLS basato su variabili trasformate per mezzo delle proprietà degli autovettori ed autovalori ricavati dalla matrice di var-cov dei residui <span class="math inline">\(\Sigma_{\varepsilon}\)</span>. Si procede con la decomposizione spettrale della matrice degli errori:</p>
+<p><span class="math display">\[\Sigma_{\varepsilon} =
+\begin{bmatrix}
+s_1^2     &amp; \rho_{12} &amp; \dots  &amp; \rho_{1k} \\
+\rho_{12} &amp; s_1^2     &amp; \dots  &amp; \rho_{2k} \\
+\vdots    &amp; \vdots    &amp; \ddots &amp; \vdots \\
+\rho_{1k} &amp; \rho_{12} &amp; \dots  &amp; s_k^2 \\
+\end{bmatrix} =
+\sigma^2VV^t\]</span></p>
+<p>con <span class="math inline">\(V = \sigma(\sqrt{AL})A^t\)</span>, <span class="math inline">\(A\)</span> la matrice degli autovettori e <span class="math inline">\(L\)</span> la matrice degli autovettori di <span class="math inline">\(\Sigma_{\varepsilon}\)</span>. Premotiplicando per <span class="math inline">\(V^{-1}\)</span> le componenti del modello si ottiene una nuova funzione con variabili trasformate e <span class="math inline">\(\Sigma_{\varepsilon°}\)</span> omoschedastica ed incorrelata:</p>
+<p><span class="math display">\[V^{-1} y = y° \ \ \text{e} \ \ V^{-1} X = X° \\
+\implies y° = X° \beta° + \varepsilon\]</span></p>
+<p>Lo stimatore <span class="math inline">\(\beta°\)</span> risulta essere corretto e consistente:</p>
+<p><span class="math display">\[\begin{align}
+   E(B°) &amp;= \text{E}[(X°^t X°)^{-1} X°^t y°] \\
+         &amp;= \text{E}[b° + (X°^t X°)^{-1} X°^t E°] \\
+         &amp;= b° + (X°^t X°)^{-1} X°^t \text{E}(E°) = b°
+\end{align}\]</span></p>
+<p>Inoltre, secondo il <em>Teorema di Aitken</em> è lo stimatore più efficiente per il modello generalizzato nonostante abbia una varianza maggiore rispetto al metodo OLS:</p>
+<p><span class="math display">\[\begin{align}
+   \text{E}[(B° - b°) (B° - b°)^t] =&amp; \text{E}[((X°^t X°)^{-1} X°^t y° - b°)((X°^t X°)^{-1} X°^t y° - b°)^t] \\
+                                   =&amp; [(X°^t X°)^{-1} X°^t][\text{E}(E E^t)][X° (X°^t X°)^{-1}]^t \\
+                                   =&amp; \sigma^2 (X^t \Sigma_{E°} X)^{-1}
+\end{align}\]</span></p>
+<p>Tuttavia, la stima GLS necessita di assumere come nota la matrice di varianza-covarianza dei residui <span class="math inline">\(\Sigma_{\varepsilon}\)</span>, oppure si può calcolare una sua stima <span class="math inline">\(S_{E°}\)</span> a patto che sia consistente a <span class="math inline">\(\lim_{n \rightarrow \infty} S_{\varepsilon°} = \Sigma_{\varepsilon°}\)</span></p>
+<p>Di conseguenza è possibile utilizzare lo stimatore <strong><em>F</em></strong>easibile <strong><em>G</em></strong>eneralized <strong><em>L</em></strong>east <strong><em>S</em></strong>quare (<strong>FGLS</strong>). Questa soluzione solitamente viene utilizzata per il controllo di eteroschedasticità o di semplice autocorrelazione.</p>
+</div>
+</div>
+<div id="violazioni-del-modello-lineare" class="section level1">
+<h1><span class="header-section-number">3</span> Violazioni del modello lineare</h1>
+<div id="multicollinearità" class="section level2">
+<h2><span class="header-section-number">3.1</span> Multicollinearità</h2>
+<p>La <strong><em>multicollinearità</em></strong> sorge nel momento in cui è presente una elevata correlazione tra due o più variabili esplicative del modello o linearmente dipendente da altre. In questo caso, le varianze delle stime dei parametri diventano molto alte. Di conseguenza, i parametri stimati non sono più attendibili e l’intervallo di confidenza costruito con la t Student (o la F di Snedecor) tende ad avere una ampiezza maggiore, diminuendo la probabilità di stima del vero valore del parametro. Esistono diversi modi per studiare questo fenomeno: il primo è quello di costruire la <em>matrice di correlazione</em>, in modo da osservare la presenza di valori molto alti dell’indice di correlazione <span class="math inline">\(\rho\)</span> tra coppie di variabili. Un secondo approccio è il calcolo dell’<em>indice di tolleranza</em> (<strong><em>TOL</em></strong>), che misura il grado di dipendenza lineare di una variabile esplicativa rispetto alle altre:</p>
+<p><span class="math display">\[TOL_{x_j} = 1 - R^2_{x_j \ | \ x_{1}, \dots, x_{j-1}, x_{j+1}, \dots, x_p} \in [0,1]\]</span></p>
+<p>Se una variabile è multicollineare con le altre <span class="math inline">\(TOL_{x_j} = 0\)</span>, con il coefficiente di determinazione corretto della
+regressione della variabile in funzione delle altre variabili presenti pari ad 1; se è incorrelata <span class="math inline">\(TOL_{x_j} = 1\)</span>.</p>
+<p>Un terzo approccio è il calcolo della <em>varianza multifattoriale</em> (<strong><em>VIF</em></strong>), calcolato come il reciproco del TOL:</p>
+<p><span class="math display">\[VIF_{x_j} = \frac{1}{TOL_{x_j}} \in [1, +\infty)\]</span></p>
+<p>In questo caso se una variabile è incorrelata con le restanti covariate <span class="math inline">\(VIF_{x_j} = 1\)</span>. Una variabile è collineare nel caso in cui il valore <span class="math inline">\(VIF_{x_j} &gt; 10\)</span>.</p>
+<p>La principale differenza tra questi due indici è che il TOL è un indice normalizzato, mentre il VIF si estende su quasi tutti i numeri reali positivi con soglia 10.</p>
+<p>Un ultimo approccio è il calcolo dell’<em>indice di collinearità</em>, calcolato come la radice del rapporto tra l’autovalore massimo della matrice <span class="math inline">\(X^t X\)</span> e ogni autovalore. Un valore superiore a 10 della quota di varianza di ogni variabile associata indica la presenza di multicollinearità.</p>
+</div>
+<div id="linearità" class="section level2">
+<h2><span class="header-section-number">3.2</span> Linearità</h2>
+<p>Per linearità si intende una relazione di tipo polinomiale tra la variabile risposta e le covariate del modello, secondo una combinazione lineare. Prima di affermare che il modello utilizzato non è adatto anche introducendo nuove variabili, bisogna verificare la linearità del modello tramite strumenti grafici, tra i quali:</p>
+<ul>
+<li>Scatterplot variabile risposta vs covariata <span class="math inline">\(y \sim x_j \ \ \forall j\)</span>;</li>
+<li>Scatterplot residui vs valori osservati <span class="math inline">\(\varepsilon \sim x_i \ \ \forall i\)</span>;</li>
+<li>Scatterplot residui vs valori previsti <span class="math inline">\(\varepsilon \sim \hat x_i \ \ \forall i\)</span>.</li>
+</ul>
+<p>Un altro modo per verificare la linearità del modello è l’utilizzo di indici, come l’indice di adattabilità <span class="math inline">\(R^2\)</span>, e di test F e t, osservando la significatività delle variabili esplicative. È da notare che la non linearità potrebbe dipendere anche da poche variabili esplicative e non da tutte. Nel momento in cui il modello non è lineare, si possono utilizzare delle trasformazioni dei parametri o delle variabili tali che li renda lineari e stimare i parametri applicando la trasformazione inversa per ottenere il parametro originale. Nel caso in cui le componenti siano intrinsecamente non lineari, si utilizza lo stimatore <strong><em>N</em></strong>on <strong><em>L</em></strong>inear <strong><em>S</em></strong>quare (<strong><em>NLS</em></strong>), che sfrutta algoritmi numerici per risolvere il problema di minimizzazione non lineare.</p>
+<p>Volendo utilizzare funzioni di variabili risposte non lineari in X si possono riformulare una vasta famiglia di funzioni di regressione lineare come regressioni multiple. Quelle più utilizzate sono funzioni polinomiali e trasformazioni logaritmiche, nella quale esistono tre modelli principali:</p>
+<ul>
+<li><em>Log-lineare</em>, in cui ad un incremento dell’1% di <span class="math inline">\(x\)</span> corrisponde un incremento di <span class="math inline">\(\beta_1\)</span>% di <span class="math inline">\(log_y\)</span>;</li>
+<li><em>Log-log</em>, in cui ad un incremento dell’1% di <span class="math inline">\(log_x\)</span> corrisponde un incremento di <span class="math inline">\(\beta_1\)</span>% di <span class="math inline">\(log_y\)</span>;</li>
+<li><em>Linear-log</em>, in cui ad un incremento dell’1% di <span class="math inline">\(log_x\)</span> corrisponde ad un incremento di <span class="math inline">\(\beta_1\)</span> di <span class="math inline">\(y\)</span>.</li>
+</ul>
+</div>
+<div id="non-normalità" class="section level2">
+<h2><span class="header-section-number">3.3</span> Non Normalità</h2>
+<p>Nel caso in cui gli errori <span class="math inline">\(\varepsilon_i\)</span> sono i.i.d. <span class="math inline">\(\sim N(0, \sigma^2)\)</span> è possibile ricavare la distribuzione degli stimatori ed i test statistici con i relativi intervalli di confidenza. Nel caso in cui gli errori <strong><em>non</em></strong> fossero <strong><em>normali</em></strong>, in campioni sufficientemente elevati con <span class="math inline">\(n &gt; 25\)</span>, per il Teorema del Limite Centrale la distribuzione degli errori tende asintoticamente alla normalità. Per campioni più piccoli non è possibile applicare test ed intervalli di confidenza perché sono basati sull’ipotesi di normalità degli errori. Se vengono violati i principi di normalità:</p>
+<ol style="list-style-type: decimal">
+<li>I parametri <span class="math inline">\(\beta\)</span>, espressi come combinazione lineare degli errori, non sono distribuiti come una Normale, come le rispettive stime <span class="math inline">\(\hat \beta\)</span>;</li>
+<li>Non è possibile ricavare test basati sulla Normale standardizzata, t Student e F Snedecor per i parametri;</li>
+<li>Non è possibile ricavare intervalli di confidenza per i parametri basati sulla Normale standardizzata e t Student;</li>
+<li>Le stime OLS non coincidono con le stime di massima verosimiglianza (ML); di conseguenza, gli stimatori non sono più corretti a minima varianza tra tutti quelli corretti (VUE), ma sono ancora BLUE;</li>
+</ol>
+<p>Tuttavia, gli stimatori OLS sono corretti:</p>
+<p><span class="math display">\[\begin{align}
+    \text{E}(\hat B) &amp;= \text{E}(X^t X)^{-1} X^t y \\
+                     &amp;= (X^t X)^{-1} X^t \text{E}(y) \\
+                     &amp;= (X^t X)^{-1} X^t \text{E}(X \beta + e) \\
+                     &amp;= (X^t X)^{-1} X^t \text{E}(\beta) = b
+\end{align}\]</span></p>
+<p>Dato che le stime OLS non coincidono con quelle ML, alcuni software statistici potrebbero fornire stime non attendibili.</p>
+<p>Per individuare i casi di non normalità, in prima istanza, è opportuno calcolare indici descrittivi: se moda, media e mediana coincidono, allora la distribuzione è Normale; per osservare questo fenomeno si costruisce un boxplot. Gli indici più utilizzati sono l’indice di simmetria, calcolato come il rapporto tra il momento terzo intorno alla media ed il cubo della varianza, e l’indice di curtosi, calcolato come il rapporto tra il momento quarto intorno alla media ed il cubo della varianza. Il secondo modo è attraverso le rappresentazioni grafiche, quali:</p>
+<ul>
+<li>Istogramma della distribuzione dei residui;</li>
+<li>Distribuzione cumulata dei residui, in modo da osservare evidenti irregolarità;</li>
+<li>qq-plot della distribuzione dei residui contro la Normale Standard, con i punti che si devono distribuire sulla retta;</li>
+<li>pp-plot della distribuzione cumulata dei residui contro la cumulata della Normale Standard in termini probabilistici.</li>
+</ul>
+<p>Un’ultima modalità è con la costruzione di test statistici: essi sono detti non parametrici poiché testano la distribuzione dei parametri, perciò sono molto utili per analizzare problemi di normalità dei residui.</p>
+<p>Il <em>Test di Shapiro-Wilk</em> prende in considerazione l’indice <span class="math inline">\(W\)</span> calcolato come la combinazione lineare degli errori in rango con i parametri del modello costanti fratto le varianze campionarie relative all’errore, con ipotesi nulla <span class="math inline">\(H_0: \varepsilon \sim N(0, \sigma^2)\)</span> ed alternativa <span class="math inline">\(H_1: \varepsilon \nsim N(0, \sigma^2)\)</span>. Gli estremi dell’indice <span class="math inline">\(W\)</span> corrispondono rispettivamente alla regione di rifiuto e alla regione di accettazione:</p>
+<p><span class="math display">\[W = \frac{\sum_{i=1}^n (\beta_i \varepsilon_i)^2}{\sum_{i=1}^n {\varepsilon_i}^2} \in [0,1]\]</span></p>
+<p>W è fortemente asimmetrico ed i suoi valori elevati possono portare ugualmente al rifiuto dell’ipotesi di normalità.</p>
+<p>Il <em>Test di Kolmogorov-Smirnov</em> si basa sul calcolo della statistica test D, definita come la somma in valore assoluto della differenza tra le frequenze cumulate della distribuzione empirica da testare e quelle della Normale. Infine viene confrontata con le tavole numeriche: in caso di superamento del valore critico in base al livello di significatività scelto si rifiuta o accetta l’ipotesi nulla.</p>
+<p>Il <em>Test di Asimmetria</em> è basato sulla ipotesi che la distribuzione sia Normale. In questo caso il valore atteso dell’indice di simmetria è <span class="math inline">\(E(S) = 0\)</span>. Bisogna assicurarsi che il campione sia sufficientemente grande perché il test non riconosce che la distribuzione del modello è Normale quando il campione è piccolo. Per questo a partire dai dati il valore dell’indice è spesso ottenuto da una simulazione con 1000 iterazioni. Se S supera una certa soglia a cui è associato il livello di significatività <span class="math inline">\(\alpha\)</span> prescelto e quindi il suo p-value è inferiore a <span class="math inline">\(\alpha\)</span> si rifiuta l’ipotesi <span class="math inline">\(H_0\)</span> di normalità.</p>
+<p>Il <em>Test di Curtosi</em> verifica se la distribuzione empirica ha la stessa curtosi della Normale, perciò in questo caso <span class="math inline">\(K-3\)</span> ha valore atteso <span class="math inline">\(E(K-3) = 0\)</span>. Se K supera una certa soglia cui è associato il livello di significatività <span class="math inline">\(\alpha\)</span> prescelto e quindi il suo p-value è inferiore a <span class="math inline">\(\alpha\)</span> si rifiuta l’ipotesi <span class="math inline">\(H_0\)</span> di normalità.</p>
+<p>I problemi di non normalità possono essere risolti mediante trasformazione della variabile risposta <span class="math inline">\(y\)</span>, migliorando l’adattabilità del modello ai dati. Le trasformazioni più diffuse sono:</p>
+<ul>
+<li><span class="math inline">\(log(y)\)</span> quando la <!--controllare--> varianza dei residui cresce con il modello o la distribuzione dell’errore ha una asimmetria positiva;</li>
+<li><span class="math inline">\(y^2\)</span> quando la varianza dei residui è proporzionale a <span class="math inline">\(E(y)\)</span> o la distribuzione dell’errore ha una asimmetria positiva;</li>
+<li><span class="math inline">\(\sqrt{y}\)</span> quando la varianza dei residui è proporzionale a <span class="math inline">\(E(y)\)</span>;</li>
+<li><span class="math inline">\(y^{-1}\)</span> quando la varianza dei residui cresce significativamente al crescere di y nei diversi campioni.</li>
+</ul>
+</div>
+<div id="outlier" class="section level2">
+<h2><span class="header-section-number">3.4</span> Outlier</h2>
+<p>I valori <em>outlier</em> sono delle osservazioni all’interno di un dataset che alterano le stime dei parametri nella costruzione di un modello lineare. In particolare, bastano uno o pochi valori molto lontani dagli altri perché cambi completamente la somma delle differenze al quadrato e quindi le stime dei parametri. Essi possono essere distinti in punti <em>anomali</em>, che si discostano in modo rilevante dall’andamento generale, e punti <em>influenti</em>, che influenzano in misura rilevante le stime.</p>
+<p>Gli outlier possono essere identificati graficamente tramite la costruzione di boxplot, se sono presenti punti superiori al baffo, e scatterplot univariati, nella quale i punti si discostano maggiormente dalla linea di tendenza delle osservazioni. All’aumentare del numero di dimensioni, tuttavia, si perde la possibilità di individuare gli outlier in termini grafici e sono necessari indici numerici.</p>
+<p>Definendo la matrice di proiezione <span class="math inline">\(H = X(X^tX)^{-1}X^t\)</span>, si chiamano <em>valori di leva</em> gli elementi <span class="math inline">\(h_{ii}\)</span> sulla diagonale principale che rappresentano l’impatto della i-esima osservazione sulla capacità del modello di predire tutti i casi. Il valore medio del leverage è:</p>
+<p><span class="math display">\[\overline{h} = \frac{k - 1}{n}\]</span></p>
+<p>con <span class="math inline">\(k\)</span> il numero di covariate ed <span class="math inline">\(n\)</span> il numero di osservazioni nel modello. Un valore di leva si considera significativamente alto se supera 2 o 3 volte il suo valore medio:</p>
+<p><span class="math display">\[h_{11} &gt; \frac{2(k - 1)}{n}\]</span></p>
+<p>I residui possono essere calcolati nella seguente formula matriciale:</p>
+<p><span class="math display">\[\varepsilon = (I-H)y \implies Var(\varepsilon_i) = (1 - h_{i.i})\sigma^2\]</span></p>
+<p>Di conseguenza è possibile calcolare anche i <em>residui standardizzati</em>:</p>
+<p><span class="math display">\[\varepsilon_i^* = \frac{\varepsilon_i}{\sigma \sqrt{1-h_{ii}}} \sim N(0, 1)\]</span></p>
+<p>Per verificare la presenza di outlier si utilizzano le tavole della distribuzione Normale. Il 95% della popolazione assume valori compresi tra <span class="math inline">\(-2 &lt; \varepsilon_i^* &lt; +2\)</span>. Si considera outlier un valore il cui valore assoluto è <span class="math inline">\(|\varepsilon_i^*| &gt; 3\)</span></p>
+<p>I <em>valori studentizzati</em> sono utilizzati per verificare la presenza di osservazioni anomale in campioni di non elevata numerosità. La differenza con i residui standardizzati è che sono divisi per lo s.q.m di ogni osservazione invece che per quella generale:</p>
+<p><span class="math display">\[\varepsilon_i^* = \frac{\varepsilon_i}{s_{\varepsilon} \sqrt{1-h_{ii}}}\]</span></p>
+<p>I residui studentizzati <em>Jacknife</em> sono residui divisi per una stima della deviazione standard ottenuta eliminando dal dataset la i-esima osservazione dal modello e stimando nuovamente i parametri:</p>
+<p><span class="math display">\[\varepsilon_i^* = \frac{\varepsilon_i}{s_{\varepsilon(i)} \sqrt{(1-h_{ii})}}\]</span></p>
+<p>Si presentano ora indici complessi basati sulla eliminazione della i-esima osservazione dal dataset.</p>
+<p>Il <em>covratio</em> misura la variazione del determinante della matrice <span class="math inline">\(\Sigma\)</span> delle stime eliminando la i-esima osservazione. Il valore è significativo se supera la soglia <span class="math inline">\(1 \pm 3 \  \sqrt{\frac{k + 1}{n}}\)</span>:</p>
+<p><span class="math display">\[\text{COVRATIO}_i = \frac{det(\Sigma_i)}{det(\Sigma)} = \frac{det(\frac{1}{n - 1}\tilde{X}^{t}_i\tilde{X}_i)}{\det(\frac{1}{n}\tilde{X}^{\prime}\tilde{X})}\]</span></p>
+<p>Il <em>Dfitts</em> misura l’influenza dell’i-esima osservazione sulla stima dei coefficienti di regressione e sulla loro varianza eliminandola dal dataset. Se lo scostamento super la soglia<span class="math inline">\(\pm 2 \sqrt{\frac{k+1}{n}}\)</span> l’osservazione è da considerarsi outlier:</p>
+<p><span class="math display">\[\text{DFITTS}_i = \frac{\hat{y} - \hat{y}_i}{s_i\sqrt{h_{i.i}}}\]</span></p>
+<p>Il <em>Dfbetas</em> misura l’influenza della i-esima osservazione sulle stime di ogni singolo coefficiente di regressione eliminandola dal dataset. Se lo scostamento supera la soglia <span class="math inline">\(2\)</span> o <span class="math inline">\(2 \sqrt{n}\)</span> per almeno un parametro <span class="math inline">\(\beta\)</span>, l’osservazione è da considerarsi outlier:</p>
+<p><span class="math display">\[\text{DFBETAS}_i = \beta - \beta_i = X_i(X^{\prime}X)^{-1}\frac{\varepsilon_i}{1-h_{ii}}\]</span></p>
+<p>La <em>Distanza di Cook</em> misura l’influenza della i-esima osservazione sulla stima dei parametri del modello nel loro complesso. Se lo scostamento dei coefficienti di regressione supera la soglia <span class="math inline">\(1\)</span>, il valore è da considerarsi outlier:</p>
+<p><span class="math display">\[D_i = \frac{\sum(\hat{y}_j - \hat{y}_{j.i})^2}{k s^2} \sim F_{(k, n-k)}\]</span></p>
+</div>
+</div>
+
+
+
+<div id="modello-lineare-multivariato" class="section level1">
+<h1><span class="header-section-number">4</span> Modello Lineare Multivariato</h1>
+<p>Per modello lineare multivariato si intende l’estensione multivariata della regressione lineare multipla a <span class="math inline">\(m\)</span> variabili risposta <span class="math inline">\(y_j\)</span>, con essa legata alle stesse variabili esplicative. Per l’i-esima osservazione si ha:</p>
+<p><span class="math display">\[\begin{align}
+y_i &amp;= [y_{i1}, \dots, y_{ij}, \dots, y_{im}] \\
+z_i &amp;= [1, z_{i1}, \dots, z_{ik}, \dots, z_{ir}] \\
+\varepsilon_i &amp;= [\varepsilon_{i1}, \dots, \varepsilon_{ij}, \dots, \varepsilon_{i.m}]
+\end{align}\]</span></p>
+<p>Nella matrice dei parametri <span class="math inline">\(B\)</span> di dimensioni <span class="math inline">\(m \times r+1\)</span> ogni riga si riferisce ad una variabile risposta e per ogni colonna ad una variabile esplicativa diventa:</p>
+<p><span class="math display">\[B =
+\begin{bmatrix}
+   \beta_{10} &amp; \cdots  &amp; \beta_{1k} &amp; \cdots  &amp; \beta_{1r} \\
+   \vdots     &amp; \ddots  &amp; \vdots     &amp; \cdots  &amp; \vdots     \\
+   \beta_{j0} &amp; \cdots  &amp; \beta_{jk} &amp; \cdots  &amp; \beta_{jr} \\
+   \vdots     &amp; \vdots  &amp; \vdots     &amp; \ddots  &amp; \vdots     \\
+   \beta_{m0} &amp; \cdots  &amp; \beta_{mk} &amp; \cdots  &amp; \beta_{mr} 
+\end{bmatrix}\]</span></p>
+<p>Nel suo complesso perciò il modello multivariato appare come:</p>
+<p><span class="math display">\[Y_{m \times n} = B_{m \times r + 1} Z_{r+1 \times n} + E_{m \times n}\]</span></p>
+<p>o altrimenti scritto come:</p>
+<p><span class="math display">\[y_j = \beta_j Z + \varepsilon_j \hspace{15pt} j = 1 \dots m\]</span></p>
+<p>Ogni colonna della matrice <span class="math inline">\(Y\)</span> rappresenta un carattere, mentre ogni riga rappresenta i valori dei caratteri per un singolo individuo.</p>
+<p>La matrice dei valori predetti è calcolata nel seguente modo:</p>
+<p><span class="math display">\[\hat Y = \hat B Z = Y Z^t (ZZ^t)^{-1} Z\]</span></p>
+<p>mentre la matrice degli errori è <span class="math inline">\(\hat E = Y - \hat B Z = Y (I - Z^t(ZZ^t)^{-1} Z)\)</span>. Le condizioni di ortogonalità rimangono le medesime rispetto al caso univariato in quanto i residui sono incorrelate con le variabili esplicative e con i valori predetti:</p>
+<p><span class="math display">\[\hat E Z^t = Y [I - Z^t (ZZ^t)^{-1} Z]Z^t = Y Z^t - Y Z^t = 0 \\
+  \hat Y \hat E^t = Y Z^t (ZZ^t)^{-1} ZZ^t \times [I - Z^t (ZZ^t)^{-1} ZT^t] = Y^t Z Y - Y^t Z Y = 0\]</span></p>
+<p>Le ipotesi del modello sono analoghe a quelle formulate in precedenza per il modello univariato, ma essendo applicate su più variabili dipendenti saranno più stringenti:</p>
+<ol style="list-style-type: decimal">
+<li>I parametri e le variabili sono <em>lineari</em>;</li>
+<li><em>Non sistematicità degli errori</em>, ovvero il valore atteso degli errori casuali sono nulli (nella seguente ipotesi): <span class="math inline">\(\text{E}(\hat E_{ij}) = 0\)</span></li>
+<li>Sfericità degli errori: gli errori casuali in ogni e tra diverse equazioni sono omoschedastici ed incorrelati. La matrice di var-cov <span class="math inline">\(\Sigma_E = \text{diag}(\sigma^2 I_n, \dots, \sigma^2 I_n)\)</span>. Gli elementi diagonali della matrice rappresentano gli errori relativi della stessa equazione, gli altri elementi rappresentano la correlazione tra errori relativi ad equazioni diverse;</li>
+<li>Le variabili esplicative <span class="math inline">\(Z\)</span> <em>non</em> sono <em>stocastiche</em>, in quanto per ogni osservazione il valore della covariata <span class="math inline">\(Z\)</span> è una costante mentre il corrispondente valore di ogni <span class="math inline">\(y_j\)</span> è una v.c influenzata dagli errori casuali <span class="math inline">\(\hat \varepsilon_j\)</span>;</li>
+<li>Le variabili esplicative sono <em>non collineari</em> con rango <span class="math inline">\(r+1\)</span>, altrimenti la matrice <span class="math inline">\(ZZ^t\)</span> non sarebbe invertibile e non potremmo calcolare lo stimatore OLS;</li>
+<li>La numerosità della popolazione <span class="math inline">\(n\)</span> è maggiore del numero dei <span class="math inline">\(r\)</span> parametri stimati più l’intercetta (<span class="math inline">\(n &gt; r + 1\)</span>) per la stessa ragione, per cui per ogni equazione le stime OLS dei parametri si calcolano analogamente al caso univariato;</li>
+<li>Gli errori <span class="math inline">\(E\)</span> si distribuiscono come una Normale multivariata
+<span class="math display">\[E \sim N(0, s^2I_{nm})\]</span>
+con 0 vettore delle medie e <span class="math inline">\(s^2I_{nm}\)</span> matrice di var-cov della v.c multivariata <span class="math inline">\(E\)</span>.</li>
+</ol>
+<div id="inferenza" class="section level2">
+<h2><span class="header-section-number">4.1</span> Inferenza</h2>
+<p>Dato il modello lineare multivariata della popolazione è possibile definire il modello campionario e stimare con il metodo OLS la matrice dei parametri (<span class="math inline">\(\hat B\)</span>) e gli errori campionari (<span class="math inline">\(\hat E\)</span>):</p>
+<p><span class="math display">\[Y = \hat B Z + \hat E\]</span></p>
+<p>Se il modello è omoschedastico e gli errori sono incorrelati, la matrice <span class="math inline">\(\Sigma_{\varepsilon}\)</span> è diagonale ed analogamente al caso multiplo la matrice dei parametri è pari a <span class="math inline">\(\hat B = Y Z^t(ZZ^t)^{-1}\)</span>.</p>
+<p>Lo stimatore OLS è corretto, consistente ed efficiente:</p>
+<p><span class="math display">\[\begin{align}
+   \text{E}[(\hat B - B)^t ((\hat B - B))] &amp;= \text{E}[(Y Z^t (ZZ^t)^{-1} - B)^t (((Y Z^t (ZZ^t)^{-1} - B))]\\
+                                           &amp;= (ZZ^t)^{-1} Z \text{E}(\hat E^t \hat E) Z^t (ZZ^t)^{-1} Z \\
+                                           &amp;= \sigma^2 (ZZ^t)^{-1} ZZ^t (ZZ^t)^{-1} \\
+                                           &amp;= \sigma^2 (ZZ^t)^{-1}
+\end{align}\]</span></p>
+<p>, di conseguenza il teorema di Gauss-Markov è valido anche nel contesto multivariato, lo stimatore dei parametri <span class="math inline">\(\hat B\)</span> è BLUE e lo stimatore ML di massima verosimiglianza, uguale a quello OLS imponendo anche l’ipotesi di normalità, è UNVUE.</p>
+<p>Detto ciò, anche la matrice della variabile risposta <span class="math inline">\(Y\)</span> e delle variabili esplicative <span class="math inline">\(Z\)</span> si distribuiscono come una Normale Multivariata:</p>
+<p><span class="math display">\[\begin{align}
+  Y &amp; \sim N(BZ, \Sigma_Y) \\
+  \hat B &amp; \sim N(B, \sigma^2(ZZ^t)^{-1})
+\end{align}\]</span></p>
+<p>Essendo il caso multivariato analogo a quello univariato, si possono ricavare le soluzioni equazione per equazione ed utilizzare i test N, t-Student e F di Snedecor per verificare la nullità dei singoli parametri o a gruppi per la non significatività del modello. Inoltre, si possono utilizzare le tre distribuzioni per costruire intervalli di confidenza verificandole per ogni equazione. È comunque possibile compiere test su una dimensione multivariata dato il carattere del modello.</p>
+<p>Dato <span class="math inline">\(Y = \hat B Z + \hat E\)</span> è possibile definire la matrice di var-cov campionarie:</p>
+<p><span class="math display">\[\Sigma_Y = \frac{1}{n} \hat BZZ^t \hat B^t + \sigma_{\hat E} = \hat{H} + \sigma_{\hat E}\]</span></p>
+<p>La matrice di var-cov spigata <span class="math inline">\(\hat{H}\)</span> è positiva ed efficiente. Inoltre si distribuisce come una v.c. di Wishart, <span class="math inline">\(W_r\)</span> in modo indipendente da <span class="math inline">\(\sigma_{\hat E}\)</span>. Quest’ultima è definita come la matrice di var-cov residua distribuita come una v.c. <span class="math inline">\(W_{n-r}\)</span>.</p>
+<p>Si definisce invece varianza generalizzata di Wilks <span class="math inline">\(\hat{H}\)</span> il suo determinante <span class="math inline">\(\det(\hat{H})\)</span>; per le distribuzioni multivariate si usa questo indice di variabilità in quanto ha il vantaggio di essere univariato e permette quindi di costruire facilmente test <span class="math inline">\(t\)</span> ed <span class="math inline">\(F\)</span>. La varianza generalizzata inoltre considera la correlazione delle variabili, e si dimostra infatti uguale a <span class="math inline">\(0\)</span> in caso di presenza di:</p>
+<ul>
+<li>Variabile costante nelle unità statistiche;</li>
+<li>Variabile perfettamente correlata con un’altra (rango non pieno);</li>
+<li>Variabile combinazione lineare di altre variabili.</li>
+</ul>
+<p>Analogamente si definisce varianza generalizzata di <span class="math inline">\(\Sigma_E\)</span> il determinante della matrice di varianza-covarianza residua.</p>
+<div id="test-di-wilks" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Test di Wilks</h3>
+<p>Il test di Wilks è definito come il test del rapporto di verosimiglianza:</p>
+<p><span class="math display">\[\Lambda = \frac{\det(\Sigma_E)}{\det(\Sigma_E + \hat H)} = \prod_{i=1}^n \frac{1}{1+\lambda_i}\]</span></p>
+<p>con <span class="math inline">\(\lambda_1 \geq \dots \geq \lambda_p\)</span> gli autovalori non nulli di <span class="math inline">\((\Sigma_E)^{-1} \hat H \sim \Lambda_{n,m,r}\)</span>. Da <span class="math inline">\(\Lambda\)</span> si ricava una distribuzione asintotica <span class="math inline">\(F = \frac{1-\Lambda}{\Lambda}\)</span>.</p>
+<p>Quando <span class="math inline">\(\varepsilon \sim N\)</span> si possono costruire test del rapporto di verosimiglianza <span class="math inline">\(\Lambda\)</span>, analogo al test F nel modello univariato. Il test ha come ipotesi nulla che tutte le <span class="math inline">\(Z\)</span> non sono significative rispetto a tutte le variabili risposte, mentre l’alternativa è che almeno una è significativo rispetto ad una variabile dipendente:</p>
+<p><span class="math display">\[H_0: \hat{B} = 0 \ \ \ H_1: \hat{\beta_j} \neq 0\]</span></p>
+<p>Sotto l’ipotesi nulla <span class="math inline">\(\Lambda \to 1\)</span>, dato che il numeratore e denominatore tenderebbero a coincidere, mentre <span class="math inline">\(F \to 0\)</span>. Analogamente si possono costruire intervalli di confidenza per i parametri e per i valori predetti delle <span class="math inline">\(Y\)</span>.</p>
+<p>Si possono costruire anche diversi test su diverse ipotesi e possono essere verificati mediante il rapporto di varianze generalizzate di Wilk:</p>
+<ol style="list-style-type: decimal">
+<li>Test sulla non significatività di un gruppo di variabili <span class="math inline">\(Z_1\)</span> rispetto a tutte le variabili dipendenti <span class="math inline">\(Y\)</span>, con <span class="math inline">\(H_0: B_{(1)} = 0\)</span>;</li>
+<li>Test sulla non significatività di tutte le variabili <span class="math inline">\(Z\)</span> rispetto a ad un gruppo di variabili dipendenti <span class="math inline">\(Y_2\)</span>, con <span class="math inline">\(H_0: B_{(2)} = 0\)</span>;</li>
+<li>Test sulla non significatività di alcune variabili <span class="math inline">\(Z_3\)</span> rispetto ad
+alcune variabili dipendenti <span class="math inline">\(Y_3\)</span>, con <span class="math inline">\(H_0: B_{(3)} = 0\)</span>;</li>
+<li>Test sull’uguaglianza dei parametri relativi a 2 gruppi di
+variabili <span class="math inline">\(Z_k\)</span> e <span class="math inline">\(Z_g\)</span> rispetto a un gruppo di variabili dipendenti <span class="math inline">\(Y_j\)</span>, con <span class="math inline">\(H_0: B_{kj} = B_{gj}\)</span>;</li>
+<li>Test sull’uguaglianza dei parametri relativi alle stesse variabili
+<span class="math inline">\(Z_c\)</span> rispetto a un insieme di variabili dipendenti <span class="math inline">\(Y_A\)</span>, con <span class="math inline">\(H_0: B_{cA} = B_{vA}\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="modello-lineare-generalizzato" class="section level1">
+<h1><span class="header-section-number">5</span> Modello Lineare Generalizzato</h1>
+<p>Il modello lineare multivariato generalizzato supera le ipotesi, molto stringenti, del modello lineare multivariato classico, rimuovendo le ipotesi sugli errori. Delle 7 ipotesi del modello lineare classico generalizzato quella inerente la sfericità degli errori è l’unica che deve essere riproposta. Quando si modificano le ipotesi sugli errori si ha il modello lineare generalizzato in cui la matrice di var-cov degli errori <span class="math inline">\(\Sigma_{\hat{E}}\)</span> non è più diagonale. Il modello è formulato nel seguente modo:</p>
+<p><span class="math display">\[Y = B Z + E\]</span></p>
+<p>in cui la matrice di var-cov degli errori <span class="math inline">\(\Sigma_{\hat{E}}\)</span> non è più necessariamente diagonale e con gli errori che possono essere eteroschedastici. Nel caso di errori omoschedastici ed incorrelati <span class="math inline">\(\sigma_E^2 = \sigma^2 I_n\)</span>, con la matrice di varianze del modello pari a <span class="math inline">\(\Sigma_Y = BZZ^tB^t + \sigma^2I_n\)</span>.
+La sfericità degli errori nel caso multivariato è un’ipotesi molto più restrittiva rispetto al caso univariato in quanto fa si che la parte non spiegata del modello sia identica per ogni variabile risposta
+e che necessiti di modelli generalizzati per affrontare la maggior parte dei casi reali.</p>
+<div id="soluzione-dei-minimi-quadrati-generalizzati" class="section level2">
+<h2><span class="header-section-number">5.1</span> Soluzione dei minimi quadrati generalizzati</h2>
+<p>Come nel caso del modello lineare classico multiplo non è possibile utilizzare lo stimatore OLS dato che la matrice degli errori non è diagonale La soluzione viene, ma è possibile ricavare le stime con lo stimatore GLS.</p>
+<p>Data la matrice di var-cov della popolazione <span class="math inline">\(\Sigma_E\)</span>, si ipotizza l’esistenza di una matrice <span class="math inline">\(W_{(nm,nm)}\)</span> non singolare, ottenuta con la decomposizione spettrale di <span class="math inline">\(\Sigma_{E°^{*}}\)</span>, tale per cui:</p>
+<p><span class="math display">\[\Sigma_{E°^{*}} = \text{E}({E°^{*}}^tE°^{*}) = \sigma^2W^tW\]</span></p>
+<p>Si definiscono gli errori trasformati <span class="math inline">\(E\)</span> tali che:</p>
+<p><span class="math display">\[E° = E°^{*} W^{-1}\\
+\implies \Sigma_{E°} = W^{-1} \sigma^2 W^tWW^{-1} = \sigma^2I_{nm}\]</span></p>
+<p>Gli errori <span class="math inline">\(E°\)</span> trasformati sono quindi sferici, omoschedastici e incorrelati rispetto alla risposta e covariate del modello, con il modello che diventa</p>
+<p><span class="math display">\[\begin{align}
+Y° &amp;= B°Z° + E° \\
+Y°W^{-1} &amp;= B°^{*}Z°W^{-1} + E°W^{-1} \\
+Y°^{*} &amp;= B°^{*} Z°^{*} + E
+\end{align}\]</span></p>
+<p>Perciò la matrice dei parametri diventa:</p>
+<p><span class="math display">\[\begin{align}
+B°{*} &amp;= Y°^{*} {Z°^{*}}^t  \times ({Z°^{*}} {Z°^{*}}^t)^{-1} \\
+&amp;= Y° \Sigma_{E^{*}} Z°^t \times (Z° {\Sigma_{E^{*}}}^{-1}Z°^t)^{-1}
+\end{align}\]</span></p>
+<p>La differenza principale con il modello multivariato classico è che per calcolare le soluzione dei parametri è necessario considerare tutte le equazioni attraverso la matrice di var-cov degli errori.</p>
+</div>
+<div id="forme-della-matrice-di-var-cov-degli-errori" class="section level2">
+<h2><span class="header-section-number">5.2</span> Forme della matrice di var-cov degli errori</h2>
+<p>Esistono diversi modelli a seconda della struttura della matrice <span class="math inline">\(\Sigma_E\)</span>, presentando le più importanti.</p>
+<p>Modello lineare multivariato <strong>classico</strong>. <span class="math inline">\(\qquad\)</span> Gli errori sono <em>omoschedastici</em> all’interno delle stesse equazioni e anche tra equazioni diverse, cioè per ogni individuo rispetto alla stessa/diversa variabile risposta la parte spiegata è identica. Inoltre, gli errori sono <em>incorrelati</em> all’interno delle stesse equazioni e tra equazioni diverse, ovvero il comportamento di ogni individuo rispetto alla stessa/diversa variabile risposta non è legato ad altri individui.</p>
+<p>Modello lineare multivariato <strong>intermedio</strong>. <span class="math inline">\(\qquad\)</span> Gli errori sono <em>omoschedastici</em> ed <em>incorrelati</em> all’interno delle stesse equazioni, come nel modello classico, ma sono <em>eteroschedastici</em> e <em>correlati</em> tra equazioni diverse: la varianza spiegata è unica per ogni individuo e il valore di una variabile dipendente può influenzare gli altri dello stesso individuo.</p>
+<p>Modello lineare <strong>generalizzato</strong>. <span class="math inline">\(\qquad\)</span> Gli errori sono <em>eteroschedastici</em> e <em>correlati</em> sia all’interno delle stesse equazioni, ovvero il comportamento di un individuo può influenzare gli altri e ognuno ha una varianza unica, sia tra equazioni diverse, come nel modello intermedio</p>
+</div>
+<div id="soluzioni-fgls" class="section level2">
+<h2><span class="header-section-number">5.3</span> Soluzioni FGLS</h2>
+<p>Come nel caso multiplo raramente si conosce la matrice <span class="math inline">\(\Sigma_E\)</span> della popolazione. Di conseguenza, è possibile utilizzare la matrice di var-cov degli errori campionaria <span class="math inline">\(S_{E^*}\)</span>, con essa che tende a <span class="math inline">\(\Sigma_E^*\)</span> se <span class="math inline">\(n \rightarrow \infty\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+B°^* &amp;= Y°^* {Z°^*}^{t} \times (Z°^* {Z°^*}^{t})^{-1} \\
+&amp;= Y° {S_{E*}}^{-1} Z°^t \times (Z° {S_{E*}}^{-1} Z°^t)^{-1}
+\end{align}\]</span></p>
+</div>
+<div id="modello-sure" class="section level2">
+<h2><span class="header-section-number">5.4</span> Modello SURE</h2>
+<p>Il modello Seemengly Uncorrelated Regression Equation (SURE) è un tipico modello lineare generalizzato più realistico. Il modello costruito è il seguente:</p>
+<p><span class="math display">\[Y° = B° Z° + E°\]</span></p>
+<p>Il modello ha regressori diversi e può essere presentato con diverse versioni della matrice di var-cov degli errori <span class="math inline">\(\Sigma_{E°}\)</span> omoschedastici ed incorrelati, ma è possibile costruire modelli diversi in ogni equazione utilizzando una diversa matrice <span class="math inline">\(\Sigma_{E°}\)</span>. Il modello si risolve con il metodo dei minimi quadrati generalizzati:</p>
+<p><span class="math display">\[\begin{align}
+B° &amp;= Y°Z°^t \times (Z°Z°^t)^{-1} \\
+   &amp;= Y° \Sigma_{E°} Z°^t \times (Z° {\Sigma_{E°}}^{-1} Z°^t)^{-1}
+\end{align}\]</span></p>
+<p>Il modello è caratterizzato dalla presenza delle variabili esplicative diverse da equazione a equazione, modificando i coefficienti di regressione. Gli errori sono omoschedastici ed incorrelati nella stessa equazione, ma eteroschedastici, correlati per lo stesso individuo ed incorrelati tra individui diversi tra diverse equazioni. Se nelle diverse equazioni gli errori non fossero correlati, si avrebbe un sistema di equazioni di regressione multipla individuali stimate separatamente come nel modello classico multivariato.</p>
+<!--Non è da sapere per la teoria, ma per il futuro-->
+<p>Tra le svariate possibilità, bisogna individuare il modello ottimale. I passaggi da seguire sono:</p>
+<ol style="list-style-type: decimal">
+<li>Verificare omoschedasticità e correlazione all’interno delle equazioni. Utilizzando le stime OLS, se la matrice di varianza non è diagonale, con varianze diverse (molto diverse da 0) e correlate cade l’ipotesi di sfericità;</li>
+<li>Riguardo alla scelta del modello lineare generalizzato o SURE è necessario osservare la significatività univariata delle variabile esplicative, eliminando le variabili esplicative;</li>
+<li>Verificare l’adattamento ai dati con l’indice <span class="math inline">\(R^2\)</span> insieme alla parsimonia equazione per equazione;</li>
+<li>La scelta di ipotesi e la specificazione dei modelli non è meccanico, ma bisogna avere intuizione, creatività e conoscere bene il fenomeno analizzato.</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="modello-lineare-multilevel" class="section level1">
+<h1><span class="header-section-number">6</span> Modello Lineare Multilevel</h1>
+<p>I modelli statistici si basano su un <em>c.c.s.</em> da una popolazione finita od infinita CR, nella quale vige l’ipotesi di <em>i.i.d.</em> di tutte osservazioni. In certi casi i dati presentano una struttura gerarchica: la tipologia di campionamento non è più efficiente, ma è preferibile effettuare un campionamento a stadi, scegliendo i cluster e le unità condizionate dalla prima selezione, in modo da analizzare le relazioni tra le variabili misurate a livelli i raggruppamento diversi. Questo campionamento implica una dipendenza tra le osservazioni appartenenti alla stesso gruppo.</p>
+<p>Ignorando la struttura dei dati, a livello descrittivo i valori osservati saranno distorti e perderanno informazioni in due modi:</p>
+<ul>
+<li><em>Fallacia ecologica</em>, che consiste nell’interpretare i dati aggregati come se fossero dati individuali. In tal modo si utilizza la correlazione tra variabili a livello di gruppo per fare affermazioni su relazioni di livello micro;</li>
+<li><em>Fallacia atomistica</em>, nella quale si disaggregano i dati ignorando la variabilità tra i gruppi. Se è presente correlazione tra variabili micro, essa non può essere usata a livello macro.</li>
+</ul>
+<p>A livello stocastico, le osservazioni non sono più <em>i.i.d.</em> e non hanno la stessa probabilità di essere estratte:</p>
+<ul>
+<li>Aggregando i dati micro a livello macro, le unità sono <em>i.i.d.</em> con uguale probabilità di estrazione, quando in realtà non lo sono per la presenza dei gruppi;</li>
+<li>Disaggregando i dati macro a livello micro, i gruppi sono <em>i.i.d.</em> con stessa probabilità di estrazione, quando in realtà non lo sono per la eterogeneità di distribuzione interna.</li>
+</ul>
+<p>Esistono due modelli che tengono conto dei dati gerarchici e che superano i problemi precedenti: la regressione multilevel ed il modello multilevel.</p>
+<div id="regressione-multilevel" class="section level2">
+<h2><span class="header-section-number">6.1</span> Regressione Multilevel</h2>
+<p>Considerando una <strong><em>Regressione Multilevel</em></strong> e dati con struttura a 1 livello, la costruzione del modello e le stime sono le medesime del modello lineare univariato e multivariato, con <span class="math inline">\(p\)</span> gruppi e <span class="math inline">\(n_p\)</span> osservazioni:</p>
+<p><span class="math display">\[y_{ij} = \beta_0 + \beta_1x_{ij} + \varepsilon_{ij} \\ \forall i = 1, \dots, n_j \ \ \ \forall i = 1, \dots, p \ \ \ n_1 + \dots + n_p = n\]</span></p>
+<p>Le medie della variabile risposta e l’esplicativa, pur misurate a livello individuale, possono essere diverse da quelle di un altro gruppo, in quanto di diversa composizione. Si possono avere diversi tipi di regressioni:</p>
+<ul>
+<li><em>Regressione disaggregata</em> a livello micro con stimatore OLS: in esse il raggruppamento delle unità viene ignorato;</li>
+<li><em>Relazione aggregata</em> fra gruppi a livello macro: sono diverse dalle regressioni micro in quanto ignorano le unità all’interno dei gruppi e sono basate sulle medie di <span class="math inline">\(x\)</span> ed <span class="math inline">\(y\)</span>;</li>
+<li><em>Relazione entro ciascun gruppo</em>, considerando le deviazioni dalle medie;</li>
+<li><em>Relazione multilevel</em>, nella quale si costruiscono regressioni tra i gruppi ed entro i gruppi congiuntamente.</li>
+</ul>
+<p>Si definisce il modello di Cronbach, dovuto all’effetto della media dei gruppi di <span class="math inline">\(y\)</span> al netto delle differenze all’interno dei gruppi:</p>
+<p><span class="math display">\[y_{ij} = \alpha + \beta_{within} (x_{ij} - \overline x_{.j}) + \beta_{between} \overline x_{.j} \ \ \
+\begin{cases}
+    \overline y_{.j}          = \alpha + \beta_{between} \overline x_{.j} + \overline \varepsilon_{.j} \\
+    y_{ij} - \overline y_{.j} = \beta_{within} (x_{ij} - \overline x_{.j}) + (\varepsilon_{ij} - \overline \varepsilon_{.j})
+\end{cases}\]</span></p>
+<p>In termini di regressione multipla si ha:</p>
+<p><span class="math display">\[\begin{align}
+y_{ij} &amp;= \beta_0 + \sum_{k = 1}^p \beta_{kj} x_{ijk} + \varepsilon_{ij} = \\
+       &amp;= \beta_0 + \sum_{k = 1}^p \beta_{k \ (within)} (x_{ijk} - \mu(x_{jk})) + \beta_{k \ (between)} \mu(x_{jk}) + \varepsilon_{ij}
+\end{align}\]</span></p>
+<p>ed in termini matriciali <span class="math inline">\(y = X^@ B^@ + E\)</span>, con soluzione OLS pari a <span class="math inline">\(B^@ = (X^{@t} X^@)^{-1} X^{@t}y\)</span></p>
+</div>
+<div id="modello-multilevel-definizione-e-significato" class="section level2">
+<h2><span class="header-section-number">6.2</span> Modello Multilevel: definizione e significato</h2>
+<p>Innanzitutto, si definisce <strong><em>modello ANOVA</em></strong> il modello di analisi della varianza, che spiega in che misura la variabilità della <span class="math inline">\(y\)</span> è dovuta a differenze delle media tra gruppi con covariate <span class="math inline">\(x_j\)</span> qualitative. Il modello è definito nel seguente modo:</p>
+<p><span class="math display">\[y_{ij} = \gamma_{00} + u_j + e_{ij}\]</span></p>
+<ul>
+<li><span class="math inline">\(\gamma_{00}\)</span> media di <span class="math inline">\(y\)</span> di tutta la popolazione;</li>
+<li><span class="math inline">\(\gamma_{00} + u_j\)</span> media relativa al gruppo <em>j-esimo</em>;</li>
+<li><span class="math inline">\(u_j\)</span> effetto dell’unità macro <span class="math inline">\(j\)</span> su <span class="math inline">\(y_{ij}\)</span>;</li>
+<li><span class="math inline">\(e_{ij}\)</span> residuo dell’unita micro <span class="math inline">\(i \in j\)</span>.</li>
+</ul>
+<p>A livello matriciale, il modello ANOVA si costruisce nel seguente modo:</p>
+<p><span class="math display">\[y - \gamma_{00} = Au + e \implies 
+\begin{bmatrix}
+    y_1 \\
+    \vdots \\
+    y_j \\
+    \vdots \\
+    y_p
+\end{bmatrix}
+    - \gamma_{00} =
+    \begin{bmatrix}
+    1 &amp; \cdots &amp; 0 &amp; \cdots &amp; 0 \\
+    \vdots &amp; \cdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+    0 &amp; \cdots &amp; 1 &amp; \cdots &amp; 0 \\
+    \vdots &amp; \cdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+    0 &amp; \cdots  &amp; 0 &amp; \cdots &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+    u_1 \\
+    \vdots \\
+    u_j \\
+    \vdots \\
+    u_p
+\end{bmatrix}
++
+\begin{bmatrix}
+    e_1 \\
+    \vdots \\
+    e_j \\
+    \vdots \\
+    e_p
+\end{bmatrix}\]</span></p>
+<p>L’ANOVA è perciò un caso particolare del modello lineare con covariate qualitative in cui la matrice <span class="math inline">\(A\)</span> si sostituisce con la matrice <span class="math inline">\(X\)</span> ed <span class="math inline">\(u\)</span> con il vettore dei parametri <span class="math inline">\(\beta\)</span>.</p>
+<p>È possibile calcolare la devianza totale (<em>SST</em>) del modello, che è possibile scomporre in devianza spiegata (<em>SSF</em>) e devianza residua (<em>SSE</em>):</p>
+<p><span class="math display">\[\begin{align}
+SST &amp;= (y - \gamma_{00})^t (y - \gamma_{00}) = \\
+    &amp;= (Au + e)^t (Au + e) = \\
+    &amp;= u^t A^t A + e^t e = \\
+    &amp;= SSF + SSE
+\end{align}\]</span></p>
+<p>In caso di omoschedaticità, essendo la varianza di ogni errore pari a <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(SSF = \tau^2 \text{ e } SSE = \sigma^2\)</span> ed è possibile calcolare il <em>coefficiente di correlazione intraclasse</em>:</p>
+<p><span class="math display">\[\rho = \frac{\tau^2}{\tau^2 + \sigma^2}\]</span></p>
+<p>Esso indica la quota di varianza totale spiegata dovuta ai gruppi: quanto più è elevato il valore, tanto più l’appartenenza delle osservazioni ai gruppi spiega la varianza totale.</p>
+<p>Se le caratteristiche <span class="math inline">\(x\)</span> delle osservazioni appartenenti ai diversi gruppi sono differenti tra i gruppi l’analisi della varianza viene distorta. Il <strong><em>modello ANCOVA</em></strong> elimina l’effetto delle caratteristiche della popolazione <span class="math inline">\(X\)</span> sulla variabile risposta ed effettua successivamente l’analisi della varianza. Il modello
+Questo processo avviene in 4 fasi:</p>
+<ol style="list-style-type: decimal">
+<li>Calcolare i parametri del modello lineare <span class="math inline">\(\hat B\)</span> ed i residui <span class="math inline">\(\hat w\)</span>;</li>
+<li>Ricavare la soluzione OLS <span class="math inline">\(v°\)</span>;</li>
+<li>Calcolare le varianze tra gruppi <span class="math inline">\(SSV\)</span> e nei gruppi *SSE$ ;</li>
+<li>Calcolare il coefficiente intraclasse.</li>
+</ol>
+<p>Successivamente, l’ANOVA cattura la relazione aggregata tra gruppi descrivendone la varianza tra i gruppi. Questo processo avviene in 3 fasi:</p>
+<ol style="list-style-type: decimal">
+<li>Effettuare l’ANOVA su <span class="math inline">\(SSR_{yc}\)</span> (devianza residua corretta di <span class="math inline">\(y\)</span>)</li>
+<li>Calcolare la devianza spiegata del fattore sperimentale corretta per l’effetto della covariata <span class="math inline">\(X\)</span>, ottenuta come <span class="math inline">\(SSE_{yc} = SST_{yc} - SSR_{yc}\)</span>;</li>
+<li>Calcolare la devianza totale <span class="math inline">\(SST_y = SSE_x + SST_{yc} = SSE_x + SSE_{yc} + SSR_{yc}\)</span>.</li>
+</ol>
+<p>In definitiva , il modello ANCOVA elimina gli aspetti casuali, analizza gli effetti di gruppo ed attribuisce la varianza al gruppo di appartenenza.</p>
+<!--Aggiungere effetti casuali, fissi e misti?-->
+<p>Il modello ANCOVA ad effetti variabili è definito modello Multilevel: la regressione lineare cattura la relazione disaggregata tra i dati, eliminando l’effetto distorsivo della varianza tra i gruppi e ricavando quella nei gruppi, mentre l’ANOVA cattura la relazione aggregata tra i gruppi descrivendone la varianza tra i gruppi.</p>
+<p>In una prima tipologia di modelli, chiamati <em>Mixed Models</em>, la relazione disaggregata tra i dati e la varianza nei gruppi sono descritte mediante parametri fissi, mentre la relazione aggregata tra gruppi e la varianza tra gruppi sono descritte come <em>v.c</em>.</p>
+<p>In un secondo tipo di modelli, chiamati <em>Random Models</em>, anche la relazione disaggregata tra i dati e la varianza nei gruppi sono descritte come <em>v.c</em>.</p>
+<p>I modelli finora studiati possono essere visti come sottocasi del modello multilevel:</p>
+<ul>
+<li>se <span class="math inline">\(u_j = 0\)</span> e non è presente alcuna gerarchia nei dati, si ottiene un modello lineare;</li>
+<li>se <span class="math inline">\(u_j = 0\)</span> si ottiene una regressione multilevel;</li>
+<li>se <span class="math inline">\(u_j\)</span> è fisso e l’effetto della media nei gruppi è nulla, si ottiene un modello ANOVA;</li>
+<li>se <span class="math inline">\(u_j\)</span> è casuale e l’effetto della media nei gruppi è nulla, si ottiene un modello ANOVA ad effetti casuali.</li>
+</ul>
+</div>
+<div id="modello-multilevel-ols-empty-mixed-total-effects" class="section level2">
+<h2><span class="header-section-number">6.3</span> Modello Multilevel: OLS, Empty , Mixed, Total Effects</h2>
+<p>La stima del modello multilevel si compone di 4 passaggi:</p>
+<p><strong>1. Modello Lineare OLS</strong> <span class="math inline">\(\qquad\)</span> Si consideri un modello Multilevel in cui appare solo la parte del modello lineare stimata con lo stimatore dei parametri OLS con una sola variabile ed ipotizzando che <span class="math inline">\(X\)</span> ed <span class="math inline">\(Y\)</span> siano centrate:</p>
+<p><span class="math display">\[y_{ij} = \beta_0 + \beta_1 x_{1jk} + \dots + \beta_k x_{njk} + \varepsilon_{ij}\]</span></p>
+<p>Così facendo, si osserva l’effetto delle covariate sulla risposta nel caso in cui i dati non fossero centrati, con <span class="math inline">\(\varepsilon_{ij} \sim N(0, \sigma^2)\)</span>.</p>
+<p>Si possono proporre anche regressioni Multilevel introducendo variabili esplicative <span class="math inline">\(Z\)</span> misurate sui gruppi, rappresentanti il livello 2, invece che sugli individui. Questo aspetto può essere esteso anche all’interazione <em>cross-level</em>, cioè nel modello si possono introdurre variabili originate dall’interazione tra variabili misurate sull’individuo e sui gruppi appartenenti. Per risolvere la regressione Multilevel si può scomporre il coefficiente di regressione tra gruppi e nei gruppi utilizzando il modello di Cronbach:</p>
+<p><span class="math display">\[y_{ij} = \alpha + \beta_{whithin}(x_{ij} - \overline x_{.j}) + \beta_{between} \overline x_{.j} + \varepsilon\]</span></p>
+<p><strong>2. Empty Model</strong> <span class="math inline">\(\qquad\)</span> Nel modello ANOVA ad effetti casuali, chiamato anche Empty model, si ha il seguente modello:</p>
+<p><span class="math display">\[y_{ij} = v_j + r_{ij}\]</span></p>
+<p>In questo caso la variabile risposta dipende dagli effetti casuali a livello di gruppo, <span class="math inline">\(V_j \sim N(\gamma_{00}, \tau^2)\)</span>, mentre a livello individuale dai residui <span class="math inline">\(R_{ij} \sim N(0, \sigma^2)\)</span>, con <span class="math inline">\(V_j\)</span> e <span class="math inline">\(R_{ij}\)</span> indipendenti e mutualmente incorrelati.</p>
+<p>La variabilità all’interno di ogni gruppo è dovuta solamente alla distribuzione casuale della risposta. L’intercetta casuale a livello di gruppo può essere scomposta in due parti: l’intercetta fissa media tra tutti i gruppi <span class="math inline">\(\gamma_{00}\)</span> e la misura della sua deviazione attorno alla media tra i gruppi di tipo casuale <span class="math inline">\(u_j\)</span>. Il modello si può scrivere nel seguente modo:</p>
+<p><span class="math display">\[y_{ij} = \gamma_{00} + u_ + r_{ij}\]</span></p>
+<p>In questo modello la variabilità totale della risposta può essere scomposta nella somma delle varianze ai due livelli, con varianza nei gruppi e varianza tra i gruppi:</p>
+<p><span class="math display">\[\sigma^2_y = \sigma^2_{U_j} + \sigma^2_{R_{ij}} = \tau^2 + \sigma^2\]</span>
+Si può quindi definire il coefficiente di correlazione intraclasse:</p>
+<p><span class="math display">\[\rho = \frac{\tau^2}{\tau^2 + \sigma^2}\]</span></p>
+<p>Il coefficiente di correlazione intraclasse <span class="math inline">\(\rho\)</span> misura la quota di varianza di <span class="math inline">\(y\)</span> spiegata dall’appartenenza ai gruppi dei singoli individui. Se <span class="math inline">\(\rho = 0\)</span>, ovvero tutti gli <span class="math inline">\(u_j\)</span> sono nulli, il raggruppamento è irrilevante ed è inutile utilizzare altri modelli oltre il modello lineare semplice. Nel caso invece <span class="math inline">\(\rho\)</span> fosse positivo, è necessario considerare un modello di tipo gerarchico.</p>
+<p>Il Test <span class="math inline">\(F\)</span> può essere utilizzato per verificare in termini inferenziali l’ipotesi che le intercette casuali <span class="math inline">\(u_j\)</span> siano nel complesso tra loro equivalenti (nel caso non ci fosse differenza fra gruppi). In questo caso, serve per capire se nel complesso vale l’ipotesi nulla <span class="math inline">\(H_0\)</span> che le medie parziali ottenute nel campione possano essere ritenute nel complesso equivalenti. Per confrontare tra loro le strutture di secondo livello come nell’analisi della varianza casuale non si utilizzano i valori delle medie campionarie, non informative del vero valore di <span class="math inline">\(U_j\)</span> ma i loro <em>intervalli di confidenza</em> che comprendono con una probabilità del 90%, 95%, 99% i valori veri ignoti di <span class="math inline">\(U_j\)</span>. Ciò significa potabilizzare la gerarchia fra medie parziali in quanto, tanto più sono piccoli gli intervalli di confidenza, maggiore è la loro capacità di fornire informazioni sui valori veri ignoti di <span class="math inline">\(U_j\)</span>.</p>
+<p><strong>3. Random Intercept Model</strong> <span class="math inline">\(\qquad\)</span> Se si inserisce nel modello Empty una variabile esplicativa <span class="math inline">\(x_k\)</span> il modello diventa un Random Intercept Model, anche chiamato Mixed Model:</p>
+<p><span class="math display">\[y_{ij} = \gamma_{00} + \beta_1x_{ij} + u_j + \varepsilon_{ij}\]</span></p>
+<p>dove <span class="math inline">\(u_{ij}\)</span> è la della determinazione della v.c. <span class="math inline">\(U_j \sim N(\gamma_{00}, \tau^2)\)</span> a rappresentazione dei residui di secondo livello. Essi sono indipendenti e quindi incorrelati con i residui del primo livello <span class="math inline">\(\varepsilon_{ij}\)</span> della v.c. <span class="math inline">\(E_{ij} \sim N(0,\sigma^2)\)</span>.</p>
+<p>In questo caso la variabile risposta dipende dalle variabili <span class="math inline">\(X\)</span> e dai relativi parametri fissi <span class="math inline">\(\beta\)</span>, dall’effetto casuale a livello di gruppo <span class="math inline">\(u_j \sim N(\gamma_{00}, \tau^2)\)</span> e dall’effetto casuale a livello individuale <span class="math inline">\(\varepsilon_{ij} \sim N(0,\sigma^2)\)</span>.</p>
+<p>La correlazione intraclasse <span class="math inline">\(\rho\)</span> misura la quota di varianza spiegata dall’appartenenza ai gruppi dei singoli individui al netto della quota di varianza spiegata da <span class="math inline">\(x\)</span>, che a differenza del modello nullo <span class="math inline">\(X\)</span> spiega una parte della variabilità non dovuta all’appartenenza ad un gruppo. Il suo valore può diminuire di molto rispetto al modello precedente.</p>
+<p>Il modello RIM può essere costruito in:</p>
+<ul>
+<li>Modello micro: <span class="math inline">\(y_{ij} = \beta_1 x_{ij} + R_{ij}\)</span>;</li>
+<li>Modello macro: <span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span>.</li>
+</ul>
+<p>Come unica equazione, il modello RIM si costruisce nel seguente modo:</p>
+<p><span class="math display">\[y_{ij} = \beta_1 x_{ij} + \gamma_{00} + R_{ij} + U_{0j}\]</span></p>
+<p>con la parte fissa del modello <span class="math inline">\(\beta_1 x_{ij} + \gamma_{00}\)</span> e la parte casuale <span class="math inline">\(R_{ij} + U_{0j}\)</span> e come varianze e covarianze al primo livello <span class="math inline">\(\sigma^2\)</span> ed al secondo livello <span class="math inline">\(\tau^2\)</span>.</p>
+<p><strong>4. Random Slope and Intercept Model</strong> <span class="math inline">\(\qquad\)</span> La relazione tra <span class="math inline">\(Y\)</span> e le covariate <span class="math inline">\(X_j\)</span> può variare tra i gruppi in diversi modi: è possibile avere una eterogeneità delle regressioni tra i diversi gruppi (interazione gruppo-covariate). La struttura dei dati ed il loro raggruppamento può essere spiegato anche facendo variare i coefficienti della regressione da gruppo a gruppo:</p>
+<p><span class="math display">\[y_{ij} = \beta_{0j} + \beta_{1j} x_{ij} + R_{ij}\]</span></p>
+<p>A seconda del comportamento dei parametri è possibile ottenere:</p>
+<ul>
+<li>Con diversi <span class="math inline">\(\beta_{0j}\)</span> in base ai gruppi un modello RIM;</li>
+<li>Con diversi <span class="math inline">\(\beta_{1j}\)</span> in base ai gruppi un modello RC;</li>
+<li>Se i coefficienti <span class="math inline">\(\beta_{0j}\)</span> e <span class="math inline">\(\beta_{1j}\)</span> sono entrambi costanti la struttura gerarchica non ha effetto e si ottiene un modello lineare con stime OLS.</li>
+</ul>
+<p>Considerando il modello precedente, è possibile scomporre i parametri in una parte costante e deviazione dalla media a livello di gruppo:</p>
+<p><span class="math display">\[\beta_{0j} = \gamma_{00} + U_{0j} \\
+  \beta_{1j} = \gamma_{10} + U_{1j}\]</span></p>
+<p>ottenendo quindi l’equazione completa</p>
+<p><span class="math display">\[y_{ij} = \gamma_{00} + \gamma_{10}x_{ij} + U_{0j} + U_{1j} x_{ij} + R_{ij}\]</span>
+con effetti di gruppo dati da:</p>
+<ul>
+<li><span class="math inline">\(U_{0j}\)</span> intercetta random;</li>
+<li><span class="math inline">\(U_{1j} x_{ij}\)</span> interazione random tra i gruppi e la variabile esplicativa <span class="math inline">\(x_{ij}\)</span>;</li>
+<li><span class="math inline">\(\gamma_{00} + \gamma_{10}x_{ij}\)</span> parte fissa del modello generale;</li>
+<li><span class="math inline">\(U_{0j} + U_{1j} x_{ij} + R_{ij}\)</span> parte random del modello generale.</li>
+</ul>
+</div>
+<div id="metodi-di-stima-e-verifica-di-ipotesi" class="section level2">
+<h2><span class="header-section-number">6.4</span> Metodi di Stima e Verifica di Ipotesi</h2>
+<p>La specificazione del modello comporta la scelta dello stesso più soddisfacente. Nel caso di modelli lineari gerarchici implica la scelta delle covariate <span class="math inline">\(x_{ij}\)</span> e delle interazioni della parte fissa e la scelta dei coefficienti casuali con le strutture di covarianza per la parte random del modello.</p>
+<p>I parametri da stimare nel modello RIM sono i coefficienti di regressione <span class="math inline">\(\gamma_{00}\)</span> e <span class="math inline">\(\beta\)</span>, i componenti di varianza <span class="math inline">\(\sigma^2\)</span> e <span class="math inline">\(\tau^2\)</span> e gli effetti casuali <span class="math inline">\(U_{0j}\)</span> non direttamente osservabili.</p>
+<p>I metodi per la stima dei parametri assumendo che i residui <span class="math inline">\(U_{0j}\)</span> e <span class="math inline">\(R_{ij}\)</span> siano distribuiti come una Normale sono il metodo di massima verosimiglianza (ML) e la massima verosimiglianza ristretta (REML). Quest’ultimo massimizza la verosimiglianza dei residui osservati ottenendo le stime degli effetti fissi usando metodi come OLS o GLS e dopodiché le utilizza per massimizzare la verosimiglianza dei residui, sottraendo gli effetti misti, per ottenere le stime dei parametri della varianza.</p>
+<p><strong>Test sui Parametri Fissi del Modello</strong> <span class="math inline">\(\qquad\)</span> Per testare i parametri fissi del modello si utilizza l’ipotesi di significatività su ciascun parametro, <span class="math inline">\(H_0: \gamma_h = 0\)</span>. Questa ipotesi viene verificata con un test T noto come Test di Wald:</p>
+<p><span class="math display">\[T(\gamma_h) = \frac{\hat \gamma_h}{\text{se}_{\hat \gamma_h}}\]</span></p>
+<p>Sotto l’ipotesi nulla il test ha approssimativamente una <span class="math inline">\(t\)</span> con i gradi di libertà basati sulla struttura Multilevel.</p>
+<p><strong>Test sui Parametri Fissi e Random del Modello</strong> <span class="math inline">\(\qquad\)</span> Per testare più parametri, in questo caso fissi e random, del modello si utilizza il Test di Devianza. Dalla stima del modello lineare con il metodo ML si ottiene la verosimiglianza del modello:</p>
+<p><span class="math display">\[\text{Deviance} = -2 ln(ML)\]</span></p>
+<p>Solitamente viene interpretata in termini differenziali, calcolando la differenza tra le Deviance dei modelli alternativi. Si tratta di confrontare i valori osservati della <span class="math inline">\(y\)</span> con i valori teorici di due modelli:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(X_j\)</span> di interesse e l’altro senza variabile (modello nullo);</li>
+<li><span class="math inline">\(X_j\)</span> di interesse e l’altro chiamato modello saturo.</li>
+</ol>
+<p>Il confronto si basa sulla funzione di log-verosimiglianza: indicate con <span class="math inline">\(D_0\)</span> la devianza del modello vuoto, <span class="math inline">\(D_{mod}\)</span> del modello scelto e <span class="math inline">\(D_sat\)</span> del modello saturo, valori più vicini a 0 che non a <span class="math inline">\(D_0\)</span> indicano un modello considerato buono.</p>
+<p>Tutte le devianze <span class="math inline">\(\sim \chi^2\)</span>, con <span class="math inline">\(j\)</span> gradi di libertà pari al numero delle <span class="math inline">\(x_j\)</span>, di conseguenza anche le loro differenze saranno distribuite allo stesso modo.</p>
+<p>Se l’obiettivo è verificare la nullità congiunta di tutti i coefficienti, l’ipotesi nulla sarà <span class="math inline">\(H_0: \beta_1 = \dots = \beta_k = 0\)</span> confrontando il modello nullo ed il modello ipotizzato (applicabile sia alla parte fissa che a quella casuale del modello).</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
