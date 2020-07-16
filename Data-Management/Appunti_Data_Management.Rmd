@@ -182,6 +182,7 @@ La partcolarità è che ha una sola Column Family ed utilzza un linguaggio CQL (
 Il *Keyspace*, il database in RDBMS, possiede nativamente un fattore ed un algoritmo di replicazione, ma rimane solamente un raggruppamento di Column Families.
 Esso non permette operazioni di *join* o chiavi esterne, quindi il database prevede l'uso di dati ridondanti e denormalizzati per gestire i collegamenti.
 
+\newpage
 # Data Quality
 La qualità dei dati è definita secondo diversi aspetti, tra i quali Accuracy, Completeness, Currency e Consistency.
 
@@ -221,6 +222,7 @@ La seconda, chiamata *process-driven*, ridisegna il processo di creazione dei da
 * *process control*, nella quale si inseriscono de controlli nel processo dei dati per prevenire la degradazione e la propagazione dell'errore;
 * *process redesign*, nella quale si rimuovo le cause di bassa qualità dei dati.
 
+\newpage
 # Data Distribution
 Un sistema di database centralizzato è un sistema in cui un database è localizzato, memorizzato e mantenuto in un'unica posizione.
 Se il processore fallisce, allora succede anche a tutto il sistema.
@@ -271,6 +273,7 @@ Esistono diverse strutture di replica:
 Per creare una replica è possibile prendere i dati dal master, che sono i backup o i dati stessi, e muoverli se non accessibili dall'esterno.
 Oppure si usa il file di *log*: per mantenere la replica uguale alla sorgente durante il trasferimento, si usa il *log* per eseguire gli stessi comandi sulla sorgente.
 
+\newpage
 # Data Architecture (Volume)
 La prima definizione di Big Data è stata coniata da Gartner nel 2012:
 
@@ -424,6 +427,7 @@ I data scientist, in questo modo, possono provare a giocare con i dati senza che
 La memorizzazione è basata sul recupero ottimale, quindi veloce e chiara, dei dati con un pattern autoesplicativo.
 L'organizzazione è frequentemente basata sull'area del soggetto, sul tempo di partizionamento e sull'accesso dei dati da parte dell'utente.
 
+\newpage
 # Velocity
 Per *velocità* si intende quel processo in cui i dati devono essere acquisiti processati velocemente.
 Per farlo, si utilizzano software chiamati Online Data Analytics.
