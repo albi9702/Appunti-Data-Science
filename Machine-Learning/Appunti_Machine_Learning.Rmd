@@ -830,13 +830,17 @@ $$corr(x,y)=\frac{cov(x,y)}{\sigma_{x} \sigma_{y}} \in [-1,+1]$$
 
 Esistono molti algoritmi con diversi parametri per compiere analisi di clustering, ma la valutazione dei cluster non è una operazione ben sviluppata perchè poco utilizzata nella Cluster Analysis, anche se molto importante.
 
-Un algoritmo di clustering ha l'obiettivo di trovare dei cluster all'interno dei dati anche se non esistono delle divisioni naturali. Per valutare i risultati dell'algoritmo bisogna determinare la tendenza di costruzione di cluster del dataset ed il corretto numero di cluster (anche se non esiste un vero e proprio numero). Per risolvere questi problemi si utilizzano delle misure di valutazione, anche chiamati *Indici*, che possono essere di tre tipi.
+Un algoritmo di clustering ha l'obiettivo di trovare dei cluster all'interno dei dati anche se non esistono delle divisioni naturali.
+Per valutare i risultati dell'algoritmo bisogna determinare la tendenza di costruzione di cluster del dataset ed il corretto numero di cluster (anche se non esiste un vero e proprio numero).
+Per risolvere questi problemi si utilizzano delle misure di valutazione, anche chiamati *Indici*, che possono essere di tre tipi.
 
 ## Misure di Valutazione
 
 ### External Measure
 
-L'indice Esterno, chiamato in inglese ***External Measure***, misura se l'estensione della struttura dei cluster corrisponde a qualche struttura esterna. Si prendono in considerazione una partizione $P={P_1,...,P_R}$ di un datasaet di $m$ righe divise in $R$ categorie, e una partizione $C={C_1,...,C_K}$ ottenuto da un algoritmo di clustering che partiziona i dati in $K$ cluster. L'indice supervisionato compara le partizioni $P$ e $C$ considerando 4 casi:
+L'indice Esterno, chiamato in inglese ***External Measure***, misura se l'estensione della struttura dei cluster corrisponde a qualche struttura esterna.
+Si prendono in considerazione una partizione $P={P_1, ..., P_R}$ di un datasaet di $m$ righe divise in $R$ categorie, e una partizione $C = {C_1, ..., C_K}$ ottenuto da un algoritmo di clustering che partiziona i dati in $K$ cluster.
+L'indice supervisionato compara le partizioni $P$ e $C$ considerando 4 casi:
 
 a. $x$ e $y$ appartengono alla stesso cluster di $C$ e alla stessa categoria di $P$;
 b. $x$ e $y$ appartengono alla stesso cluster di $C$, ma ad un diversa categoria di $P$;
@@ -845,54 +849,79 @@ d. $x$ e $y$ appartengono ad un cluster diverso di $C$ e ad una categoria divers
 
 Il numero totale di coppie è pari a $M=\frac{m(m-1)}{2}=a+b+c+d$. Si prendono in considerazione diversi indici:
 
-* Rand: $R=\frac{a+d}{M} \in [0,1]$
-* Jaccard: $J=\frac{a}{a+b+c} \in [0,1]$ 
-* Fowleks and Mallows: $FM=\sqrt{\frac{a}{a+b} \times \frac{a}{a+c}} \in [0,1]$
-* $\Gamma$ Statistics: $\Gamma=\frac{Ma-(a+b)(a+c)}{\sqrt{(a+b)(a+c)(M-a-b)(M-a-c)}} \in [-1,+1]$
+* Rand: $R = \frac{a + d}{M} \in [0, 1]$
+* Jaccard: $J = \frac{a}{a + b + c} \in [0, 1]$ 
+* Fowleks and Mallows: $FM = \sqrt{\frac{a}{a + b} \times \frac{a}{a + c}} \in [0, 1]$
+* $\Gamma$ Statistics: $\Gamma = \frac{Ma - (a + b)(a + c)}{\sqrt{(a + b)(a + c)(M-a-b)(M - a - c)}} \in [-1, +1]$
 
 Più i valori di questi indici si avvicinano ad 1, più le partizioni $C$ e $P$ saranno simili.
 
 ### Internal Measure
 
-L'indice Interno, chiamato in inglese ***Internal Measure***, misura la bontà della struttura dei cluster rispetto alle informazioni esterne. Questi indici tengono in considerazione anche di misure di *coesione*, che determina quanto sono relazionate i record all'interno dei cluster, e *separazione*, che determina quanto sono distinti, perciò ben separati, i cluster. In generale, si considera l'insieme dei $K$ cluster $C={C_1, ..., C_K}$. La validità generale dei cluster è calcolata come una somma pesata dei singoli cluster:
-$$overall_validity=\sum_{i=1}^{K}w_i \times validity(C_i)$$
-con la funzione di validità considerata come coesione ($c$), separazione ($s$) od una combinazione delle due. Il valore dei pesi dipende dalla misura di valutazione dei cluster. Considerando come funzione di validità la coesione, valori alti implicano un'alta coesione, mentre per la separazione valori più bassi.
+L'indice Interno, chiamato in inglese ***Internal Measure***, misura la bontà della struttura dei cluster rispetto alle informazioni esterne.
+Questi indici tengono in considerazione anche di misure di *coesione*, che determina quanto sono relazionate i record all'interno dei cluster, e *separazione*, che determina quanto sono distinti, perciò ben separati, i cluster.
+In generale, si considera l'insieme dei $K$ cluster $C = {C_1, ..., C_K}$. 
+La validità generale dei cluster è calcolata come una somma pesata dei singoli cluster:
+
+$$overall_validity = \sum_{i = 1}^{K} w_i \times validity(C_i)$$
+
+con la funzione di validità considerata come coesione ($c$), separazione ($s$) od una combinazione delle due.
+Il valore dei pesi dipende dalla misura di valutazione dei cluster.
+Considerando come funzione di validità la coesione, valori alti implicano un'alta coesione, mentre per la separazione valori più bassi.
 
 Per i cluster *Graph-Based*, la coesione di un di un cluster è definito come somma dei pesi che collegano i punti all'interno di un cluster:
-$$c(C_i)=\sum_{x,y \in C_i}p(x,y)=\sum_{x,y \in C_i}s(x,y)$$
+
+$$c(C_i) = \sum_{x,y \in C_i}p(x, y) = \sum_{x, y \in C_i} s(x, y)$$
+
 La coesione e la similarità sono massimizzate quando la dissimilarità è minimizzata.
 
 La separazione tra due cluster può essere misurata come la somma dei pesi che collegano i punti di un cluster ad un altro:
-$$s(C_i,C_j)=\sum_{x \in C_i,y \in C_j}p(x,y)=\sum_{x \in C_i,y \in C_j}s(x,y)$$
+
+$$s(C_i, C_j) = \sum_{x \in C_i, y \in C_j} p(x, y) = \sum_{x \in C_i, y \in C_j} s(x,y)$$
+
 La separazione e la similarità sono minimizzate quando la dissimilarità è massimizzata.
 
 Per i cluster *Proototype-Based*, la coesione di un clsuetr è definito come la somma delle prossimità rispetto al centroide (o medoide) del cluster:
-$$c(C_i)=\sum_{x \in C_i}p(x,c_i)=\sum_{x \in C_i}s(x,c_i)$$
+
+$$c(C_i) = \sum_{x \in C_i} p(x, c_i) = \sum_{x \in C_i}s(x, c_i)$$
+
 La separazione tra due cluster è definita come la prossimità tra i centroidi (o medoidi) dei due cluster:
-$$s(C_i,C_j)=p(c_i,c_j)=(c_i,c_j)s$$
+
+$$s(C_i, C_j) = p(c_i, c_j) = (c_i, c_j)s$$
+
 Un'altra modalità di calcolo della misura è possibile utilizzando il centroide complessivo (in questo caso $c$):
-$$s(C_i)=p(c_i,c)=s(c_i,c)$$
 
-Si possono utilizzare diversi pesi per il calcolo della validità di un cluster, in base anche alla grandezza di un cluster. Per esempio, se si utilizza la coesione nei Graph-Based il peso da utilizzare è $1/m_i$, mentre per i Prototype-Based si utilizza il peso $1$.
+$$s(C_i) = p(c_i, c) = s(c_i, c)$$
 
-Per migliorare la qualità dei cluster, si possono clusterizzare i record rispetto a uno specifico valore della validità del cluster, tramite la coesione o la separazione. è possibile valutare la validità dei punti all'interno di un cluster: i record più interni contribuiscono di più alla coesione e separazione dei cluster rispetto a quelli esterni. Per questa valutazione si considera la *Silhouette Coefficient*, combinando le misure di separazione e coesione per l'i-esima riga:
-$$s_i=\frac{b_i-a_i}{max(b_i,a_i)} \in [-1,+1]$$
+Si possono utilizzare diversi pesi per il calcolo della validità di un cluster, in base anche alla grandezza di un cluster.
+Per esempio, se si utilizza la coesione nei Graph-Based il peso da utilizzare è $1/m_i$, mentre per i Prototype-Based si utilizza il peso $1$.
+
+Per migliorare la qualità dei cluster, si possono clusterizzare i record rispetto a uno specifico valore della validità del cluster, tramite la coesione o la separazione.
+È possibile valutare la validità dei punti all'interno di un cluster: i record più interni contribuiscono di più alla coesione e separazione dei cluster rispetto a quelli esterni.
+Per questa valutazione si considera la *Silhouette Coefficient*, combinando le misure di separazione e coesione per l'i-esima riga:
+
+$$s_i = \frac{b_i - a_i}{max(b_i, a_i)} \in [-1, +1]$$
 
 * $a_i$ indica la distanza medie rispetto alle altre righe all'interno del cluster;
 * $b_i$ indica la minima distanza degli altri cluster.
 
-Un valore negativo implica una distanza media dei punti nel cluster ($a_i$) maggiore della minima distanza media dei punti degli altri cluster ($b_i$). Una misura di validità di clusterizzazione è l' ***Average Silhouette Coefficient***, definita come la media dei singoli coefficienti dei punti appartenti al cluster.
+Un valore negativo implica una distanza media dei punti nel cluster ($a_i$) maggiore della minima distanza media dei punti degli altri cluster ($b_i$).
+Una misura di validità di clusterizzazione è l' ***Average Silhouette Coefficient***, definita come la media dei singoli coefficienti dei punti appartenti al cluster.
 
-Un'altra metrica, utilizzata soprattuto nei clustering gerarchici, è la ***Cophenetic Corelation Coefficient***, che misura il grado di similarità tra la matrice di prossimità $P$ e la matrice Cophenetica $Q$, definita nell'intervallo $[-1,+1]$, dove 1 indica la similarità tra le due matrici ed un buon fit di gerarchizzazione dei dati.
+Un'altra metrica, utilizzata soprattuto nei clustering gerarchici, è la ***Cophenetic Corelation Coefficient***, che misura il grado di similarità tra la matrice di prossimità $P$ e la matrice Cophenetica $Q$, definita nell'intervallo $[-1, +1]$, dove 1 indica la similarità tra le due matrici ed un buon fit di gerarchizzazione dei dati.
 
 ### Relative Measure
-L'indice relativo, chiamato in inglese ***Relative Measure***, compara diversi cluster in termini supervisionati o non supervisionati. Gli indici interni ed esterni richiedono test statistici che possono portare ad un alto peso computazionale. Essa elimina questo requisito e si concentra sul confronto dei risultati della clusterizzazione, utilizzando diversi algoritmi o lo stesso con diversi parametri di input.
+L'indice relativo, chiamato in inglese ***Relative Measure***, compara diversi cluster in termini supervisionati o non supervisionati.
+Gli indici interni ed esterni richiedono test statistici che possono portare ad un alto peso computazionale.
+Essa elimina questo requisito e si concentra sul confronto dei risultati della clusterizzazione, utilizzando diversi algoritmi o lo stesso con diversi parametri di input.
 
-In questo caso si introduce il *Problema fondamentale* della validità di un cluster: **determinare il numero ideale di cluster**. Per risolvere questo problema si possono proiettare i dati in 2/3 dimensioni Euclidee utilizzando tecniche di visualizzazione che possono fornire il numero ideale. Questo metodo è utilizzato solo per piccoli scopi di applicazione. Esistono altri indici per risolvere il problema:
+In questo caso si introduce il *Problema fondamentale* della validità di un cluster: **determinare il numero ideale di cluster**.
+Per risolvere questo problema si possono proiettare i dati in 2/3 dimensioni Euclidee utilizzando tecniche di visualizzazione che possono fornire il numero ideale.
+Questo metodo è utilizzato solo per piccoli scopi di applicazione. Esistono altri indici per risolvere il problema:
 
-* Calinski e Harabasz, per la quale il massimo valore di K corrispondente è preso dal numero ottimale di cluster;
-* Dunn, per la quale il massimo valore di K corrispondente è preso dal numero ottimale di cluster. Un alto valore indica cluster compatti e ben separati;
-* Davies-Bouldin, per la quale il minimo valore di K corrispondente è preso dal numero ottimale di cluster.
+* Calinski e Harabasz, per la quale il massimo valore di $K$ corrispondente è preso dal numero ottimale di cluster;
+* Dunn, per la quale il massimo valore di $K$ corrispondente è preso dal numero ottimale di cluster. Un alto valore indica cluster compatti e ben separati;
+* Davies-Bouldin, per la quale il minimo valore di $K$ corrispondente è preso dal numero ottimale di cluster.
 
 Per modelli di mistura di probabilità si presentano i principali indici:
 
@@ -900,10 +929,13 @@ Per modelli di mistura di probabilità si presentano i principali indici:
 * ***M***inimum ***D***escription ***L***ength (MDL), per la quale il minimo valore di K corrispondente è preso dal numero ottimale di cluster;
 * ***B***ayesian ***I***nformation ***C***riterion (BIC), per la quale il minimo valore di K corrispondente è preso dal numero ottimale di cluster.
 
-Per un algoritmo di clusterizzazione che richiede il numero dei K cluster dall'utente, il numero ottimale di cluster è ottenuto compiendo un algoritmo r volte dove K è compreso tra un valore minimo e massimo scelto dall'utente. Inanzitutto bisogna scegliere l'algoritmo di clusterizzazione ed un indice di validità; successivamente si compie un ciclo nella quale il valore $K=K_{min}$ e si fa andare l'algoritmo di clustering, si calcola il valore dell'indice e $q(i)=1$. Dopo aver concluso i due cicli si sceglie il valore migliore di $\vec{q}\*$ tra i valori proposti e lo si setta pari a $Q(k)= \vec{q}\*$. Nel caso di strutture gerarchiche, gli indici di definiscono come *stopping rule*, che affermano il livello ottimale per il taglio del dendrogramma.
+Per un algoritmo di clusterizzazione che richiede il numero dei $K$ cluster dall'utente, il numero ottimale di cluster è ottenuto compiendo un algoritmo $r$ volte dove $K$ è compreso tra un valore minimo e massimo scelto dall'utente.
+Inanzitutto bisogna scegliere l'algoritmo di clusterizzazione ed un indice di validità; successivamente si compie un ciclo nella quale il valore $K = K_{min}$ e si fa andare l'algoritmo di clustering, si calcola il valore dell'indice e $q(i) = 1$.
+Dopo aver concluso i due cicli si sceglie il valore migliore di $\vec{q}\*$ tra i valori proposti e lo si setta pari a $Q(k) = \vec{q}\*$. Nel caso di strutture gerarchiche, gli indici di definiscono come *stopping rule*, che affermano il livello ottimale per il taglio del dendrogramma.
 
 ## Validity Paradigm
-Sia le misure interne che esterne sono strettamente correlate con metodi statistici e test d'ipotesi. Il paradigma di validità dei cluster si basa sulla seguente ipotesi nulla: "Non esiste alcuna struttura nel dataset".
+Sia le misure interne che esterne sono strettamente correlate con metodi statistici e test d'ipotesi.
+Il paradigma di validità dei cluster si basa sulla seguente ipotesi nulla: "Non esiste alcuna struttura nel dataset".
 
 Il paradigma procede nelle seguenti fasi:
 
@@ -912,32 +944,58 @@ Il paradigma procede nelle seguenti fasi:
 3. Si definisce l'ipotesi nulla della struttura nulla. Si possono utilizzare tre tipi di ipotesi: la *Random Position Hypotesis*, in cui tutte le posizioni dei dati di una specifica regione dello spazio sono equamente probabili (usata per dati numerici); la *Random Graph Hypotesis*, nella quale il ranghi delle matrici di prossimità sono equamente probabili (usata per prossimità ordinali ); la *Random Label Hypotesis*, nella quale le etichette dei dati sono equamente probabili (usata per tutti i tipi di dati);
 4. Si stabilisce la distribuzione di fondo sotto la condizione d'ipotesi nulla, utilizzando metodi computazionali quali l'analisi di Montecarlo e il Bootstrapping;
 5. Si calcola l'indice associato alla soluzione di clustering utilizzata;
-6. Si testa l'ipotesi della struttura nulla comparnando il valore dell'indice precedente sulla distribuzione di fondo dell'ipotesi nulla con un livello di confidenza pari ad $\alpha$.
+6. Si testa l'ipotesi della struttura nulla comparando il valore dell'indice precedente sulla distribuzione di fondo dell'ipotesi nulla con un livello di confidenza pari ad $\alpha$.
 
 # Association Analysis
 
-L'analisi delle associazioni analizza le transazioni effettuate, ovvero insiemi di elementi di lunghezza variabile che corrispondono ad operazioni unitarie effettuate dagli utienti. Un esempio è la lista della spesa degli utenti di un supermercato. L'obiettivo è trovare rapporti di consguenza, *antecedenti* e *conseguenti* che offrono dei vantaggi di strategia. I dati sono rappresentati come variabili *booleane* nella quale ogni riga rappresenta una transazione e le collone ogni *item* (in questo caso i prodotti acquistati) nella transazione.
+L'analisi delle associazioni analizza le transazioni effettuate, ovvero insiemi di elementi di lunghezza variabile che corrispondono ad operazioni unitarie effettuate dai clienti.
+Un esempio è la lista della spesa degli utenti di un supermercato.
+L'obiettivo è trovare rapporti di conseguenza, *antecedenti* e *conseguenti* che offrono dei vantaggi di strategia.
+I dati sono rappresentati come variabili *booleane* nella quale ogni riga rappresenta una transazione e le collone ogni *item* (in questo caso i prodotti acquistati) nella transazione.
 
-Sia $I={i_1,i_2,...,i_k}$ l'insieme degli item e con $T={t_1,t_2,...,t_k}$ l'insieme delle transazioni. Un ***itemset*** è un insieme di item; se contiente $k$ item differenti, si chiama *k-itemset*. Una transazione contiene più itemset di dimensioni diverse, avendo la possibilità di eleminare o aggiungere elementi. La larghezza della transazione rappresenta il numero di item della transazione.
+Sia $I = {i_1, i_2, ..., i_k}$ l'insieme degli item e con $T = {t_1, t_2, ..., t_k}$ l'insieme delle transazioni.
+Un ***itemset*** è un insieme di item; se contiente $k$ item differenti, si chiama *k-itemset*.
+Una transazione contiene più itemset di dimensioni diverse, avendo la possibilità di eleminare o aggiungere elementi.
+La larghezza della transazione rappresenta il numero di item della transazione.
 
 Il *support count* $\sigma(X) = |\{t_i : X \subseteq t_i, t_i \in T\}|$ conta il numero di k-itemset per determinare regole di associazione $A \rightarrow B$, a patto che $A \cap B = \varnothing$.
 Si definisce *confidenza* il numero di volte in cui l'assocazione si ripete rispetto al numero di volte in cui appare l'antecedente, in percentuale:
+
 $$c(A \rightarrow B) = \frac{\sigma(A \cup B)}{\sigma(A)}$$
+
 Invece, il *supporto* è definito come il numero in cui una regola è applicata all'intero dataset, in percentuale:
+
 $$s(A \rightarrow B) = \frac{\sigma(A \cup B)}{N}$$
+
 L'idea è trovare regole con un grande support, poichè facili da trovare, ed alta confidenza, perchè attendibili.
 
-Il supporto elimina anche regole che occorrono per puro caso, o regole poco applicabili e perciò non interessanti nel mondo reale,riducendo quindi il numero di regole considerate. Per trovare il numero ideae è sconsigliato il metodo a *forza bruta*, in quanto l'elevato numero di regole segue una legge esponenziale, quindi ad alto peso computazionale. Il problema si risolve eliminando tutte le regole che si è sicuri non soddisfano una soglia minima di frequenza, poichè poco presenti nell'itemset e considerare le regole solo per gli elementi rimanenti.
+Il supporto elimina anche regole che occorrono per puro caso, o regole poco applicabili e perciò non interessanti nel mondo reale, riducendo quindi il numero di regole considerate. Per trovare il numero ideae è sconsigliato il metodo a *forza bruta*, in quanto l'elevato numero di regole segue una legge esponenziale, quindi ad alto peso computazionale.
+Il problema si risolve eliminando tutte le regole che si è sicuri non soddisfano una soglia minima di frequenza, poichè poco presenti nell'itemset e considerare le regole solo per gli elementi rimanenti.
 
 ## Valutazione
-La formazione di regole non deve essere troppo semplice e deve interessare gli esperti di dominio. Esistono misure oggettive, indipendenti dal dominio, per calcolare la qualità delle regole formulate: si costruisce una matrice di confusione (come quella per i modelli di classificazione). Si calcolano quindi le frequenze marginali della tabella per verificare che la regola aggiunga informazione: la confidenza è calcolata in relazione al supporto del conseguente. Infatti, l'antecedente è gia verificato dall'algoritmo di formulazione, ma solamente regole con un conseguente frequente possono aggiungere informazione. Si calcola quindi il *fattore di interesse*:
+La formazione di regole non deve essere troppo semplice e deve interessare gli esperti di dominio.
+Esistono misure oggettive, indipendenti dal dominio, per calcolare la qualità delle regole formulate: si costruisce una matrice di confusione (come quella per i modelli di classificazione).
+Si calcolano quindi le frequenze marginali della tabella per verificare che la regola aggiunga informazione: la confidenza è calcolata in relazione al supporto del conseguente.
+Infatti, l'antecedente è gia verificato dall'algoritmo di formulazione, ma solamente regole con un conseguente frequente possono aggiungere informazione.
+Si calcola quindi il *fattore di interesse*:
+
 $$Lift = \frac{c(A \rightarrow B)}{s(B)}$$
+
 oppure
+
 $$I(A, B) = \frac{s(A, B)}{s(A) \cdot s(B)} = N \frac{f_{1.1}}{f_{1.\cdot} \cdot f_{\cdot.1}}$$
-che assume il valore 1 in caso di indipendenza tra i due item. Si calola anche il *Coefficiente di Correlazione*:
+
+che assume il valore 1 in caso di indipendenza tra i due item.
+Si calola anche il *Coefficiente di Correlazione*:
+
 $$Phi = \frac{f_{1.1} \cdot f_{0.0} - f_{0.1} \cdot f_{1.0}}{\sqrt{f_{1.\cdot} \cdot f_{\cdot.1} \cdot f_{0.\cdot} \cdot f_{\cdot.0}}}$$
+
 o l'*IS Measure*:
+
 $$IS(A, B) = \sqrt{I(A, B) \cdot s(A, B)} = \frac{S(A, B)}{\sqrt{s(A) \cdot s(B)}}$$
+
 che è una buona misura per verificare l'associazione di parole all'interno di testi; è semplificabile $\sqrt{s(A) \cdot s(B)}$ come in caso di indipendenza tra le due variabili.
 
-Una misura si dice *simmetrica* se scambiando antecedente e conseguente il suo valore non cambia, *asimmetrica* altrimenti. Esistono comunque una quarantina di misure diverse per calcolare il valore di una regola, e la letteratura suggerisce anche delle particolari misure per ogni dominio. Alcuni attributi sono più adatti a misurare le prestazioni in caso di regole simmetriche o asimmetriche.
+Una misura si dice *simmetrica* se scambiando antecedente e conseguente il suo valore non cambia, *asimmetrica* altrimenti.
+Esistono comunque una quarantina di misure diverse per calcolare il valore di una regola, e la letteratura suggerisce anche delle particolari misure per ogni dominio.
+Alcuni attributi sono più adatti a misurare le prestazioni in caso di regole simmetriche o asimmetriche.
