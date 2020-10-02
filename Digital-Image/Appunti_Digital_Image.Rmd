@@ -1,0 +1,45 @@
+---
+title: "Untitled"
+author: "Digital Signal and Image Management"
+date: "29/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Classificazione dei Segnali
+I segnali possono essere classificati in base al Dominio ed al Codominio. Si riportano i seguenti esempi:
+
+1. Segnale Analogico, $\mathbb{D} : \mathbb{R} \rightarrow \mathbb{R}$;
+2. Segnale Analogico a tempo discreto, $\mathbb{D} : \mathbb{R} \rightarrow \mathbb{K}$, con $K = \{\dots, t-1, t, t+1, \dots\}$;
+3. Segnale Continuo nelle ampiezze, $\mathbb{D} : \mathbb{R} \rightarrow \mathbb{K}$;
+4. Segnale Digitale, $\mathbb{D} : \mathbb{K} \rightarrow \mathbb{K}$.
+
+Per rappresentare digitalmente un segnale analogico sono necessari 3 fasi:
+
+* Campionamento: si considerano solanemente le parti di segnali tali per cui non si perdono troppe informazioni. Una alta frequenza di campionamenta significa una buona riproduzione del segnale originale, ma si avrà un numero elevato di dati, mentre una bassa frequenza di campionamnto produce il fenomeno chiamato aliasing;
+* Quantizzazione: l'ADC campiona una onda analogica ad intervalli temporali uniformi ed assegna u valore digitale ad ogni campione. Il valore è ottenuto tramite la seguente formula:
+
+$$\text{Digital Output Code} = \frac{\text{Analog Input}}{\text{Reference Input}} \times (2^N - 1)$$;
+
+* Codifica, limitata dalla memoria del dispositivo digitale e dalla sua velocità. Il file verrà compresso, processato o trasmesso
+
+Per un efficace trattamento dei segnali è necessario minimizzare il quantitativo dei dati processati individuando solo quelli strettamente necessari, in modo da perdere meno informazioni possibili. La differenza tra il segnale analogico e la sua rappresentazione digitale è definita rumore di quantizzazione; il rumore diminuisce all'aumentare dei bit richiesti per la codifica del singolo campione.
+
+Per *Ampiezza* si intende il valore assunto dal segnale e sarà la variabile dipendente $y$. Il tempo (o lo spazio) corrisponde alla variabile indipendente $x$, monodimensionale o a più dimensioni.
+
+Le grandezze statistiche utilizzate sono:
+
+Energy: $E_f = \int_{-\infty}^{+\infty} f^2(t) dt$
+Power: $P_f = \lim_{T \rightarrow \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} (|f(t)|)^2 dt$
+Average: $\mu = \lim_{T \rightarrow \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t) dt = \frac{1}{T_1 - T_0}\int_{T_0}^{T_1} x(t) dt$
+
+Se il segnale è una forma d'onda ripetuta, queste escursioni sono costanti e possono essere descritte da una grandezza chiamata Ampiezza *Picco-Picco*.
+
+La periodicità di un segnale indica il tempo nel quale è definito il segnale che si ripete. La frequenza fondamentale è legata al periodo della relazione $f_0 = 1/T$. Nella realtà non esistono segnali puramente periodici, ma segnali quasi periodici caratterizzati da forme d'onda che si ripetono quasi uguali.
+
+Il *Decibel* è un'unità di misura di tipo logaritmico che esprime il rapporto fra due livelli di potenza. La misura in decibel tra due grandezze fisiche delo stesso tipo è quindi una misura relativa, adimensionale e non lineare:
+
+$$Bel = \log_{10}\frac{P_1}{P_2} \implies dB = 10Bel = 20\log_{10}\frac{A_1}{A_2}$$

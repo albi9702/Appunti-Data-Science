@@ -1,0 +1,123 @@
+---
+title: "Streaming Data Management and Time Series Analysis"
+author: "Alberto Filosa"
+date: "28/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- Lecture 1: 28/09/2020 -->
+# Statistical Prediction
+A *Statistical Prediction* is a guess about the value of a random variable $Y$ based on the outcome of other random variales $X_1, \dots, X_m$. A *Predictor* is a function of the random variables: $\hat Y = p(X_1, \dots, X_m)$. An optimal prediction is the *Loss Function* which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymetric: $l(-x) = l(x)$, but the most used is generally asymetric, like the *Quadratic loss function*: $l_2(x) = x^2$.
+
+The predictor $\hat Y= \hat p(X_1, \dots, X_m)$ is optimal for $Y$ with respect to the loss $l$ if minize il the expected loss among the class of measurable functions:
+
+$$\mathbb{E} \ l(Y - \hat Y) = \min_{p \in M}\mathbb{E} \ l[Y - p(X_1, \dots, X_m)]$$
+
+The optimal predictor under quadratric loss is the conditional expectation $\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]$.
+
+The properties of the conditional expecation are:
+
+1. *Linearity*: $\mathbb{E}[aY + bZ + c|X] = a\mathbb{E}[Y|X] + b\mathbb{E}[Z|X] + c$, with $a,b,c,$ constants;
+2. *Orthogonality of the prediction error*: $\mathbb{E}\{(Y - \hat Y) g(x) \} = \mathbb{E}\{(Y - \mathbb{E}[Y|X]) g(x) \} = 0$;
+3. *Functions of conditioning variables*: $\mathbb{E}[Yg(x)[X] = \mathbb{E}[Y|X]g(x)$;
+4. *Indipendence with the conditioning variables*: $\mathbb{E}[Y|X] = \mathbb{E}[Y]$ if $X \perp\!\!\!\perp Y$
+5. *Law of iterated expecatons*: $\mathbb{E}[Y] = \mathbb{E} \{\mathbb{E}[Y|X] \}$;
+6. *Law of total variance*: $\mathbb{V} \text{ar}[Y] = \mathbb{E}[\mathbb{V}\text{ar} (Y|X)] + \mathbb{V} \text{ar} [\mathbb{E}[Y|X]]$.
+
+## Optimal Linear Predictor
+Sometimes it can be easer to limit the search to a smaller class functions, like linear combination. The main advantage is that the covariance structure of the random variables is all needed to compute the prediction:
+
+$$\mathbb{P}[Y|X_1, \dots, X_m] = \mu_Y + \Sigma_{YX} \Sigma_{XX}^{-1} (X - \mu_X)$$
+
+The Properties of the optimal linear predictor are:
+
+1. *Unbiasedness*: $\mathbb{E}[Y - \mathbb{P}[Y|X]] = 0$;
+2. ***M***ean ***S***quare ***E***rror (**MSE**) of the prediction: $MSE_{lin} = \Sigma_{YY} - \Sigma_{YX}\Sigma_{YY}^{-1}\Sigma_{XY}$
+3. *Orthogonality of the prediction error*: $\mathbb{E}[(Y - \mathbb{P}[Y|X])X^t] = 0$;
+4. *Linearity*: $\mathbb{P}[aY + bZ + c|Z] = a\mathbb{P}[Y|X] + b\mathbb{P}[Z|X] + c$
+5. *Law of iterated projections*: if $\mathbb{E}(X - \mu_x)(Z - \mu_Z)^t = 0$, then $\mathbb{P}[Y | X,Z] = \mu_Y + \mathbb{P}[Y - \mu_Y|X] + \mathbb{P}[Y - \mu_Y|Z]$
+
+<!--Aggiungere parte 1.3-->
+
+<!-- Lecture 2: 29/09/2020 -->
+# Time Series Concepts
+A *Time Series* is a sequence of observation ordered to a time index $t$ taking valus in an index set $S$. If $S$ contains finite numbers we speak about of *Discrete* time series $y_t$, otherwis a *Continous* time series $y(t)$.
+
+The most important form of time homogenity is *Stationarity*, define as time invariance of the whole probability of the data generating process (strict stationarity) or just of its two moments (weak stationarity).
+
+The process $\{Y_t\}$ is *Strictly* stationary if $\forall k \in \mathbb{N}, h \in \mathbb{Z}$ and $(t_1, \dots, t_k) \in \mathbb{Z}^k$,
+
+$$(Y_{t1}, \dots, Y_{tk},) \buildrel d \over= (Y_{t1+h}, \dots, Y_{tk+h},)$$
+
+the process $\{Y_t\}$ is *Weakly* stationary if, $\forall h, t \in \mathbb{Z}$, with $\gamma(0) < \infty$
+
+$$\begin{align}
+  \mathbb{E}(Y_t)                   &= \mu       \\
+  \mathbb{C}\text{ov}(Y_t, Y_{t-h}) &= \gamma(h)
+  \end{align}$$
+  
+If a time series is strictly stationary, then it is also weakly stationary if and only if $\mathbb{V}\text{ar}(Y_t) < \infty$. If a time series a Gaussian process, then strict and weak stationarity are equivalent.
+
+The most elementary stationarity process is the white noise.
+A stochastic process is *White Noise* if has $\mu = 0, \sigma^2 > 0$ and covariance function
+
+$$\gamma(h) =
+    \begin{cases}
+      \sigma^2 &\qquad \text{for } h = 0 \\
+      0        &\qquad \text{for } h \ne 0
+    \end{cases}$$
+  
+<!--DA SISTEMARE-->
+Un processa $MA(q)$ <!--Moving Average--> ha funzione di autocorrelazione che si annulla per $h > q$. Un processo $MA(q)$ per cui l'equazione caratteristica $1 + \theta_1X+ \dots + \theta_qX^q = 0$ ha solo soluzoni esterne al cerchio unitario è rappresentabile come un processo $Y_t = k + \psi_1 Y_{t-1} + \dots + \psi_q Y_{t-q} + \varepsilon_t$
+
+Un processo autoregressivo $AR(p)$ è definito come
+
+$$Y_t = k + \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \varepsilon_t$$
+
+Esso è stazionario se nella equazione caratteristica $1 - \phi_1X - \dots - \phi_pX^p = 0$ tutte le soluzioni sono esterne al cerchio unitario.
+
+Se $Y_t$ è stazionario, allora $\mathbb{E}(Y_t) = \frac{k}{1- \phi_1 - \dots - \phi_p}$.
+
+The AR(1) process is $Y_t = k + \phi Y_{t-1} + \varepsilon_1$, so $1 - \phi x = 0 \implies x = 1/\phi$. AR(1) is stationary if $|\phi | < 1$
+
+If in AR(1) $\phi = 1$ we obtain a non stationary process (integrate) called Random Walk:
+
+$$Y_t = k + Y_{t-1} + \varepsilon$$
+
+Un processo integrato $Z_t$ di ordine 1, $I(1)$, è un processo non stazionario, ma la cui differenza prima è stazionaria:
+
+$$\Delta Z_t = Z_t - Z_{t-1} \sim I(0)$$
+
+A $Z_t$ process is integrated of order $d$ if it is not stationary, $\Delta^{d-1}Z_{t-1}$ non stationary, while $\Delta^dZ_t}$ is stationary.
+
+The process $\{Y_t\}$ is ARMA$(p,q)$ if it is stationary and satisfies 
+
+$$Y_t = \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \theta_1Z_{t-1} + \dots + \theta_1Y_{t-1}$$
+
+<!-- Lecture 3: 01/10/2020 -->
+```{r Time Series}
+library(forecast)
+set.seed(20201001)
+
+eps <- rnorm(1000) #-- White Noise
+plot(ts(eps)) #-- Plot Time Series (ts)
+
+ar1 <- stats::filter(eps, 0.9, "recursive") #-- Linear filtering to a Time Series
+
+plot(ts(ar1))
+
+ggAcf(ar1, lag.max = 36) #-- Autocorrelation Function
+ggPacf(ar1, lag.max = 36) #-- 
+
+ar2 <- stats::filter(eps, c(1.7, -0.8), "recursive")
+plot(ts(ar2))
+ggAcf(ar2)
+ggPacf(ar2)
+
+mod1 <- Arima(sunspot.year, c(2, 0, 0))
+```
+
