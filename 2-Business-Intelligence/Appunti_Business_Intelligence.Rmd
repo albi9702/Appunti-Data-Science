@@ -1,0 +1,19 @@
+---
+title: "Untitled"
+author: "Alberto Filosa"
+date: "30/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Sistemi Informativi
+Per *Sistema Informativo* si intende l'insieme delle informazioni utilizzate, memorizzate ed elaborate in una organizzazione per perseguire i propri fini. Per *Sistema Organizzativo*, invece, si intende l'insieme delle risorse e regole per l'utilizzo coordinato di queste risorse.
+
+cliclo di vita dei dati
+
+# Data Driven Economy
+Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per milgiorare i servizi e prodotti delle aziende.
+

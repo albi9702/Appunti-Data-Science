@@ -1,14 +1,31 @@
-Data-Management/libs
+1-Data-Management/libs
 
-Decision-Models/Immagini
-Decision-Models/libs
+1-Decision-Models/Immagini
+1-Decision-Models/libs
 
-Digital-Marketing/Immagini
-Digital-Marketing/libs
+1-Digital-Marketing/Immagini
+1-Digital-Marketing/libs
 
-Foundation-Computer-Science/files
+1-Foundation-Computer-Science/files
 
-Machine-Learning/Appunti_Machine_Learning.log
-Machine-Learning/libs
+1-Machine-Learning/Appunti_Machine_Learning.log
+1-Machine-Learning/libs
 
-Statistical-Modeling/libs
+1-Statistical-Modeling/libs
+
+2-Business-Intelligence/Immagini
+2-Business-Intelligence/libs
+
+2-Digital-Image/Immagini
+2-Digital-Image/libs
+
+2-Social-Media-Analytics/Immagini
+2-Social-Media-Analytics/libs
+
+2-Text-Mining/Immagini
+2-Text-Mining/libs
+
+2-Time-Series-Analysis/Appunti_Streaming_Time_Series_files
+2-Time-Series-Analysis/Immagini
+2-Time-Series-Analysis/libs
+2-Time-Series-Analysis/esempio_ts
