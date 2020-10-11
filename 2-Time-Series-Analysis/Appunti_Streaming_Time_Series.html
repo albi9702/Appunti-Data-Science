@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Streaming Data Management and Time Series Analysis</title>
+  <meta name="description" content="Streaming Data Management and Time Series Analysis" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Streaming Data Management and Time Series Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Streaming Data Management and Time Series Analysis" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Streaming Data Management and Time Series Analysis </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#statistical-prediction"><i class="fa fa-check"></i><b>1</b> Statistical Prediction</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#optimal-linear-predictor"><i class="fa fa-check"></i><b>1.1</b> Optimal Linear Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#time-series-concepts"><i class="fa fa-check"></i><b>2</b> Time Series Concepts</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#moving-average-process"><i class="fa fa-check"></i><b>2.1</b> Moving Average Process</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive Process</a></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#integrated-process"><i class="fa fa-check"></i><b>2.3</b> Integrated Process</a></li>
+<li class="chapter" data-level="2.4" data-path=""><a href="#arima-models"><i class="fa fa-check"></i><b>2.4</b> ARIMA Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#unobserved-comoponents-model"><i class="fa fa-check"></i><b>3</b> Unobserved Comoponents Model</a><ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#trend"><i class="fa fa-check"></i><b>3.1</b> Trend</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Streaming Data Management and Time Series Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Streaming Data Management and Time Series Analysis</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>28/9/2020</em></p>
+</div>
+<!-- Lecture 1: 28/09/2020 -->
+<div id="statistical-prediction" class="section level1">
+<h1><span class="header-section-number">1</span> Statistical Prediction</h1>
+<p>A <em>Statistical Prediction</em> is a guess about the value of a random variable <span class="math inline">\(Y\)</span> based on the outcome of other random variales <span class="math inline">\(X_1, \dots, X_m\)</span>. A <em>Predictor</em> is a function of the random variables: <span class="math inline">\(\hat Y = p(X_1, \dots, X_m)\)</span>. An optimal prediction is the <em>Loss Function</em> which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymetric: <span class="math inline">\(l(-x) = l(x)\)</span>, but the most used is generally asymetric, like the <em>Quadratic loss function</em>: <span class="math inline">\(l_2(x) = x^2\)</span>.</p>
+<p>The predictor <span class="math inline">\(\hat Y= \hat p(X_1, \dots, X_m)\)</span> is optimal for <span class="math inline">\(Y\)</span> with respect to the loss <span class="math inline">\(l\)</span> if minize il the expected loss among the class of measurable functions:</p>
+<p><span class="math display">\[\mathbb{E} \ l(Y - \hat Y) = \min_{p \in M}\mathbb{E} \ l[Y - p(X_1, \dots, X_m)]\]</span></p>
+<p>The optimal predictor under quadratric loss is the conditional expectation <span class="math inline">\(\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]\)</span>.</p>
+<p>The properties of the conditional expecation are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Linearity</em>: <span class="math inline">\(\mathbb{E}[aY + bZ + c|X] = a\mathbb{E}[Y|X] + b\mathbb{E}[Z|X] + c\)</span>, with <span class="math inline">\(a,b,c,\)</span> constants;</li>
+<li><em>Orthogonality of the prediction error</em>: <span class="math inline">\(\mathbb{E}\{(Y - \hat Y) g(x) \} = \mathbb{E}\{(Y - \mathbb{E}[Y|X]) g(x) \} = 0\)</span>;</li>
+<li><em>Functions of conditioning variables</em>: <span class="math inline">\(\mathbb{E}[Yg(x)[X] = \mathbb{E}[Y|X]g(x)\)</span>;</li>
+<li><em>Indipendence with the conditioning variables</em>: <span class="math inline">\(\mathbb{E}[Y|X] = \mathbb{E}[Y]\)</span> if <span class="math inline">\(X \perp\!\!\!\perp Y\)</span></li>
+<li><em>Law of iterated expecatons</em>: <span class="math inline">\(\mathbb{E}[Y] = \mathbb{E} \{\mathbb{E}[Y|X] \}\)</span>;</li>
+<li><em>Law of total variance</em>: <span class="math inline">\(\mathbb{V} \text{ar}[Y] = \mathbb{E}[\mathbb{V}\text{ar} (Y|X)] + \mathbb{V} \text{ar} [\mathbb{E}[Y|X]]\)</span>.</li>
+</ol>
+<div id="optimal-linear-predictor" class="section level2">
+<h2><span class="header-section-number">1.1</span> Optimal Linear Predictor</h2>
+<p>Sometimes it can be easer to limit the search to a smaller class functions, like linear combination. The main advantage is that the covariance structure of the random variables is all needed to compute the prediction:</p>
+<p><span class="math display">\[\mathbb{P}[Y|X_1, \dots, X_m] = \mu_Y + \Sigma_{YX} \Sigma_{XX}^{-1} (X - \mu_X)\]</span></p>
+<p>The Properties of the optimal linear predictor are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Unbiasedness</em>: <span class="math inline">\(\mathbb{E}[Y - \mathbb{P}[Y|X]] = 0\)</span>;</li>
+<li><strong><em>M</em></strong>ean <strong><em>S</em></strong>quare <strong><em>E</em></strong>rror (<strong>MSE</strong>) of the prediction: <span class="math inline">\(MSE_{lin} = \Sigma_{YY} - \Sigma_{YX}\Sigma_{YY}^{-1}\Sigma_{XY}\)</span></li>
+<li><em>Orthogonality of the prediction error</em>: <span class="math inline">\(\mathbb{E}[(Y - \mathbb{P}[Y|X])X^t] = 0\)</span>;</li>
+<li><em>Linearity</em>: <span class="math inline">\(\mathbb{P}[aY + bZ + c|Z] = a\mathbb{P}[Y|X] + b\mathbb{P}[Z|X] + c\)</span></li>
+<li><em>Law of iterated projections</em>: if <span class="math inline">\(\mathbb{E}(X - \mu_x)(Z - \mu_Z)^t = 0\)</span>, then <span class="math inline">\(\mathbb{P}[Y | X,Z] = \mu_Y + \mathbb{P}[Y - \mu_Y|X] + \mathbb{P}[Y - \mu_Y|Z]\)</span></li>
+</ol>
+<!--Aggiungere parte 1.3-->
+<!-- Lecture 2: 29/09/2020 -->
+</div>
+</div>
+<div id="time-series-concepts" class="section level1">
+<h1><span class="header-section-number">2</span> Time Series Concepts</h1>
+<p>A <em>Time Series</em> is a sequence of observation ordered to a time index <span class="math inline">\(t\)</span> taking values in an index set <span class="math inline">\(S\)</span>. If <span class="math inline">\(S\)</span> contains finite numbers we speak about of <em>Discrete</em> time series <span class="math inline">\(y_t\)</span>, otherwise a <em>Continuos</em> time series <span class="math inline">\(y(t)\)</span>.</p>
+<p>The most important form of time homogeneity is <em>Stationarity</em>, defined as time-invariance of the whole probability of the data generating process (<em>strict</em> stationarity) or just of its two moments (<em>weak</em> stationarity).</p>
+<p>The process <span class="math inline">\(\{Y_t\}\)</span> is <em>Strictly</em> stationary if <span class="math inline">\(\forall k \in \mathbb{N}, h \in \mathbb{Z}\)</span> and <span class="math inline">\((t_1, \dots, t_k) \in \mathbb{Z}^k\)</span>,</p>
+<p><span class="math display">\[(Y_{t1}, \dots, Y_{tk},) \buildrel d \over= (Y_{t1+h}, \dots, Y_{tk+h},)\]</span></p>
+<p>The process <span class="math inline">\(\{Y_t\}\)</span> is <em>Weakly</em> stationary if, <span class="math inline">\(\forall h, t \in \mathbb{Z}\)</span>, with <span class="math inline">\(\gamma(0) &lt; \infty\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbb{E}(Y_t)                   &amp;= \mu       \\
+    \mathbb{C}\text{ov}(Y_t, Y_{t-h}) &amp;= \gamma(h)
+\end{aligned}\]</span></p>
+<p>If a time series is strictly stationary, then it is also weakly stationary if and only if <span class="math inline">\(\mathbb{V}\text{ar}(Y_t) &lt; \infty\)</span>. If a time series a Gaussian process, then strict and weak stationarity are equivalent.</p>
+<p>The most elementary stationarity process is the white noise. A stochastic process is <em>White Noise</em> if has <span class="math inline">\(\mu = 0, \sigma^2 &gt; 0\)</span> and covariance function</p>
+<p><span class="math display">\[\gamma(h) =
+    \begin{cases}
+      \sigma^2 &amp;\qquad \text{for } h = 0 \\
+      0        &amp;\qquad \text{for } h \ne 0
+    \end{cases}\]</span></p>
+<p>The <em>Autocovariance Function</em> is a function characterized by a weakly stationary process, while the <em>Autocorellation Function</em> (<strong>ACF</strong>) is the scale independent version of the autocovariance function:</p>
+<p>If <span class="math inline">\(/{Y_t/}\)</span> is a stationary process with autocovariance <span class="math inline">\(\gamma ()\)</span>, the its ACF is <span class="math inline">\(p(h) = \mathbb{C}\text{or}(Y_t, Y_{t-h}) &amp;= \gamma(h)/\gamma(0)\)</span>.</p>
+<p>An alternative summary of the linear dependence of a stationary process can be obtained from the <em>Partial Autocorellation Function</em>, that measures the correlation between <span class="math inline">\(Y_t\)</span> and <span class="math inline">\(Y_{t-h}\)</span> after their linear dependence on the interventing random variables has been removed</p>
+<div id="moving-average-process" class="section level2">
+<h2><span class="header-section-number">2.1</span> Moving Average Process</h2>
+<p>A <strong><em>M</em></strong>oving <strong><em>A</em></strong>verage Process (<strong>MA</strong>) is a process that estimates the trend-cycle at time <span class="math inline">\(t\)</span> obtained by averaging values of the time series within <span class="math inline">\(k\)</span> periods of <span class="math inline">\(t\)</span>. The average eliminates some of the randomness in the data, leaving a smooth trend-cycle component.</p>
+<p><span class="math display">\[\begin{aligned}
+    Y_t     &amp;= \varepsilon_t + \theta_1 \varepsilon_{t-1} + \dots + \theta_q \varepsilon_{t-q} \\
+    Y_{t-1} &amp;= \varepsilon_{t-1} + \theta_1 \varepsilon_{t-2} + \dots + \theta_q \varepsilon_{t-q-1}
+  \end{aligned}\]</span></p>
+<p>A <span class="math inline">\(MA(q)\)</span> process has <span class="math inline">\(PACF = 0\)</span> for <span class="math inline">\(h &gt; p\)</span> and its characteristic equation <span class="math inline">\(1 + \theta_1X+ \dots + \theta_qX^q = 0\)</span> that has only external solution of the unitary circle is a process such that <span class="math inline">\(Y_t = k + \psi_1 Y_{t-1} + \dots + \psi_q Y_{t-q} + \varepsilon_t\)</span></p>
+</div>
+<div id="autoregressive-process" class="section level2">
+<h2><span class="header-section-number">2.2</span> Autoregressive Process</h2>
+<p>An Autoregressive Process is a process that forecasts the <span class="math inline">\(Y\)</span> variable using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself.</p>
+<p><span class="math display">\[Y_t = k + \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \varepsilon_t\]</span></p>
+<p>An <span class="math inline">\(AR(p)\)</span> process is stationary for the characteristic equation <span class="math inline">\(1 - \phi_1X - \dots - \phi_pX^p = 0\)</span> and all solutions are external of the unitary circle</p>
+<p>If <span class="math inline">\(Y_t\)</span> is stationary, <span class="math inline">\(\mathbb{E}(Y_t) = \frac{k}{1- \phi_1 - \dots - \phi_p}\)</span>.</p>
+<p>The <span class="math inline">\(AR(1)\)</span> process is <span class="math inline">\(Y_t = k + \phi Y_{t-1} + \varepsilon_1\)</span>, so <span class="math inline">\(1 - \phi x = 0 \implies x = 1/\phi\)</span>. AR(1) is stationary if <span class="math inline">\(|\phi | &lt; 1\)</span>. If in <span class="math inline">\(AR(1)\)</span> <span class="math inline">\(\phi = 1\)</span> we obtain a non stationary process (integrate) called Random Walk:</p>
+<p><span class="math display">\[Y_t = k + Y_{t-1} + \varepsilon\]</span></p>
+<!-- Lecture 3: 01/10/2020 -->
+</div>
+<div id="integrated-process" class="section level2">
+<h2><span class="header-section-number">2.3</span> Integrated Process</h2>
+<p>An integrated process <span class="math inline">\(\{ Y_t \} \sim I(d)\)</span> is a non stationary process, but its first difference is stationary:</p>
+<p><span class="math display">\[\Delta Z_t = Z_t - Z_{t-1} \sim I(0)\]</span></p>
+<p>A <span class="math inline">\(Z_t\)</span> process is integrated of order <span class="math inline">\(d\)</span> if it is not stationary, <span class="math inline">\(\Delta^{d-1}Z_{t-1}\)</span> non stationary, while <span class="math inline">\(\Delta^dZ_t}\)</span> is stationary.</p>
+<p>The process <span class="math inline">\(\{Y_t\}\)</span> is ARMA<span class="math inline">\((p,q)\)</span> if it is stationary and satisfies:</p>
+<p><span class="math display">\[Y_t = \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \theta_1Z_{t-1} + \dots + \theta_1Y_{t-1}\]</span></p>
+</div>
+<div id="arima-models" class="section level2">
+<h2><span class="header-section-number">2.4</span> ARIMA Models</h2>
+<p>If we combine differencing with autoregression and a moving average model, we obtain a non-seasonal <strong><em>A</em></strong>uto<strong><em>R</em></strong>egressive <strong><em>I</em></strong>ntegrated <strong><em>M</em></strong>oving <strong><em>A</em></strong>verage (<strong>ARIMA</strong>).</p>
+<p><span class="math display">\[Y_t&#39; = c + \phi_1 Y_{t-1}&#39; + \dots + \phi_p Y_{t-p}&#39; + \theta_1 \varepsilon_{t-1} + \dots + \theta_q \varepsilon_{t-q} + \varepsilon_t\]</span></p>
+<p>where <span class="math inline">\(Y_t&#39;\)</span> is the differenced series. This is an <span class="math inline">\(ARIMA(p, d, q)\)</span>, where <span class="math inline">\(p\)</span> is the order of the <strong><em>A</em></strong>uto<strong><em>R</em></strong>egressive part, <span class="math inline">\(d\)</span> is the degree of first differencing involved (<strong><em>I</em></strong>ntegrated) and <span class="math inline">\(q\)</span> is the order of the <strong><em>M</em></strong>oving <strong><em>A</em></strong>verage part.</p>
+<p>The backward shift operator <span class="math inline">\(B(y_t) = y_{t-1}\)</span> is a useful notational device when working with time series lags, so it has the effect of shifting the data back one period. The backward shift operator is convenient for describing the process of differencing. A first difference can be written as:</p>
+<p><span class="math inline">\(y_t&#39; = y_t - y_{t-1} = y_t - B(y_t) = (1 - B)y_t\)</span></p>
+<p>Backshift notation is particularly useful when combining differences, as the operator can be treated using ordinary algebraic rules. In particular, terms involving <span class="math inline">\(B\)</span> can be multiplied together.</p>
+<!-- Box and Jenkins Procedure for ARIMA Model Identification-->
+<p><img src="Immagini/Box-Jenkins-Procedure.png" width="75%" style="display: block; margin: auto;" /></p>
+<!-- Lecture 4 04/10/2020 -->
+<!-- Lecture 5 06/10/2020 -->
+</div>
+</div>
+<div id="unobserved-comoponents-model" class="section level1">
+<h1><span class="header-section-number">3</span> Unobserved Comoponents Model</h1>
+<p>A natural way humans tend to think about time series is as sum of non directly observable components such as trends, seasonality and cycle. <strong><em>U</em></strong>nobserved <strong><em>C</em></strong>omoponents <strong><em>M</em></strong>odels (<strong>UCM</strong>) select the best features of stochastic framework as ARIMA models, but also they tend to perform very well in forecasting .</p>
+<p>The observable time series of UCM is the sum of trend (<span class="math inline">\(\mu_t\)</span>), cycle (<span class="math inline">\(\psi_t\)</span>), seasonality (<span class="math inline">\(\gamma_t\)</span>) and white noise (<span class="math inline">\(\varepsilon_t\)</span>):</p>
+<p><span class="math display">\[Y_t = \mu_t + \psi_t + \gamma_t + \varepsilon_t\]</span></p>
+<p>Some of these components could be skipped and some other could be added. Also, they can be seen as stochastic version of the deterministic functions of time. In the next sections we see how to build stochastically evolving components.</p>
+<div id="trend" class="section level2">
+<h2><span class="header-section-number">3.1</span> Trend</h2>
+<p>The <em>Trend</em> usually adopted in UCM is the local linear trend. Let us take a linear function defined as follows:</p>
+<p><span class="math display">\[\mu_t = \mu_0 + \beta_0 t\]</span></p>
+<p>where <span class="math inline">\(\mu_0\)</span> is the intercept and <span class="math inline">\(\beta_0\)</span> the slope and write it in incremental form:</p>
+<p><span class="math display">\[\mu_t = \mu_{t-1} + \beta_0\]</span></p>
+<p>By adding the white noise <span class="math inline">\(\eta_n\)</span>, we obtain a random walk with drift. In this case we can interpreted <span class="math inline">\(\mu_t\)</span> as a linear trend with a random walk intercept, but the slope remains unchanged.</p>
+<p>It is possible obtain a time-varying slope in trends, easily achieved letting the slope evolves as a random walk:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mu_t   &amp;= \mu_{t-1}   + \beta_0 + \eta_n \\
+    \beta_t &amp;= \beta_{t-1} + \xi_t            
+\end{aligned}\]</span></p>
+<p>These equations define the local linear trend interpreted as a linear trend where both intercept and slope evolve in time as random walks</p>
+<p>The local linear trend has different special case of interest obtained by fixing the value of the variances:</p>
+<ul>
+<li><em>Deterministic Linear Trend</em> if <span class="math inline">\(\sigma_{\eta}^2 = \sigma_{\xi}^2 = 0\)</span>;</li>
+<li><em>Random Walk with Drift</em> <span class="math inline">\(\beta_0\)</span> if <span class="math inline">\(\sigma_{\xi}^2 = 0\)</span> (slope constant);</li>
+<li><em>Random Walk</em> if <span class="math inline">\(\sigma_{\xi}^2 = \beta_0 = 0\)</span> (slope = 0)</li>
+<li><em>Integrated Random Walk</em> if <span class="math inline">\(\sigma_{\eta}^2 = 0\)</span>, with a very smooth trend</li>
+</ul>
+<p><strong>Obs.</strong>: the local linear trend can be also seen as an ARIMA process: if <span class="math inline">\(\sigma_{\xi}^2 &gt; 0\)</span>, <span class="math inline">\(\mu_t \sim I(2)\)</span> process as trend is non-stationary, while its second difference is stationary.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">set.seed</span>(<span class="dv">20201006</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">n &lt;-<span class="st"> </span><span class="dv">200</span>           <span class="co">#-- Observations</span></a>
+<a class="sourceLine" id="cb1-3" title="3">beta &lt;-<span class="st"> </span><span class="kw">numeric</span>(n) <span class="co">#-- Slope</span></a>
+<a class="sourceLine" id="cb1-4" title="4">mu &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)   <span class="co">#-- Trend</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">sd_eta &lt;-<span class="st"> </span><span class="dv">1</span>        <span class="co">#-- Standard Deviation White Noise</span></a>
+<a class="sourceLine" id="cb1-7" title="7">sd_xi  &lt;-<span class="st"> </span><span class="fl">0.1</span>      <span class="co">#-- Standard Deviation White Noise</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n){</a>
+<a class="sourceLine" id="cb1-10" title="10">  beta[t] &lt;-<span class="st"> </span>beta[t<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>,<span class="dt">sd =</span> sd_xi)           <span class="co">#-- Slope</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  mu[t] &lt;-<span class="st"> </span>mu[t<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>beta[t<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">sd =</span> sd_eta) <span class="co">#-- Intercept</span></a>
+<a class="sourceLine" id="cb1-12" title="12">}</a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="kw">plot</span>(<span class="kw">ts</span>(beta))</a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="kw">plot</span>(<span class="kw">ts</span>(mu))</a></code></pre></div>
+<p><img src="Appunti_Streaming_Time_Series_files/figure-html/Local%20Linear%20Trend-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
