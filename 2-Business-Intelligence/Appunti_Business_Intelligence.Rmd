@@ -17,3 +17,240 @@ cliclo di vita dei dati
 # Data Driven Economy
 Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per milgiorare i servizi e prodotti delle aziende.
 
+<!-- Lecture 6: 17/10/2020 -->
+# Esercitazione SQL
+
+## Esercizio 1
+### 1.1 
+Visualizzare solo il contenuto degli attributi titolo, tipo, prezzo della tabella libri:
+
+```SQL
+SELECT titolo,
+       tipo,
+       prezzo
+  FROM libri;
+```
+
+### 1.2
+Visualizzare titolo e prezzo dei libri che costano meno di 10 euro:
+
+```SQL
+SELECT titolo,
+       prezzo
+  FROM libri
+ WHERE prezzo < 10;
+```
+
+### 1.3
+Visualizzare le informazioni dei libri di informatica (`CS`):
+
+```SQL
+SELECT titolo,
+       tipo
+  FROM libri
+ WHERE tipo = "CS";
+```
+
+### 1.4
+Visualizzare con un’unica query le informazioni sia dei libri di informatica sia dei libri di fiction (`CS` e `FIC`):
+
+```SQL
+SELECT titolo,
+       tipo
+  FROM libri
+ WHERE tipo = "CS" OR 
+       tipo = "FIC";
+```
+
+### 1.5
+Visualizzare per ogni libro, il titolo del libro e l'editore:
+
+```SQL
+SELECT titolo,
+       nome
+  FROM editori,
+       libri
+ WHERE editori.codice = libri.codice_editore;
+```
+
+### 1.6
+Visualizzare per ogni libro il titolo, il prezzo e la descrizione del formato:
+
+```SQL
+SELECT titolo,
+       prezzo,
+       descrizione
+  FROM libri AS l
+       JOIN
+       formato AS f ON f.codice = l.cod_format;
+```
+
+### 1.7
+Visualizzare (per ogni libro della tabella libri) il titolo del libro e il cognome dell'autore che lo ha scritto:
+
+```SQL
+SELECT titolo,
+       cognome
+  FROM libri AS l
+       JOIN
+       hascritto AS hs ON l.codice = hs.codice_libro
+       JOIN
+       autori AS a ON hs.codice_autore = a.codice_autore;
+```
+
+### 1.8
+Come il punto precedente, ma stampare solamente i libri scritti da Kafka:
+
+```SQL
+SELECT titolo,
+       cognome
+  FROM libri AS l
+       JOIN
+       hascritto AS hs ON l.codice = hs.codice_libro
+       JOIN
+       autori AS a ON hs.codice_autore = a.codice_autore
+ WHERE cognome = "Kafka";
+```
+
+### 1.9
+Come il punto precedente, ma stampare solamente i libri scritti da Kafka o da Agata Christie:
+
+```SQL
+SELECT titolo,
+       cognome
+  FROM libri AS l
+       JOIN
+       hascritto AS hs ON l.codice = hs.codice_libro
+       JOIN
+       autori AS a ON hs.codice_autore = a.codice_autore
+ WHERE cognome = "Kafka" OR 
+       cognome = "Christie";
+```
+
+### 1.10
+Stampate il nome e la sede delle librerie dove è in vendita il libro `dBASE Programming`:
+
+```SQL
+SELECT nome,
+       sede
+  FROM negozi AS n
+       JOIN
+       scorte AS s ON n.codice_negozio = s.codice_negozio
+       JOIN
+       libri AS l ON s.codice_libro = l.codice
+ WHERE titolo = "dBASE Programming";
+```
+
+## Esercizio 2
+### 2.1
+Visualizzare il numero totale di clienti con nome `Charles`, `Patricia` e `Sharon`:
+
+```SQL
+SELECT count( * ) AS Conteggio
+  FROM customer
+ WHERE fname = 'Charles' OR 
+       fname = 'Patricia' OR 
+       fname = 'Sharon'
+ GROUP BY fname;
+```
+
+### 2.2
+Visualizzare il numero totale di carte stratificate per tipo di carta:
+
+```SQL
+SELECT mc.description,
+       COUNT( * ) 
+  FROM customer AS c
+       JOIN
+       member_card AS mc ON c.card_type_id = mc.card_type_id
+ GROUP BY mc.card_type_id;
+```
+
+### 2.3
+Visualizzare il numero degli scontrini dei client `Clyde Dixon` e `Bonnie Emerson`:
+
+```SQL
+SELECT *
+  FROM bill AS b
+       JOIN
+       customer AS c ON b.customer_id = c.customer_id
+ WHERE c.fname = 'Clyde' AND 
+       c.lname = 'Dixon';
+```
+
+### 2.4
+Visualizzare il nome ed il cognome dei clienti, per i quali sono stati emessi scontrini che singolarmente riportano un totale superiore a 307 dollari:
+
+```SQL
+SELECT *
+  FROM bill AS b
+       JOIN
+       customer AS c ON b.customer_id = c.customer_id
+ WHERE b.total > 307;
+```
+
+### 2.5
+Visualizzare il cognome ed il nome di tutti i clienti che hanno acquistato il prodotto `Great Muffins`:
+
+```SQL
+SELECT c.lname,
+       c.fname
+  FROM bill AS b
+       JOIN
+       customer AS c ON c.customer_id = b.customer_id
+       JOIN
+       item_in_bill AS i ON b.bill_id = i.bill_id
+       JOIN
+       product AS p ON i.product_id = p.product_id
+ WHERE p.product_name = 'Great Muffins'
+ ORDER BY c.lname;
+```
+
+### 2.6
+Visualizzate il cognome e il nome di tutti i clienti che hanno acquistato prodotti forniti dall’azienda `Bravo`:
+
+```SQL
+SELECT c.lname,
+       c.fname,
+       p.product_name,
+       b.date
+  FROM bill AS b
+       JOIN
+       customer AS c ON c.customer_id = b.customer_id
+       JOIN
+       item_in_bill AS i ON b.bill_id = i.bill_id
+       JOIN
+       product AS p ON i.product_id = p.product_id
+       JOIN
+       supplier AS s ON p.supplier_id = s.supplier_id
+ WHERE s.name = 'Bravo';
+```
+
+### 2.7
+Per ogni prodotto con `product_id` < 20, visualizzare la quantità di prodotto venduta:
+
+```SQL
+SELECT p.product_id,
+       p.product_name,
+       sum(i.quantity) 
+  FROM product AS p
+       JOIN
+       item_in_bill AS i ON p.product_id = i.product_id
+ WHERE p.product_id < 20
+ GROUP BY p.product_id;
+```
+
+### 2.8
+Eseguire delle query per individuare la classe di prodotti che vende di più, sia in termini di quantità, sia in termini di ricavo:
+
+```SQL
+SELECT pc.product_class_id,
+       pc.product_subcategory,
+       sum(i.quantity) as Quantita
+  FROM item_in_bill AS i
+       JOIN
+       product AS p ON i.product_id = p.product_id
+       JOIN
+       product_class AS pc ON p.product_class_id = pc.product_class_id
+ GROUP BY pc.product_class_id;
+```

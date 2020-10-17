@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Digital Signal and Image Management</title>
+  <meta name="description" content="Digital Signal and Image Management" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Digital Signal and Image Management" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Digital Signal and Image Management" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Digital Signal and Image Management </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#classificazione-dei-segnali"><i class="fa fa-check"></i><b>1</b> Classificazione dei Segnali</a></li>
+<li class="chapter" data-level="2" data-path=""><a href="#analisi-di-fourier"><i class="fa fa-check"></i><b>2</b> Analisi di Fourier</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#trasformata"><i class="fa fa-check"></i><b>2.1</b> Trasformata</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#convoluzioni"><i class="fa fa-check"></i><b>2.2</b> Convoluzioni</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#fondamenti-di-immagini-digitali"><i class="fa fa-check"></i><b>3</b> Fondamenti di Immagini Digitali</a></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Digital Signal and Image Management</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Digital Signal and Image Management</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>29/9/2020</em></p>
+</div>
+<div id="classificazione-dei-segnali" class="section level1">
+<h1><span class="header-section-number">1</span> Classificazione dei Segnali</h1>
+<p>I segnali possono essere classificati in base al Dominio ed al Codominio. Si riportano i seguenti esempi:</p>
+<ol style="list-style-type: decimal">
+<li>Segnale Analogico, <span class="math inline">\(\mathbb{D} : \mathbb{R} \rightarrow \mathbb{R}\)</span>;</li>
+<li>Segnale Analogico a tempo discreto, <span class="math inline">\(\mathbb{D} : \mathbb{R} \rightarrow \mathbb{K}\)</span>, con <span class="math inline">\(K = \{\dots, t-1, t, t+1, \dots\}\)</span>;</li>
+<li>Segnale Continuo nelle ampiezze, <span class="math inline">\(\mathbb{D} : \mathbb{R} \rightarrow \mathbb{K}\)</span>;</li>
+<li>Segnale Digitale, <span class="math inline">\(\mathbb{D} : \mathbb{K} \rightarrow \mathbb{K}\)</span>.</li>
+</ol>
+<p>Per rappresentare digitalmente un segnale analogico sono necessari 3 fasi:</p>
+<ul>
+<li>Campionamento: si considerano solanemente le parti di segnali tali per cui non si perdono troppe informazioni. Una alta frequenza di campionamenta significa una buona riproduzione del segnale originale, ma si avrà un numero elevato di dati, mentre una bassa frequenza di campionamnto produce il fenomeno chiamato aliasing;</li>
+<li>Quantizzazione: l’ADC campiona una onda analogica ad intervalli temporali uniformi ed assegna u valore digitale ad ogni campione. Il valore è ottenuto tramite la seguente formula:</li>
+</ul>
+<p><span class="math display">\[\text{Digital Output Code} = \frac{\text{Analog Input}}{\text{Reference Input}} \times (2^N - 1)\]</span>;</p>
+<ul>
+<li>Codifica, limitata dalla memoria del dispositivo digitale e dalla sua velocità. Il file verrà compresso, processato o trasmesso</li>
+</ul>
+<p>Per un efficace trattamento dei segnali è necessario minimizzare il quantitativo dei dati processati individuando solo quelli strettamente necessari, in modo da perdere meno informazioni possibili. La differenza tra il segnale analogico e la sua rappresentazione digitale è definita rumore di quantizzazione; il rumore diminuisce all’aumentare dei bit richiesti per la codifica del singolo campione.</p>
+<p>Per <em>Ampiezza</em> si intende il valore assunto dal segnale e sarà la variabile dipendente <span class="math inline">\(y\)</span>. Il tempo (o lo spazio) corrisponde alla variabile indipendente <span class="math inline">\(x\)</span>, monodimensionale o a più dimensioni.</p>
+<p>Le grandezze statistiche utilizzate sono:</p>
+<p>Energy: <span class="math inline">\(E_f = \int_{-\infty}^{+\infty} f^2(t) dt\)</span>
+Power: <span class="math inline">\(P_f = \lim_{T \rightarrow \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} (|f(t)|)^2 dt\)</span>
+Average: <span class="math inline">\(\mu = \lim_{T \rightarrow \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t) dt = \frac{1}{T_1 - T_0}\int_{T_0}^{T_1} x(t) dt\)</span></p>
+<p>Se il segnale è una forma d’onda ripetuta, queste escursioni sono costanti e possono essere descritte da una grandezza chiamata Ampiezza <em>Picco-Picco</em>.</p>
+<p>La periodicità di un segnale indica il tempo nel quale è definito il segnale che si ripete. La frequenza fondamentale è legata al periodo della relazione <span class="math inline">\(f_0 = 1/T\)</span>. Nella realtà non esistono segnali puramente periodici, ma segnali quasi periodici caratterizzati da forme d’onda che si ripetono quasi uguali.</p>
+<p>Il <em>Decibel</em> è un’unità di misura di tipo logaritmico che esprime il rapporto fra due livelli di potenza. La misura in decibel tra due grandezze fisiche delo stesso tipo è quindi una misura relativa, adimensionale e non lineare:</p>
+<p><span class="math display">\[Bel = \log_{10}\frac{P_1}{P_2} \implies dB = 10Bel = 20\log_{10}\frac{A_1}{A_2}\]</span></p>
+<!-- Lecture 2: 06/10/2020 -->
+</div>
+<div id="analisi-di-fourier" class="section level1">
+<h1><span class="header-section-number">2</span> Analisi di Fourier</h1>
+<p>L’Analisi di Fourier ha lo scopo di decomporre il segnale in costituenti sinusoidali di frequenze differenti. In particolare, consente di osservare il segnale non più nel dominio tempo - spazio, ma nel dominio delle freqeunze.</p>
+<p>Ogni funzione periodica e a quadrato sommabile può essere espressa come somma di funzioni di seno e coseno:</p>
+<p><span class="math display">\[y = A \sin(\overline \omega x + \phi) \\
+y = A \cos(\overline \omega x + \phi)\]</span></p>
+<p>L’ampiezza indica quali sono i valori che la sinusoide può assumere, La pulsazione (<span class="math inline">\(\overline \omega = 2 \pi / T\)</span>) indica la frequenza della sinusionide, la fase indica quanto ritardo c’è nella sinusioide classica</p>
+<!-- Mettere Foto -->
+<p>Ad esempio, il segnale della immagine di sinistra è ottenuto sommando i segnali nella parte destra.</p>
+<p><img src="Immagini/Somma-Segnali.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>La serie di furier scrive un segnale nella seguente forma:</p>
+<p><span class="math display">\[f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} a_k \cos(\frac{2 \pi}{N} kx) + b_k \sin(\frac{2 \pi}{N} kx)\]</span></p>
+<p>con <span class="math inline">\(N\)</span> periodo, (<span class="math inline">\(1/N\)</span>) definita come frequenza fondamentale <span class="math inline">\(f_0\)</span>, <span class="math inline">\(k/n\)</span> frequenza <span class="math inline">\(f_k = kf_0\)</span> e <span class="math inline">\(\overline \omega = 2 \pi f_k\)</span> pulsazione. La formula diventa perciò:</p>
+<p><span class="math display">\[f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} a_k \cos(2 \pi k f_0 x) + b_k \sin(2 \pi k f_0 x)\]</span></p>
+<p>Data la funzione <span class="math inline">\(f(x)\)</span> periodica, i coefficienti della serie sono univocamente determinati:</p>
+<p><span class="math display">\[a_k = \frac{2}{N} \int_{-N/2}^{N/2} f(x) \cos(2 \pi k f_0 x) \qquad b_k = \frac{2}{N} \int_{-N/2}^{N/2} f(x) \sin(2 \pi k f_0 x)\]</span></p>
+<div id="trasformata" class="section level2">
+<h2><span class="header-section-number">2.1</span> Trasformata</h2>
+<p>Ogni funzione continua <span class="math inline">\(f(x)\)</span>, anche se non periodica, può essere espressa come integrale di sinusoidi complesse opportunamente pesate:</p>
+<p><span class="math display">\[F(u) = \int_{-\infty}^{+\infty} f(x) e^{-j2 \pi u x} dx \\
+  f(x) = \int_{-\infty}^{+\infty} F(u) e^{j2 \pi u x} dx \]</span></p>
+<p>Inoltre, è possibile passare dalla trasformata di Fourier, definita come il dominio delle frequenze (o trasformato), alla antitrasformata di Fourier, definita come dominio temporale. Questa trasformazione avviene senza perdita di informazione.</p>
+<p>La trasformata di Fourier di una funzione continua ed integrabile è una funzione complessa nel dominio delle freqeunze. In coordinate polali si ha:</p>
+<p><span class="math display">\[F(u) = F[f(x)] = \Re(u) + j\Im(u) = |F(u)|e^{j \phi(u)}\]</span></p>
+<p>Il modulo della trasformata <span class="math inline">\(|F(u)|\)</span> è definito come:</p>
+<p><span class="math display">\[|F(u)| = \sqrt{\Re(u)^2+ \Im(u)^2}\]</span></p>
+<p>mentre la fase <span class="math inline">\(\phi(u)\)</span>:</p>
+<p><span class="math display">\[\phi(u) = \tan^{-1} \frac{\Im(u)}{\Re(u)}\]</span></p>
+<p>Per il caso bidimensionale l’equazione della trasformata assume un’altra forma:</p>
+<p><span class="math display">\[\begin{aligned}
+    F(u, v) &amp;= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f(x, y) \cdot e^{-i2\pi(ux + vy)} dx dy \\
+    f(u, v) &amp;= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}F(x, y) \cdot e^{i2\pi(ux + vy)} dx dy
+  \end{aligned}\]</span></p>
+<p>che rimane molto simile a parte per il numero di assi.</p>
+<p>Operando con segnali digitali, che assumono valori discreti, l’integrale è sostituito dalla sommatoria:</p>
+<p><span class="math display">\[F(u) = \frac{1}{N} \sum_{i = 0}^{N - 1}f(j)e^{-j 2 \pi u \frac{1}{N}i}\]</span></p>
+<p>Si intende filtrare il suono di un’onda eliminando le frequenze sopra una certa soglia (ad esempio convervando solamente i bassi). Si effettua questa operazione nello spazio delle frequenze, molto più semplice in quanto si programma un filtro di una funzione che vale 0 sulle frequenze da eliminare e 1 quelle da conserbare, e lo si moltiplica per la trasformata <span class="math inline">\(F(u)\)</span>, effettuando l’anti-trasformata per poter fruire nuovamente del file.</p>
+<p>Si può effettuare un filtraggio anche con le immagini, considerando solamente il modulo della trasformata bidimensionale del segnale. Più la rappresentazione del modulo è regolare, più l’immagine sarà ordinata.
+Per costruire un filtro basta considerare una circonferenza di raggio arbitrario per considerare solamente determinate frequenze.
+Considerando solamente le frequenze alte sono conservati i bordi dell’immagine, con frequenze basse le informazioni sul contenuto (si ottiene una sfocatura dell’immagine).</p>
+<p><img src="Immagini/Spazio-Temporale-Frequenze.png" width="100%" style="display: block; margin: auto;" /></p>
+<!-- Lecture 4: 13/10/2020 -->
+</div>
+<div id="convoluzioni" class="section level2">
+<h2><span class="header-section-number">2.2</span> Convoluzioni</h2>
+<p>Una <em>Convoluzione</em> è l’operatore che descrive i filtraggi lineari nel dominio spaziale. In particolare, è l’applicazione di un filtraggio <span class="math inline">\(g\)</span> ad una funzione <span class="math inline">\(f\)</span>. Si considera una convoluzione nel dominio continuo tra due funzioni <span class="math inline">\(f(x)\)</span> e <span class="math inline">\(g(x)\)</span>:</p>
+<p><span class="math display">\[(f \ast g)(x) = \int_{s = -\infty}^{+\infty}g(x - s)f(s) ds\]</span></p>
+<p>In particolare,</p>
+<ol style="list-style-type: decimal">
+<li>L’asse di rappresentazione di uno dei due segnali è invertita: <span class="math inline">\(g(t) \rightarrow g(-t)\)</span>;</li>
+<li>Il segnale invertito viene traslato tra <span class="math inline">\(-\infty\)</span> e <span class="math inline">\(+\infty\)</span>;</li>
+<li>Per ogni traslazione si calcola il prodotto del segnale traslato e quello non traslato;</li>
+<li>Si calcola l’area del prodotto.</li>
+</ol>
+<!-- Esempio Convoluzione -->
+<p>I filtri possono essere a media mobile, in inglese smoothing, nella quale i coefficienti sommano ad 1 (<span class="math inline">\(\sum_i c_i = 1\)</span>), e derivativi, nella quale i coefficienti sommano a 0 (<span class="math inline">\(\sum_i c_i = 0\)</span>)</p>
+<p>Applicando la definizione di Trasofrmata di Fourier è possibile dimostrare il Teorema della Convoluzione:</p>
+<p>La trasformata della convoluzione di due funzioni è il prodotto delle trasformate delle stesse:</p>
+<p><span class="math display">\[G(u) = F[g(x)] = F[f(x) \ast h(x)]= F(u)H(u)\]</span></p>
+<p>Per la corrispondenza fra dominio spaziale e dominio delle frequenze si hanno le seguenti relazioni:</p>
+<p><span class="math display">\[\begin{matrix}
+    \text{Dominio Spaziale} &amp;&amp;                 &amp;&amp; \text{Dominio delle Frequenze} \\
+    g(x) = f(x) \ast h(x)   &amp;&amp; \Leftrightarrow &amp;&amp; G(u) = F(u) H(u) \\
+    g(x) = f(x)h(x)         &amp;&amp; \Leftrightarrow &amp;&amp; G(u) = F(u) \ast H(u) 
+  \end{matrix}\]</span></p>
+</div>
+</div>
+<div id="fondamenti-di-immagini-digitali" class="section level1">
+<h1><span class="header-section-number">3</span> Fondamenti di Immagini Digitali</h1>
+<p>Una <em>Immagine</em> è una funzione di intensità di luce a due dimensioni, <span class="math inline">\(f(x, y)\)</span>, con coordinate spaziali rispetto alla luce in quel punto. Una <em>Immagine Digitale</em>, invece, è una rappresentazione di una immagine continua tramite un array bidimensionale di carattere discreto. Ogni elemento dell’array campionato è chiamato <em>Pixel</em>.</p>
+<p>Il <em>Livello di Grigio</em> di una immagine è l’intesità relativa per ogni unità d’area, di solito compresa tra il valore più basso dintensità (Nero = 0) e più intenso (Bianco = 255).</p>
+<p>L’<em>Intensità</em> di una immagine è l’energia di luce, emessa da una unità d’area nell’immagine (dipende dal dispositivo), mentre la <em>Luminosità</em> di una immagine è l’apparenza soggettiva di una unità d’area (soggettiva e dipende dal contesto).</p>
+<!-- Luminance Vs Lightness -->
+<p>La <em>Luminance</em> è definita come potenza della luce pesata per una funzione spettrale chiamata efficienza luminosa. Essa mi</p>
+<p>I pixel <span class="math inline">\(f(x,y) = f_{yx}\)</span> sono ordinati in modo natuarel in una matrice, con <span class="math inline">\(x\)</span> la colonna e <span class="math inline">\(y\)</span> l’indice di riga:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    f(0,0)   &amp;&amp; f(1,0)   &amp;&amp; \dots &amp;&amp; f(N-1, L-0)
+    f(0,1)   &amp;&amp; f(1,1)   &amp;&amp; \dots &amp;&amp; f(N-1, 1)
+    \vdots   &amp;&amp; \vdots   &amp;&amp;       &amp;&amp; \vdots
+    f(0,L-1) &amp;&amp; f(1,L-1) &amp;&amp; \dots &amp;&amp; f(N-1, L-1)
+  \end{bmatrix}\]</span></p>
+<!-- Vedere Trasformazioni Immagini -->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

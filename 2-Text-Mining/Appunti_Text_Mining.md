@@ -40,7 +40,6 @@ output:
     fig_caption: true
     df_print: kable
     highlight: monochrome
-
 ---
 
 
@@ -94,38 +93,32 @@ Terms are the basic features of text and they collected in a bag-of-world.
 
 *Tokenization* is the process of demarcating and possibly classifying sections of a string of input characters. A token is an instance of a sequence of characters, so each of these is a candidate to be a meaningful term after further processing. There are many problems about this procedure: firstly, how split a city name like  `San Francisco` or `Los Angeles`; secondly, there are some problem tokenizing hyphenated sequence; numbers, recognized in different terms, and language issues (like German or Arabic language). Basically, the tokenizations consists in breaking a stream of text into meaningful units that depends on language, corpus or even context.
 
-```
-It's not straight-forward to perform so-called "tokenization"
+`It's not straight-forward to perform so-called "tokenization"`
 
 `It`, `’`, `s`, `not`, `straight`, `-`, `forward`
 `to`, `perform`, `so`, `-`, `called`, `“`, `tokenization`, `.`
-```
 
 To solve these problem is useful use Regular Expression or Statistical Method to detect the token in a specific sentence. They explore rich feature to decide where the boundary of a word is.
 
-A *Stop Word* is a word, usually one of a series in a stop list, that is to be ignored by a Search Engine (e.g. `the`, `a`, `and`, `to`, `be`, etc.). However, Web SE do not use stop lists due to the good compression techniques and needed in most of search queries, such as song titles of relational queries.
+A ***Stop Word*** is a word, usually one of a series in a stop list, that is to be ignored by a Search Engine (e.g. `the`, `a`, `and`, `to`, `be`, etc.). However, Web SE do not use stop lists due to the good compression techniques and needed in most of search queries, such as song titles of relational queries.
 
-The *Normalization* is the process of mapping variants of a term to a single, standardized form. It may depends on the language an so is intertwined <!-- Intrecciarsi -->with language detection. In Search Engines is necessary to normalizes indexed text as well as query terms identically.
+The ***Normalization*** is the process of mapping variants of a term to a single, standardized form. It may depends on the language an so is intertwined <!-- Intrecciarsi -->with language detection. In Search Engines is necessary to normalizes indexed text as well as query terms identically.
 
-*Case folding* is the process reducing all letters to lower case. There are some exception, such as proper noun or acronymous, but often the best choice is to lower case everything.
+***Case folding*** is the process reducing all letters to lower case. There are some exception, such as proper noun or acronymous, but often the best choice is to lower case everything.
 
-*Thesauri* is the process to handle synonyms and homonyms in text sentences. It can be handled by hand-construct equivalence classes, rewrite the word to form equivalence-class terms or in Search Engines it can expand a query. 
+***Thesauri*** is the process to handle synonyms and homonyms in text sentences. It can be handled by hand-construct equivalence classes, rewrite the word to form equivalence-class terms or in Search Engines it can expand a query. 
 
-*Soundex* is an approach which forms equivalence classes of words based on phonetic heuristic, useful for spelling mistakes.
+**Soundex** is an approach which forms equivalence classes of words based on phonetic heuristic, useful for spelling mistakes.
 
-*Lemmization* is the process to reduce variant forms to base form:
+**Lemmization** is the process to reduce variant forms to base form:
 
-```
 `am`, `are`, `is` $\rightarrow$ `be`
 
-`car`, `cars`, `car's`, `cars'` $\rightarrow `car`
-```
+`car`, `cars`, `car's`, `cars'` $\rightarrow$ `car`
 
-It implies doing proper reduction to dictionary headword form. A crude affix chopping is *Stemming*, that reduce inflected or derived words to their root form:
+It implies doing proper reduction to dictionary headword form. A crude affix chopping is ***Stemming***, that reduce inflected or derived words to their root form:
 
-```
 `automate`, `automatic`, `automation` $\rightarrow$ `automat`
-```
 
 # Text Representation
 *Text Representation* is the process to representing the text with graphical method. The simplest way is the binary term-document weighting, in which each document can be represented by a set of term (or binary vector) $\in \{ 0, 1\}$. Another graphical method is the count matrix, that consider the number of occurrences of a term in a document, but this not consider the ordering of words in a document.
@@ -161,3 +154,38 @@ The *Weights*, called $tf$-$idf$ weights, are the product of the two indices:
 $$w_{t, d} = \frac{tf_{t, d}}{\displaystyle \max_{t_i \in d} \{ tf_{t_i, d} \}} \cdot \log \Big(\frac{N}{df_t} \Big)$$
 
 The weight $w$ increases with the number of occurrences within a document and with the rarity of the term in the collection.
+
+
+<!-- Lecture 5 15/10/2020 -->
+Syntax is managed by Part of Speech Tagging (POS) and Named Entities Recogniction (NER).
+
+## Part Of Speech Tagging
+The Part Of Speech Tagging is a procedure that assigns to each word its syntax role in a sentence, such as nouns, verbs and adverbs. There are many applicaations:
+
+* Parsing;
+* Word prediction in speech recognition;
+* Machine Translation;
+
+
+The procedure to choose a pos tagset is
+
+1. choose set of tags
+2. pick small tagset;
+
+The problem is tag ambiguity: words often ave more tahn one pos, eg back (the back door, on my back). To solve this problem, we can assume a probability of pos tags
+
+aprroaches: rule ased tagging
+stochastic tagging
+
+rules, start with a dictionary, assign all possible tags to words and write rules by haan
+
+## ner
+find and classify names in text, so identidy word referred to names of interest in a particula application. It involves identification of proper names in text and classification into a set of predefined categories of interest.
+
+grey areas caused by metonomy, so two diffent categories entitities
+
+approaches:
+* ruled-based, identify if a seqeunce of words can be an entity name. using lexicons that categorize names (developed by trial and error or ml techniques)
+* statistic-based, maximize the probability of an entity using hidden markov model estimated with training data, resolving ambiguitu using context
+
+hmm describe a process as a collection of states with transitions between them. each state is associated with a probability distribution over worlds

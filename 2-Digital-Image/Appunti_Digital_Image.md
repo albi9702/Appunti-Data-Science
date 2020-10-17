@@ -42,9 +42,7 @@ output:
     highlight: monochrome
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 # Classificazione dei Segnali
 I segnali possono essere classificati in base al Dominio ed al Codominio. Si riportano i seguenti esempi:
@@ -96,9 +94,7 @@ L'ampiezza indica quali sono i valori che la sinusoide può assumere, La pulsazi
 Ad esempio, il segnale della immagine di sinistra è ottenuto sommando i segnali nella parte destra.
 
 
-```{r Somma Segnali, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("Immagini/Somma-Segnali.png")
-```
+<img src="Immagini/Somma-Segnali.png" width="100%" style="display: block; margin: auto;" />
 
 La serie di furier scrive un segnale nella seguente forma:
 
@@ -152,9 +148,7 @@ Per costruire un filtro basta considerare una circonferenza di raggio arbitrario
 Considerando solamente le frequenze alte sono conservati i bordi dell'immagine, con frequenze basse le informazioni sul contenuto (si ottiene una sfocatura dell'immagine).
 
 
-```{r Frequenze Spazio-Tempo, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("Immagini/Spazio-Temporale-Frequenze.png")
-```
+<img src="Immagini/Spazio-Temporale-Frequenze.png" width="100%" style="display: block; margin: auto;" />
 
 <!-- Lecture 4: 13/10/2020 -->
 ## Convoluzioni

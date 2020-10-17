@@ -138,9 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path=""><a href="#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive Process</a></li>
 <li class="chapter" data-level="2.3" data-path=""><a href="#integrated-process"><i class="fa fa-check"></i><b>2.3</b> Integrated Process</a></li>
 <li class="chapter" data-level="2.4" data-path=""><a href="#arima-models"><i class="fa fa-check"></i><b>2.4</b> ARIMA Models</a></li>
+<li class="chapter" data-level="2.5" data-path=""><a href="#arima-regression"><i class="fa fa-check"></i><b>2.5</b> ARIMA Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path=""><a href="#unobserved-comoponents-model"><i class="fa fa-check"></i><b>3</b> Unobserved Comoponents Model</a><ul>
 <li class="chapter" data-level="3.1" data-path=""><a href="#trend"><i class="fa fa-check"></i><b>3.1</b> Trend</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#state-space-form"><i class="fa fa-check"></i><b>3.2</b> State Space Form</a></li>
+<li class="chapter" data-level="3.3" data-path=""><a href="#kalman-filter"><i class="fa fa-check"></i><b>3.3</b> Kalman Filter</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
@@ -170,11 +173,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- Lecture 1: 28/09/2020 -->
 <div id="statistical-prediction" class="section level1">
 <h1><span class="header-section-number">1</span> Statistical Prediction</h1>
-<p>A <em>Statistical Prediction</em> is a guess about the value of a random variable <span class="math inline">\(Y\)</span> based on the outcome of other random variales <span class="math inline">\(X_1, \dots, X_m\)</span>. A <em>Predictor</em> is a function of the random variables: <span class="math inline">\(\hat Y = p(X_1, \dots, X_m)\)</span>. An optimal prediction is the <em>Loss Function</em> which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymetric: <span class="math inline">\(l(-x) = l(x)\)</span>, but the most used is generally asymetric, like the <em>Quadratic loss function</em>: <span class="math inline">\(l_2(x) = x^2\)</span>.</p>
-<p>The predictor <span class="math inline">\(\hat Y= \hat p(X_1, \dots, X_m)\)</span> is optimal for <span class="math inline">\(Y\)</span> with respect to the loss <span class="math inline">\(l\)</span> if minize il the expected loss among the class of measurable functions:</p>
+<p>A <em>Statistical Prediction</em> is a guess about the value of a random variable <span class="math inline">\(Y\)</span> based on the outcome of other random variables <span class="math inline">\(X_1, \dots, X_m\)</span>. A <em>Predictor</em> is a function of the random variables: <span class="math inline">\(\hat Y = p(X_1, \dots, X_m)\)</span>. An optimal prediction is the <em>Loss Function</em> which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymmetric: <span class="math inline">\(l(-x) = l(x)\)</span>, but the most used is generally asymmetric, like the <em>Quadratic loss function</em>: <span class="math inline">\(l_2(x) = x^2\)</span>.</p>
+<p>The predictor <span class="math inline">\(\hat Y= \hat p(X_1, \dots, X_m)\)</span> is optimal for <span class="math inline">\(Y\)</span> with respect to the loss <span class="math inline">\(l\)</span> if minimize il the expected loss among the class of measurable functions:</p>
 <p><span class="math display">\[\mathbb{E} \ l(Y - \hat Y) = \min_{p \in M}\mathbb{E} \ l[Y - p(X_1, \dots, X_m)]\]</span></p>
-<p>The optimal predictor under quadratric loss is the conditional expectation <span class="math inline">\(\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]\)</span>.</p>
-<p>The properties of the conditional expecation are:</p>
+<p>The optimal predictor under quadratic loss is the conditional expectation <span class="math inline">\(\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]\)</span>.</p>
+<p>The properties of the conditional expectation are:</p>
 <ol style="list-style-type: decimal">
 <li><em>Linearity</em>: <span class="math inline">\(\mathbb{E}[aY + bZ + c|X] = a\mathbb{E}[Y|X] + b\mathbb{E}[Z|X] + c\)</span>, with <span class="math inline">\(a,b,c,\)</span> constants;</li>
 <li><em>Orthogonality of the prediction error</em>: <span class="math inline">\(\mathbb{E}\{(Y - \hat Y) g(x) \} = \mathbb{E}\{(Y - \mathbb{E}[Y|X]) g(x) \} = 0\)</span>;</li>
@@ -218,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       0        &amp;\qquad \text{for } h \ne 0
     \end{cases}\]</span></p>
 <p>The <em>Autocovariance Function</em> is a function characterized by a weakly stationary process, while the <em>Autocorellation Function</em> (<strong>ACF</strong>) is the scale independent version of the autocovariance function:</p>
-<p>If <span class="math inline">\(/{Y_t/}\)</span> is a stationary process with autocovariance <span class="math inline">\(\gamma ()\)</span>, the its ACF is <span class="math inline">\(p(h) = \mathbb{C}\text{or}(Y_t, Y_{t-h}) &amp;= \gamma(h)/\gamma(0)\)</span>.</p>
+<p>If <span class="math inline">\(/{Y_t/}\)</span> is a stationary process with autocovariance <span class="math inline">\(\gamma ()\)</span>, the its ACF is <span class="math inline">\(p(h) = \mathbb{C}\text{or}(Y_t, Y_{t-h}) = \gamma(h)/\gamma(0)\)</span>.</p>
 <p>An alternative summary of the linear dependence of a stationary process can be obtained from the <em>Partial Autocorellation Function</em>, that measures the correlation between <span class="math inline">\(Y_t\)</span> and <span class="math inline">\(Y_{t-h}\)</span> after their linear dependence on the interventing random variables has been removed</p>
 <div id="moving-average-process" class="section level2">
 <h2><span class="header-section-number">2.1</span> Moving Average Process</h2>
@@ -243,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Integrated Process</h2>
 <p>An integrated process <span class="math inline">\(\{ Y_t \} \sim I(d)\)</span> is a non stationary process, but its first difference is stationary:</p>
 <p><span class="math display">\[\Delta Z_t = Z_t - Z_{t-1} \sim I(0)\]</span></p>
-<p>A <span class="math inline">\(Z_t\)</span> process is integrated of order <span class="math inline">\(d\)</span> if it is not stationary, <span class="math inline">\(\Delta^{d-1}Z_{t-1}\)</span> non stationary, while <span class="math inline">\(\Delta^dZ_t}\)</span> is stationary.</p>
+<p>A <span class="math inline">\(Z_t\)</span> process is integrated of order <span class="math inline">\(d\)</span> if it is not stationary, <span class="math inline">\(\Delta^{d-1}Z_{t-1}\)</span> non stationary, while <span class="math inline">\(\Delta^dZ_t\)</span> is stationary.</p>
 <p>The process <span class="math inline">\(\{Y_t\}\)</span> is ARMA<span class="math inline">\((p,q)\)</span> if it is stationary and satisfies:</p>
 <p><span class="math display">\[Y_t = \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \theta_1Z_{t-1} + \dots + \theta_1Y_{t-1}\]</span></p>
 </div>
@@ -256,8 +259,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(y_t&#39; = y_t - y_{t-1} = y_t - B(y_t) = (1 - B)y_t\)</span></p>
 <p>Backshift notation is particularly useful when combining differences, as the operator can be treated using ordinary algebraic rules. In particular, terms involving <span class="math inline">\(B\)</span> can be multiplied together.</p>
 <!-- Box and Jenkins Procedure for ARIMA Model Identification-->
-<p><img src="Immagini/Box-Jenkins-Procedure.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><img src="Immagini/Box-Jenkins-Procedure.png" width="95%" style="display: block; margin: auto;" /></p>
 <!-- Lecture 4 04/10/2020 -->
+</div>
+<div id="arima-regression" class="section level2">
+<h2><span class="header-section-number">2.5</span> ARIMA Regression</h2>
+<p>The time series models in the previous two chapters allow for the inclusion of information from past observations of a series, but not for the inclusion of other information that may also be relevant:</p>
+<p><span class="math display">\[\begin{aligned}
+    \Delta^d y_t                        &amp;= \beta_t \Delta^d X_t + \frac{\theta_q(B)}{\phi_q(B)} \varepsilon_t \\
+    \Delta^d(y_t - \beta_t X_t)         &amp;= \frac{\theta_q(B)}{\phi_q(B)} \varepsilon_t                        \\
+    \phi(B) \Delta^d(y_t - \beta_t X_t) &amp;= \theta(B) \varepsilon_t
+  \end{aligned}\]</span></p>
 <!-- Lecture 5 06/10/2020 -->
 </div>
 </div>
@@ -284,8 +296,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><em>Deterministic Linear Trend</em> if <span class="math inline">\(\sigma_{\eta}^2 = \sigma_{\xi}^2 = 0\)</span>;</li>
 <li><em>Random Walk with Drift</em> <span class="math inline">\(\beta_0\)</span> if <span class="math inline">\(\sigma_{\xi}^2 = 0\)</span> (slope constant);</li>
-<li><em>Random Walk</em> if <span class="math inline">\(\sigma_{\xi}^2 = \beta_0 = 0\)</span> (slope = 0)</li>
-<li><em>Integrated Random Walk</em> if <span class="math inline">\(\sigma_{\eta}^2 = 0\)</span>, with a very smooth trend</li>
+<li><em>Random Walk</em> if <span class="math inline">\(\sigma_{\xi}^2 = \beta_0 = 0\)</span> (slope = 0);</li>
+<li><em>Integrated Random Walk</em> if <span class="math inline">\(\sigma_{\eta}^2 = 0\)</span>, with a very smooth trend.</li>
 </ul>
 <p><strong>Obs.</strong>: the local linear trend can be also seen as an ARIMA process: if <span class="math inline">\(\sigma_{\xi}^2 &gt; 0\)</span>, <span class="math inline">\(\mu_t \sim I(2)\)</span> process as trend is non-stationary, while its second difference is stationary.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">set.seed</span>(<span class="dv">20201006</span>)</a>
@@ -306,6 +318,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-16" title="16"><span class="kw">plot</span>(<span class="kw">ts</span>(mu))</a></code></pre></div>
 <p><img src="Appunti_Streaming_Time_Series_files/figure-html/Local%20Linear%20Trend-1.png" width="75%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a></code></pre></div>
+</div>
+<div id="state-space-form" class="section level2">
+<h2><span class="header-section-number">3.2</span> State Space Form</h2>
+<p>The state space form is a system of equation in which one or more observable time series are linearly related to a set of unobservable state variables. It is defined by the following system of equation:</p>
+<p><span class="math display">\[\begin{cases}
+      Y_t          &amp;= d_t + Z_t \alpha_t + \varepsilon_t
+      \quad \text{Observation equation} \\
+      \alpha_{t+1} &amp;= c_t + T_t \alpha_t + R_t \eta_t
+      \quad \text{State equation}
+  \end{cases}\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_t \sim WN(0, H_t)\)</span>, <span class="math inline">\(\eta_t \sim WN(0, Q_t)\)</span>, uncorrelated random variables with zero mean and covariance matrix respectably <span class="math inline">\(H_t\)</span> and <span class="math inline">\(Q_t\)</span>.</p>
+<p>The initialization is the process where the state vector <span class="math inline">\(a_{1|0} = \mathbb{E}(\alpha_1)\)</span> and <span class="math inline">\(P_{1|0} = \mathbb{E}(\alpha_1 - a_{1|0})(\alpha_1 - a_{1|0})^t\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\(\qquad\)</span> Let’s transform a Local Linear Trend with White Noise in the State Space form. The LLT has this system of equation:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mu_t   &amp;= \mu_{t-1}   + \beta_0 + \eta_n \\
+    \beta_t &amp;= \beta_{t-1} + \xi_t            
+\end{aligned}\]</span></p>
+<p>with noise <span class="math inline">\(y_t = \mu_t + \varepsilon_t\)</span>. The state space form of the LLT is the following:</p>
+<p><span class="math display">\[\begin{cases}
+      \alpha_{t+1} = T \alpha_t + R \eta_t = 
+                 \begin{bmatrix}
+                   \mu_{t+1} \\
+                   \beta_{t+1}
+                 \end{bmatrix} =
+                 \begin{bmatrix}
+                   1 &amp; 1 \\
+                   0 &amp; 1
+                 \end{bmatrix}
+                 \begin{bmatrix}
+                   \mu_t \\
+                   \beta_t
+                   \end{bmatrix} + 
+                 \begin{bmatrix}
+                   \eta_t \\
+                   \zeta_t
+                 \end{bmatrix}
+      \quad \text{State equation} \\
+      Y_t = Z \alpha_t + \varepsilon_t =
+             \begin{bmatrix}
+               1 &amp; 0
+             \end{bmatrix}
+             \begin{bmatrix}
+               \mu_t \\
+               \beta_t
+             \end{bmatrix} + \varepsilon_t
+      \quad \text{Observation equation}
+  \end{cases}\]</span></p>
+<p>where <span class="math inline">\(\eta_t = \begin{bmatrix} \eta_t \\ \zeta^2 \end{bmatrix}\)</span> and <span class="math inline">\(Q = \begin{bmatrix} \sigma_\eta^2 &amp; 0 \\ 0 &amp; \sigma_\zeta^2 \end{bmatrix}\)</span>.</p>
+<p>The initialization process is the following:</p>
+<p><span class="math display">\[a_{1|0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} 
+  \qquad
+  P_{1|0} = \begin{bmatrix} \infty &amp; 0 \\ 0 &amp; \infty \end{bmatrix}\]</span></p>
+</div>
+<div id="kalman-filter" class="section level2">
+<h2><span class="header-section-number">3.3</span> Kalman Filter</h2>
+<p>Suppose that all parameters in the state space form are known; the only unknown quantities are unobservable components, specified as random variables, then the inference to carry out is the statistical prediction:</p>
+<ul>
+<li>Forecasting, the SP of <span class="math inline">\(\alpha_t\)</span> based on <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &lt; t\)</span>);</li>
+<li>Filtering, SP of <span class="math inline">\(\alpha_t\)</span> based on <span class="math inline">\(Y_t\)</span>;</li>
+<li>Smoothing, SP of <span class="math inline">\(\alpha_t\)</span> based on <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &gt; t\)</span>).</li>
+</ul>
+<p>It is possible to build the optimal linear predictor that is better than any other predictor assuming if <span class="math inline">\(\varepsilon_t\)</span>, <span class="math inline">\(v_t \sim WN\)</span> and the initial state <span class="math inline">\(\alpha_1\)</span> are jointly Gaussian.</p>
+<p>Consider the following notation:</p>
+<p><span class="math display">\[\begin{aligned}
+    a_{t|s} &amp;= \mathbb{P}[\alpha_t | Y_t] \\
+    P_{t|s} &amp;= \mathbb{E}[\alpha_t - a_{t|s}][\alpha_t - a_{t|s}]^t
+  \end{aligned}\]</span></p>
+<p>The <em>Kalman Filter</em> is an algorithm for computing the pair <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span> starting from <span class="math inline">\(\{a_{t-1|t-1}, P_{t-1|t-1}\}\)</span> and <span class="math inline">\(\{a_{t|t}, P_{t|t}\}\)</span> starting from <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span>. Perciò proietta le stime di <span class="math inline">\(y_t\)</span> partendo basate sulle osservazioni precedenti.</p>
+<p>It also provides the sequence of innovations with the relative covariance matrix, used to compute the Gaussian likelihood of the model in state space form.</p>
+<p><span class="math display">\[\begin{cases}
+    a_{t|t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    P_{t|t-1} &amp;= \mathbb{E}[\alpha_t - a_{t | t-1}][\alpha_t - a_{t | t-1}]^t
+  \end{cases}
+  \quad
+  \begin{cases}
+    \hat y_{t | t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    i_t              &amp;= y_t - \hat y_{t | t-1} \\
+    F_t              &amp;= \mathbb{E}[i_t i_t^t] = \mathbb{E}[y_t - \hat y_{t | t-1}][y_t - \hat y_{t | t-1}]^t
+  \end{cases}\]</span></p>
+<p><span class="math display">\[\begin{cases}
+    a_{t | t} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_t) \\
+    P_{t|t}  &amp;= \mathbb{E}[\alpha_t - a_{t | t}][\alpha_t - a_{t | t}]^t
+  \end{cases}\]</span></p>
+<p><span class="math display">\[(a_{1|0}, P_{1|0}) \rightarrow (a_{1|1}, P_{1|1}) \rightarrow (a_{2|1}, P_{2|1}) \rightarrow (a_{2|2}, P_{2|2}) \rightarrow \ldots \rightarrow (a_{n|n}, P_{n|n})\]</span></p>
 </div>
 </div>
             </section>

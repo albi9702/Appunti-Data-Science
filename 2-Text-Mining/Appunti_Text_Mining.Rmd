@@ -42,7 +42,7 @@ output:
         facebook: no
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       fig.align = 'center')
 ```
@@ -159,3 +159,38 @@ The *Weights*, called $tf$-$idf$ weights, are the product of the two indices:
 $$w_{t, d} = \frac{tf_{t, d}}{\displaystyle \max_{t_i \in d} \{ tf_{t_i, d} \}} \cdot \log \Big(\frac{N}{df_t} \Big)$$
 
 The weight $w$ increases with the number of occurrences within a document and with the rarity of the term in the collection.
+
+
+<!-- Lecture 5 15/10/2020 -->
+Syntax is managed by Part of Speech Tagging (POS) and Named Entities Recogniction (NER).
+
+## Part Of Speech Tagging
+The Part Of Speech Tagging is a procedure that assigns to each word its syntax role in a sentence, such as nouns, verbs and adverbs. There are many applicaations:
+
+* Parsing;
+* Word prediction in speech recognition;
+* Machine Translation;
+
+
+The procedure to choose a pos tagset is
+
+1. choose set of tags
+2. pick small tagset;
+
+The problem is tag ambiguity: words often ave more tahn one pos, eg back (the back door, on my back). To solve this problem, we can assume a probability of pos tags
+
+aprroaches: rule ased tagging
+stochastic tagging
+
+rules, start with a dictionary, assign all possible tags to words and write rules by haan
+
+## ner
+find and classify names in text, so identidy word referred to names of interest in a particula application. It involves identification of proper names in text and classification into a set of predefined categories of interest.
+
+grey areas caused by metonomy, so two diffent categories entitities
+
+approaches:
+* ruled-based, identify if a seqeunce of words can be an entity name. using lexicons that categorize names (developed by trial and error or ml techniques)
+* statistic-based, maximize the probability of an entity using hidden markov model estimated with training data, resolving ambiguitu using context
+
+hmm describe a process as a collection of states with transitions between them. each state is associated with a probability distribution over worlds

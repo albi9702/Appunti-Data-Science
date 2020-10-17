@@ -42,7 +42,7 @@ output:
         facebook: no
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       fig.align = "center",
                       out.width = "75%")
@@ -50,15 +50,15 @@ knitr::opts_chunk$set(echo = TRUE,
 
 <!-- Lecture 1: 28/09/2020 -->
 # Statistical Prediction
-A *Statistical Prediction* is a guess about the value of a random variable $Y$ based on the outcome of other random variales $X_1, \dots, X_m$. A *Predictor* is a function of the random variables: $\hat Y = p(X_1, \dots, X_m)$. An optimal prediction is the *Loss Function* which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymetric: $l(-x) = l(x)$, but the most used is generally asymetric, like the *Quadratic loss function*: $l_2(x) = x^2$.
+A *Statistical Prediction* is a guess about the value of a random variable $Y$ based on the outcome of other random variables $X_1, \dots, X_m$. A *Predictor* is a function of the random variables: $\hat Y = p(X_1, \dots, X_m)$. An optimal prediction is the *Loss Function* which maps the prediction error to it cost; if the prediction error is zero, also the loss is 0 (exact guess = no losses). A loss function can be symmetric about 0 or asymmetric: $l(-x) = l(x)$, but the most used is generally asymmetric, like the *Quadratic loss function*: $l_2(x) = x^2$.
 
-The predictor $\hat Y= \hat p(X_1, \dots, X_m)$ is optimal for $Y$ with respect to the loss $l$ if minize il the expected loss among the class of measurable functions:
+The predictor $\hat Y= \hat p(X_1, \dots, X_m)$ is optimal for $Y$ with respect to the loss $l$ if minimize il the expected loss among the class of measurable functions:
 
 $$\mathbb{E} \ l(Y - \hat Y) = \min_{p \in M}\mathbb{E} \ l[Y - p(X_1, \dots, X_m)]$$
 
-The optimal predictor under quadratric loss is the conditional expectation $\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]$.
+The optimal predictor under quadratic loss is the conditional expectation $\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]$.
 
-The properties of the conditional expecation are:
+The properties of the conditional expectation are:
 
 1. *Linearity*: $\mathbb{E}[aY + bZ + c|X] = a\mathbb{E}[Y|X] + b\mathbb{E}[Z|X] + c$, with $a,b,c,$ constants;
 2. *Orthogonality of the prediction error*: $\mathbb{E}\{(Y - \hat Y) g(x) \} = \mathbb{E}\{(Y - \mathbb{E}[Y|X]) g(x) \} = 0$;
@@ -164,11 +164,19 @@ $y_t' = y_t - y_{t-1} = y_t - B(y_t) = (1 - B)y_t$
 Backshift notation is particularly useful when combining differences, as the operator can be treated using ordinary algebraic rules. In particular, terms involving $B$ can be multiplied together.
 
 <!-- Box and Jenkins Procedure for ARIMA Model Identification-->
-```{r Digital Report 2020, echo=FALSE, out.width="75%"}
+```{r Digital Report 2020, echo = FALSE, out.width = "95%"}
 knitr::include_graphics("Immagini/Box-Jenkins-Procedure.png")
 ```
 
 <!-- Lecture 4 04/10/2020 -->
+## ARIMA Regression
+The time series models in the previous two chapters allow for the inclusion of information from past observations of a series, but not for the inclusion of other information that may also be relevant:
+
+$$\begin{aligned}
+    \Delta^d y_t                        &= \beta_t \Delta^d X_t + \frac{\theta_q(B)}{\phi_q(B)} \varepsilon_t \\
+    \Delta^d(y_t - \beta_t X_t)         &= \frac{\theta_q(B)}{\phi_q(B)} \varepsilon_t                        \\
+    \phi(B) \Delta^d(y_t - \beta_t X_t) &= \theta(B) \varepsilon_t
+  \end{aligned}$$
 
 <!-- Lecture 5 06/10/2020 -->
 # Unobserved Comoponents Model
@@ -204,8 +212,8 @@ The local linear trend has different special case of interest obtained by fixing
 
 * *Deterministic Linear Trend* if $\sigma_{\eta}^2 = \sigma_{\xi}^2 = 0$;
 * *Random Walk with Drift* $\beta_0$ if $\sigma_{\xi}^2 = 0$ (slope constant);
-* *Random Walk* if $\sigma_{\xi}^2 = \beta_0 = 0$ (slope = 0)
-* *Integrated Random Walk* if $\sigma_{\eta}^2 = 0$, with a very smooth trend
+* *Random Walk* if $\sigma_{\xi}^2 = \beta_0 = 0$ (slope = 0);
+* *Integrated Random Walk* if $\sigma_{\eta}^2 = 0$, with a very smooth trend.
 
 **Obs.**: the local linear trend can be also seen as an ARIMA process: if $\sigma_{\xi}^2 > 0$, $\mu_t \sim I(2)$ process as trend is non-stationary, while its second difference is stationary.
 
@@ -229,3 +237,101 @@ plot(ts(mu))
 par(mfrow = c(1,1))
 ```
 
+## State Space Form
+The state space form is a system of equation in which one or more observable time series are linearly related to a set of unobservable state variables. It is defined by the following system of equation:
+
+$$\begin{cases}
+      Y_t          &= d_t + Z_t \alpha_t + \varepsilon_t
+      \quad \text{Observation equation} \\
+      \alpha_{t+1} &= c_t + T_t \alpha_t + R_t \eta_t
+      \quad \text{State equation}
+  \end{cases}$$
+
+where $\varepsilon_t \sim WN(0, H_t)$, $\eta_t \sim WN(0, Q_t)$, uncorrelated random variables with zero mean and covariance matrix respectably $H_t$ and $Q_t$.
+
+The initialization is the process where the state vector $a_{1|0} = \mathbb{E}(\alpha_1)$ and $P_{1|0} = \mathbb{E}(\alpha_1 - a_{1|0})(\alpha_1 - a_{1|0})^t$.
+
+**Example.** $\qquad$ Let's transform a Local Linear Trend with White Noise in the State Space form. The LLT has this system of equation:
+
+$$\begin{aligned}
+    \mu_t   &= \mu_{t-1}   + \beta_0 + \eta_n \\
+    \beta_t &= \beta_{t-1} + \xi_t            
+\end{aligned}$$
+
+with noise $y_t = \mu_t + \varepsilon_t$. The state space form of the LLT is the following:
+
+$$\begin{cases}
+      \alpha_{t+1} = T \alpha_t + R \eta_t = 
+                 \begin{bmatrix}
+                   \mu_{t+1} \\
+                   \beta_{t+1}
+                 \end{bmatrix} =
+                 \begin{bmatrix}
+                   1 & 1 \\
+                   0 & 1
+                 \end{bmatrix}
+                 \begin{bmatrix}
+                   \mu_t \\
+                   \beta_t
+                   \end{bmatrix} + 
+                 \begin{bmatrix}
+                   \eta_t \\
+                   \zeta_t
+                 \end{bmatrix}
+      \quad \text{State equation} \\
+      Y_t = Z \alpha_t + \varepsilon_t =
+             \begin{bmatrix}
+               1 & 0
+             \end{bmatrix}
+             \begin{bmatrix}
+               \mu_t \\
+               \beta_t
+             \end{bmatrix} + \varepsilon_t
+      \quad \text{Observation equation}
+  \end{cases}$$
+
+where $\eta_t = \begin{bmatrix} \eta_t \\ \zeta^2 \end{bmatrix}$ and $Q = \begin{bmatrix} \sigma_\eta^2 & 0 \\ 0 & \sigma_\zeta^2 \end{bmatrix}$.
+
+The initialization process is the following:
+
+$$a_{1|0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} 
+  \qquad
+  P_{1|0} = \begin{bmatrix} \infty & 0 \\ 0 & \infty \end{bmatrix}$$
+
+## Kalman Filter
+Suppose that all parameters in the state space form are known; the only unknown quantities are unobservable components, specified as random variables, then the inference to carry out is the statistical prediction:
+
+  * Forecasting, the SP of $\alpha_t$ based on $Y_s$ ($s < t$);
+  * Filtering, SP of $\alpha_t$ based on $Y_t$;
+  * Smoothing, SP of $\alpha_t$ based on $Y_s$ ($s > t$).
+
+ It is possible to build the optimal linear predictor that is better than any other predictor assuming if $\varepsilon_t$, $v_t \sim WN$ and the initial state $\alpha_1$ are jointly Gaussian. 
+
+ Consider the following notation:
+
+$$\begin{aligned}
+    a_{t|s} &= \mathbb{P}[\alpha_t | Y_t] \\
+    P_{t|s} &= \mathbb{E}[\alpha_t - a_{t|s}][\alpha_t - a_{t|s}]^t
+  \end{aligned}$$
+
+The *Kalman Filter* is an algorithm for computing the pair $\{a_{t|t-1}, P_{t|t-1}\}$ starting from $\{a_{t-1|t-1}, P_{t-1|t-1}\}$ and $\{a_{t|t}, P_{t|t}\}$ starting from $\{a_{t|t-1}, P_{t|t-1}\}$. Perciò proietta le stime di $y_t$ partendo basate sulle osservazioni precedenti.
+
+It also provides the sequence of innovations with the relative covariance matrix, used to compute the Gaussian likelihood of the model in state space form.
+
+$$\begin{cases}
+    a_{t|t-1} &= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    P_{t|t-1} &= \mathbb{E}[\alpha_t - a_{t | t-1}][\alpha_t - a_{t | t-1}]^t
+  \end{cases}
+  \quad
+  \begin{cases}
+    \hat y_{t | t-1} &= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    i_t              &= y_t - \hat y_{t | t-1} \\
+    F_t              &= \mathbb{E}[i_t i_t^t] = \mathbb{E}[y_t - \hat y_{t | t-1}][y_t - \hat y_{t | t-1}]^t
+  \end{cases}$$
+  
+$$\begin{cases}
+    a_{t | t} &= \mathbb{P}(\alpha_t | y_1, \dots, y_t) \\
+    P_{t|t}  &= \mathbb{E}[\alpha_t - a_{t | t}][\alpha_t - a_{t | t}]^t
+  \end{cases}$$
+  
+$$(a_{1|0}, P_{1|0}) \rightarrow (a_{1|1}, P_{1|1}) \rightarrow (a_{2|1}, P_{2|1}) \rightarrow (a_{2|2}, P_{2|2}) \rightarrow \ldots \rightarrow (a_{n|n}, P_{n|n})$$

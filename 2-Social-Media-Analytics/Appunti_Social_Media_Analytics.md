@@ -11,16 +11,6 @@ classoption: twocolumn
 header-includes:
   - \usepackage{longtable}
 output: 
-  pdf_document:
-    latex_engine: xelatex
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
-    df_print: kable
-    highlight: monochrome
   bookdown::gitbook:
     keep_md: true
     css: style.css
@@ -42,12 +32,19 @@ output:
         linkedin: yes
         twitter: no
         facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      fig.align = 'center')
-```
+
 
 <!-- Lecture 1: 30/09/2020 -->
 # Scenario
@@ -71,9 +68,7 @@ Social media analytics has a complex process of identifying relevant, valid, new
 The aim of the course is to provide the skills to start a social media specialist path to learn how to extract significant insights from the huge volume of mostly unstructured data using Social Media Analytics methods and tools.
 
 <!-- Digital Report 2020 Image -->
-```{r Digital Report 2020, echo=FALSE, out.width="75%"}
-knitr::include_graphics("Immagini/Digital-Report.png")
-```
+<img src="Immagini/Digital-Report.png" width="75%" style="display: block; margin: auto;" />
 
 ## Internet
 *Internet* is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The ***W***orld ***W***ide **W**eb (**WWW**) is one of the major service of Internet. The proposal was designed to provide more effective communication system within CERN. It allows to browser through web pages and services accessible to all or a selected part of users.
@@ -193,24 +188,18 @@ In particular, ***S***ocial ***N***etwork ***A***nalysis (**SNA**) is the proces
 A *Graph* is a pair of vertices ($V$) and edges ($E$), $G = (V, E)$, such that $E \subseteq [V]^2$. The set of *vertices* of a graph is denoted as $V(G) = {v_1, v_2, \dots, v_n}$, while the set of *Edges* is denoted as $E(G) = {e_1, e_2, \dots, e_n}$. The representation is drawing a point for each vertex and join these points with lines if there's a connection:
 
 <!-- Graph Image -->
-```{r Graph, echo = FALSE, out.width ="75%"}
-knitr::include_graphics("Immagini/Graph.png")
-```
+<img src="Immagini/Graph.png" width="75%" style="display: block; margin: auto;" />
 
 ## Undirected Graph
 An *Undirected* graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge $e = (a,b)$, $e$ is called *Outgoing* edge from $a$, denoted as direct *Predecessor*, and *Ingoing* edge in $b$, known as direct *Successor*. Given a vertex $a$ of a directed graph $G$, $E^+(a)$ is the set of outgoing edges from $a$ and $E^-(a)$ the set of incoming edges in $a$. A *Sink* vertex is a vertex with only incoming edges, while with only outgoing edges is called *Source* vertex.
 
 <!-- Undirected Graph Image -->
-```{r Undirected Graph, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Undirected-Graph.png")
-```
+<img src="Immagini/Undirected-Graph.png" width="75%" style="display: block; margin: auto;" />
 
 The *Degree* of a vertex, $d(v)$ is the number of edge incident to a node, equivalent to the number of neighbors of $v$; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value $\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}$ is the minimum degree, while the value $\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}$ is the maximum degree:
 
 <!-- Degree of a Graph Image -->
-```{r Degree of Graph, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Degree.png")
-```
+<img src="Immagini/Degree.png" width="75%" style="display: block; margin: auto;" />
 
 There are many different type of graphs:
 
@@ -222,16 +211,12 @@ There are many different type of graphs:
 A graph is *Directed* if edges are directed from one vertex to another (e.g. Twitter). Given the edge $e = (a, b)$, $a$ and $b$ are called *Extreme* and *Adjacent* vertices of $e$, called the *incident* edge. $a$ is called *Neighbor* of $b$ in $G$ and vice versa. Two edges $e, f$ are *Adjacent* if they have a common vertex. The *Neighborhood* of $a$, $N(a)$, is the set of vertices adjacent to $a$. The *Star* of $a$, $s(a)$, is the set of edges incident in $a$.
 
 <!-- Directed Graph Image -->
-```{r Directed Graph, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Directed-Graph.png")
-```
+<img src="Immagini/Directed-Graph.png" width="75%" style="display: block; margin: auto;" />
 
 The *In-Degree* of a vertex $v$ is the number of edges arriving at the $v$ vertex, while the *Out-Degree* is the number of edges starting from the vertex $v$.
 
 <!-- Out and In-Degree of a Graph Image -->
-```{r Out and In Degree, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Out-In-Degree.png")
-```
+<img src="Immagini/Out-In-Degree.png" width="75%" style="display: block; margin: auto;" />
 
 The *Degree* $d(v)$ of a vertex $v$ is the sum of the number of its incoming and outgoing edges.
 
@@ -249,9 +234,7 @@ Given a graph $G = (V, E)$ with $V = \{v_1, \dots, v_n \}$ and $E = \{e_1, \dots
 Connectivity $k(G)$ is the basic concept of graph theory. It measures the minimum number of elements that must be removed to disconnect the graph. In particular, an *Articular* point is a vertex whose removal disconnects a component of the graph, while a *Bridge* is an edge whose removal disconnect a component of the graph.
 
 <!-- Bridge and Articular Point of a Graph Image -->
-```{r Bridge and Articular Point, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Bridge-Articular-Point.png")
-```
+<img src="Immagini/Bridge-Articular-Point.png" width="75%" style="display: block; margin: auto;" />
 
 When $k(G) = 2$, we talk about *Biconnectivity* no single edge or vertex removal disconnects the graph and no network failure points compromise the network itself.
 
@@ -260,9 +243,7 @@ When $k(G) = 2$, we talk about *Biconnectivity* no single edge or vertex removal
 A *Clique* is a set of vertices $C$ totally connected in a graph $G$. It usually ignores single vertices and vertex connected by an edge. In particular, a *Maximal Clique* is a clique not extended adding a new adjacent vertex, while a *Maximum Clique* is the largest clique in a graph.
 
 <!-- Clique Image -->
-```{r Clique, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Clique.png")
-```
+<img src="Immagini/Clique.png" width="75%" style="display: block; margin: auto;" />
 
 The *Clustering Coefficient* is the measure of the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:
 
@@ -272,9 +253,7 @@ $$cc(v) = \frac{||N(v)||}{k(k-1)} \qquad
   cc(v) = \frac{2||N(v)||}{k(k-1)}$$
 
 <!-- Local Clustering Coefficient Image -->
-```{r Local Clustering Coefficient, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/LCC.png")
-```
+<img src="Immagini/LCC.png" width="75%" style="display: block; margin: auto;" />
 
 * *Average Clustering Coefficient*, which is the average of the clustering coefficient for each single node of the graph $G$:
 
@@ -285,9 +264,7 @@ $$cc(G) = \frac{1}{|V|} \sum_{i=1}^n cc(v_i)$$
 $$cc_{\bigtriangleup} = \frac{3 n_{\bigtriangleup}(G)}{n_{\land}(G)} = \frac{\sum_{i=1}^n cc(v_i)w_i}{\sum_{i=1}^n w_i}$$
 
 <!-- Global Clustering Coefficient Image -->
-```{r Global Clustering Coefficient, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/GCC.png")
-```
+<img src="Immagini/GCC.png" width="75%" style="display: block; margin: auto;" />
 
 ## Tree
 An *Undirected Tree* is an undirected, connected and acyclic graph in which a node is designated as the root, while a *Directed Tree* is a directed graph that has a root node and there are no arcs entering the root, each node has exactly one incoming edge and for each node there is a path from the root to the node.
@@ -298,9 +275,7 @@ The *Depth* of a tree is the length of the path from the root to the node, a *Le
 Let $G$ be a graph with $V(G) = \{v_1, v_2, \dots, v_n \}$ and $E(G) = \{e_1, e_2, \dots, e_m \}$. The *Adjacency Matrix* $A(G) = [a_{ij}]$ is an $n \times n$ matrix where $a_{ij}$ are the number of edges between two vertices $v_i$ and $v_j$. 
 
 <!-- Adjacency Matrix Image -->
-```{r Adjacency Matrix, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Adjacency-Matrix.png")
-```
+<img src="Immagini/Adjacency-Matrix.png" width="75%" style="display: block; margin: auto;" />
 
 The *Incidence Matrix* $I(G) = [m_{ij}]$ where:
 
@@ -308,16 +283,12 @@ The *Incidence Matrix* $I(G) = [m_{ij}]$ where:
 * $m_{ij} = -1$ if $e_j$ leaves $v_i$, $m_{ij} = 1$ if $e_j$ enters $v_i$, otherwise $m_{ij} = 0$;
 
 <!-- Incidence Matrix Image -->
-```{r Incidence Matrix, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Incidence-Matrix.png")
-```
+<img src="Immagini/Incidence-Matrix.png" width="75%" style="display: block; margin: auto;" />
 
 The *Adjacent List* $Adj(G)$ is an array of $n$ lists. To each vertex of $G$ corresponds a list containing its neighbors:
 
 <!-- Adjacent List Image -->
-```{r Adjacent List, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Adjacent-List.png")
-```
+<img src="Immagini/Adjacent-List.png" width="75%" style="display: block; margin: auto;" />
 
 The weight of the edge $(u,v)$ is store with the vertex $v$ in the list of $u$.
 
@@ -332,9 +303,7 @@ In *Regular Networks* each node is connected to a fixed number of nodes. They ha
 * *Star Network*, a tree with a single vertex of maximum degree: $S = v_1, e_{12}, v_2, v_1, e_{13}, v_{3}, \dots, v_{1}, e_{1k}, v_k$.
 
 <!-- Regular Networks Image -->
-```{r Regular Networks, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Regular-Networks.png")
-```
+<img src="Immagini/Regular-Networks.png" width="75%" style="display: block; margin: auto;" />
 
 |         Summary        |        Linear        |        Ring        |          Star         |
 |:----------------------:|:--------------------:|:------------------:|:---------------------:|
@@ -349,16 +318,12 @@ knitr::include_graphics("Immagini/Regular-Networks.png")
 In *Random Networks* pairs of nodes are randomly connected by a given number of connections. Two nodes are connected by a certain probability. All nodes have approximately the same number of neighbors, which differs slightly from the average value.
 
 <!-- Random Networks Image -->
-```{r Random Networks, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Random-Network.png")
-```
+<img src="Immagini/Random-Network.png" width="75%" style="display: block; margin: auto;" />
 
 *Complex Networks* of interactions have substantially different characteristics from both classes. The Complex Network Theory shows non intuitive characteristics and can be made up of millions of units communicating with each other. Mathematical methods are used to extract information from complex networks in a synthetic way. For example,online social networks are complex networks: the personal network of contact is usually composed of a first order area, with an ego-centric network, with direct relationship, a second order and so on, with a socio-centric network.
 
 <!-- Ego Socio Networks Image -->
-```{r Ego Socio Networks, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("Immagini/Ego-Socio-Networks.png")
-```
+<img src="Immagini/Ego-Socio-Networks.png" width="75%" style="display: block; margin: auto;" />
 
 There are several phenomena related to the Theory of Complex Networks:
 <!-- Slide 30 -->

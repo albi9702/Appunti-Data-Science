@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Social Media Analytics</title>
+  <meta name="description" content="Social Media Analytics" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Social Media Analytics" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Social Media Analytics" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Social Media Analytics </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#scenario"><i class="fa fa-check"></i><b>1</b> Scenario</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#internet"><i class="fa fa-check"></i><b>1.1</b> Internet</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#social-media"><i class="fa fa-check"></i><b>2</b> Social Media</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#social-media-analytics"><i class="fa fa-check"></i><b>2.1</b> Social Media Analytics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#network-and-graph-theory"><i class="fa fa-check"></i><b>3</b> Network and Graph Theory</a><ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#undirected-graph"><i class="fa fa-check"></i><b>3.1</b> Undirected Graph</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#directed-graph"><i class="fa fa-check"></i><b>3.2</b> Directed Graph</a></li>
+<li class="chapter" data-level="3.3" data-path=""><a href="#subgraph"><i class="fa fa-check"></i><b>3.3</b> Subgraph</a></li>
+<li class="chapter" data-level="3.4" data-path=""><a href="#connected"><i class="fa fa-check"></i><b>3.4</b> Connected</a></li>
+<li class="chapter" data-level="3.5" data-path=""><a href="#clustering"><i class="fa fa-check"></i><b>3.5</b> Clustering</a></li>
+<li class="chapter" data-level="3.6" data-path=""><a href="#tree"><i class="fa fa-check"></i><b>3.6</b> Tree</a></li>
+<li class="chapter" data-level="3.7" data-path=""><a href="#graph-representation"><i class="fa fa-check"></i><b>3.7</b> Graph Representation</a></li>
+<li class="chapter" data-level="3.8" data-path=""><a href="#complex-network"><i class="fa fa-check"></i><b>3.8</b> Complex Network</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Social Media Analytics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Social Media Analytics</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>30/9/2020</em></p>
+</div>
+<!-- Lecture 1: 30/09/2020 -->
+<div id="scenario" class="section level1">
+<h1><span class="header-section-number">1</span> Scenario</h1>
+<p>Huge amount of data are exchanged on social media through various devices. Information process is fully integrated within object and activities.</p>
+<p>Information is provided in real time on various social platform:</p>
+<ul>
+<li>Entities: books, records, etc.;</li>
+<li>Events: launch of a new product, concert, etc.;</li>
+<li>News: entertainment, politics, etc.;</li>
+<li>Relationships: between entities, events, etc.</li>
+</ul>
+<p>When collecting data, it’s necessary to transform information, organized in classified data, in to knowledge, so awareness and understanding in which info can be useful.</p>
+<p>Social media analytics has a complex process of identifying relevant, valid, new and potentially useful information which can be transformed into knowledge used by different actors and purpose. The main applications of SMA are:</p>
+<ul>
+<li>Life quality, for transaction;</li>
+<li>Brand reputation (awareness of the brand, sentiment, bad comments, consoling reputation, ect.)</li>
+<li>Forecasting the performance of finance markets.</li>
+</ul>
+<p>The aim of the course is to provide the skills to start a social media specialist path to learn how to extract significant insights from the huge volume of mostly unstructured data using Social Media Analytics methods and tools.</p>
+<!-- Digital Report 2020 Image -->
+<p><img src="Immagini/Digital-Report.png" width="75%" style="display: block; margin: auto;" /></p>
+<div id="internet" class="section level2">
+<h2><span class="header-section-number">1.1</span> Internet</h2>
+<p><em>Internet</em> is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong>W</strong>eb (<strong>WWW</strong>) is one of the major service of Internet. The proposal was designed to provide more effective communication system within CERN. It allows to browser through web pages and services accessible to all or a selected part of users.</p>
+<p><strong><em>U</em></strong>niform <strong><em>R</em></strong>esource <strong><em>I</em></strong>dentifier (<strong>URI</strong>) is a sequence of characters that uniquely identifies a generic resource, such as web address (URL), documents, images, etc.</p>
+<p>There are different type of data:</p>
+<ul>
+<li><em>Structured</em>: data are stored in databases and organized in a rigid schemes and tables (Relational Scheme);</li>
+<li><em>Semi-Structured</em>: data aren’t stored in a tabular structure, but it contains tags to separate semantic elements (HTML, XML, JSON);</li>
+<li><em>Unstructured</em>: data are stored without any scheme (Narrative Text).</li>
+</ul>
+<!-- REMEMBER: HTML vs XML -->
+<!-- Lecture 2: 02/10/2020 -->
+</div>
+</div>
+<div id="social-media" class="section level1">
+<h1><span class="header-section-number">2</span> Social Media</h1>
+<p>The social aspect of communication was to facilitate interaction between people who shared strong relationships, the same interests or find themselves working together in specific geographical contexts. The availability of information is made possible also by the presence and diffusion of Web Browser, Search Engines and <em>Social Media</em>.</p>
+<p>There are three main distinction between data collected through the Web:</p>
+<ul>
+<li><em>Virtual Data</em> (or Provoked Data), obtained through conventional research methods, such as queries online, and these answers are provided by users following specific questions;</li>
+<li><em>Digitized Data</em>, analog data transformed in another digital formats (e-books, music, etc.);</li>
+<li><em>Digital Data</em>, traces left by users, such as page visits or interactions with social media. In this case they are generated spontaneously by the users visiting a web page.</li>
+</ul>
+<p>Social Media has specific characteristics:
+* Interactive web 2.0 applications;
+* Contents are generated by the users (posts, comments, etc.);
+* Users create service-specific profiles;
+* Social Media facilitates the development of online social networks.</p>
+<p>The <em>Theory of Social Presence</em> states that media differ in degree of social presence between the influence of the degree of intimacy and immediacy of the means of communication.</p>
+<blockquote>
+<p>The higher the social presence, the larger the social influence that the communication partners have on each other’s behavior</p>
+</blockquote>
+<p>The <em>Media Richness Theory</em> is based on the assumption that the goal of any communication is the resolution of ambiguity and the reduction of uncertainty. The media differs in the degree of information richness they have. The concept of <em>Self Presentation</em> states that in any type of social interaction people have a desire to control the impressions of other people. This concept is related to self-disclosure</p>
+<blockquote>
+<p>Social media are <strong>interactive computer-mediated</strong> technologies that facilitate the <strong>creation and sharing of information</strong>, ideas, career interests and other forms of expression via <strong>virtual communities</strong> and networks.</p>
+</blockquote>
+<p>A <strong><em>U</em></strong>ser-<strong><em>G</em></strong>enerated <strong><em>C</em></strong>ontent (<strong>UGC</strong>) is any form of content created by users of online system made available on social media. The reason for creating UGC are:</p>
+<ul>
+<li><em>Implicit Incentives</em>, not based on anything tangible, not directly monetizable. Social Incentives are the most common form; a user feels as active user of the community, also through the interaction of friends. It also improve the customer experience when purchasing a product;</li>
+<li><em>Explicit Incentives</em>, referred to tangible rewards. They are easily understood by most people and have immediate value regardless of the size of the community (contest, voucher, etc.). The main disadvantage is they can make user believe that the only reason of participating is explicit incentive, reducing the influence of other type of interactions.</li>
+</ul>
+<p>A Virtual Community is made up of social network of individuals who interact through means of communication, crossing any kind of boundaries in order to pursue mutual interests.</p>
+<p>A <em>Social Network</em> is a social structure made up of a set of individuals, a series of dyadic links and other social interactions of social actors. There are many methods to analyze the structure of social entities, called <strong><em>S</em></strong>ocial <strong><em>N</em></strong>etwork <strong><em>A</em></strong>nalysis (<strong>SNA</strong>), to identify local and global patterns and examine network dynamics.</p>
+<!-- The evolution of Social Media -->
+<p>There are many type of social media:</p>
+<ul>
+<li><em>Blog</em>, a website containing one or more chronological posts that interactively discuss a certain topic;</li>
+<li><em>Microblog</em>, publicational textual or multimedial content on the net;</li>
+<li><em>News Sites</em>, the paper edition of the main newspaper. In these sites is possible to interact with other people;</li>
+<li><em>Forums</em>, discussion sections in an IT platform or single sections;</li>
+<li><em>Social Networking Sites</em>;</li>
+<li><em>Virtual Game Worlds</em>;</li>
+<li><em>Virtual Social Worlds</em>;</li>
+<li><em>Content Communities</em>.</li>
+</ul>
+<p>These sites produce different type of data:</p>
+<ul>
+<li><em>Articles</em>, mainly form news sites;</li>
+<li><em>Posts</em>, generally blog and Social Networking Sites;</li>
+<li><em>Tweets</em>, Twitter’s content</li>
+<li><em>Threads</em>, a conversation developed between multiple users;</li>
+<li><em>Reviews</em>, ratings left by users;</li>
+<li><em>Images</em> and <em>Videos</em>.</li>
+</ul>
+<!-- Lecture 3: 07/10/2020 -->
+<div id="social-media-analytics" class="section level2">
+<h2><span class="header-section-number">2.1</span> Social Media Analytics</h2>
+<p><em>Web Analytics</em> is the measurement, collection, analysis and reporting of Web data for the purposes of understanding and optimizing Web usage. <em>Social Media Analytics</em> is monitoring, analyzing, measuring and interpreting digital interactions and relationships of people, topics, ideas and content. Interaction take place in workplace and external-facing communities.</p>
+<p>It is possible to divide the analyzes into two main categories:</p>
+<ul>
+<li>Social Network Analysis;</li>
+<li>Social Content Analysis.</li>
+</ul>
+<p>SMA in the <em>business</em> context is the process of measuring, analyzing and interpreting interactions and conversations in Social Media regarding a brand, product, service or a topic of interest. The analysis is based on elements that influences the customer behavior, the perception and feelings of the customer respect to a brand end their level of engagement.</p>
+<p>There are many business objectives:</p>
+<ul>
+<li>Brand Advocacy, an indicator that expresses the highest degree of brand loyalty, so a customer can recommend the brand to other people;</li>
+<li>Business Reputation Management, constantly monitoring and managing the company’s online presence and how the brand is perceived in a positive light and allowing to gain new customers;</li>
+<li>Community Management, the process of building an authentic community through various interactions;</li>
+<li>Demand Generation, the strategy of various marketing programs aimed at certain interest in the products/services of a company.</li>
+</ul>
+<!-- Sistemare questa parte -->
+<p>Question to plan an analysis activity:</p>
+<p>Why: the reasons that should lead to online analysis
+What: what does the analytic activity consist of and what are the phases that make it yo
+How: what are the tools and resources to equip to create a structured and effective monitoring process
+Who: who are the actors involved in the monitoring and analysis process of the web and social media
+Where: what are the sources tha must be taken into consideration for an effective analysis
+When: when and with what timing it is necessary to activate the listening and analysis strategy</p>
+<p>Social Media Analysis phases:
+1. Planning of the analysis activity;
+2. Data identification;
+3. Data Analysis, models and techniques that allows to answer to the objectives developed, selected or integrated among those available;
+4. Information interpretation and visualization, better interpreting information obtained from data analysis.</p>
+<!-- Lecture 4: 09/10/2020 -->
+</div>
+</div>
+<div id="network-and-graph-theory" class="section level1">
+<h1><span class="header-section-number">3</span> Network and Graph Theory</h1>
+<p><em>Network Theory</em> is the study of structures representing symmetrical or asymmetrical relationships between objects. It is also a part of Graph Theory: a graph is composed by nodes (also known as vertices) connected through link (edges).</p>
+<p>Other examples of networks are:</p>
+<ul>
+<li>Technological networks, designed for distribution of goods, resources and services (e.g. Internet);</li>
+<li>Information networks, made up of data and information linked together in some way (e.g. <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong><em>W</em></strong>eb);</li>
+<li>Biological networks, representing the interaction patterns between biological elements (e.g. Neural Network);</li>
+<li>Social networks, where vertices represent people of groups connected by some form of social interaction, such as friendship.</li>
+</ul>
+<p>In particular, <strong><em>S</em></strong>ocial <strong><em>N</em></strong>etwork <strong><em>A</em></strong>nalysis (<strong>SNA</strong>) is the process of investigating social structures through the use of networks and <em>Graph Theory</em>. These networks are usually visualized in sociograms (also known as social network graph) where vertices are represented as points and edges as lines.</p>
+<p>A <em>Graph</em> is a pair of vertices (<span class="math inline">\(V\)</span>) and edges (<span class="math inline">\(E\)</span>), <span class="math inline">\(G = (V, E)\)</span>, such that <span class="math inline">\(E \subseteq [V]^2\)</span>. The set of <em>vertices</em> of a graph is denoted as <span class="math inline">\(V(G) = {v_1, v_2, \dots, v_n}\)</span>, while the set of <em>Edges</em> is denoted as <span class="math inline">\(E(G) = {e_1, e_2, \dots, e_n}\)</span>. The representation is drawing a point for each vertex and join these points with lines if there’s a connection:</p>
+<!-- Graph Image -->
+<p><img src="Immagini/Graph.png" width="75%" style="display: block; margin: auto;" /></p>
+<div id="undirected-graph" class="section level2">
+<h2><span class="header-section-number">3.1</span> Undirected Graph</h2>
+<p>An <em>Undirected</em> graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge <span class="math inline">\(e = (a,b)\)</span>, <span class="math inline">\(e\)</span> is called <em>Outgoing</em> edge from <span class="math inline">\(a\)</span>, denoted as direct <em>Predecessor</em>, and <em>Ingoing</em> edge in <span class="math inline">\(b\)</span>, known as direct <em>Successor</em>. Given a vertex <span class="math inline">\(a\)</span> of a directed graph <span class="math inline">\(G\)</span>, <span class="math inline">\(E^+(a)\)</span> is the set of outgoing edges from <span class="math inline">\(a\)</span> and <span class="math inline">\(E^-(a)\)</span> the set of incoming edges in <span class="math inline">\(a\)</span>. A <em>Sink</em> vertex is a vertex with only incoming edges, while with only outgoing edges is called <em>Source</em> vertex.</p>
+<!-- Undirected Graph Image -->
+<p><img src="Immagini/Undirected-Graph.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>Degree</em> of a vertex, <span class="math inline">\(d(v)\)</span> is the number of edge incident to a node, equivalent to the number of neighbors of <span class="math inline">\(v\)</span>; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value <span class="math inline">\(\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the minimum degree, while the value <span class="math inline">\(\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the maximum degree:</p>
+<!-- Degree of a Graph Image -->
+<p><img src="Immagini/Degree.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>There are many different type of graphs:</p>
+<ul>
+<li><em>Null</em> graph, made up of only isolated graphs;</li>
+<li><em>Regular</em> graph, if all vertices of <span class="math inline">\(G\)</span> have the same degree <span class="math inline">\(k\)</span>;</li>
+<li><em>Complete</em> graph, in which each pair of distinct vertices are adjacent;</li>
+</ul>
+</div>
+<div id="directed-graph" class="section level2">
+<h2><span class="header-section-number">3.2</span> Directed Graph</h2>
+<p>A graph is <em>Directed</em> if edges are directed from one vertex to another (e.g. Twitter). Given the edge <span class="math inline">\(e = (a, b)\)</span>, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called <em>Extreme</em> and <em>Adjacent</em> vertices of <span class="math inline">\(e\)</span>, called the <em>incident</em> edge. <span class="math inline">\(a\)</span> is called <em>Neighbor</em> of <span class="math inline">\(b\)</span> in <span class="math inline">\(G\)</span> and vice versa. Two edges <span class="math inline">\(e, f\)</span> are <em>Adjacent</em> if they have a common vertex. The <em>Neighborhood</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(N(a)\)</span>, is the set of vertices adjacent to <span class="math inline">\(a\)</span>. The <em>Star</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(s(a)\)</span>, is the set of edges incident in <span class="math inline">\(a\)</span>.</p>
+<!-- Directed Graph Image -->
+<p><img src="Immagini/Directed-Graph.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>In-Degree</em> of a vertex <span class="math inline">\(v\)</span> is the number of edges arriving at the <span class="math inline">\(v\)</span> vertex, while the <em>Out-Degree</em> is the number of edges starting from the vertex <span class="math inline">\(v\)</span>.</p>
+<!-- Out and In-Degree of a Graph Image -->
+<p><img src="Immagini/Out-In-Degree.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>Degree</em> <span class="math inline">\(d(v)\)</span> of a vertex <span class="math inline">\(v\)</span> is the sum of the number of its incoming and outgoing edges.</p>
+</div>
+<div id="subgraph" class="section level2">
+<h2><span class="header-section-number">3.3</span> Subgraph</h2>
+<p>A <em>Subgraph</em> of a graph <span class="math inline">\(G = (V, E)\)</span> is a graph included with in the main graph that contains all vertices and edges in <span class="math inline">\(G\)</span>. It is possible to obtain subgraphs by removing some vertices and/or edges from <span class="math inline">\(G\)</span>.</p>
+<p>Given a graph <span class="math inline">\(G = (V, E)\)</span> with <span class="math inline">\(V = \{v_1, \dots, v_n \}\)</span> and <span class="math inline">\(E = \{e_1, \dots, e_n \}\)</span>, a <em>Walk</em> is a finite (or infinite) alternating sequence of vertices and edges. A walk is called <em>Simple</em> if edges and vertices of the walk are all distinct, otherwise it is <em>Not Simple</em>. In particular, there are many different types of walks:</p>
+<ul>
+<li><em>Trail</em>, in which all edges are distinct;</li>
+<li><em>Path</em>, in which all vertices are distinct;</li>
+<li><em>Directed</em>, for each edge in the walk the initial vertex is the head and final is the tail of the walk;</li>
+<li><em>Closed</em>, where the extreme vertices coincide (also known as cycle). A circuit allows repetition of vertices, but not edges.</li>
+</ul>
+</div>
+<div id="connected" class="section level2">
+<h2><span class="header-section-number">3.4</span> Connected</h2>
+<p>Connectivity <span class="math inline">\(k(G)\)</span> is the basic concept of graph theory. It measures the minimum number of elements that must be removed to disconnect the graph. In particular, an <em>Articular</em> point is a vertex whose removal disconnects a component of the graph, while a <em>Bridge</em> is an edge whose removal disconnect a component of the graph.</p>
+<!-- Bridge and Articular Point of a Graph Image -->
+<p><img src="Immagini/Bridge-Articular-Point.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>When <span class="math inline">\(k(G) = 2\)</span>, we talk about <em>Biconnectivity</em> no single edge or vertex removal disconnects the graph and no network failure points compromise the network itself.</p>
+<!-- Lecture 5: 14/10/2020 -->
+</div>
+<div id="clustering" class="section level2">
+<h2><span class="header-section-number">3.5</span> Clustering</h2>
+<p>A <em>Clique</em> is a set of vertices <span class="math inline">\(C\)</span> totally connected in a graph <span class="math inline">\(G\)</span>. It usually ignores single vertices and vertex connected by an edge. In particular, a <em>Maximal Clique</em> is a clique not extended adding a new adjacent vertex, while a <em>Maximum Clique</em> is the largest clique in a graph.</p>
+<!-- Clique Image -->
+<p><img src="Immagini/Clique.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>Clustering Coefficient</em> is the measure of the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:</p>
+<ul>
+<li><em>Local Clustering Coefficient</em>: given a set of neighbors <span class="math inline">\(N(v)\)</span>, it is the number of edges between the members of neighbors divided by the number of potential edges between them (<span class="math inline">\(k = d(v)\)</span>):</li>
+</ul>
+<p><span class="math display">\[cc(v) = \frac{||N(v)||}{k(k-1)} \qquad 
+  cc(v) = \frac{2||N(v)||}{k(k-1)}\]</span></p>
+<!-- Local Clustering Coefficient Image -->
+<p><img src="Immagini/LCC.png" width="75%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><em>Average Clustering Coefficient</em>, which is the average of the clustering coefficient for each single node of the graph <span class="math inline">\(G\)</span>:</li>
+</ul>
+<p><span class="math display">\[cc(G) = \frac{1}{|V|} \sum_{i=1}^n cc(v_i)\]</span></p>
+<ul>
+<li><em>Global Clustering Coefficient</em>, based on triples of vertices(Open if 3 nodes are connected by 2 edges and Closed if connected by 3 edges). It is the number of the closed triplet divided by the total number of triplets:</li>
+</ul>
+<p><span class="math display">\[cc_{\bigtriangleup} = \frac{3 n_{\bigtriangleup}(G)}{n_{\land}(G)} = \frac{\sum_{i=1}^n cc(v_i)w_i}{\sum_{i=1}^n w_i}\]</span></p>
+<!-- Global Clustering Coefficient Image -->
+<p><img src="Immagini/GCC.png" width="75%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tree" class="section level2">
+<h2><span class="header-section-number">3.6</span> Tree</h2>
+<p>An <em>Undirected Tree</em> is an undirected, connected and acyclic graph in which a node is designated as the root, while a <em>Directed Tree</em> is a directed graph that has a root node and there are no arcs entering the root, each node has exactly one incoming edge and for each node there is a path from the root to the node.</p>
+<p>The <em>Depth</em> of a tree is the length of the path from the root to the node, a <em>Level</em> the set of nodes at the same depth and <em>Tree Height</em> the maximum depth reached by leaves</p>
+</div>
+<div id="graph-representation" class="section level2">
+<h2><span class="header-section-number">3.7</span> Graph Representation</h2>
+<p>Let <span class="math inline">\(G\)</span> be a graph with <span class="math inline">\(V(G) = \{v_1, v_2, \dots, v_n \}\)</span> and <span class="math inline">\(E(G) = \{e_1, e_2, \dots, e_m \}\)</span>. The <em>Adjacency Matrix</em> <span class="math inline">\(A(G) = [a_{ij}]\)</span> is an <span class="math inline">\(n \times n\)</span> matrix where <span class="math inline">\(a_{ij}\)</span> are the number of edges between two vertices <span class="math inline">\(v_i\)</span> and <span class="math inline">\(v_j\)</span>.</p>
+<!-- Adjacency Matrix Image -->
+<p><img src="Immagini/Adjacency-Matrix.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>Incidence Matrix</em> <span class="math inline">\(I(G) = [m_{ij}]\)</span> where:</p>
+<ul>
+<li><span class="math inline">\(m_{ij} = 1\)</span> if <span class="math inline">\(v_i\)</span> is incident to <span class="math inline">\(e_j\)</span>, otherwise <span class="math inline">\(m_{ij} = 0\)</span>;</li>
+<li><span class="math inline">\(m_{ij} = -1\)</span> if <span class="math inline">\(e_j\)</span> leaves <span class="math inline">\(v_i\)</span>, <span class="math inline">\(m_{ij} = 1\)</span> if <span class="math inline">\(e_j\)</span> enters <span class="math inline">\(v_i\)</span>, otherwise <span class="math inline">\(m_{ij} = 0\)</span>;</li>
+</ul>
+<!-- Incidence Matrix Image -->
+<p><img src="Immagini/Incidence-Matrix.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The <em>Adjacent List</em> <span class="math inline">\(Adj(G)\)</span> is an array of <span class="math inline">\(n\)</span> lists. To each vertex of <span class="math inline">\(G\)</span> corresponds a list containing its neighbors:</p>
+<!-- Adjacent List Image -->
+<p><img src="Immagini/Adjacent-List.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The weight of the edge <span class="math inline">\((u,v)\)</span> is store with the vertex <span class="math inline">\(v\)</span> in the list of <span class="math inline">\(u\)</span>.</p>
+<!-- Lecture 5: 16/10/2020 -->
+</div>
+<div id="complex-network" class="section level2">
+<h2><span class="header-section-number">3.8</span> Complex Network</h2>
+<p>Interaction networks are complex systems composed of several parts connected to each other and intertwined with each other so that the result is different from the sum of the parts. The structure (Topology) of the contact network is crucial in determining collective behavior.</p>
+<p>In <em>Regular Networks</em> each node is connected to a fixed number of nodes. They have regular patterns within the structure, in which they may or not be <span class="math inline">\(k\)</span>-regular graphs and the Entropy <span class="math inline">\(\approx 0\)</span>, the degree of randomness. There are many examples of regular networks:</p>
+<ul>
+<li><em>Linear Network</em>, a linear sequence <span class="math inline">\(L\)</span> of connected vertices: <span class="math inline">\(L = v_1, e_{12}, v_2, e_{23}, v_{3}, \dots, v_{k-1}, e_{(k-1)k}, v_k\)</span>;</li>
+<li><em>Ring Network</em>, in which each node is connected to exactly two other nodes, forming a ring: <span class="math inline">\(A = v_1, e_{12}, v_2, e_{23}, v_{3}, \dots, v_{k}, e_{k1}, v_1\)</span>;</li>
+<li><em>Star Network</em>, a tree with a single vertex of maximum degree: <span class="math inline">\(S = v_1, e_{12}, v_2, v_1, e_{13}, v_{3}, \dots, v_{1}, e_{1k}, v_k\)</span>.</li>
+</ul>
+<!-- Regular Networks Image -->
+<p><img src="Immagini/Regular-Networks.png" width="75%" style="display: block; margin: auto;" /></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Summary</th>
+<th align="center">Linear</th>
+<th align="center">Ring</th>
+<th align="center">Star</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Order</td>
+<td align="center"><span class="math inline">\(\|L\| = k\)</span></td>
+<td align="center"><span class="math inline">\(\|A\| = k\)</span></td>
+<td align="center"><span class="math inline">\(\|S\| = k\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Degree</td>
+<td align="center"><span class="math inline">\(1 \leq d(L) \leq 2\)</span></td>
+<td align="center"><span class="math inline">\(d(A) 2\)</span></td>
+<td align="center"><span class="math inline">\(d(S) = 1\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Clustering Coefficient</td>
+<td align="center"><span class="math inline">\(cc(L) = 0\)</span></td>
+<td align="center"><span class="math inline">\(cc(A) = 0\)</span></td>
+<td align="center"><span class="math inline">\(cc(S) = 0\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Size</td>
+<td align="center"><span class="math inline">\(\|L\| = k -1\)</span></td>
+<td align="center"><span class="math inline">\(\|A\| = k\)</span></td>
+<td align="center"><span class="math inline">\(\|S\| = k - 1\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Diameter</td>
+<td align="center"><span class="math inline">\(diam(L) = k - 1\)</span></td>
+<td align="center"><span class="math inline">\(diam(A) = k/2\)</span></td>
+<td align="center"><span class="math inline">\(diam(S) = 2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Degree of Connectivity</td>
+<td align="center">Not Biconnected</td>
+<td align="center">Biconnected</td>
+<td align="center">Point of Articulation</td>
+</tr>
+<tr class="odd">
+<td align="center">Adjacency Matrix</td>
+<td align="center">Diagonals</td>
+<td align="center">Diagonals + Angles</td>
+<td align="center">First Row and Column</td>
+</tr>
+</tbody>
+</table>
+<p>In <em>Random Networks</em> pairs of nodes are randomly connected by a given number of connections. Two nodes are connected by a certain probability. All nodes have approximately the same number of neighbors, which differs slightly from the average value.</p>
+<!-- Random Networks Image -->
+<p><img src="Immagini/Random-Network.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><em>Complex Networks</em> of interactions have substantially different characteristics from both classes. The Complex Network Theory shows non intuitive characteristics and can be made up of millions of units communicating with each other. Mathematical methods are used to extract information from complex networks in a synthetic way. For example,online social networks are complex networks: the personal network of contact is usually composed of a first order area, with an ego-centric network, with direct relationship, a second order and so on, with a socio-centric network.</p>
+<!-- Ego Socio Networks Image -->
+<p><img src="Immagini/Ego-Socio-Networks.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>There are several phenomena related to the Theory of Complex Networks:
+<!-- Slide 30 -->
+1. Small Word;
+2. Clustering;
+3. Strength of Weak Tries;
+4. Scale Invariance.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

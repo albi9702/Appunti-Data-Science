@@ -10,6 +10,8 @@ Appunti del corso di studi di Data Science presso l'Università degli Studi Mila
 * [Decision Models](1-Decision-Models/Appunti_Decision_Models.pdf)
 * [Digital Marketing](1-Digital-Marketing/Appunti_Digital_Marketing.pdf)
 
+#### 2° Anno
+
 * [Business Intelligence](2-Business-Intelligence/Appunti_Business_Intelligence.pdf)
 * [Digital Signal and Image Management](2-Digital-Image/Appunti_Digital_Image.pdf)
 * [Social Media Analytics](2-Social-Media-AnalyticsAppunti_Social_Media_Analytics.pdf)
