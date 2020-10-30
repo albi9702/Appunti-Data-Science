@@ -160,37 +160,121 @@ $$w_{t, d} = \frac{tf_{t, d}}{\displaystyle \max_{t_i \in d} \{ tf_{t_i, d} \}} 
 
 The weight $w$ increases with the number of occurrences within a document and with the rarity of the term in the collection.
 
-
 <!-- Lecture 5 15/10/2020 -->
-Syntax is managed by Part of Speech Tagging (POS) and Named Entities Recogniction (NER).
+## Natural Language Processing
+Text representation can be enriched using ***N***atural ***L***anguage ***P***rocessing (**NPL**), which provides models that go deeper to uncover the meaning. A real problem about Text processing is how phrases are recognized. There are 3 possible solutions:
 
-## Part Of Speech Tagging
-The Part Of Speech Tagging is a procedure that assigns to each word its syntax role in a sentence, such as nouns, verbs and adverbs. There are many applicaations:
+* Use word N-grams;
+* Identify the syntactic role of words within phrases using a Part-Of-Speech tagger;
+* Store word positions in indexes and use proximity operators in queries.
+
+### Part Of Speech Tagging
+The ***P***art ***O***f ***S***peech (**POS**) Tagging is a procedure that assigns to each word its syntax role in a sentence, such as nouns, verbs and adverbs. There are many applications:
 
 * Parsing;
 * Word prediction in speech recognition;
 * Machine Translation;
 
+The POS Tagging problem is determine the POS tag for a particular instance of a word, because words often have more than one tag, like `back` (*the back door*, *on my back*). It is possible to assume a conditional probability of words $\mathax{P}(w_n | w_{n - 1})$ or POS likelihood $\mathax{P}(t_n | t_{n - 1})$ to disambiguate sentences and assessing the likelihood.
 
-The procedure to choose a pos tagset is
+1. Start with a dictionary;
+2. Assign all possible tags to word from the dictionary;
+3. Write rules to selectively remove tags;
+4. Leave the correct tag for each word.
 
-1. choose set of tags
-2. pick small tagset;
+### Named Entity Recognition
+The ***N***amed ***E***ntity ***R***ecognition (**NER**) is a very important task of Information Extraction because it identifies and classifies names in text in a particular application. It involves identification of proper names in text and classification into a set of predefined categories of interest.
 
-The problem is tag ambiguity: words often ave more tahn one pos, eg back (the back door, on my back). To solve this problem, we can assume a probability of pos tags
+Category definitions are intuitively clear, but there are many gey areas caused by metonomy, for example Organization (`England won the World Cup`) versus Location (`The World Cup took place in England`).
 
-aprroaches: rule ased tagging
-stochastic tagging
+NER has different approaches:
 
-rules, start with a dictionary, assign all possible tags to words and write rules by haan
+* *Ruled-Based*, identifying if a sequence of words can be an entity name using lexicons that categorize names (developed by Trial and Error or ML techniques);
+* *Statistic-Based*, maximizing the probability of an entity using Hidden Markov Model estimated with training data and resolving ambiguity using context.
 
-## ner
-find and classify names in text, so identidy word referred to names of interest in a particula application. It involves identification of proper names in text and classification into a set of predefined categories of interest.
+HMM describes a process as a collection of states with transitions between them. Each state is associated with a probability distribution over worlds of possible outputs. For identifying named entities, it finds sequence of labels which gives the highest probability of the sentence.
 
-grey areas caused by metonomy, so two diffent categories entitities
+<!-- Lecture 6: 19/10/2020-->
+Natural Language is designed to make human communication efficient, but people omit a lot of common sense knowledge and keep lots of ambiguities, such as Word-Level or Syntactic ambiguity. 
 
-approaches:
-* ruled-based, identify if a seqeunce of words can be an entity name. using lexicons that categorize names (developed by trial and error or ml techniques)
-* statistic-based, maximize the probability of an entity using hidden markov model estimated with training data, resolving ambiguitu using context
+Usually, a message is sent by the sender and received by the recipient, who infers *Morphological* information of the words, uses lexical rules (*Syntax*) to reconstruct the original message and compare it with its knowledge to understand its *Semantic*, what is explicit, and does not change with the context, and *Pragmatic*, what is implicit or context related. It is the study of the relationship between language and context, fundamental to explain the understanding of the language.
+In the same way, a program have to rebuild the message and compare it whit a base of knowledge (usually modeled as a graph) to understand its content (*Inference*) handling a large chunk of text (*Discourse*).
 
-hmm describe a process as a collection of states with transitions between them. each state is associated with a probability distribution over worlds
+The Context is the situation in which the communicative act takes place and the set of knowledge, beliefs and the like are shared by both people. It includes at a minimum the beliefs and assumptions of the language users, relating to actions, situations and a state of knowledge and attention of those who partecipate to social interactions.
+
+To build a computer that understands text it is necessary thus NLP Pipeline:
+
+1. Syntactic Parsing, a grammatical analysis of a given sentence, conforming to the rules of a formal grammar;
+2. Relation Extraction, identifying the relationship among named entities;
+3. Logic Inference, which converts chunks of text into more formal representation.
+
+<!-- Lecture 7: 22/10/2020 -->
+# Language Models
+A *Language Model* (**LM**) is a formal representation of a specific language, generating a probability distribution of the words in topics. A probability to a sequence words can be used for:
+
+* Machine Translation;
+* Spell Correction;
+* Speech Recognition;
+* Text Categorization;
+* Information Retrieval;
+* Summarization.
+
+The main task is to compute the probability of a sentence (or a sequence of words), $\mathbb{P}(W) = \mathbb{P}(w_1, w_2, \dots, w_n)$, while the related task is the probability of an upcoming word: $\mathbb{P}(w_{n + 1} | w_1, \dots, w_n)$. Any model which computes any of these procedure is called a language model.
+
+The joint probability is computed relying on the chain rule of probability:
+
+$$\begin{align}
+    \mathbb{P}(w_1, w_2, \dots, w_n) &= \mathbb{P}(w_1)\mathbb{P}(w_2 | w_1) \dots \mathbb{P}(w_n | w_1, \dots, w_{n-1}) \\
+                                     &= \prod_{i = 1}^n \mathbb{P}(w_i | w_1, \dots, w_{i-1})
+  \end{align}$$
+
+but so many product could lead the number to decay pretty fast. A solution is the Markov Assumption, an approximation of the joint probability in which considers the probability of one or two words preceding the word:
+
+$$\mathbb{P}(w_1, w_2, \dots, w_n) \approx \prod_{i = 1}^n \mathbb{P}(w_i | w_{i - k} \dots w_{i-1}$$
+
+In this case is possible to construct an *Unigram Language Model*, the probability distribution over the words in a language, or *N-gram Language Model*, where probabilities depend on previous words. For example a Bigram LM is the probability of a word in a sequence where considering the previous word.
+
+The Maximum Likelihood Estimate of a Bigram LM is the following:
+
+$$\mathbb{P}(w_i | w_{i-1}) = \frac{c(w_{i-1}, w_i)}{w_{i-1}}$$
+
+For example, look at this repository:
+
+```
+<s> I am Sam </s>
+<s> Sam I am </s>
+<s> I do not like green eggs and ham </s>
+```
+
+The probability of `I` at the start of the sentence is $\mathbb{P}(I | <s> = 2/3 = 0.67$, while the probability of Sam in as the last word is $\mathbb{P}(Sam | <s> = 1/3 = 0.33$.
+
+The evaluation of a language model is the same as most important models: the dataset is splitted in training set and test set, testing the model's performance on unseen data. The best evaluation for comparing models is compare the accuracy of those. An important metric evaluation is *perplexity*, the inverse probability of the test set normalized by number of word (minimizing perplexity is the same as maximizing probability):
+
+$$PP(W) = \sqrt[N]{\prod_{i = 1}^N \frac{1}{\mathbb{P}(w_i | w_1 \dots w_{i-1})}}$$
+
+<!-- Lecture 8: 29/10/2020 -->
+## World Embedding
+*World Embedding* indicates a set of techniques in a NLP where words from a vocabulary are mapped to vectors of real numbers. It involves a mathematical embedding from a space with many dimensions per word to a vector space with a lower dimension. This model can be used to check similarity between either or words and check topic similarity and words usage per topic (worlds can be represented as vectors too).
+
+Each document is represented by a vector of words, such as binary representation. Another representation is the frequency of the words or the weighted representation, tf-idf.
+
+Usually, the similarity is not computed by using term-document representation, because two words are similar if their context vectors are similar. To represent words as vectors, a $V \times V$ *1-hot* matrix is built in which each word has all values equal to 0 except for the corresponding colum, equal to 1. This is a very sparse matrix, with no information between similar words. To solve these problems, the idea is associate $k$ context dimensions representing properties of the words in the vocabulary, also known as *Distributed Representation*. Distributed vectors allow to group similar words together depending on the considered context.
+
+For simple scenarios it is possible create a $k$-dimensional mapping for a simple example vocabulary y manually choosing contextual dimensions that make sense. This is not a simple task, in particular manual assignment of vector would be impossibly. The Distributional Hypothesis aims to represent each words by some context.
+
+The Window-based Co-occurence Matrix counts the number of times each context words co-occurs inside a windows of a particular size with the word of interest. It generates an $X = |V| \times |V|$ co-occurence matrix. The frequency is not a good representation, it is possible to use weights, TF-IDF or ***P***ointwise ***M***utual ***I***nformation (**PMI**):
+
+$$PMI(x, y) = \log_2 \frac{\mathbb{P}(x, y)}{\mathbb{P}(x)\mathbb{P}(y)} \in (- \infty, + \infty)$$
+
+where $x$ is the target word and $y$ the context. To have better estimation, only positive estimation are taken:
+
+$$PPMI(x, y) = \max [PMI(x,y),0]$$
+
+$f_{i, j}$ is the number of time the word $w_i$ appears in the context $c_j$. It is used to compute
+
+<!--inserire formule-->
+
+Rare words and apax produce higher scores, that risks to bias the analysis: probabilities of $w$ and $c$ are modified or a $k$-smoothing is used to reduced those scores with a value $\alpha \in [0, 1]$ (usually $\alpha = 0.75$):
+
+$$P_{\alphs}(c) = \frac{\text{count}(c)^{\alpha}}{\sum_c \text{count}^{\alpha}}$$
+

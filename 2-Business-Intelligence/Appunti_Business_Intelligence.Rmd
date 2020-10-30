@@ -5,7 +5,7 @@ date: "30/9/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -254,3 +254,14 @@ SELECT pc.product_class_id,
        product_class AS pc ON p.product_class_id = pc.product_class_id
  GROUP BY pc.product_class_id;
 ```
+
+<!--Lezione 9: 28/10/2020-->
+# Data Warehouse
+Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L'obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato. 
+
+> Il Data Warehouse è una collezione di dati di supporto al processo deisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell'evoluzione temporale e non volatile (accessibile in sola lettura).
+
+La costruzione di un sistema di Data Warehouse non comporta l'inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.
+
+## Architettura
+L'elaborazione analitica e transazionale devono essere mantenute il più possibile separate, 

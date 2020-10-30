@@ -43,7 +43,8 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.align = "center")
 ```
 
 # Classificazione dei Segnali
@@ -56,7 +57,7 @@ I segnali possono essere classificati in base al Dominio ed al Codominio. Si rip
 
 Per rappresentare digitalmente un segnale analogico sono necessari 3 fasi:
 
-* Campionamento: si considerano solanemente le parti di segnali tali per cui non si perdono troppe informazioni. Una alta frequenza di campionamenta significa una buona riproduzione del segnale originale, ma si avrà un numero elevato di dati, mentre una bassa frequenza di campionamnto produce il fenomeno chiamato aliasing;
+* Campionamento: si considerano solamente le parti di segnali tali per cui non si perdono troppe informazioni. Una alta frequenza di campionamento significa una buona riproduzione del segnale originale, ma si avrà un numero elevato di dati, mentre una bassa frequenza di campionamento produce il fenomeno chiamato aliasing;
 * Quantizzazione: l'ADC campiona una onda analogica ad intervalli temporali uniformi ed assegna u valore digitale ad ogni campione. Il valore è ottenuto tramite la seguente formula:
 
 $$\text{Digital Output Code} = \frac{\text{Analog Input}}{\text{Reference Input}} \times (2^N - 1)$$;
@@ -77,30 +78,30 @@ Se il segnale è una forma d'onda ripetuta, queste escursioni sono costanti e po
 
 La periodicità di un segnale indica il tempo nel quale è definito il segnale che si ripete. La frequenza fondamentale è legata al periodo della relazione $f_0 = 1/T$. Nella realtà non esistono segnali puramente periodici, ma segnali quasi periodici caratterizzati da forme d'onda che si ripetono quasi uguali.
 
-Il *Decibel* è un'unità di misura di tipo logaritmico che esprime il rapporto fra due livelli di potenza. La misura in decibel tra due grandezze fisiche delo stesso tipo è quindi una misura relativa, adimensionale e non lineare:
+Il *Decibel* è un'unità di misura di tipo logaritmico che esprime il rapporto fra due livelli di potenza. La misura in decibel tra due grandezze fisiche dello stesso tipo è quindi una misura relativa, adimensionale e non lineare:
 
 $$Bel = \log_{10}\frac{P_1}{P_2} \implies dB = 10Bel = 20\log_{10}\frac{A_1}{A_2}$$
 
 <!-- Lecture 2: 06/10/2020 -->
 # Analisi di Fourier
-L'Analisi di Fourier ha lo scopo di decomporre il segnale in costituenti sinusoidali di frequenze differenti. In particolare, consente di osservare il segnale non più nel dominio tempo - spazio, ma nel dominio delle freqeunze.
+L'Analisi di Fourier ha lo scopo di decomporre il segnale in costituenti sinusoidali di frequenze differenti. In particolare, consente di osservare il segnale non più nel dominio tempo - spazio, ma nel dominio delle frequenze.
 
 Ogni funzione periodica e a quadrato sommabile può essere espressa come somma di funzioni di seno e coseno:
 
 $$y = A \sin(\overline \omega x + \phi) \\
 y = A \cos(\overline \omega x + \phi)$$
 
-L'ampiezza indica quali sono i valori che la sinusoide può assumere, La pulsazione ($\overline \omega = 2 \pi / T$) indica la frequenza della sinusionide, la fase indica quanto ritardo c'è nella sinusioide classica
+L'ampiezza indica quali sono i valori che la sinusoide può assumere, La pulsazione ($\overline \omega = 2 \pi / T$) indica la frequenza della sinusoide, la fase indica quanto ritardo c'è nella sinusoide classica
 
 <!-- Mettere Foto -->
 Ad esempio, il segnale della immagine di sinistra è ottenuto sommando i segnali nella parte destra.
 
 
-```{r Somma Segnali, echo = FALSE, fig.align = 'center', out.width = "100%"}
+```{r Somma Segnali, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("Immagini/Somma-Segnali.png")
 ```
 
-La serie di furier scrive un segnale nella seguente forma:
+La serie di Furier scrive un segnale nella seguente forma:
 
 $$f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} a_k \cos(\frac{2 \pi}{N} kx) + b_k \sin(\frac{2 \pi}{N} kx)$$
 
@@ -118,9 +119,9 @@ Ogni funzione continua $f(x)$, anche se non periodica, può essere espressa come
 $$F(u) = \int_{-\infty}^{+\infty} f(x) e^{-j2 \pi u x} dx \\
   f(x) = \int_{-\infty}^{+\infty} F(u) e^{j2 \pi u x} dx $$
 
-Inoltre, è possibile passare dalla trasformata di Fourier, definita come il dominio delle frequenze (o trasformato), alla antitrasformata di Fourier, definita come dominio temporale. Questa trasformazione avviene senza perdita di informazione.
+Inoltre, è possibile passare dalla trasformata di Fourier, definita come il dominio delle frequenze (o trasformato), alla anti-trasformata di Fourier, definita come dominio temporale. Questa trasformazione avviene senza perdita di informazione.
 
-La trasformata di Fourier di una funzione continua ed integrabile è una funzione complessa nel dominio delle freqeunze. In coordinate polali si ha:
+La trasformata di Fourier di una funzione continua ed integrabile è una funzione complessa nel dominio delle frequenze. In coordinate polari si ha:
 
 $$F(u) = F[f(x)] = \Re(u) + j\Im(u) = |F(u)|e^{j \phi(u)}$$
 
@@ -145,14 +146,14 @@ Operando con segnali digitali, che assumono valori discreti, l'integrale è sost
 
 $$F(u) = \frac{1}{N} \sum_{i = 0}^{N - 1}f(j)e^{-j 2 \pi u \frac{1}{N}i}$$
 
-Si intende filtrare il suono di un'onda eliminando le frequenze sopra una certa soglia (ad esempio convervando solamente i bassi). Si effettua questa operazione nello spazio delle frequenze, molto più semplice in quanto si programma un filtro di una funzione che vale 0 sulle frequenze da eliminare e 1 quelle da conserbare, e lo si moltiplica per la trasformata $F(u)$, effettuando l'anti-trasformata per poter fruire nuovamente del file.
+Si intende filtrare il suono di un'onda eliminando le frequenze sopra una certa soglia (ad esempio conservando solamente i bassi). Si effettua questa operazione nello spazio delle frequenze, molto più semplice in quanto si programma un filtro di una funzione che vale 0 sulle frequenze da eliminare e 1 quelle da conservare, e lo si moltiplica per la trasformata $F(u)$, effettuando l'anti-trasformata per poter fruire nuovamente del file.
 
 Si può effettuare un filtraggio anche con le immagini, considerando solamente il modulo della trasformata bidimensionale del segnale. Più la rappresentazione del modulo è regolare, più l'immagine sarà ordinata.
 Per costruire un filtro basta considerare una circonferenza di raggio arbitrario per considerare solamente determinate frequenze.
 Considerando solamente le frequenze alte sono conservati i bordi dell'immagine, con frequenze basse le informazioni sul contenuto (si ottiene una sfocatura dell'immagine).
 
 
-```{r Frequenze Spazio-Tempo, echo = FALSE, fig.align = 'center', out.width = "100%"}
+```{r Frequenze Spazio-Tempo, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("Immagini/Spazio-Temporale-Frequenze.png")
 ```
 
@@ -173,7 +174,7 @@ In particolare,
 
 I filtri possono essere a media mobile, in inglese smoothing, nella quale i coefficienti sommano ad 1 ($\sum_i c_i = 1$), e derivativi, nella quale i coefficienti sommano a 0 ($\sum_i c_i = 0$)
 
-Applicando la definizione di Trasofrmata di Fourier è possibile dimostrare il Teorema della Convoluzione:
+Applicando la definizione di Trasformata di Fourier è possibile dimostrare il Teorema della Convoluzione:
 
 La trasformata della convoluzione di due funzioni è il prodotto delle trasformate delle stesse:
 
@@ -190,14 +191,14 @@ $$\begin{matrix}
 # Fondamenti di Immagini Digitali
 Una *Immagine* è una funzione di intensità di luce a due dimensioni, $f(x, y)$, con coordinate spaziali rispetto alla luce in quel punto. Una *Immagine Digitale*, invece, è una rappresentazione di una immagine continua tramite un array bidimensionale di carattere discreto. Ogni elemento dell'array campionato è chiamato *Pixel*.
 
-Il *Livello di Grigio* di una immagine è l'intesità relativa per ogni unità d'area, di solito compresa tra il valore più basso dintensità (Nero = 0) e più intenso (Bianco = 255).
+Il *Livello di Grigio* di una immagine è l'intensità relativa per ogni unità d'area, di solito compresa tra il valore più basso d'intensità (Nero = 0) e più intenso (Bianco = 255).
 
 L'*Intensità* di una immagine è l'energia di luce, emessa da una unità d'area nell'immagine (dipende dal dispositivo), mentre la *Luminosità* di una immagine è l'apparenza soggettiva di una unità d'area (soggettiva e dipende dal contesto).
 
 <!-- Luminance Vs Lightness -->
 La *Luminance* è definita come potenza della luce pesata per una funzione spettrale chiamata efficienza luminosa. Essa mi
 
-I pixel $f(x,y) = f_{yx}$ sono ordinati in modo natuarel in una matrice, con $x$ la colonna e $y$ l'indice di riga:
+I pixel $f(x,y) = f_{yx}$ sono ordinati in modo naturale in una matrice, con $x$ la colonna e $y$ l'indice di riga:
 
 $$\begin{bmatrix}
     f(0,0)   && f(1,0)   && \dots && f(N-1, L-0)
@@ -207,3 +208,131 @@ $$\begin{bmatrix}
   \end{bmatrix}$$
 
 <!-- Vedere Trasformazioni Immagini -->
+
+Il *Contrasto* di un punto di un'immagine è definito come la differenza relativa tra l'intensità del punto stesso e quella del suo vicino:
+
+$$C = \frac{I_p - I_n}{I_n}$$
+
+Il contrasto di una immagine intera, invece, è definito come la quantità di livello di grigio presente nella stessa. Per osservare il livello di grigio presente in una foto è necessario costruire un istogramma, che descrive la relativa proporzione di livello di grigio (assoluta, normalizzata e cumulata). è possibile manipolare il contrasto della intera immagine con lo *Stretching*, diminuendo il contrasto di un immagine, e *Shifting*, aumentando il valore di grigi.
+
+## Miglioramento Immagini
+Il miglioramento delle immagini è il processo nella quale una immagine viene visualizzata meglio, ma che dipende dal tipo di problema da svolgere. Esso può essere effettuato sia nel dominio dello spazio, lavorando sulla immagine originale, che in quello delle frequenze, operando sulla trasformata di Fourier.
+
+$$g(x, y) = T[f(x, y)]$$
+
+Esistono diverse tecniche di miglioramento delle immagini:
+
+* *Point Operations*, nella quale qualsiasi punto di una immagine dipende solamente dal livello di grigio in quel punto. Le operazioni più utilizzate sono:
+  + Contrast Stretching, nella quale si aumenta il range dinamico di dei livelli di grigio nella immagine. I valori prima di una soglia $m$ verranno compressi con una trasformazione $s = T(r)$;
+  + Image Negatives, ovvero una trasformazione negativa della seguente espressione: $s = L - 1 - r$;
+  + Compression of Dynamic Range, in quanto alcune volte è meglio comprimere i valori di grigio di una immagine. Di solito si utilizza una trasformazione logaritmica: $T(r) = c \log(1 + |r|)$, altre volte si utilizza la trasformazione $s = cr^{\gamma}$. Il fenomeno di correzione questa equazione è chiamata Gamma Correction;
+  + Gray-Level Slicing, nella quale si focalizza l'attenzione su uno specifico range di valori di grigio. In questo caso è possibile evidenziare il range con un alto contrasto il range desiderato (Binarizzazione), oppure preservare la tonalità dello sfondo.
+  + Bit Plane;
+  + Histogram Operations, nella quale è possibile modificare il livello medio dell'immagine (*Sliding*), espandere/comprimere il range dinamico della scala di grigi (*Stretching/Shrinking*), o migliorare il contrasto di una immagine distribuendo equamente il livello di grigio di una foto.
+  + Local Enhancement, nella quale scegliendo un intorno quadrato, si compie un istogramma locale e si applica l'equalizzatore a partire dal pixel centrale;
+* Mask Operation, un filtraggio lineare di una immagine $f$ che forma una sotto-immagine: 
+
+$$g(x, y) = \sum_{s = -a}^a \sum_{s = -b}^b w(s,t) f(x + s, y + t)$$
+
+Lo Smoothing è una operazione di filtraggio nella quale si sfuma l'immagine riducendo la variazione dei pixel in scala di grigi.
+
+<!-- Lecture 7: 27/10/2020 -->
+# Color Spaces
+Un *Modello di Colore* è un modello matematico astratto che descrive come i colori possono essere rappresentati tramite numeri, tipicamente composto da 3 o 4 componenti. Lo *Spazio di Colore* è un assortimento di 3 dimensioni di colori nella quale ogni colore è rappresentato tramite un punti. Ne esistono di diversi tipi: il più importante è chiamato Device Derived, utilizzato per descrivere il livello del display del dispositivo, utilizzando il colore *RGB*.
+
+I colori possono essere additivi, a partire dal livello di colore nero ed aggiungere i colori primari (rosso, verde e blu), oppure sottrattivo, a partire dal bianco e sottrarre i complementi dei colori primari (ciano, magenta e giallo).
+
+I colori in definitiva possono essere definiti come una combinazione dei colori primari:
+
+$$\text{Color} = r\text{*R*} + g\text{*G*} + b\text{*B*} = 
+                \begin{bmatrix}
+                  \text{*R*} & \text{*G*} & \text{*B*}
+                \end{bmatrix}
+                \begin{bmatrix}
+                  r \\ g \\ b
+                \end{bmatrix}$$
+
+Il modello *RGB* è Device Oriented, ovvero la rappresentazione dei colori dipende dal tipo di dispositivo e riguarda sia l'acquisizione, ovvero il valore del colore dipende dalla sensibilità spettrale del sensore della camera, che l'esposizione, ovvero il colore RGB appare differente se visto da un altro dispositiva. 
+
+Molte volte è consigliato normalizzare i valori:
+
+$$\begin{aligned}
+    I = \frac{R + G + B}{3} \qquad r = \frac{R}{R + G + B}
+    g = \frac{G}{R + G + B} \qquad b = \frac{B}{R + G + B}
+\end{aligned}$$
+
+```{r Spazio di Colore RGB, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/RGB.png")
+```
+
+L'acquisizione delle immagini da parte di un dispositivo applica una Gamma correction per trasformare la luce da termini lineari a non linear, mentre i display applicano l'operazione inversa.
+
+Un altro spazio di colori molto famoso è chiamato *Intuitive*, basato sulla descrizione dei colori familiari. Il modello di colore associato è ***H***ue ***S***aturation ***I***ntensity (**HSV**):
+
+* *Tonalità*: indica la posizione del colore;
+* *Saturazione*: indica le coordinate radiali della ruota dei colori
+* *Intensità*: indica la quantità di luce.
+
+Questo spazio di colore è molto famoso in quanto più intuitivo e permette di compiere delle trasformazioni più efficienti rispetto dello spazio di colore precedente. Il problema principale è che quando una delle tre componenti è circa 0, le altre componenti diventano instabili.
+
+```{r Spazio di Colore HSV, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/HSV.png")
+```
+
+Un altro modello molto utilizzato è il modello di colori *CMY*, spesso utilizzato per stampare fogli. Esso è il complemento del modello RGB: Al posto di aggiungere colori al nero, si sottraggono i colori dal bianco.
+
+* *Ciano*, controlla la quantità di colore rosso nella stampante;
+* *Magenta*, controlla la quantità di colore verde;
+* *Giallo*, controlla la quantità di colore blu.
+
+$$\begin{bmatrix}
+    C \\ M \\ Y
+  \end{bmatrix} =
+  \begin{bmatrix}
+    1 \\ 1 \\ 1 
+  \end{bmatrix} -
+  \begin{bmatrix}
+    R \\ G \\ B
+  \end{bmatrix}$$
+
+```{r Spazio di Colore CMY, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/CMY.png")
+```
+
+# Interest Point Detectors and Descriptors
+Uno degli aspetti principali della Data Science è riconoscere oggetti presenti nelle immagini. In particolare, si chiama *Object Recognition* un classe di oggetti da dover identificare, mentre *Istance Recognition* una particolare istanza della classe dell'oggetto.
+
+Un modo intuitivo per riconoscere un oggetto all'interno di una immagine è individuare tramite la rotazione, traslazione, illuminazione e qualità della immagine in inglese chiamato *Template Matching*. In particolare, è possibile utilizzare due approcci: 
+
+* ***S***um of ***S***quared ***D***ifferences (**SSD**), un metodo molto veloce, ma sensibile alla intensità generale della immagine;
+* *Normalized Cross Correlation*, più lenta della precedente, ma non varia al variare della intensità di luce locale e al contrasto.
+
+## Local Descriptors Trends
+<!--Mettere Definizione (guardare video)-->
+
+I Descrittori locali sono *Keypoints-based* in quanto sono metodi efficienti per applicazioni in real-time, sono in grado di comprimere informazioni in immagini di grande dimensione e riconoscono parti specifiche delle foto. Inoltre, gli algoritmi non devono compiere nuovi addestramenti (*traininig*) ogni volta che si applica la funzione.
+
+I punti più importanti all'interno di una immagine sono chiamati *Corner*, in quanto si verificano i maggiori cambiamenti in termini di luce e colore al loro esterno. La funzione che identifica questi punti è chiamata *Harris Corner Detector*, deinifita come la differenza tra l'immagine originale e la finestra in movimento tra le coordinate $x, y$:
+
+$$E(u, v) = \sum_{x, y}w(x, y)[I(x + u, y + v) - I(x, y)]^2$$
+
+che grazie alla espansione di Taylor è possibile scriverla nella seguente formula matriciale:
+
+$$M = \underset{(x,y)\in W}\sum 
+    \begin{bmatrix}
+      I_x^2 & I_x I_y \\
+      I_x I_y & I_y^2 
+    \end{bmatrix}$$
+
+Gli autovalori della matrice sono utili per determinare il vero cambiamento del punto:
+
+```{r Harris Corner Detector, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/Harris-Corner-Detector.png")
+```
+
+I passaggi sono:
+
+* Key-point Detection;
+* Key-point Description;
+* Confronto dei Key-point simili;
+* Punteggio di similarità basato sui punti di matching.
