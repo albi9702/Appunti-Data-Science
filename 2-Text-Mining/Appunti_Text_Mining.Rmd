@@ -211,9 +211,7 @@ To build a computer that understands text it is necessary thus NLP Pipeline:
 <!-- Lecture 7: 22/10/2020 -->
 # Language Models
 A *Language Model* (**LM**) is a formal representation of a specific language, generating a probability distribution of the words in topics. A probability to a sequence words can be used for:
-
-* Machine Translation;
-* Spell Correction;
+iaeQ45YB@sYwv&pell Correction;
 * Speech Recognition;
 * Text Categorization;
 * Information Retrieval;
@@ -256,25 +254,65 @@ $$PP(W) = \sqrt[N]{\prod_{i = 1}^N \frac{1}{\mathbb{P}(w_i | w_1 \dots w_{i-1})}
 ## World Embedding
 *World Embedding* indicates a set of techniques in a NLP where words from a vocabulary are mapped to vectors of real numbers. It involves a mathematical embedding from a space with many dimensions per word to a vector space with a lower dimension. This model can be used to check similarity between either or words and check topic similarity and words usage per topic (worlds can be represented as vectors too).
 
-Each document is represented by a vector of words, such as binary representation. Another representation is the frequency of the words or the weighted representation, tf-idf.
+Each document is represented by a vector of words, with a binary representation, the frequency of the words or the weighted representation (TF-Idf).
 
-Usually, the similarity is not computed by using term-document representation, because two words are similar if their context vectors are similar. To represent words as vectors, a $V \times V$ *1-hot* matrix is built in which each word has all values equal to 0 except for the corresponding colum, equal to 1. This is a very sparse matrix, with no information between similar words. To solve these problems, the idea is associate $k$ context dimensions representing properties of the words in the vocabulary, also known as *Distributed Representation*. Distributed vectors allow to group similar words together depending on the considered context.
+Usually, the similarity is not computed by using term-document representation, because two words are similar if their context vectors are similar. To represent words as vectors, it is possible to build a $V \times V$ *1-hot* matrix (also known as *Local Representation*) in which each word has all values equal to 0 except for the corresponding colum, equal to 1. This is a very sparse matrix, with no information between similar words. To solve these problems, the idea is associate $k$ context dimensions representing properties of the words in the vocabulary, also known as *Distributed Representation*. Distributed vectors allow to group similar words together depending on the considered context.
 
-For simple scenarios it is possible create a $k$-dimensional mapping for a simple example vocabulary y manually choosing contextual dimensions that make sense. This is not a simple task, in particular manual assignment of vector would be impossibly. The Distributional Hypothesis aims to represent each words by some context.
+The difference between Local and Distributed representation is in the matrix: in particular, in LR every term in a vocabulary $T$ is represented by a binary vector, while in DR every term is represented by a real-valued vector.
 
-The Window-based Co-occurence Matrix counts the number of times each context words co-occurs inside a windows of a particular size with the word of interest. It generates an $X = |V| \times |V|$ co-occurence matrix. The frequency is not a good representation, it is possible to use weights, TF-IDF or ***P***ointwise ***M***utual ***I***nformation (**PMI**):
+For simple scenarios it is possible create a $k$-dimensional mapping for a simple example vocabulary y manually choosing contextual dimensions that make sense. This is not a simple task, in particular manual assignment of vector would be impossibly. The *Distributional Hypothesis* aims to represent each words by some context. It is possible to use different granularities of context, such as documents and sentences.
 
-$$PMI(x, y) = \log_2 \frac{\mathbb{P}(x, y)}{\mathbb{P}(x)\mathbb{P}(y)} \in (- \infty, + \infty)$$
+The *Window-based Co-occurence Matrix* counts the number of times each context words co-occurs inside a windows of a particular size with the word of interest. It generates an $X = |V| \times |V|$ co-occurence matrix. The frequency is not a good representation, it is possible to use weights, TF-IDF or ***P***ointwise ***M***utual ***I***nformation (**PMI**):
 
-where $x$ is the target word and $y$ the context. To have better estimation, only positive estimation are taken:
+$$PMI(w_1, w_2) = \log_2 \frac{\mathbb{P}(w_1, w_2)}{\mathbb{P}(w_1)\mathbb{P}(w_2)} \in (- \infty, + \infty)$$
+
+To have better estimation, only positive estimation are taken:
 
 $$PPMI(x, y) = \max [PMI(x,y),0]$$
 
-$f_{i, j}$ is the number of time the word $w_i$ appears in the context $c_j$. It is used to compute
+$f_{i, j}$ is the number of time the word $w_i$ appears in the context $c_j$. It is used to compute these probabilities:
 
-<!--inserire formule-->
+$$\begin{aligned}
+    \mathbb{P}(w_j, c_j) &= \frac{f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
+    \mathbb{P}(w_j) &= \frac{\sum_{i = 1}^C f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
+    \mathbb{P}(c_j) &= \frac{\sum_{i = 1}^W f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
+  \end{aligned}$$
+
+For example, look at this table:
+
+```{r PMI}
+PMI <- rbind(c(0,0,1,0,1),
+             c(0,0,1,0,1),
+             c(2,1,0,1,0),
+             c(1,6,0,4,0))
+
+rownames(PMI) <- c("Apricot", "Pineapple", "Digital", "Information")
+colnames(PMI) <- c("Computer", "Data", "Pinch", "Result", "Sugar")
+
+knitr::kable(PMI)
+```
+
+The $\mathbb{w_4, c_2} = 6/19 = 0.32$, $\mathbb{w_4} = 11/19 = 0.58$ and $\mathbb{c_2} = 7/19 = 0.37$. The PPMI table is:
+
+```{r PPMI}
+PPMI <- rbind(c(0.00, 0.00, 0.05, 0.00, 0.05),
+              c(0.00, 0.00, 0.05, 0.00, 0.05),
+              c(0.11, 0.05, 0.05, 0.05, 0.00),
+              c(0.05, 0.32, 0.00, 0.021, 0.05))
+
+rownames(PPMI) <- c("Apricot", "Pineapple", "Digital", "Information")
+colnames(PPMI) <- c("Computer", "Data", "Pinch", "Result", "Sugar")
+
+knitr::kable(PPMI)
+```
 
 Rare words and apax produce higher scores, that risks to bias the analysis: probabilities of $w$ and $c$ are modified or a $k$-smoothing is used to reduced those scores with a value $\alpha \in [0, 1]$ (usually $\alpha = 0.75$):
 
-$$P_{\alphs}(c) = \frac{\text{count}(c)^{\alpha}}{\sum_c \text{count}^{\alpha}}$$
+$$PMI_{\alpha}(w, c) = \log_2 \frac{\mathbb{P}(w, c)}{\mathbb{P}(w)\mathbb{P}_{\alpha}(c)} \in (- \infty, + \infty)
+\implies
+PPMI_{\alpha}(w, c) = \max [(PMI_{\alpha}(w, c), 0]$$
+
+with
+
+$$P_{\alpha}(c) = \frac{\text{count}(c)^{\alpha}}{\sum_c \text{count}^{\alpha}}$$
 
