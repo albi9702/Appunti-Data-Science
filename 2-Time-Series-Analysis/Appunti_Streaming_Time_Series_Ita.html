@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Streaming Data Management and Time Series Analysis</title>
+  <meta name="description" content="Streaming Data Management and Time Series Analysis" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Streaming Data Management and Time Series Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Streaming Data Management and Time Series Analysis" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Streaming Data Management and Time Series Analysis </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#previsione-statistica"><i class="fa fa-check"></i><b>1</b> Previsione Statistica</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#stimatore-ottimale-lineare"><i class="fa fa-check"></i><b>1.1</b> Stimatore Ottimale Lineare</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#serie-storica"><i class="fa fa-check"></i><b>1.2</b> Serie Storica</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#processo-a-media-mobile"><i class="fa fa-check"></i><b>1.3</b> Processo a Media Mobile</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#processo-autoregressivo"><i class="fa fa-check"></i><b>1.4</b> Processo Autoregressivo</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#processo-integrato"><i class="fa fa-check"></i><b>1.5</b> Processo Integrato</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#modello-arima"><i class="fa fa-check"></i><b>1.6</b> Modello ARIMA</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#regressione-arima"><i class="fa fa-check"></i><b>1.7</b> Regressione ARIMA</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#modelli-a-componenti-non-osservabili"><i class="fa fa-check"></i><b>2</b> Modelli a Componenti non Osservabili</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#trend"><i class="fa fa-check"></i><b>2.1</b> Trend</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#forma-state-space"><i class="fa fa-check"></i><b>2.2</b> Forma State Space</a><ul>
+<li class="chapter" data-level="2.2.1" data-path=""><a href="#filtro-di-kalman"><i class="fa fa-check"></i><b>2.2.1</b> Filtro di Kalman</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#ciclo-stocastico"><i class="fa fa-check"></i><b>2.3</b> Ciclo Stocastico</a></li>
+<li class="chapter" data-level="2.4" data-path=""><a href="#stagionalità"><i class="fa fa-check"></i><b>2.4</b> Stagionalità</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Streaming Data Management and Time Series Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Streaming Data Management and Time Series Analysis</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>28/9/2020</em></p>
+</div>
+<div style="page-break-after: always;"></div>
+<!-- Versione Italiana -->
+<div id="previsione-statistica" class="section level1">
+<h1><span class="header-section-number">1</span> Previsione Statistica</h1>
+<p>Una Previsione Statistica è una stima del valore della variable casuale <span class="math inline">\(Y\)</span> basato sull’esito di altre variabili casuali indipendenti <span class="math inline">\(X_1, \dots, X_m\)</span>. Uno stimatore è una funzione delle variabile casuale: <span class="math inline">\(\hat Y = p(X_1, \dots, X_m)\)</span>. uno stimatore ottimale è la funzione di perdita che mappa le previsioni degli errori sui costi; se la previsione di errore è nulla, lo è anche la perdita (no perdita di informazione). Una funzione di perdita può essere simmetrica o asimmetrica: <span class="math inline">\(l(-x) = l(x)\)</span>; generalmente viene utilizzata asimmetrica, come la funzione di perdita quadratica <span class="math inline">\(l_2(x) = x^2\)</span>.</p>
+<p>Lo stimatore <span class="math inline">\(\hat Y = \hat p(X_1, \dots, X_m)\)</span> è ottimale se minimizza la perdita attesa tra le funzioni di classe misurabili:</p>
+<p><span class="math display">\[\mathbb{E} \ l(Y - \hat Y) = \min_{p \in M}\mathbb{E} \ l[Y - p(X_1, \dots, X_m)]\]</span></p>
+<p>Lo stimatore ottimale sollo la funzione di perdita quadratica è la previsione attesa condizionata: <span class="math inline">\(\hat Y = \mathbb{E}[Y | X_1, \dots, X_m]\)</span>.</p>
+<p>Le proprietà della previsione attesa condizionata sono:</p>
+<ul>
+<li><em>Linearità</em>: <span class="math inline">\(\mathbb{E}[aY + bZ + c|X] = a\mathbb{E}[Y|X] + b\mathbb{E}[Z|X] + c\)</span>, con <span class="math inline">\(a,b,c,\)</span> costanti;</li>
+<li><em>Ortogonalità</em>: <span class="math inline">\(\mathbb{E}[(Y - \hat Y) g(x) ] = \mathbb{E}[(Y - \mathbb{E}[Y|X]) g(x) ] = 0\)</span>;</li>
+<li><em>Funzioni Condizionate</em>: <span class="math inline">\(\mathbb{E}[Yg(x)|X] = \mathbb{E}[Y|X]g(x)\)</span>;</li>
+<li><em>Indipendenza del Valore Atteso Condizionato</em>: <span class="math inline">\(\mathbb{E}[Y|X] = \mathbb{E}[Y]\)</span> if <span class="math inline">\(X \perp\!\!\!\perp Y\)</span>;</li>
+<li><em>Legge dei Valori Attesi Iterati</em>: <span class="math inline">\(\mathbb{E}[Y] = \mathbb{E} [\mathbb{E}(Y|X) ]\)</span>;</li>
+<li><em>Legge della Varianza Totale</em>: <span class="math inline">\(\mathbb{V} \text{ar}[Y] = \mathbb{E}[\mathbb{V}\text{ar} (Y|X)] + \mathbb{V} \text{ar} [\mathbb{E}(Y|X)]\)</span>.</li>
+</ul>
+<div id="stimatore-ottimale-lineare" class="section level2">
+<h2><span class="header-section-number">1.1</span> Stimatore Ottimale Lineare</h2>
+<p>Alcune volte è più semplice limitare la ricerca con funzioni semplici, ad esempio le combinazioni lineari. Il vantaggio principale è che la struttura della covarianza delle v.c. è tutto ciò che serve per la previsione:</p>
+<p><span class="math display">\[\mathbb{P}[Y|X_1, \dots, X_m] = \mu_Y + \Sigma_{YX} \Sigma_{XX}^{-1} (X - \mu_X)\]</span></p>
+<p>Le proprietà dell stimatore ottimo lineare sono:</p>
+<ol style="list-style-type: decimal">
+<li><em>Unbiasedness</em>: <span class="math inline">\(\mathbb{E}[Y - \mathbb{P}(Y|X)] = 0\)</span>;</li>
+<li><strong><em>M</em></strong>ean <strong><em>S</em></strong>quare <strong><em>E</em></strong>rror (<strong>MSE</strong>) delle previsioni: <span class="math inline">\(MSE_{lin} = \Sigma_{YY} - \Sigma_{YX}\Sigma_{YY}^{-1}\Sigma_{XY}\)</span></li>
+<li><em>Ortogonalità</em>: <span class="math inline">\(\mathbb{E}[(Y - \mathbb{P}[Y|X])X^t] = 0\)</span>;</li>
+<li><em>Linearità</em>: <span class="math inline">\(\mathbb{P}[aY + bZ + c| X] = a\mathbb{P}[Y|X] + b\mathbb{P}[Z|X] + c\)</span>;</li>
+<li><em>Legge delle Proiezioni Iterate</em>: se <span class="math inline">\(\mathbb{E}(X - \mu_x)(Z - \mu_Z)^t = 0\)</span>, allora <span class="math inline">\(\mathbb{P}[Y | X,Z] = \mu_Y + \mathbb{P}[Y - \mu_Y|X] + \mathbb{P}[Y - \mu_Y|Z]\)</span>.</li>
+</ol>
+</div>
+<div id="serie-storica" class="section level2">
+<h2><span class="header-section-number">1.2</span> Serie Storica</h2>
+<p>Una Serie Storica è una sequenza di osservazioni ordinate in un temp <span class="math inline">\(t\)</span> che prende valori con un indice <span class="math inline">\(s\)</span>. Se <span class="math inline">\(s\)</span> contiene osservazioni finite si parla di una serie storica <em>Discreta</em> <span class="math inline">\(y_t\)</span>, altrimenti è una serie storica <em>Continua</em> <span class="math inline">\(y(t)\)</span>.</p>
+<p>Il concetto più importante di una serie storica è la <em>Stazionarietà</em>, definita come l’invarianza nel tempo dell’intero processo dei dati (stazionarietà <em>Forte</em>) oppure nei primi due momenti (stazionarietà <em>Debole</em>).</p>
+<p>In particolare, un processo <span class="math inline">\(\{Y_t\}\)</span> è detto stazionario in senso stretto se <span class="math inline">\(\forall k \in \mathbb{N}, h \in \mathbb{Z}\)</span> e <span class="math inline">\((t_1, \dots, t_k) \in \mathbb{Z}^k\)</span>,</p>
+<p><span class="math display">\[(Y_{t_1}, \dots, Y_{t_k},) \buildrel d \over = (Y_{t_1+h}, \dots, Y_{t_k+ h})\]</span></p>
+<p>Un processo <span class="math inline">\(\{Y_t\}\)</span> è detto stazionario in senso debole se <span class="math inline">\(\forall h, t \in \mathbb{Z}\)</span>, with <span class="math inline">\(\gamma(0) &lt; \infty\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbb{E}(Y_t)                   &amp;= \mu       \\
+    \mathbb{C}\text{ov}(Y_t, Y_{t-h}) &amp;= \gamma(h)
+\end{aligned}\]</span></p>
+<p>ovvero se media e varianza non dipendono dal tempo e la covarianza del processo con se stesso anticipato, detta funzione di auto-covarianza, dipende solo dalla distanza temporale.</p>
+<p>Se una serie storica è stazionaria in senso stretto, allora lo è anche in senso debole se e solo se <span class="math inline">\(\mathbb{V}\text{ar}(Y_t) &lt; \infty\)</span>. Se una serie storica è distribuito come una Gaussiana, allora la stazionarietà stretta e debole coincidono.</p>
+<p>Il processo stazionario più semplice è chiamato <em>White Noise</em>, una serie storica senza autocorrelazione. Un processo stocastico è definito White Noise se <span class="math inline">\(\mu = 0, \sigma^2 &gt; 0\)</span> e la sua funzione di covarianza pari a:</p>
+<p><span class="math display">\[\gamma(h) =
+    \begin{cases}
+      \sigma^2 &amp;\quad \text{for } h = 0 \\
+      0        &amp;\quad \text{for } h \ne 0
+    \end{cases}\]</span></p>
+<p><img src="Appunti_Streaming_Time_Series_Ita_files/figure-html/White%20Noise-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Se la serie storica è un processo non stazionario, allora viene chiamato come <em>Random Walk</em>, definito come una somma cumulativa di <span class="math inline">\(WN(0, \sigma^2)\)</span>:</p>
+<p><img src="Appunti_Streaming_Time_Series_Ita_files/figure-html/Random%20Walk-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>La funzione di <em>Autocovarianza</em> è una funzione caratterizzata da un processo stazionario debole, mentre la funzione di <em>Autocorrelazione</em> (ACF) è la versione di scala indipendente della autocovarianza. Essa misura la relazione lineare tra valori ritardati di una serie storica.</p>
+<p>Se <span class="math inline">\(\{Y_t\}\)</span> è un processo stazionario con autocovarianza <span class="math inline">\(\gamma (·)\)</span>, allora la sua ACF è pari a <span class="math inline">\(p(h) = \mathbb{C}\text{or}(Y_t, Y_{t-h}) = \gamma(h)/\gamma(0)\)</span>.</p>
+<p>Un altro modo per osservare la dipendenza lineare di un processo stocastico è con la funzione di <em>Autocorrelazione Parziale</em> (PACF), che misura la correlaione tra <span class="math inline">\(Y_t\)</span> e <span class="math inline">\(Y_{t - h}\)</span> dopo che la loro dipendenza lineare sulle variabili casuali è stata rimossa:</p>
+<p><span class="math display">\[\alpha(h) = \mathbb{C}or[Y_t - \mathbb{P}(Y_t | Y_{t-1 | t - h + 1}), 
+                           Y_{t - h} - \mathbb{P}(Y_{t - h} | Y_{t-1 | t - h + 1})]\]</span></p>
+<p>Quando i dati hanno un <em>Trend</em>, la autocorrelazione tende ad avere alti valori per piccoli ritardi in quanto le osservazioni vicine in termini di tempo lo sono anche in grandezza; in particolare, ACF ha valori positivi che lentamente diminuiscono a 0. Quando i dati sono <em>Stagionali</em>, l’autocorrelazione sarà più grande per i ritardi stagionali che per gli altri.</p>
+<p><img src="Appunti_Streaming_Time_Series_Ita_files/figure-html/Autocorrelation%20Plots,-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>L’andamento decrescente nel grafico ACF all’aumento del ritardo è dovuto al trend, mentre l’andamento a creste è dovuto alla stagionalità.</p>
+</div>
+<div id="processo-a-media-mobile" class="section level2">
+<h2><span class="header-section-number">1.3</span> Processo a Media Mobile</h2>
+<p>Un processo a <em>Media Mobile</em>, in inglese <strong><em>M</em></strong>oving <strong><em>A</em></strong>verage Process (<strong>MA</strong>), è un processo che stima il ciclo di trend dei dati al tempo <span class="math inline">\(t\)</span> ottenuto come la media dei valori della serie storica all’interno di <span class="math inline">\(q\)</span> periodi di <span class="math inline">\(t\)</span>. La media è utile per eliminare una parte della casualità dei dati, lasciando una componente ciclica del trend:</p>
+<p><span class="math display">\[\begin{aligned}
+    Y_t     &amp;= \varepsilon_t + \theta_1 \varepsilon_{t-1} + \dots + \theta_q \varepsilon_{t-q} \\
+    Y_{t-1} &amp;= \varepsilon_{t-1} + \theta_1 \varepsilon_{t-2} + \dots + \theta_q \varepsilon_{t-q-1}
+  \end{aligned}\]</span></p>
+<p>Un processo <span class="math inline">\(MA(q)\)</span> ha la funzione di autocorrelazione che si annulla per <span class="math inline">\(h &gt; q\)</span>. Inoltre, un processo <span class="math inline">\(MA(q)\)</span> per cui l’equazione caratteristica <span class="math inline">\(1 + \theta_1X+ \dots + \theta_qX^q = 0\)</span> ha solo soluzioni esterne al cerchio unitario (<span class="math inline">\(|x &gt; 1|\)</span> se <span class="math inline">\(x\)</span> è la soluzione della equazione) ed è rappresentabile come <span class="math inline">\(Y_t = k + \psi_1 Y_{t-1} + \dots + \psi_q Y_{t-q} + \varepsilon_t\)</span>.</p>
+<p>Una particolare proprietà di un processo <span class="math inline">\(MA(q)\)</span> è che in generale le autocorrelazioni per i primi <span class="math inline">\(q\)</span> ritardi sono non nulli e nulli per tutti ritardi maggiori di <span class="math inline">\(q\)</span>. Un pattern più chiaro per identificare un processo <span class="math inline">\(MA(q)\)</span> è osservare il grafico ACF, nella quale ha valori non nulli solamente per i ritardi coinvolti nel modello.</p>
+<!-- Modello a Media Mobile -->
+<p><img src="Immagini/MA(1).png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="processo-autoregressivo" class="section level2">
+<h2><span class="header-section-number">1.4</span> Processo Autoregressivo</h2>
+<p>Un processo <em>Autoregressivo</em>, in inglese Autoregressive Process (<strong>AR</strong>), è un processo nella quale si vuole prevedere la variabile <span class="math inline">\(Y\)</span> come combinazione lineare dei valori passati. Il termine autoregressivo indica a regressione della variabile con sè stessa:</p>
+<p><span class="math display">\[Y_t = k + \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \varepsilon_t\]</span></p>
+<p>Un processo <span class="math inline">\(AR(p)\)</span> è stazionario se nella equazione caratteristica <span class="math inline">\(1 - \phi_1X - \dots - \phi_pX^p = 0\)</span> tutte le soluzioni sono esterne al cerchio unitario (<span class="math inline">\(|x &gt; 1|\)</span> se <span class="math inline">\(x\)</span> è la soluzione della equazione). Se <span class="math inline">\(Y_t\)</span> è stazionario allora la sua media sarà <span class="math inline">\(\mathbb{E}(Y_t) = \frac{k}{1- \phi_1 - \dots - \phi_p}\)</span>.</p>
+<p>Il processo <span class="math inline">\(AR(1)\)</span> è definito come <span class="math inline">\(Y_t = k + \phi Y_{t-1} + \varepsilon_1\)</span>, di conseguenza <span class="math inline">\(1 - \phi x = 0 \implies x = 1/\phi\)</span>. Esso è stazionario se <span class="math inline">\(|\phi | &lt; 1\)</span>; se in <span class="math inline">\(AR(1)\)</span> <span class="math inline">\(\phi = 1\)</span> si ottiene un processo stazionario (integrato) chiamato Random Walk:</p>
+<p><span class="math display">\[Y_t = k + Y_{t-1} + \varepsilon\]</span></p>
+<p>Per valori positivi di <span class="math inline">\(\phi_p\)</span>, il grafico ACF diminuisce a 0 all’aumentare del ritardo. Per valori negativi, invece, il grafico ACF diminuisce anch’essa a 0, ma alterna valori positivi e negativi. Il grafico PACF si spegne dopo aver superato l’ordine <span class="math inline">\(p\)</span> del modello.</p>
+<!-- Modello  Autoregressivo -->
+<p><img src="Immagini/AR(1).png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="processo-integrato" class="section level2">
+<h2><span class="header-section-number">1.5</span> Processo Integrato</h2>
+<p>Un <em>Processo Integrato</em> <span class="math inline">\(\{ Y_t \} \sim I(d)\)</span> è un processo non stazionario nella quale la differenza prima è stazionaria. Ad esempio, si consideri un processo integrato di ordine 1:</p>
+<p><span class="math display">\[\begin{aligned}
+    Y_t             &amp;= Y_{t - 1} + \varepsilon_t \sim I(0) \\
+    Y_t - Y_{t - 1} &amp;= \varepsilon_t \sim I(1)
+  \end{aligned}\]</span></p>
+<p>un processo <span class="math inline">\(Z_t\)</span> è integrato di ordine <span class="math inline">\(d\)</span> se <span class="math inline">\(Z_t\)</span> non è stazionario, <span class="math inline">\(\Delta^{d-1}Z_{t-1}\)</span>, mentre <span class="math inline">\(\Delta^dZ_t\)</span> è stazionario.</p>
+<p>In un processo <span class="math inline">\(AR(p)\)</span>, <span class="math inline">\(\phi_p(B) Y_t = \varepsilon_t\)</span>, se esistono <span class="math inline">\(d\)</span> soluzioni con <span class="math inline">\(x = 1\)</span> e le restanti <span class="math inline">\(|x| &gt; 1\)</span>, esso è un processo stazionario di ordine <span class="math inline">\(d\)</span>:</p>
+<p><span class="math display">\[\Delta^d Y_t = AR(p - d)\]</span></p>
+<p>Un processo <span class="math inline">\(\{Y_t\}\)</span> è chiamato ARMA<span class="math inline">\((p,q)\)</span> se è stazionario e soddisfa la seguente equazione:</p>
+<p><span class="math display">\[Y_t = \phi_1Y_{t-1} + \dots + \phi_pY_{t-p} + \theta_1Z_{t-1} + \dots + \theta_1Y_{t-q}\]</span></p>
+</div>
+<div id="modello-arima" class="section level2">
+<h2><span class="header-section-number">1.6</span> Modello ARIMA</h2>
+<p>Se si combinano i modelli autoregressivi ed a media mobile, si otteine un modello non stagionale <strong><em>A</em></strong>uto<strong><em>R</em></strong>egressive <strong><em>I</em></strong>ntegrated <strong><em>M</em></strong>oving <strong><em>A</em></strong>verage (<strong>ARIMA</strong>).</p>
+<p><span class="math display">\[Y_t&#39; = c + \phi_1 Y_{t-1}&#39; + \dots + \phi_p Y_{t-p}&#39; + \theta_1 \varepsilon_{t-1} + \dots + \theta_q \varepsilon_{t-q} + \varepsilon_t\]</span></p>
+<p>con <span class="math inline">\(Y_t&#39;\)</span> le serie differenziate. Il modello <span class="math inline">\(ARIMA(p, d, q)\)</span> presenta la parte <span class="math inline">\(p\)</span> AutoRegressiva, il primo grado di Integrazione <span class="math inline">\(d\)</span> e la parte <span class="math inline">\(q\)</span> della Media Mobile.</p>
+<p>L’operatore ritardo <span class="math inline">\(B(y_t) = y_{t-1}\)</span> è una notazione molto utile per snellire l’equazione e sposta di un periodo precedente la serie storica. La prima differenze è possibile scriverla come segue:</p>
+<p><span class="math display">\[y_t&#39; = y_t - y_{t-1} = y_t - B(y_t) = (1 - B)y_t\]</span></p>
+<p>L’operatore ritardo è utile per combinare le differenze, tanto che è possibile utilizzare semplici regole algebriche. In particolare, è possibile coinvolgere più operatori ritardo <span class="math inline">\(B\)</span> insieme.</p>
+<!-- Procedura Box and Jenkins per identificare modelli ARIMA Model -->
+<p><img src="Immagini/Box-Jenkins-Procedure.png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="regressione-arima" class="section level2">
+<h2><span class="header-section-number">1.7</span> Regressione ARIMA</h2>
+<p>I modelli di serie storica permettono di osservare le informazioni dei periodi presenti, ma non di altre informazioni che possono essere rilevanti:</p>
+<p><span class="math display">\[\begin{aligned}
+    \Delta^d y_t                        &amp;= \beta_t \Delta^d X_t + \frac{\theta_q(B)}{\phi_p(B)} \varepsilon_t \\
+    \Delta^d(y_t - \beta_t X_t)         &amp;= \frac{\theta_q(B)}{\phi_p(B)} \varepsilon_t                        \\
+    \phi(B) \Delta^d(y_t - \beta_t X_t) &amp;= \theta(B) \varepsilon_t
+  \end{aligned}\]</span></p>
+<p>I modelli <span class="math inline">\(ARIMA(p, d, 0)\)</span> hanno un grafico ACF che decresce esponenzialmente o in modo sinusoidale ed il grafico PACF presenta valori molto alti fino al ritardo <span class="math inline">\(p\)</span>, mentre valori prossimi a 0 superato il ritardo <span class="math inline">\(p\)</span>.</p>
+<p>I modelli <span class="math inline">\(ARIMA(0, d, q)\)</span> hanno un valore molto alto fino al ritardo <span class="math inline">\(q\)</span> nel grafico ACF e valori prossimi a 0 superato il ritardo, mentre el grafico PACF il valore decresce esponenzialmente o in in termini sinusoidali.</p>
+</div>
+</div>
+<div id="modelli-a-componenti-non-osservabili" class="section level1">
+<h1><span class="header-section-number">2</span> Modelli a Componenti non Osservabili</h1>
+<p>Una serie storica può essere considerata come somma di componenti non osservabili, come trend, stagionalità e componente ciclica. I Modelli a Componenti non Osservabili, in inglese <strong><em>U</em></strong>nobserved <strong><em>C</em></strong>omoponents <strong><em>M</em></strong>odels (<strong>UCM</strong>), selezionano le componenti stocastiche migliori dei modelli ARIMA, ma sono anche molto utili nelle previsioni.</p>
+<p>La serie storica UCM è definita come la somma di Trend (<span class="math inline">\(\mu_t\)</span>), Ciclo (<span class="math inline">\(\psi_t\)</span>), Stagionalità (<span class="math inline">\(\gamma_t\)</span>) e White Noise (<span class="math inline">\(\varepsilon_t\)</span>):</p>
+<p><span class="math display">\[Y_t = \mu_t + \psi_t + \gamma_t + \varepsilon_t\]</span></p>
+<p>Alcune di queste componenti possono essere non presenti ed altre aggiunte. inoltre, possono essere viste come una versione stocastica della funzione deterministica del tempo.</p>
+<div id="trend" class="section level2">
+<h2><span class="header-section-number">2.1</span> Trend</h2>
+<p>Il <em>Trend</em> è responsabile della variazione della media del processo nel lungo periodo. Questa componente solitamente viene usata come <strong><em>L</em></strong>ocal <strong><em>L</em></strong>inear <strong><em>T</em></strong>rend (<strong>LLT</strong>). Si considera la seguente funzione lineare:</p>
+<p><span class="math display">\[\mu_t = \mu_0 + \beta_0 t\]</span></p>
+<p>con <span class="math inline">\(\mu_0\)</span> intercetta e <span class="math inline">\(\beta_0\)</span> la pendenza e la si scriva nella sua forma incrementale:</p>
+<p><span class="math display">\[\mu_t = \mu_{t-1} + \beta_0\]</span></p>
+<p>Aggiungendo White Noise <span class="math inline">\(\eta_n\)</span> è possibile ottenere Random Walk con Drift. In questo caso <span class="math inline">\(\mu_t\)</span> è interpretabile com un trend lineare con una intercetta Random Walk, mentre la pendenza rimane costante.</p>
+<p>Inoltre, è possibile ottenere una pendenza che varia nel tempo facendo evolvere ’intercetta come un Random Walk:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mu_t   &amp;= \mu_{t-1}   + \beta_0 + \eta_n \\
+    \beta_t &amp;= \beta_{t-1} + \xi_t            
+\end{aligned}\]</span></p>
+<p>Queste equazioni definiscono un Local Linear Trend interpretabili come un trend lineare nella quale sia intercetta che pendenza evolvono come Random Walk.</p>
+<p>Il Local Linear Trend presenta diversi casi d’interesse aggiustando il valore delle varianze:</p>
+<ul>
+<li><em>Deterministic Linear Trend</em> se <span class="math inline">\(\sigma_{\eta}^2 = \sigma_{\xi}^2 = 0\)</span>;</li>
+<li><em>Random Walk con Drift</em> <span class="math inline">\(\beta_0\)</span> se <span class="math inline">\(\sigma_{\xi}^2 = 0\)</span> (pendenza costante);</li>
+<li><em>Random Walk</em> se <span class="math inline">\(\sigma_{\xi}^2 = \beta_0 = 0\)</span> (pendenza = 0);</li>
+<li><em>Integrated Random Walk</em> se <span class="math inline">\(\sigma_{\eta}^2 = 0\)</span>, con un trend molto lineare.</li>
+</ul>
+<p><strong>Obs.</strong>: il Local Linear Trend può essere visto com un modello ARIMA se <span class="math inline">\(\sigma_{\xi}^2 &gt; 0\)</span>, <span class="math inline">\(\mu_t \sim I(2)\)</span> con trend non stazionario, ma la sua seconda differenza stazionaria.</p>
+</div>
+<div id="forma-state-space" class="section level2">
+<h2><span class="header-section-number">2.2</span> Forma State Space</h2>
+<p>Una serie storica può essere scritta in forma <em>State Space</em>, un sistema di equazioni nella quale una o più serie storiche osservabili sono linearmente correlate con un set di variabili non osservabili. Essa è definita nel seguente modo:</p>
+<p><span class="math display">\[\begin{cases}
+      Y_t          &amp;= d_t + Z_t \alpha_t + \varepsilon_t
+      \quad \text{Equazione di Osservazione} \\
+      \alpha_{t+1} &amp;= c_t + T_t \alpha_t + R_t \eta_t
+      \quad \text{Equazione di Stato}
+  \end{cases}\]</span></p>
+<p>dove <span class="math inline">\(\varepsilon_t \sim WN(0, H_t)\)</span>, <span class="math inline">\(\eta_t \sim WN(0, Q_t)\)</span> sono delle variabili casuali incorrelate tra di loro con valore atteso nullo e matrice di varianza covarianza rispettivamente <span class="math inline">\(H_t\)</span> e <span class="math inline">\(Q_t\)</span>.</p>
+<p>Il processo di inizializzazione è un processo nella quale il vettore di stato è definito come <span class="math inline">\(a_{1|0} = \mathbb{E}(\alpha_1)\)</span> e <span class="math inline">\(P_{1|0} = \mathbb{E}(\alpha_1 - a_{1|0})(\alpha_1 - a_{1|0})^t\)</span>.</p>
+<p><strong>Esempio 1.</strong> <span class="math inline">\(\qquad\)</span> Si consideri la trasformazione in formato State Space del Local Linear Trend con White Noise. Il Local Linear Trend presenta il seguente sistema di equazioni:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mu_t   &amp;= \mu_{t-1}   + \beta_0 + \eta_n \\
+    \beta_t &amp;= \beta_{t-1} + \xi_t            
+\end{aligned}\]</span></p>
+<p>con rumore <span class="math inline">\(y_t = \mu_t + \varepsilon_t\)</span>. La forma State Space del Local Linear Trend diventa:</p>
+<p><span class="math display">\[\begin{cases}
+      \alpha_{t+1} = T \alpha_t + R \eta_t = 
+                 \begin{bmatrix}
+                   \mu_{t+1} \\
+                   \beta_{t+1}
+                 \end{bmatrix} =
+                 \begin{bmatrix}
+                   1 &amp; 1 \\
+                   0 &amp; 1
+                 \end{bmatrix}
+                 \begin{bmatrix}
+                   \mu_t \\
+                   \beta_t
+                   \end{bmatrix} + 
+                 \begin{bmatrix}
+                   \eta_t \\
+                   \zeta_t
+                 \end{bmatrix}
+      \quad \text{Stato} \\
+      Y_t = Z \alpha_t + \varepsilon_t =
+             \begin{bmatrix}
+               1 &amp; 0
+             \end{bmatrix}
+             \begin{bmatrix}
+               \mu_t \\
+               \beta_t
+             \end{bmatrix} + \varepsilon_t
+      \quad \text{Osservazione}
+  \end{cases}\]</span></p>
+<p>dove <span class="math inline">\(\eta_t = \begin{bmatrix} \eta_t \\ \zeta^2 \end{bmatrix}\)</span> e <span class="math inline">\(Q = \begin{bmatrix} \sigma_\eta^2 &amp; 0 \\ 0 &amp; \sigma_\zeta^2 \end{bmatrix}\)</span>.</p>
+<p>Il processo di inizializzazione diventa:</p>
+<p><span class="math display">\[a_{1|0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} 
+  \qquad
+  P_{1|0} = \begin{bmatrix} \infty &amp; 0 \\ 0 &amp; \infty \end{bmatrix}\]</span></p>
+<p><strong>Oss.</strong> <span class="math inline">\(\qquad\)</span> L’Integrated Random Walk è un Local Linear Trend con la varianza del primo disturbo pari a 0.</p>
+<div id="filtro-di-kalman" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Filtro di Kalman</h3>
+<p>Si suppone che tutti i parametri della forma State Space siano noti. Le uniche componenti non note sono quelle non osservabili, specificate come variabili casuali, e l’inferenza si basa sulla previsione statistica attraverso:</p>
+<ul>
+<li>Forecasting, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &lt; t\)</span>);</li>
+<li>Filtering, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_t\)</span>;</li>
+<li>Smoothing, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &gt; t\)</span>).</li>
+</ul>
+<p>In particolare, è possibile costruire uno stimatore ottimo lineare migliore di ogni predittore assumendo che <span class="math inline">\(\varepsilon_t\)</span>, <span class="math inline">\(v_t \sim WN\)</span> e l’initial state <span class="math inline">\(\alpha_1\)</span> sono congiuntamente Gaussiane.</p>
+<p>Si consideri la seguente notazione:</p>
+<p><span class="math display">\[\begin{aligned}
+    a_{t|s} &amp;= \mathbb{P}[\alpha_t | Y_t] \\
+    P_{t|s} &amp;= \mathbb{E}[\alpha_t - a_{t|s}][\alpha_t - a_{t|s}]^t
+  \end{aligned}\]</span></p>
+<p>Il <em>Filtro di Kalman</em> è un algoritmo che calcola le previsioni un passo in avanti conoscendo le previsioni fino alla osservazione precedente. In particolare, si calcolare la coppia <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span> a partire da <span class="math inline">\(\{a_{t-1|t-1}, P_{t-1|t-1}\}\)</span> e <span class="math inline">\(\{a_{t|t}, P_{t|t}\}\)</span> a partire da <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span>. Perciò proietta le stime di <span class="math inline">\(y_t\)</span> partendo basate sulle osservazioni precedenti.</p>
+<p>Inoltre fornisce le sequenze di innovazioni con la rispettiva matrice di varianza covarianza, utilizzata per stimare la verosimiglianza Gaussiana del modello nella forma State Space.</p>
+<ul>
+<li>One-Step-Ahead Forecast: si stima la previsione della serie storica un passo in avanti fino al tempo <span class="math inline">\(t - 1\)</span>;</li>
+</ul>
+<p><span class="math display">\[\begin{cases}
+    a_{t|t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    P_{t|t-1} &amp;= \mathbb{E}[\alpha_t - a_{t | t-1}][\alpha_t - a_{t | t-1}]^t
+  \end{cases}\]</span></p>
+<ul>
+<li>Innovation Step: si calcola l’errore di previsione un passo in avanti;</li>
+</ul>
+<p><span class="math display">\[\begin{cases}
+    \hat y_{t | t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
+    i_t              &amp;= y_t - \hat y_{t | t-1} \\
+    F_t              &amp;= \mathbb{E}[i_t i_t^t] = \mathbb{E}[y_t - \hat y_{t | t-1}][y_t - \hat y_{t | t-1}]^t
+  \end{cases}\]</span></p>
+<ul>
+<li>Updating Step: si restituisce la proiezione del vettore di stato conoscendo i dati fino al tempo <span class="math inline">\(t\)</span>, ovvero una stima in tempo reale.</li>
+</ul>
+<p><span class="math display">\[\begin{cases}
+    a_{t | t} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_t) \\
+    P_{t|t}  &amp;= \mathbb{E}[\alpha_t - a_{t | t}][\alpha_t - a_{t | t}]^t
+  \end{cases}\]</span></p>
+<p><span class="math display">\[(a_{1|0}, P_{1|0}) \rightarrow (a_{1|1}, P_{1|1}) \rightarrow (a_{2|1}, P_{2|1}) \rightarrow \ldots (a_{n|n}, P_{n|n})\]</span></p>
+<p>La previsione lineare del vettore di stato <span class="math inline">\(\alpha_t\)</span> basato su <span class="math inline">\(y_s = \{Y_1, \dots, Y_s\}\)</span> è chiamato <em>Smoothing</em>. Lo Smoother aggiustato a livello di intervalli fornisce una previsione per il vettore di stato basato sulla intera serie storica:</p>
+<p><span class="math display">\[a_{t | n} = \mathbb{P}[\alpha_t | Y_n]\]</span></p>
+<p><span class="math display">\[\begin{aligned} 
+    \hat y_{t | t - 1} &amp;= \mathbb{P}(y_t | y_{t - 1}) \\
+    \hat y_{t | n}     &amp;= \mathbb{P}(y_t | y_n)
+  \end{aligned}\]</span></p>
+<p>Il Disturbance Smoothing calcola la previsione delle sequenze White Noise basate sulla intera serie storica ed è utile per identificare possibili outliers:</p>
+<p><span class="math display">\[\begin{aligned}
+    \hat \varepsilon_{t | n} &amp;= \mathbb{P}(\varepsilon_t | y_n) \\
+    V_{t | n}^{\varepsilon} &amp;= \mathbb{E}[\varepsilon_t - \hat \varepsilon_{t | n}] [\varepsilon_t - \hat \varepsilon_{t | n}] ^ t \\
+    U_{t | n}^{\varepsilon} &amp;= \mathbb{E}[\hat \varepsilon_{t | n}] \hat \varepsilon_{t | n}] ^ t] \\
+    \hat \eta_{t | n} &amp;= \mathbb{P}(\eta_n | y_n) \\
+    V_{t | n}^{\varepsilon} &amp;= \mathbb{E}[(\eta_n - \hat \eta_{t | n}) (\eta_n - \hat \eta_{t | n}) ^ t] \\
+    U_{t | n}^{\varepsilon} &amp;= \mathbb{E}[\hat \eta_{t | n} \hat \eta_{t | n}] ^ t]
+  \end{aligned}\]</span></p>
+<p>Se le osservazioni sono Normalmente distribuite, il Filtro di Kalman permette di costruire la funzione di verosimiglianza. Utilizzando la definizione di densità condizionata, è possibile fattorizzare la densità congiunta dei dati:</p>
+<p><span class="math display">\[f_{\theta}(y_1, \dots, y_n) = f_{\theta}(y_1) f_{\theta}(y_2 | y_1) \dots f_{\theta}(y_n | y_{n -1}, \dots, y_1)\]</span></p>
+<p>Sotto queste assunzioni, la distribuzione condizionata è anch’essa Normale ed il Filtro di Kalman ha media e varianza come segue:</p>
+<p><span class="math display">\[\mathbb{E}(Y_t | Y_1, dots, Y_{t -1}) = \hat y_{t | t - 1}
+\mathbb{V}ar(Y_t | Y_1, dots, Y_{t -1}) = F_t\]</span></p>
+<p>La verosimiglianza è la densità congiunta del percorso del campione dei parametri non noti <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[L(\theta) = \prod_{t = 1}^n f_{\theta}(y_t | y_{t - 1}, \dots, y_1)\]</span></p>
+<p>Generalmente è più utile utilizzate la log-verosimiglianza:</p>
+<p><span class="math display">\[\begin{aligned}
+    l(\theta) &amp;= \log f(y_1, \dots, y_n) = \sum_{t=1}^n \log f(y_t | y_1, \dots, y_{t-1}) = \\
+              &amp;= \sum_{t=1}^n - 1/2(\log |F_t(\theta)| +                                    \\
+              &amp;= (y_t - \hat y_{t | t-1}(\theta)^t F_t(\theta)^{-1} (y_t - \hat y_{t | t-1}(\theta)^t \\
+              &amp; \implies \hat \theta_n = \max l(\theta)
+  \end{aligned}\]</span></p>
+</div>
+</div>
+<div id="ciclo-stocastico" class="section level2">
+<h2><span class="header-section-number">2.3</span> Ciclo Stocastico</h2>
+<p>Un ciclo si verifica quando i dati mostrano aumenti e diminuzioni che non sono di una frequenza fissa. La funzione deterministica per la costruzione di un <em>Ciclo</em> di frequenza <span class="math inline">\(\lambda\)</span> è la sinusoide <span class="math inline">\(R \cos(\lambda t + \phi)\)</span> dove <span class="math inline">\(R\)</span> è chiamata Amplitudine e <span class="math inline">\(\phi\)</span> chiamata Fase. Un modo per generare in termini geometrici la sinusoide è individuare una circonferenza di raggio <span class="math inline">\(R\)</span> il punto della fase. Il ciclo <span class="math inline">\(\psi_t\)</span> è stazionario:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    \psi_{t+1} \\
+    \psi_{t+1}^*
+  \end{bmatrix}
+  =
+  \rho
+  \begin{bmatrix}
+    \cos(\lambda)  &amp; \sin(\lambda) \\
+    -\sin(\lambda) &amp; \cos(\lambda)
+  \end{bmatrix}
+  \begin{bmatrix}
+    \psi_{t} \\
+    \psi_{t}^*
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    k_t \\
+    k_t^*
+  \end{bmatrix}\]</span></p>
+<p>dove <span class="math inline">\(\rho \in [0, 1]\)</span> è definito damping factor, <span class="math inline">\(\lambda \in [0, \pi]\)</span> la frequenza del ciclo e <span class="math inline">\(k_t\)</span>, <span class="math inline">\(k_t^*\)</span> sono sequenze indipendenti tra loro White Noise con varianza <span class="math inline">\(\sigma_k^2\)</span>.</p>
+<!-- Geometrical Sinusoid Image -->
+<p><img src="Immagini/Geometric-Sinusoid.PNG" width="95%" style="display: block; margin: auto;" /></p>
+<p>Esiste un caso unico nella quale il processo ha soluzioni stazionarie e casuali <span class="math inline">\(\mathbb{E}[\psi_t] = 0\)</span>, <span class="math inline">\(\mathbb{E}[\psi_{t+h} \psi_t^t] = \frac{\sigma_k^2}{1 - \rho^2}I^2\)</span> e <span class="math inline">\(\psi_t \sim ARMA(2, 1)\)</span> con radici complesse nel polinomio AR.</p>
+<p>Se <span class="math inline">\(\rho = 1\)</span> e <span class="math inline">\(\mathbb{E}[\psi_t] = 0\)</span>, il ciclo non è stazionario, mentre se <span class="math inline">\(\rho &lt; 1\)</span> il ciclo è stazionario.</p>
+</div>
+<div id="stagionalità" class="section level2">
+<h2><span class="header-section-number">2.4</span> Stagionalità</h2>
+<p>La componente <em>Stagionale</em> si manifesta nel momento in cui la serie storica presenta dei fattori stagionali come il giorno di una settimana. Essa riguarda sempre una frequenza fissa e nota. La componente stagionale presente nei modelli UCM è generalmente modellata tramite un forma dummy stocastica in termini trigonometrici.</p>
+<p>Si considera la seguente serie storica con stagionalità <span class="math inline">\(s\)</span>:</p>
+<p><span class="math display">\[\sum_{j = 1}^{s/2} a_j \cos(\frac{2 \pi}{s} jt) + b_j \sin(\frac{2 \pi}{s} jt)\]</span></p>
+<p>La <em>Forma Trigonometrica</em> è data da <span class="math inline">\(\gamma_t = \sum_{j=1}^{s/2} \gamma_t^{(j)}\)</span>, con <span class="math inline">\(\gamma_t^{(j)}\)</span> ciclo non stazionario stocastico:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    \gamma_{t+1}^{(j)} \\
+    \gamma_{t+1}^{*(j)}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \cos(\frac{2j \pi}{s})  &amp; \sin(\frac{2j \pi}{s}) \\
+    -\sin(\frac{2j \pi}{s}) &amp; \cos(\frac{2j \pi}{s})
+  \end{bmatrix}
+  \begin{bmatrix}
+    \gamma_{t}^{(j)} \\
+    \gamma_{t}^{*(j)}
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    w_t^{(j)} \\
+    w_t^{*(j)}
+  \end{bmatrix}\]</span></p>
+<p>Gli argomenti della sinusoide sono chiamate frequenze stagionali. Se <span class="math inline">\(s\)</span> è pari e <span class="math inline">\(j = s/2\)</span>, la seconda equazione del precedente sistema può essere omesso in quanto <span class="math inline">\(\sin(\pi) = 0\)</span> e la prima equazione può essere ridotta a <span class="math inline">\(\gamma_{t+1}^{(s/2)} = - \gamma_{t}^{(s/2)} - w_{t}^{(s/2)}\)</span> che non dipende dai valori della seconda equazione.</p>
+<p>La forma Dummy Stocastica è un altro modo di modellazione della componente stagionale definendo <span class="math inline">\(s\)</span> variabili che evolvono come RW. Sia <span class="math inline">\(\gamma_t\)</span> l’effetto stagionale al tempo <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[\gamma_t = - \sum_{s = 1}^{s - 1}\gamma_{t-i} + w_t\]</span></p>
+<p>dove <span class="math inline">\(w_t \sim WN(0, \sigma^2_w)\)</span>. Il modo più veloce per far evolvere la funzione in modo stocastico è aggiungere dei random shock di media 0.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

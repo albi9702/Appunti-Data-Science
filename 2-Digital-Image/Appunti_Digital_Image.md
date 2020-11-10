@@ -9,16 +9,6 @@ fontsize: 11pt
 geometry: margin = 0.5in
 classoption: twocolumn
 output: 
-  pdf_document:
-    latex_engine: xelatex
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
-    df_print: kable
-    highlight: monochrome
   bookdown::gitbook:
     keep_md: true
     css: style.css
@@ -40,12 +30,19 @@ output:
         linkedin: yes
         twitter: no
         facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      fig.align = "center")
-```
+
 
 # Classificazione dei Segnali
 I segnali possono essere classificati in base al Dominio ed al Codominio. Si riportano i seguenti esempi:
@@ -99,9 +96,7 @@ L'ampiezza indica quali sono i valori che la sinusoide può assumere, La pulsazi
 Ad esempio, il segnale della immagine di sinistra è ottenuto sommando i segnali nella parte destra.
 
 
-```{r Somma Segnali, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/Somma-Segnali.png")
-```
+<img src="Immagini/Somma-Segnali.png" width="100%" style="display: block; margin: auto;" />
 
 La serie di Furier scrive un segnale nella seguente forma:
 
@@ -158,9 +153,7 @@ Per costruire un filtro basta considerare una circonferenza di raggio arbitrario
 Considerando solamente le frequenze alte sono conservati i bordi dell'immagine, con frequenze basse le informazioni sul contenuto (si ottiene una sfocatura dell'immagine).
 
 
-```{r Frequenze Spazio-Tempo, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/Spazio-Temporale-Frequenze.png")
-```
+<img src="Immagini/Spazio-Temporale-Frequenze.png" width="100%" style="display: block; margin: auto;" />
 
 <!-- Lecture 4: 13/10/2020 -->
 ## Convoluzioni
@@ -266,9 +259,7 @@ $$\begin{aligned}
     g = \frac{G}{R + G + B} \qquad b = \frac{B}{R + G + B}
 \end{aligned}$$
 
-```{r Spazio di Colore RGB, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/RGB.png")
-```
+<img src="Immagini/RGB.png" width="100%" style="display: block; margin: auto;" />
 
 L'acquisizione delle immagini da parte di un dispositivo applica una Gamma correction per trasformare la luce da termini lineari a non linear, mentre i display applicano l'operazione inversa.
 
@@ -281,9 +272,7 @@ Un altro spazio di colori molto famoso è chiamato *Intuitive*, basato sulla des
 
 Questo spazio di colore è molto famoso in quanto più intuitivo e permette di compiere delle trasformazioni più efficienti rispetto dello spazio di colore precedente. Il problema principale è che quando una delle tre componenti è circa 0, le altre componenti diventano instabili.
 
-```{r Spazio di Colore HSV, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/HSV.png")
-```
+<img src="Immagini/HSV.png" width="100%" style="display: block; margin: auto;" />
 
 Un altro modello molto utilizzato è il modello di colori *CMY*, spesso utilizzato per stampare fogli. Esso è il complemento del modello RGB: Al posto di aggiungere colori al nero, si sottraggono i colori dal bianco.
 
@@ -301,9 +290,7 @@ $$\begin{bmatrix}
     R \\ G \\ B
   \end{bmatrix}$$
 
-```{r Spazio di Colore CMY, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/CMY.png")
-```
+<img src="Immagini/CMY.png" width="100%" style="display: block; margin: auto;" />
 
 # Interest Point Detectors and Descriptors
 Uno degli aspetti principali della Data Science è riconoscere oggetti presenti nelle immagini. In particolare, si chiama *Object Recognition* un classe di oggetti da dover identificare, mentre *Istance Recognition* una particolare istanza della classe dell'oggetto.
@@ -332,9 +319,7 @@ $$M = \underset{(x,y)\in W}\sum
 
 Gli autovalori della matrice sono utili per determinare il vero cambiamento del punto:
 
-```{r Harris Corner Detector, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/Harris-Corner-Detector.jpg")
-```
+<img src="Immagini/Harris-Corner-Detector.jpg" width="100%" style="display: block; margin: auto;" />
 
 I passaggi fondamentali per la costruzione di un descrittore sono:
 <!-- Anche SIFT, quindi se domanda chiede i passaggi usare questa -->
@@ -359,9 +344,7 @@ Un altro classificatore molto famoso è chiamato ***S***upport ***V***ector ***M
 
 $$w x + b = \sum_i \alpha_i y_i x_i x + b$$
 
-```{r Support Vector Machine, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("Immagini/SVM.png")
-```
+<img src="Immagini/SVM.png" width="100%" style="display: block; margin: auto;" />
 
 Certe volte i punti non possono essere linearmente separabili. Per risolvere questo problema, si utilizza il *Kernel Trick*: se nello spazio di partenza i dati non sono linearmente separabili, lo possono essere in uno spazio vettoriale di dimensione superiore a quello di partenza:
 
