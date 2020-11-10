@@ -281,7 +281,7 @@ dove $\varepsilon_t \sim WN(0, H_t)$, $\eta_t \sim WN(0, Q_t)$ sono delle variab
 
 Il processo di inizializzazione è un processo nella quale il vettore di stato è definito come $a_{1|0} = \mathbb{E}(\alpha_1)$ e $P_{1|0} = \mathbb{E}(\alpha_1 - a_{1|0})(\alpha_1 - a_{1|0})^t$.
 
-**Esempio.** $\qquad$ Si consideri la trasformazione in formato State Space del Local Linear Trend con White Noise . Il Local Linear Trend presenta il seguente sistema di equazioni:
+**Esempio 1.** $\qquad$ Si consideri la trasformazione in formato State Space del Local Linear Trend con White Noise. Il Local Linear Trend presenta il seguente sistema di equazioni:
 
 $$\begin{aligned}
     \mu_t   &= \mu_{t-1}   + \beta_0 + \eta_n \\
@@ -308,7 +308,7 @@ $$\begin{cases}
                    \eta_t \\
                    \zeta_t
                  \end{bmatrix}
-      \quad \text{Equazione di Stato} \\
+      \quad \text{Stato} \\
       Y_t = Z \alpha_t + \varepsilon_t =
              \begin{bmatrix}
                1 & 0
@@ -317,7 +317,7 @@ $$\begin{cases}
                \mu_t \\
                \beta_t
              \end{bmatrix} + \varepsilon_t
-      \quad \text{Equazione di Osservazione}
+      \quad \text{Osservazione}
   \end{cases}$$
 
 dove $\eta_t = \begin{bmatrix} \eta_t \\ \zeta^2 \end{bmatrix}$ e $Q = \begin{bmatrix} \sigma_\eta^2 & 0 \\ 0 & \sigma_\zeta^2 \end{bmatrix}$.
@@ -333,7 +333,7 @@ $$a_{1|0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
 ### Filtro di Kalman
 Si suppone che tutti i parametri della forma State Space siano noti. Le uniche componenti non note sono quelle non osservabili, specificate come variabili casuali, e l'inferenza si basa sulla previsione statistica attraverso:
 
-* Forecsting, forma State Space $\alpha_t$ basata su $Y_s$ ($s < t$);
+* Forecasting, forma State Space $\alpha_t$ basata su $Y_s$ ($s < t$);
 * Filtering, forma State Space $\alpha_t$ basata su $Y_t$;
 * Smoothing, forma State Space $\alpha_t$ basata su $Y_s$ ($s > t$).
 
@@ -346,18 +346,18 @@ $$\begin{aligned}
     P_{t|s} &= \mathbb{E}[\alpha_t - a_{t|s}][\alpha_t - a_{t|s}]^t
   \end{aligned}$$
 
-Il *Filtro di Kalman* è un algoritmo utilizzato per calcolare la coppia $\{a_{t|t-1}, P_{t|t-1}\}$ a partire da $\{a_{t-1|t-1}, P_{t-1|t-1}\}$ e $\{a_{t|t}, P_{t|t}\}$ a partire da $\{a_{t|t-1}, P_{t|t-1}\}$. Perciò proietta le stime di $y_t$ partendo basate sulle osservazioni precedenti.
+Il *Filtro di Kalman* è un algoritmo che calcola le previsioni un passo in avanti conoscendo le previsioni fino alla osservazione precedente. In particolare, si calcolare la coppia $\{a_{t|t-1}, P_{t|t-1}\}$ a partire da $\{a_{t-1|t-1}, P_{t-1|t-1}\}$ e $\{a_{t|t}, P_{t|t}\}$ a partire da $\{a_{t|t-1}, P_{t|t-1}\}$. Perciò proietta le stime di $y_t$ partendo basate sulle osservazioni precedenti.
 
 Inoltre fornisce le sequenze di innovazioni con la rispettiva matrice di varianza covarianza, utilizzata per stimare la verosimiglianza Gaussiana del modello nella forma State Space.
 
-* Prediction Step:
+* One-Step-Ahead Forecast: si stima la previsione della serie storica un passo in avanti fino al tempo $t - 1$;
 
 $$\begin{cases}
     a_{t|t-1} &= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
     P_{t|t-1} &= \mathbb{E}[\alpha_t - a_{t | t-1}][\alpha_t - a_{t | t-1}]^t
   \end{cases}$$
 
-* One-Step-Ahead Forecast and Innovation:
+* Innovation Step: si calcola l'errore di previsione un passo in avanti;
 
 $$\begin{cases}
     \hat y_{t | t-1} &= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
@@ -365,7 +365,7 @@ $$\begin{cases}
     F_t              &= \mathbb{E}[i_t i_t^t] = \mathbb{E}[y_t - \hat y_{t | t-1}][y_t - \hat y_{t | t-1}]^t
   \end{cases}$$
 
-* Updating Step:
+* Updating Step: si restituisce la proiezione del vettore di stato conoscendo i dati fino al tempo $t$, ovvero una stima in tempo reale.
 
 $$\begin{cases}
     a_{t | t} &= \mathbb{P}(\alpha_t | y_1, \dots, y_t) \\
@@ -442,7 +442,7 @@ $$\begin{bmatrix}
 dove $\rho \in [0, 1]$ è definito damping factor, $\lambda \in [0, \pi]$ la frequenza del ciclo e $k_t$, $k_t^*$ sono sequenze indipendenti tra loro White Noise con varianza $\sigma_k^2$.
 
 <!-- Geometrical Sinusoid Image -->
-```{r  Geometrical Sinusoid Image, echo = FALSE, out.width = "95%"}
+```{r Geometrical Sinusoid Image, echo = FALSE, out.width = "95%"}
 knitr::include_graphics("Immagini/Geometric-Sinusoid.png")
 ```
 
@@ -478,7 +478,7 @@ $$\begin{bmatrix}
     w_t^{*(j)}
   \end{bmatrix}$$
 
-Gli argomenti della sinusoide ono chiamate frequenze stagionali. Se $s$ è pari e $j = s/2$, la seconda equazione del precedente sistema può essere omesso in quanto $\sin(\pi) = 0$ e la prima equazione può essere ridotta a $\gamma_{t+1}^{(s/2)} = - \gamma_{t}^{(s/2)} - w_{t}^{(s/2)}$ che non dipende dai valori della seconda equazione.
+Gli argomenti della sinusoide sono chiamate frequenze stagionali. Se $s$ è pari e $j = s/2$, la seconda equazione del precedente sistema può essere omesso in quanto $\sin(\pi) = 0$ e la prima equazione può essere ridotta a $\gamma_{t+1}^{(s/2)} = - \gamma_{t}^{(s/2)} - w_{t}^{(s/2)}$ che non dipende dai valori della seconda equazione.
 
 La forma Dummy Stocastica è un altro modo di modellazione della componente stagionale definendo $s$ variabili che evolvono come RW. Sia $\gamma_t$ l'effetto stagionale al tempo $t$:
 

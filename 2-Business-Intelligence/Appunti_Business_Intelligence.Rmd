@@ -265,3 +265,130 @@ La costruzione di un sistema di Data Warehouse non comporta l'inserimento di nuo
 
 ## Architettura
 L'elaborazione analitica e transazionale devono essere mantenute il più possibile separate, 
+
+# Graph DB
+Un *Graph Database* è un database utilizzato per lo storage efficiente di dati semi-strutturati. Permette di modellare le relazioni sociali tramite un modello a grafo. <!-- Ricordare la teoria dei grafi in SMA -->
+
+Un nodo, rappresentato da una osservazione, può contenere diverse proprietà che specificano delle entità. Le relazioni, invece, rappresentano la connessione di entità. Devono obbligatoriamente avere un nome ed una direzione e devono avere un inizio ed una fine. Inoltre, anch'esse possono contenere delle proprietà, in modo tale da comprendere meglio la relazione.
+
+<!-- Immagine Grafo -->
+```{r Grafo}
+knitr::include_graphics("Immagini/Graph-DB.png")
+```
+
+Il linguaggio utilizzato in Neo4j è chiamato ***C***ypher ***Q***uery ***L***anguage (**CQL**), di tipo dichiarativo, perciò si descrive quello che si vuole, non come. Le principali funzioni sono tipo aggregativo e di ordinamento; inoltre, è possibile creare, aggiornare o eliminare elementi al grafo.
+
+* Struttura query:
+
+```Cypher
+MATCH pattern_grafo
+WHERE condizione/i
+RETURN risultato
+```
+
+* Creazione nodo:
+
+```Cypher
+CREATE (:Person {name: "Charlie"})
+```
+
+* Creazione relazione:
+
+```Cypher
+MATCH (p:person), (s:skill)
+WHERE p.name = 'charlie' AND s.name = 'medicine'
+CREATE (p)-[r:INTERESTED_IN]->(s)
+```
+
+* Caricare dati da CSV:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/skill.csv" AS row
+FIELDTERMINATOR ';'
+CREATE (:skill
+		{name: row.name});
+```
+
+# Esercitazione Graph DB
+
+## Esercizio 1
+Costruire il grafo della immagine precedente:
+
+### 1.1
+Creazione Entità `person`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/person.csv" AS row
+FIELDTERMINATOR ';'
+CREATE (:person
+		{name: row.name,
+		gender: row.gender
+});
+```
+
+### 1.2
+Creazione Entità `skill`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/skill.csv" AS row
+FIELDTERMINATOR ';'
+CREATE (:skill
+		{name: row.name});
+```
+
+### 1.3
+Creazione Relazione `INTERESTED_IN`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/interested_in.csv" as row FIELDTERMINATOR ";" 
+MATCH (a:person), (b:skill)
+WHERE a.name = row.from AND b.name = row.to
+CREATE (a)-[:INTERESTED_IN]->(b)
+```
+
+### 1.4
+Creazione Entità `project`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/projects.csv" AS row
+FIELDTERMINATOR ';'
+CREATE (:project
+		{name: row.name});
+```
+
+### 1.5
+Creazione Relazione `WORKED_ON`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/worked_on.csv" as row FIELDTERMINATOR ";" 
+MATCH (a:person), (b:project)
+WHERE a.name = row.from AND b.name = row.to
+CREATE (a)-[:WORKED_ON]->(b)
+```
+### 1.5
+Creazione Entità `company`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/company.csv" AS row
+FIELDTERMINATOR ';'
+CREATE (:company
+		{name: row.name});
+```
+
+### 1.6
+Creazione Relazione `WORKS_FOR`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/works_for.csv" as row FIELDTERMINATOR ";" 
+MATCH (a:person), (b:company)
+WHERE a.name = row.from AND b.name = row.to
+CREATE (a)-[:WORKS_FOR]->(b)
+```

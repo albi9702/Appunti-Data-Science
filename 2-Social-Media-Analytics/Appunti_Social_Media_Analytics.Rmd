@@ -340,6 +340,18 @@ In *Regular Networks* each node is connected to a fixed number of nodes. They ha
 knitr::include_graphics("Immagini/Regular-Networks.png")
 ```
 
+$$\begin{matrix}
+    \mathbf{Summary}              & \mathbf{Linear}        & \mathbf{Ring}             & \mathbf{Star}                \\
+    \text{Order}                  & \|L\| = k              & \|A\| = k                 & \|S\| = k                    \\
+    \text{Degree}                 & 1 \leq d(L) \leq 2     & d(A) 2                    & d(S) = 1                     \\
+    \text{Clustering Coefficient} & cc(L) = 0              & cc(A) = 0                 & cc(S) = 0                    \\
+    \text{Size}                   & \|L\| = k -1           & \|A\| = k                 & \|S\| = k - 1                \\
+    \text{Diameter}               & diam(L) = k - 1        & diam(A) = k/2             & diam(S) = 2                  \\
+    \text{Degree of Connectivity} & \text{Not Biconnected} & \text{Biconnected}        & \text{Point of Articulation} \\
+    \text{Adjacency Matrix}       & \text{Diagonals}       & \text{Diagonals + Angles} & \text{First Row and Column}  \\
+  \end{matrix}$$
+
+<!--
 |         Summary        |        Linear        |        Ring        |          Star         |
 |:----------------------:|:--------------------:|:------------------:|:---------------------:|
 |          Order         |      $\|L\| = k$     |     $\|A\| = k$    |      $\|S\| = k$      |
@@ -349,6 +361,7 @@ knitr::include_graphics("Immagini/Regular-Networks.png")
 |        Diameter        |   $diam(L) = k - 1$  |   $diam(A) = k/2$  |     $diam(S) = 2$     |
 | Degree of Connectivity |    Not Biconnected   |     Biconnected    | Point of Articulation |
 |    Adjacency Matrix    |       Diagonals      | Diagonals + Angles |  First Row and Column |
+-->
 
 In *Random Networks* pairs of nodes are randomly connected by a given number of connections. Two nodes are connected by a certain probability. All nodes have approximately the same number of neighbors, which differs slightly from the average value.
 
@@ -412,13 +425,13 @@ There are three main families of metrics:
 
 *Centrality* is a group of metrics that aim to quantify the importance or influence of a particular node in a network. In Graph Theory it identifies the most important vertices, in a Social Network the most influential people. The general case is called *Degree Centrality*, the risk of a node to catch whatever is flowing through the network (in the graph theory is the degree of a vertex): $c_D(v) = d(v)$. In a directed graph is necessary to explicit the in-degree and out-degree. It is possible to normalize the degree centrality, computed as:
 
-$$\over{c_D} = \frac{c_D(v)}{n - 1}$$
+$$\overline{c_D} = \frac{c_D(v)}{n - 1}$$
 
 In a connected graph the *Closeness Centrality* $c_C(v)$ is the reciprocal of the sum of the distances from $v$ to all other nodes:
 
 $$c_C(v) = \frac{1}{\sum_u d(v, u)}$$
 
-The Normalized version is expressed as $\over{c_C(v)} = (n-1) c_C(v)$.
+The Normalized version is expressed as $\overline{c_C}(v) = (n-1) c_C(v)$.
 
 The *Betweennes Centrality* $c_B(v)$ is the sum of the number of the shortest path between each pair that cross the vertex ($\sigma_{st}(v)$) divided by the number of shortest paths between each pair of vertices in a graph ($\sigma_{st}$):
 
@@ -426,7 +439,7 @@ $$c_B(v) = \sum_{s \ne t \ne v} \frac{\sigma_{st}(v)}{\sigma_{st}}$$
 
 It is possible to compute the Normalized Betweennes Centrality as the $c_B(v)$ divided by the maximum possible number of geodesics crossing node $v$ ($2c_B(v)$ for undirected graphs):
 
-$$\over c_B(v) = \frac{c_B(v)}{(n - 1)(n - 2)}$$
+$$\overline{c_B}(v) = \frac{c_B(v)}{(n - 1)(n - 2)}$$
 
 *Delta Centrality* is the importance of a node in the entire network, calculated by comparing the performance $P(G)$ (as the number of edges) to the performance $P(G')$ obtained deactivating the node $v$:
 
@@ -460,3 +473,40 @@ There are two different type of Counting:
 * *Counting of Social Circles*, groups of individuals less closely linked than in a clique.
 
 The *Cohesion* is the degree of actors directly related connected to each other cohesive bonds. An important metric is the *Structural Cohesion*, defined as the minimum number of people or ties of a Social Network that must be removed to disconnect the group (identical to Connectivity).
+
+<!-- Lecture 04/11/2020 -->
+# Community Detection
+Preferential Attachment is a property of some network where the great majority of new edges are connected to nodes with an already high degree, compared to others. The result is a network with very few nodes with an high degree of connection.
+
+<!-- Preferential Attachment Image-->
+```{r Preferential Attachment, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Preferential-Attachment.png")
+```
+It can happen because people want to be associated with popular people, ideas, etc, increasing their *popularity*; *quality*, evaluating people based on objective quality criteria, so higher nodes will attract more attention; *mixed model*, among nodes of similar attribute.
+
+A *Community* is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Networks communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.
+
+<!-- Overlapping Disjoint Communities Image-->
+```{r Overlapping Disjoint Communities, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Overlapping-Disjoint-Communities.png")
+```
+
+The Link Prediction is the prediction of which nodes are likely get connected given a Social Network; the output is a list of ranked pairs of nodes.
+
+The Community Detection is confused for clustering, but in the first data is linked in a graph and network data tends to be discrete, leading algorithm using the graph property directly.
+
+<!-- Different Categories of Community Detection -->
+Community Detection methods can be divided into 4 main categories:
+
+* *Node-centric Community*, each node in a group satisfies certain properties:
+  + Complete Mutuality, nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than $k - 1$
+  + Reachability of Members, searching communities where all nodes in the group should be reachable in k-jumps. The *k-clique* approach aims to find a maximal subgraph in which the largest distance between any nodes less than $k$ (shortest path given a subgraph). The *k-club* approach aims to find a substructure of diameter $<= k$
+  + Nodal Degrees;
+* *Group-centric Community*, which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if 
+
+$$\frac{2|E_s|}{|V_s|(|V_s| - 1)} \geq \gamma$$
+
+  A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.
+
+* *Network-centric Community*, aims to find communities considering the connection of nodes globally and divide network into disjoint set.
+* *Hierarchy-centric Community*

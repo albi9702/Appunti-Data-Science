@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Streaming Data Management and Time Series Analysis</title>
   <meta name="description" content="Streaming Data Management and Time Series Analysis" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Streaming Data Management and Time Series Analysis" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 
@@ -269,7 +272,7 @@
   \end{cases}\]</span></p>
 <p>dove <span class="math inline">\(\varepsilon_t \sim WN(0, H_t)\)</span>, <span class="math inline">\(\eta_t \sim WN(0, Q_t)\)</span> sono delle variabili casuali incorrelate tra di loro con valore atteso nullo e matrice di varianza covarianza rispettivamente <span class="math inline">\(H_t\)</span> e <span class="math inline">\(Q_t\)</span>.</p>
 <p>Il processo di inizializzazione è un processo nella quale il vettore di stato è definito come <span class="math inline">\(a_{1|0} = \mathbb{E}(\alpha_1)\)</span> e <span class="math inline">\(P_{1|0} = \mathbb{E}(\alpha_1 - a_{1|0})(\alpha_1 - a_{1|0})^t\)</span>.</p>
-<p><strong>Esempio.</strong> <span class="math inline">\(\qquad\)</span> Si consideri la trasformazione in formato State Space del Local Linear Trend con White Noise . Il Local Linear Trend presenta il seguente sistema di equazioni:</p>
+<p><strong>Esempio 1.</strong> <span class="math inline">\(\qquad\)</span> Si consideri la trasformazione in formato State Space del Local Linear Trend con White Noise. Il Local Linear Trend presenta il seguente sistema di equazioni:</p>
 <p><span class="math display">\[\begin{aligned}
     \mu_t   &amp;= \mu_{t-1}   + \beta_0 + \eta_n \\
     \beta_t &amp;= \beta_{t-1} + \xi_t            
@@ -293,7 +296,7 @@
                    \eta_t \\
                    \zeta_t
                  \end{bmatrix}
-      \quad \text{Equazione di Stato} \\
+      \quad \text{Stato} \\
       Y_t = Z \alpha_t + \varepsilon_t =
              \begin{bmatrix}
                1 &amp; 0
@@ -302,7 +305,7 @@
                \mu_t \\
                \beta_t
              \end{bmatrix} + \varepsilon_t
-      \quad \text{Equazione di Osservazione}
+      \quad \text{Osservazione}
   \end{cases}\]</span></p>
 <p>dove <span class="math inline">\(\eta_t = \begin{bmatrix} \eta_t \\ \zeta^2 \end{bmatrix}\)</span> e <span class="math inline">\(Q = \begin{bmatrix} \sigma_\eta^2 &amp; 0 \\ 0 &amp; \sigma_\zeta^2 \end{bmatrix}\)</span>.</p>
 <p>Il processo di inizializzazione diventa:</p>
@@ -314,7 +317,7 @@
 <h3><span class="header-section-number">2.2.1</span> Filtro di Kalman</h3>
 <p>Si suppone che tutti i parametri della forma State Space siano noti. Le uniche componenti non note sono quelle non osservabili, specificate come variabili casuali, e l’inferenza si basa sulla previsione statistica attraverso:</p>
 <ul>
-<li>Forecsting, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &lt; t\)</span>);</li>
+<li>Forecasting, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &lt; t\)</span>);</li>
 <li>Filtering, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_t\)</span>;</li>
 <li>Smoothing, forma State Space <span class="math inline">\(\alpha_t\)</span> basata su <span class="math inline">\(Y_s\)</span> (<span class="math inline">\(s &gt; t\)</span>).</li>
 </ul>
@@ -324,17 +327,17 @@
     a_{t|s} &amp;= \mathbb{P}[\alpha_t | Y_t] \\
     P_{t|s} &amp;= \mathbb{E}[\alpha_t - a_{t|s}][\alpha_t - a_{t|s}]^t
   \end{aligned}\]</span></p>
-<p>Il <em>Filtro di Kalman</em> è un algoritmo utilizzato per calcolare la coppia <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span> a partire da <span class="math inline">\(\{a_{t-1|t-1}, P_{t-1|t-1}\}\)</span> e <span class="math inline">\(\{a_{t|t}, P_{t|t}\}\)</span> a partire da <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span>. Perciò proietta le stime di <span class="math inline">\(y_t\)</span> partendo basate sulle osservazioni precedenti.</p>
+<p>Il <em>Filtro di Kalman</em> è un algoritmo che calcola le previsioni un passo in avanti conoscendo le previsioni fino alla osservazione precedente. In particolare, si calcolare la coppia <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span> a partire da <span class="math inline">\(\{a_{t-1|t-1}, P_{t-1|t-1}\}\)</span> e <span class="math inline">\(\{a_{t|t}, P_{t|t}\}\)</span> a partire da <span class="math inline">\(\{a_{t|t-1}, P_{t|t-1}\}\)</span>. Perciò proietta le stime di <span class="math inline">\(y_t\)</span> partendo basate sulle osservazioni precedenti.</p>
 <p>Inoltre fornisce le sequenze di innovazioni con la rispettiva matrice di varianza covarianza, utilizzata per stimare la verosimiglianza Gaussiana del modello nella forma State Space.</p>
 <ul>
-<li>Prediction Step:</li>
+<li>One-Step-Ahead Forecast: si stima la previsione della serie storica un passo in avanti fino al tempo <span class="math inline">\(t - 1\)</span>;</li>
 </ul>
 <p><span class="math display">\[\begin{cases}
     a_{t|t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
     P_{t|t-1} &amp;= \mathbb{E}[\alpha_t - a_{t | t-1}][\alpha_t - a_{t | t-1}]^t
   \end{cases}\]</span></p>
 <ul>
-<li>One-Step-Ahead Forecast and Innovation:</li>
+<li>Innovation Step: si calcola l’errore di previsione un passo in avanti;</li>
 </ul>
 <p><span class="math display">\[\begin{cases}
     \hat y_{t | t-1} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_{t-1}) \\
@@ -342,7 +345,7 @@
     F_t              &amp;= \mathbb{E}[i_t i_t^t] = \mathbb{E}[y_t - \hat y_{t | t-1}][y_t - \hat y_{t | t-1}]^t
   \end{cases}\]</span></p>
 <ul>
-<li>Updating Step:</li>
+<li>Updating Step: si restituisce la proiezione del vettore di stato conoscendo i dati fino al tempo <span class="math inline">\(t\)</span>, ovvero una stima in tempo reale.</li>
 </ul>
 <p><span class="math display">\[\begin{cases}
     a_{t | t} &amp;= \mathbb{P}(\alpha_t | y_1, \dots, y_t) \\
@@ -432,7 +435,7 @@
     w_t^{(j)} \\
     w_t^{*(j)}
   \end{bmatrix}\]</span></p>
-<p>Gli argomenti della sinusoide ono chiamate frequenze stagionali. Se <span class="math inline">\(s\)</span> è pari e <span class="math inline">\(j = s/2\)</span>, la seconda equazione del precedente sistema può essere omesso in quanto <span class="math inline">\(\sin(\pi) = 0\)</span> e la prima equazione può essere ridotta a <span class="math inline">\(\gamma_{t+1}^{(s/2)} = - \gamma_{t}^{(s/2)} - w_{t}^{(s/2)}\)</span> che non dipende dai valori della seconda equazione.</p>
+<p>Gli argomenti della sinusoide sono chiamate frequenze stagionali. Se <span class="math inline">\(s\)</span> è pari e <span class="math inline">\(j = s/2\)</span>, la seconda equazione del precedente sistema può essere omesso in quanto <span class="math inline">\(\sin(\pi) = 0\)</span> e la prima equazione può essere ridotta a <span class="math inline">\(\gamma_{t+1}^{(s/2)} = - \gamma_{t}^{(s/2)} - w_{t}^{(s/2)}\)</span> che non dipende dai valori della seconda equazione.</p>
 <p>La forma Dummy Stocastica è un altro modo di modellazione della componente stagionale definendo <span class="math inline">\(s\)</span> variabili che evolvono come RW. Sia <span class="math inline">\(\gamma_t\)</span> l’effetto stagionale al tempo <span class="math inline">\(t\)</span>:</p>
 <p><span class="math display">\[\gamma_t = - \sum_{s = 1}^{s - 1}\gamma_{t-i} + w_t\]</span></p>
 <p>dove <span class="math inline">\(w_t \sim WN(0, \sigma^2_w)\)</span>. Il modo più veloce per far evolvere la funzione in modo stocastico è aggiungere dei random shock di media 0.</p>

@@ -175,7 +175,7 @@ The ***P***art ***O***f ***S***peech (**POS**) Tagging is a procedure that assig
 * Word prediction in speech recognition;
 * Machine Translation;
 
-The POS Tagging problem is determine the POS tag for a particular instance of a word, because words often have more than one tag, like `back` (*the back door*, *on my back*). It is possible to assume a conditional probability of words $\mathax{P}(w_n | w_{n - 1})$ or POS likelihood $\mathax{P}(t_n | t_{n - 1})$ to disambiguate sentences and assessing the likelihood.
+The POS Tagging problem is determine the POS tag for a particular instance of a word, because words often have more than one tag, like `back` (*the back door*, *on my back*). It is possible to assume a conditional probability of words $\mathbb{P}(w_n | w_{n - 1})$ or POS likelihood $\mathbb{P}(t_n | t_{n - 1})$ to disambiguate sentences and assessing the likelihood.
 
 1. Start with a dictionary;
 2. Assign all possible tags to word from the dictionary;
@@ -212,6 +212,7 @@ To build a computer that understands text it is necessary thus NLP Pipeline:
 # Language Models
 A *Language Model* (**LM**) is a formal representation of a specific language, generating a probability distribution of the words in topics. A probability to a sequence words can be used for:
 iaeQ45YB@sYwv&pell Correction;
+
 * Speech Recognition;
 * Text Categorization;
 * Information Retrieval;
@@ -221,10 +222,10 @@ The main task is to compute the probability of a sentence (or a sequence of word
 
 The joint probability is computed relying on the chain rule of probability:
 
-$$\begin{align}
+$$\begin{aligned}
     \mathbb{P}(w_1, w_2, \dots, w_n) &= \mathbb{P}(w_1)\mathbb{P}(w_2 | w_1) \dots \mathbb{P}(w_n | w_1, \dots, w_{n-1}) \\
                                      &= \prod_{i = 1}^n \mathbb{P}(w_i | w_1, \dots, w_{i-1})
-  \end{align}$$
+  \end{aligned}$$
 
 but so many product could lead the number to decay pretty fast. A solution is the Markov Assumption, an approximation of the joint probability in which considers the probability of one or two words preceding the word:
 
@@ -273,14 +274,14 @@ $$PPMI(x, y) = \max [PMI(x,y),0]$$
 $f_{i, j}$ is the number of time the word $w_i$ appears in the context $c_j$. It is used to compute these probabilities:
 
 $$\begin{aligned}
-    \mathbb{P}(w_j, c_j) &= \frac{f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
-    \mathbb{P}(w_j) &= \frac{\sum_{i = 1}^C f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
-    \mathbb{P}(c_j) &= \frac{\sum_{i = 1}^W f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}
+    \mathbb{P}(w_j, c_j) &= \frac{f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}}           \\
+    \mathbb{P}(w_j) &= \frac{\sum_{i = 1}^C f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}} \\
+    \mathbb{P}(c_j) &= \frac{\sum_{i = 1}^W f_{i, j}}{\sum_{i,j = 1}^{W,C} f_{i, j}} \\
   \end{aligned}$$
 
 For example, look at this table:
 
-```{r PMI}
+```{r PMI, echo = FALSE}
 PMI <- rbind(c(0,0,1,0,1),
              c(0,0,1,0,1),
              c(2,1,0,1,0),
@@ -289,12 +290,12 @@ PMI <- rbind(c(0,0,1,0,1),
 rownames(PMI) <- c("Apricot", "Pineapple", "Digital", "Information")
 colnames(PMI) <- c("Computer", "Data", "Pinch", "Result", "Sugar")
 
-knitr::kable(PMI)
+PMI
 ```
 
 The $\mathbb{w_4, c_2} = 6/19 = 0.32$, $\mathbb{w_4} = 11/19 = 0.58$ and $\mathbb{c_2} = 7/19 = 0.37$. The PPMI table is:
 
-```{r PPMI}
+```{r PPMI, echo = FALSE}
 PPMI <- rbind(c(0.00, 0.00, 0.05, 0.00, 0.05),
               c(0.00, 0.00, 0.05, 0.00, 0.05),
               c(0.11, 0.05, 0.05, 0.05, 0.00),
@@ -303,7 +304,7 @@ PPMI <- rbind(c(0.00, 0.00, 0.05, 0.00, 0.05),
 rownames(PPMI) <- c("Apricot", "Pineapple", "Digital", "Information")
 colnames(PPMI) <- c("Computer", "Data", "Pinch", "Result", "Sugar")
 
-knitr::kable(PPMI)
+PPMI
 ```
 
 Rare words and apax produce higher scores, that risks to bias the analysis: probabilities of $w$ and $c$ are modified or a $k$-smoothing is used to reduced those scores with a value $\alpha \in [0, 1]$ (usually $\alpha = 0.75$):
@@ -316,3 +317,141 @@ with
 
 $$P_{\alpha}(c) = \frac{\text{count}(c)^{\alpha}}{\sum_c \text{count}^{\alpha}}$$
 
+<!-- Lecture 10: 02/11/2020 -->
+A Co-occurrence Matrix in reality is constituted by a very large number of words. For each word, Tf-Idf and PPMI vectors are long ($|V| \approx 50'000$) and sparse (most elements $= 0$). There are techniques to learn lower-dimensional vectors for words, which are Short and Sense. These dense vectors in a latent space are called *Embedding*.
+
+<!-- Two type of learning embedding models -->
+
+### Count-Based Models
+*Count-Based Models* computes the statistic of how often some words co-occurs with its neighbor words in a large text corpus. Then it is possible to reduce the dimensionality the vector in an small and dense array for each word. The lower-dimensional matrix of words and features represent a dense vector for each word.
+
+The most popular model is the ***S***ingular ***V***alue ***D***ecomposition (**SVD**), a dimensionality reduction techniques used in Text Mining. Any rectangular $w \times c$ matrix $X$ can be expressed as the product of 3 matrices:
+
+$$\underset{w \times c}{X} = \underset{w \times m}{U}
+                             \times \underset{m \times m}{S} 
+                             \times \underset{m \times c}{V^t}$$
+
+where:
+
+* $U$ is an $w \times m$ matrix with $w$ words of the original $X$ matrix with $m$ features in a new latent space;
+* $S$ is an $m \times m$ diagonal matrix of *Singular Values* expressing the importance of each dimension;
+* $V^t$ is an $m \times c$ matrix with $c$ features of the original matrix $X$ and $m$ singular values rows.S
+
+It is possible to select the top-$k$ singular values obtaining a low rank approximation of the original matrix $X$. Instead of multiplying these matrices, it is useful to make only use of the matrix $U$. Each row of $U$ contains a $k$-dimensional vector representing a word in the vocabulary.
+
+```{r Singular Value Decomposition, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/SVD.png")
+```
+
+$$\underset{w \times c}{X} \approx  \underset{w \times k}{U}
+                                    \times \underset{m \times k}{S} 
+                                    \times \underset{k \times c}{V^t}$$
+
+<!-- Italic words = main point  -->
+Unfortunately, there are many drawbacks regarding this method. First of all, the *Dimension* of the matrix *Change* very often: new words are added very frequently and corpus changes in size. Secondly, the matrix is extremely *Sparse* since most word do not occur and it is necessary to construct a quadratic loss function to perform an SVD. To resolve these problems there are some hacks on $X$ obtaining more satisfying values: ignoring *Stop Words*, applying a *Ramp Window*, a co-occurrence count based on the distance between the words in the document or use the *Pearson Correlation* and set negative counts to 0 instead of using PPMI.
+
+Another important Count-Based model is the ***Glo***bal ***Ve***ctors for Word Representations (**GloVe**), a model that leverages statistical information by training only non-zero element in a word-word co-occurrence matrix, rather than on the entire sparse matrix (SVD) and on individual context windows in a large corpus (Word2Vec). In particular, global corpus statistics are captured directly by the model.
+
+<!--
+$X$ is the term-context matrix
+$X_{ij}$ is the frequency of the word $j$ occuring in the context of word $i$
+$X_i = \sum_k X_{ik}$ is the global frequency of any word appearing in the context of word $i$
+$P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears in the context of word $i$ -> co-occurrence probability
+-->
+
+<!--rivedere questa riga, 11:23 lunedì-->
+In the glove model, instead of considering just the p of the context word appearing, we are going considering the ration of the probability of the words. Only in the relation capture non discriminative words because large values (> 1) correlate well with properties specific to a word and
+
+The ration $P_{ik} / P_{Jk}$ depends on three words $i,j$ and $k$. The general form of the glove model is useful to learn the word vectors representation:
+
+$$\begin{aligned}
+    F(w_i, w_j, \tilde{w_k}) = \frac{P_ik}{P_jk} \\
+    w_i^t \tilde{w_k} + b_i + \tilde{b_k} = \log(X_{ik})
+  \end{aligned}$$
+
+where $w \in R^d$ are word vectors and $\tilde{w_k} \in R^d$ are separate context word vectors. 
+
+The GloVe model builds an objective function $J$ associating word vectors to text statistics using the Least Square Error with a weighted function $f(X_{ik})$:
+
+$$\begin{aligned}
+    J &= \sum_{i,k = 1}^V f(X_{ik})(w_i^t w_k + b_i + b_k - \log(X_{ik}) \\
+      &= \frac{1}{2} \sum_{i,k = 1}^V f(X_{ik}) (w_i^t \tilde{w_k} - \log(X_{ik}))^2
+  \end{aligned}$$
+
+where $V$ is the size of the vocabulary.
+
+The two sets of vectors captures similar co-occurence information. The best solution is to simply sum them up:
+
+$$X_{final} = U + V$$
+
+## Predictive Models
+*Predictive Models* predict a word from its neighbors obtaining a small, dense embedding vectors. The most popular models is the *Word2Vec* model, which creates collections of similar concept automatically on raw texts (supervised training data) and without advanced language skills. Very good performance are obtained by employing very large ($\approx 10$M words) text including as many different words as possible.
+
+It is similar to Language Modelling, but it predicts the context rather than next word. The loss function is the following: 
+
+$$J = 1 - P(\text{context } | \text{ word})$$
+
+There are two training method:
+
+* Hierarchical Softmax;
+* Negative Sampling.
+
+<!-- Two type of architecture models -->
+
+The *Skip Gram* model predicts the surrounding (context) words based on the current (centered) word. Given a sliding window of a fixed size moving along a sentence, the word in the middle is the target, while near words (in the sliding window) are context words. Then it is trained to predict the probabilities of a word being a context word for the given target. The model is a Neural Network with just one Hidden Layer representing the word embedding of size $N$. The Input layer $x$ and the Output Layer $y$ are one-hot encoded word representations.
+
+<!-- Skip Gram Model -->
+```{r Skip Gram Model, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/Skip-Gram.png")
+```
+
+The ***C***ontinuos **B**ag ***O***f ***W***ords (**CBOW**) is another similar model learning for learning word vectors. It predicts the target word from source context words.
+
+<!-- CBOW Model -->
+```{r CBOW Model, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/CBOW.png")
+```
+
+<!-- Differences -->
+While the Skip Gram model works well with a smaller training dataset because it represents well even rare words, the CBOW is several times faster to training the model and has a slight better Accuracy for frequent words.
+
+<!-- Pros and Cons of Predictive Models-->
+Predictive models can capture complex pattern beyond word similarity and generates improved performance on other tasks, but it scales with corpus size (it is necessary to train every time the data) and it does not use efficient statistics.
+
+<!-- Lecture 11: 05/11/2020 -->
+# Text Classification
+*Text Classification* is the activity of predicting to which data items belongs to a predefined finite set of classes. In text classification, data items can be textual (news articles, e-mail, etc.) or partly textual (web pages).
+
+$$h : D \rightarrow C$$
+
+There are many types of classification:
+
+* *Binary Classification*, where each items belongs to exactly one classes in a set of two;
+* *Single Label Multi Class Classification*, where each item belongs to exactly one classes in a set of many classes (> 2);
+* *Multi Label Multi Class Classification*, where each item may belong to zero, one or several classes together;
+* *Ordinal Classification*, similar to *SLMC*, but classification are ordered respectably to some quality.
+
+The previous definitions denote hard classification (training soft classifier with a score and picking a threshold $t$). Soft classification aims to predict a score for each pair $(d, c)$ where the score denotes the probability that d belong to c, where scores are used for ranking.
+
+## Applications
+There are many applications:
+
+* *Knowledge Organization*, conferring structure to an otherwise unstructured body of knowledge (e.g. classifying news articles);
+* *Filtering*, blocking a set of non relevant items from a dynamic stream. It is a binary classification (e.g. spam filtering detecting unsuitable content);
+* *Empowering*, improving the effectiveness of other tasks in Information Retrieval or Natural Language Process.
+
+## Supervised Learning
+The Supervised Learning is a generic learning algorithm used to train a classifier from a set of manually classified examples. The classifiers learns the characteristics that a new text should have in order to be assigned to class $c$.
+
+In order to generate a vector based representation for a set of documents, there are 3 main steps:
+
+1. *Feature Extraction* by topic, a set of features that coincide with the set of words occurring in the training set (Unigram model). An alternative is make the set of features coincide with the set of character $n$-grams occurring in the document. The choice of features is different for classification tasks;
+2. *Feature Selection*, identifying the most discriminative features discarding the others. The filter approach consists in measuring the discriminative power of each feature and retaining only the top-scoring features. A typical choice is Mutual Information, measuring the mutual dependence between two variables:
+
+$$MI(t_k, c_i) = \sum \sum \mathbb{P}(t, c) \log_2 \frac{\mathbb{P}(t, c)}{\mathbb{P}(t) \mathbb{P}(c)}$$
+
+  It can be used also with matrix decomposition like SVD, PCA, aggregating different features.
+
+3. Feature weighting means attributing a value to feature in the vector that represents document. This value can be binary, numeric obtained in a unsupervised or supervised classes.
+
+<!-- Lecture 13: 09/11/2020-->

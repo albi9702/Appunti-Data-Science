@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Social Media Analytics</title>
   <meta name="description" content="Social Media Analytics" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Social Media Analytics" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 
@@ -84,6 +87,12 @@
 <li class="chapter" data-level="3.7" data-path=""><a href="#graph-representation"><i class="fa fa-check"></i><b>3.7</b> Graph Representation</a></li>
 <li class="chapter" data-level="3.8" data-path=""><a href="#complex-network"><i class="fa fa-check"></i><b>3.8</b> Complex Network</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#metrics-for-social-media-analytics"><i class="fa fa-check"></i><b>4</b> Metrics for Social Media Analytics</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#connection-metrics"><i class="fa fa-check"></i><b>4.1</b> Connection Metrics</a></li>
+<li class="chapter" data-level="4.2" data-path=""><a href="#distribution-metrics"><i class="fa fa-check"></i><b>4.2</b> Distribution Metrics</a></li>
+<li class="chapter" data-level="4.3" data-path=""><a href="#segmentation-metrics"><i class="fa fa-check"></i><b>4.3</b> Segmentation Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#community-detection"><i class="fa fa-check"></i><b>5</b> Community Detection</a></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
 
@@ -120,19 +129,19 @@
 <li>News: entertainment, politics, etc.;</li>
 <li>Relationships: between entities, events, etc.</li>
 </ul>
-<p>When collecting data, it’s necessary to transform information, organized in classified data, in to knowledge, so awareness and understanding in which info can be useful.</p>
-<p>Social media analytics has a complex process of identifying relevant, valid, new and potentially useful information which can be transformed into knowledge used by different actors and purpose. The main applications of SMA are:</p>
+<p>When collecting data, it is necessary to transform information, organized in classified data, in to knowledge, awareness and understanding in which info can be useful.</p>
+<p><strong><em>S</em></strong>ocial <strong><em>M</em></strong>edia <strong><em>A</em></strong>nalytics (<strong>SMA</strong>) has a complex process of identifying relevant, valid, new and potentially useful information which can be transformed into knowledge used by different actors and purpose. The main applications of SMA are:</p>
 <ul>
 <li>Life quality, for transaction;</li>
-<li>Brand reputation (awareness of the brand, sentiment, bad comments, consoling reputation, ect.)</li>
+<li>Brand reputation (awareness of the brand, sentiment, bad comments, consoling reputation, ect.);</li>
 <li>Forecasting the performance of finance markets.</li>
 </ul>
-<p>The aim of the course is to provide the skills to start a social media specialist path to learn how to extract significant insights from the huge volume of mostly unstructured data using Social Media Analytics methods and tools.</p>
+<p>The aim of the course is to provide the skills to start a Social Media specialist path to learn how to extract significant insights from the huge volume of mostly unstructured data using Social Media Analytics methods and tools.</p>
 <!-- Digital Report 2020 Image -->
 <p><img src="Immagini/Digital-Report.png" width="75%" style="display: block; margin: auto;" /></p>
 <div id="internet" class="section level2">
 <h2><span class="header-section-number">1.1</span> Internet</h2>
-<p><em>Internet</em> is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong>W</strong>eb (<strong>WWW</strong>) is one of the major service of Internet. The proposal was designed to provide more effective communication system within CERN. It allows to browser through web pages and services accessible to all or a selected part of users.</p>
+<p><em>Internet</em> is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong>W</strong>eb (<strong>WWW</strong>) is one of the major service of Internet. The proposal was designed to provide more effective communication system within <em>CERN</em>. It allows to browser through web pages and services accessible to all or a selected part of users.</p>
 <p><strong><em>U</em></strong>niform <strong><em>R</em></strong>esource <strong><em>I</em></strong>dentifier (<strong>URI</strong>) is a sequence of characters that uniquely identifies a generic resource, such as web address (URL), documents, images, etc.</p>
 <p>There are different type of data:</p>
 <ul>
@@ -150,31 +159,33 @@
 <p>There are three main distinction between data collected through the Web:</p>
 <ul>
 <li><em>Virtual Data</em> (or Provoked Data), obtained through conventional research methods, such as queries online, and these answers are provided by users following specific questions;</li>
-<li><em>Digitized Data</em>, analog data transformed in another digital formats (e-books, music, etc.);</li>
-<li><em>Digital Data</em>, traces left by users, such as page visits or interactions with social media. In this case they are generated spontaneously by the users visiting a web page.</li>
+<li><em>Digitized Data</em>, analog data transformed in another digital formats (e.g. e-books, music, etc.);</li>
+<li><em>Digital Data</em>, traces left by users, such as page visits or interactions with Social Media. In this case they are generated spontaneously by the users visiting a web page.</li>
 </ul>
-<p>Social Media has specific characteristics:
-* Interactive web 2.0 applications;
-* Contents are generated by the users (posts, comments, etc.);
-* Users create service-specific profiles;
-* Social Media facilitates the development of online social networks.</p>
-<p>The <em>Theory of Social Presence</em> states that media differ in degree of social presence between the influence of the degree of intimacy and immediacy of the means of communication.</p>
+<p>Social Media has specific characteristics:</p>
+<ul>
+<li>Interactive web 2.0 applications;</li>
+<li>Contents are generated by the users (posts, comments, etc.);</li>
+<li>Users create service-specific profiles;</li>
+<li>Social Media facilitates the development of online social networks.</li>
+</ul>
+<p>One of the most important theory about Social Media is the <em>Theory of Social Presence</em>. It states that media differ in degree of social presence between the influence of the degree of intimacy and immediacy of the means of communication.</p>
 <blockquote>
-<p>The higher the social presence, the larger the social influence that the communication partners have on each other’s behavior</p>
+<p>The higher the social presence, the larger the social influence that the communication partners have on each other’s behavior.</p>
 </blockquote>
 <p>The <em>Media Richness Theory</em> is based on the assumption that the goal of any communication is the resolution of ambiguity and the reduction of uncertainty. The media differs in the degree of information richness they have. The concept of <em>Self Presentation</em> states that in any type of social interaction people have a desire to control the impressions of other people. This concept is related to self-disclosure</p>
 <blockquote>
-<p>Social media are <strong>interactive computer-mediated</strong> technologies that facilitate the <strong>creation and sharing of information</strong>, ideas, career interests and other forms of expression via <strong>virtual communities</strong> and networks.</p>
+<p>Social Media are <strong>interactive computer-mediated</strong> technologies that facilitate the <strong>creation and sharing of information</strong>, ideas, career interests and other forms of expression via <strong>virtual communities</strong> and networks.</p>
 </blockquote>
 <p>A <strong><em>U</em></strong>ser-<strong><em>G</em></strong>enerated <strong><em>C</em></strong>ontent (<strong>UGC</strong>) is any form of content created by users of online system made available on social media. The reason for creating UGC are:</p>
 <ul>
 <li><em>Implicit Incentives</em>, not based on anything tangible, not directly monetizable. Social Incentives are the most common form; a user feels as active user of the community, also through the interaction of friends. It also improve the customer experience when purchasing a product;</li>
 <li><em>Explicit Incentives</em>, referred to tangible rewards. They are easily understood by most people and have immediate value regardless of the size of the community (contest, voucher, etc.). The main disadvantage is they can make user believe that the only reason of participating is explicit incentive, reducing the influence of other type of interactions.</li>
 </ul>
-<p>A Virtual Community is made up of social network of individuals who interact through means of communication, crossing any kind of boundaries in order to pursue mutual interests.</p>
+<p>A <em>Virtual Community</em> is made up of Social Network of individuals who interact through means of communication, crossing any kind of boundaries in order to pursue mutual interests.</p>
 <p>A <em>Social Network</em> is a social structure made up of a set of individuals, a series of dyadic links and other social interactions of social actors. There are many methods to analyze the structure of social entities, called <strong><em>S</em></strong>ocial <strong><em>N</em></strong>etwork <strong><em>A</em></strong>nalysis (<strong>SNA</strong>), to identify local and global patterns and examine network dynamics.</p>
 <!-- The evolution of Social Media -->
-<p>There are many type of social media:</p>
+<p>There are many type of Social Media:</p>
 <ul>
 <li><em>Blog</em>, a website containing one or more chronological posts that interactively discuss a certain topic;</li>
 <li><em>Microblog</em>, publicational textual or multimedial content on the net;</li>
@@ -197,7 +208,10 @@
 <!-- Lecture 3: 07/10/2020 -->
 <div id="social-media-analytics" class="section level2">
 <h2><span class="header-section-number">2.1</span> Social Media Analytics</h2>
-<p><em>Web Analytics</em> is the measurement, collection, analysis and reporting of Web data for the purposes of understanding and optimizing Web usage. <em>Social Media Analytics</em> is monitoring, analyzing, measuring and interpreting digital interactions and relationships of people, topics, ideas and content. Interaction take place in workplace and external-facing communities.</p>
+<p><em>Web Analytics</em> is the measurement, collection, analysis and reporting of Web data for the purposes of understanding and optimizing Web usage.</p>
+<blockquote>
+<p><em>Social Media Analytics</em> is monitoring, analyzing, measuring and interpreting digital interactions and relationships of people, topics, ideas and content. Interaction takes place in workplace and external-facing communities.</p>
+</blockquote>
 <p>It is possible to divide the analyzes into two main categories:</p>
 <ul>
 <li>Social Network Analysis;</li>
@@ -206,24 +220,28 @@
 <p>SMA in the <em>business</em> context is the process of measuring, analyzing and interpreting interactions and conversations in Social Media regarding a brand, product, service or a topic of interest. The analysis is based on elements that influences the customer behavior, the perception and feelings of the customer respect to a brand end their level of engagement.</p>
 <p>There are many business objectives:</p>
 <ul>
-<li>Brand Advocacy, an indicator that expresses the highest degree of brand loyalty, so a customer can recommend the brand to other people;</li>
-<li>Business Reputation Management, constantly monitoring and managing the company’s online presence and how the brand is perceived in a positive light and allowing to gain new customers;</li>
-<li>Community Management, the process of building an authentic community through various interactions;</li>
-<li>Demand Generation, the strategy of various marketing programs aimed at certain interest in the products/services of a company.</li>
+<li><em>Brand Advocacy</em>, an indicator that expresses the highest degree of brand loyalty, so a customer can recommend the brand to other people;</li>
+<li><em>Business Reputation Management</em>, constantly monitoring and managing the company’s online presence and how the brand is perceived in a positive light and allowing to gain new customers;</li>
+<li><em>Community Management</em>, the process of building an authentic community through various interactions;</li>
+<li><em>Demand Generation</em>, the strategy of various marketing programs aimed at certain interest in the products/services of a company.</li>
 </ul>
 <!-- Sistemare questa parte -->
-<p>Question to plan an analysis activity:</p>
-<p>Why: the reasons that should lead to online analysis
-What: what does the analytic activity consist of and what are the phases that make it yo
-How: what are the tools and resources to equip to create a structured and effective monitoring process
-Who: who are the actors involved in the monitoring and analysis process of the web and social media
-Where: what are the sources tha must be taken into consideration for an effective analysis
-When: when and with what timing it is necessary to activate the listening and analysis strategy</p>
-<p>Social Media Analysis phases:
-1. Planning of the analysis activity;
-2. Data identification;
-3. Data Analysis, models and techniques that allows to answer to the objectives developed, selected or integrated among those available;
-4. Information interpretation and visualization, better interpreting information obtained from data analysis.</p>
+<p>To plan an analysis activity is necessary to answer at these questions:</p>
+<ul>
+<li><em>Why</em>: the reasons that should lead to online analysis;</li>
+<li><em>What</em>: what does the analytic activity consist of and what are the phases that make it up;</li>
+<li><em>How</em>: what are the tools and resources to equip to create a structured and effective monitoring process;</li>
+<li><em>Who</em>: who are the actors involved in the monitoring and analysis process of the web and Social Media;</li>
+<li><em>Where</em>: what are the sources tha must be taken into consideration for an effective analysis;</li>
+<li><em>When</em>: when and with what timing it is necessary to activate the listening and analysis strategy.</li>
+</ul>
+<p>The phases of Social Media Analysis are:</p>
+<ol style="list-style-type: decimal">
+<li>Planning of the analysis activity;</li>
+<li>Data identification;</li>
+<li>Data Analysis, models and techniques that allows to answer to the objectives developed, selected or integrated among those available;</li>
+<li>Information interpretation and visualization, better interpreting information obtained from data analysis.</li>
+</ol>
 <!-- Lecture 4: 09/10/2020 -->
 </div>
 </div>
@@ -343,73 +361,142 @@ When: when and with what timing it is necessary to activate the listening and an
 </ul>
 <!-- Regular Networks Image -->
 <p><img src="Immagini/Regular-Networks.png" width="75%" style="display: block; margin: auto;" /></p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Summary</th>
-<th align="center">Linear</th>
-<th align="center">Ring</th>
-<th align="center">Star</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Order</td>
-<td align="center"><span class="math inline">\(\|L\| = k\)</span></td>
-<td align="center"><span class="math inline">\(\|A\| = k\)</span></td>
-<td align="center"><span class="math inline">\(\|S\| = k\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Degree</td>
-<td align="center"><span class="math inline">\(1 \leq d(L) \leq 2\)</span></td>
-<td align="center"><span class="math inline">\(d(A) 2\)</span></td>
-<td align="center"><span class="math inline">\(d(S) = 1\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">Clustering Coefficient</td>
-<td align="center"><span class="math inline">\(cc(L) = 0\)</span></td>
-<td align="center"><span class="math inline">\(cc(A) = 0\)</span></td>
-<td align="center"><span class="math inline">\(cc(S) = 0\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Size</td>
-<td align="center"><span class="math inline">\(\|L\| = k -1\)</span></td>
-<td align="center"><span class="math inline">\(\|A\| = k\)</span></td>
-<td align="center"><span class="math inline">\(\|S\| = k - 1\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">Diameter</td>
-<td align="center"><span class="math inline">\(diam(L) = k - 1\)</span></td>
-<td align="center"><span class="math inline">\(diam(A) = k/2\)</span></td>
-<td align="center"><span class="math inline">\(diam(S) = 2\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Degree of Connectivity</td>
-<td align="center">Not Biconnected</td>
-<td align="center">Biconnected</td>
-<td align="center">Point of Articulation</td>
-</tr>
-<tr class="odd">
-<td align="center">Adjacency Matrix</td>
-<td align="center">Diagonals</td>
-<td align="center">Diagonals + Angles</td>
-<td align="center">First Row and Column</td>
-</tr>
-</tbody>
-</table>
+<p><span class="math display">\[\begin{matrix}
+    \mathbf{Summary}              &amp; \mathbf{Linear}        &amp; \mathbf{Ring}             &amp; \mathbf{Star}                \\
+    \text{Order}                  &amp; \|L\| = k              &amp; \|A\| = k                 &amp; \|S\| = k                    \\
+    \text{Degree}                 &amp; 1 \leq d(L) \leq 2     &amp; d(A) 2                    &amp; d(S) = 1                     \\
+    \text{Clustering Coefficient} &amp; cc(L) = 0              &amp; cc(A) = 0                 &amp; cc(S) = 0                    \\
+    \text{Size}                   &amp; \|L\| = k -1           &amp; \|A\| = k                 &amp; \|S\| = k - 1                \\
+    \text{Diameter}               &amp; diam(L) = k - 1        &amp; diam(A) = k/2             &amp; diam(S) = 2                  \\
+    \text{Degree of Connectivity} &amp; \text{Not Biconnected} &amp; \text{Biconnected}        &amp; \text{Point of Articulation} \\
+    \text{Adjacency Matrix}       &amp; \text{Diagonals}       &amp; \text{Diagonals + Angles} &amp; \text{First Row and Column}  \\
+  \end{matrix}\]</span></p>
+<!--
+|         Summary        |        Linear        |        Ring        |          Star         |
+|:----------------------:|:--------------------:|:------------------:|:---------------------:|
+|          Order         |      $\|L\| = k$     |     $\|A\| = k$    |      $\|S\| = k$      |
+|         Degree         | $1 \leq d(L) \leq 2$ |      $d(A) 2$      |       $d(S) = 1$      |
+| Clustering Coefficient |      $cc(L) = 0$     |     $cc(A) = 0$    |      $cc(S) = 0$      |
+|          Size          |     $\|L\| = k -1$   |   $\|A\| = k$      |    $\|S\| = k - 1$    |
+|        Diameter        |   $diam(L) = k - 1$  |   $diam(A) = k/2$  |     $diam(S) = 2$     |
+| Degree of Connectivity |    Not Biconnected   |     Biconnected    | Point of Articulation |
+|    Adjacency Matrix    |       Diagonals      | Diagonals + Angles |  First Row and Column |
+-->
 <p>In <em>Random Networks</em> pairs of nodes are randomly connected by a given number of connections. Two nodes are connected by a certain probability. All nodes have approximately the same number of neighbors, which differs slightly from the average value.</p>
 <!-- Random Networks Image -->
 <p><img src="Immagini/Random-Network.png" width="75%" style="display: block; margin: auto;" /></p>
 <p><em>Complex Networks</em> of interactions have substantially different characteristics from both classes. The Complex Network Theory shows non intuitive characteristics and can be made up of millions of units communicating with each other. Mathematical methods are used to extract information from complex networks in a synthetic way. For example,online social networks are complex networks: the personal network of contact is usually composed of a first order area, with an ego-centric network, with direct relationship, a second order and so on, with a socio-centric network.</p>
 <!-- Ego Socio Networks Image -->
 <p><img src="Immagini/Ego-Socio-Networks.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>There are several phenomena related to the Theory of Complex Networks:
-<!-- Slide 30 -->
-1. Small Word;
-2. Clustering;
-3. Strength of Weak Tries;
-4. Scale Invariance.</p>
+<p>There are several phenomena related to the Theory of Complex Networks:</p>
+<ol style="list-style-type: decimal">
+<li><em>Small Word</em>, an experiment remained famous and repeated in various social networks. Milligram randomly chose a sample fo American and asked them to deliver a message to a stranger knowing only few information. The results show how short paths exist between individuals in large social networks and how can be found by ordinary people;</li>
+<li><em>Clustering</em>, a tendency in social network where are created communities in relation with each other, measured by clustering coefficient (<span class="math inline">\(cc\)</span>). Random networks resemble interaction networks with reference to the small world property, but they differ in the clustering coefficient because in a typical interaction network <span class="math inline">\(cc\)</span> is usually much larger than a <span class="math inline">\(cc\)</span> of a random network;</li>
+<li><em>Strength of Weak Ties</em>, a strength of a tie is given by the probably linear combination of the amount of time, emotional intensity, intimacy and exchange of services characterizing the tie. <em>Strong Ties</em> are people united in primary networks (eg family, organization), while <em>Weak Ties</em> those who characterize the informal networks of people, more important than the strong one. The <em>Tie Strength</em> is measured by identifying <em>Shortcut Bridges</em>, loosing the bridge and check if the distance between two nodes increases when the arc is removed;</li>
+<li><em>Scale Invariance</em>, a negative exponential relationship between the number of nodes and the number of their connection. When a node need to establish a new connection, it prefers to do it with a node (tipically called <em>Hubs</em>) with many connections, leading to exponential growth. The role of hubs is connecting areas of the graph that would otherwise be separate.</li>
+</ol>
+<!-- Lecture 7: 21/10/2020-->
 </div>
+</div>
+<div id="metrics-for-social-media-analytics" class="section level1">
+<h1><span class="header-section-number">4</span> Metrics for Social Media Analytics</h1>
+<p>There are three main families of metrics:</p>
+<ul>
+<li><em>Connection</em>, in which social network entities are connected;</li>
+<li><em>Distribution</em>, in which information can flow within a social network;</li>
+<li><em>Segmentation</em>, clustering the components of the social network.</li>
+</ul>
+<div id="connection-metrics" class="section level2">
+<h2><span class="header-section-number">4.1</span> Connection Metrics</h2>
+<!-- Metrics:
+    
+     * Homophily;
+     * Multiplexity;
+     * Mutuality/Reciprocity;
+     * Network Closure;
+     * Proximity/Propinquity. -->
+<p><em>Homophily</em> is the tendency of individuals to associate and tie with each other similar one, sharing common characteristics (e.g. gender or age) that facilitate communication and relationship formation. Social Media favors homophilic relationships because it shows similar posts of your interest by your user profile examined with likes and interactions personalizing your content. The perception of interpersonal similarity improves coordination and the expected payoff of interaction and helps people access information forming opinions and threads, but can translate in a limited social worlds forming closed communities or filter bubbles on Social Network sites where people with similar ideologies interact only with each other (Echo Chambers).</p>
+<p><em>Multiplexity</em> is the number of relationship levels contained in a link, associated with the strength of the bond.</p>
+<p><em>Mutuality/Reciprocity</em> is the extent to which two actors mutually exchange friendship or other interaction.</p>
+<p><em>Network Closure</em> measures the completeness of relational triads, using various clustering coefficient <span class="math inline">\(cc\)</span> to measure this closure. It refers to the concept of triadic closure, a property in which 3 nodes <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> have strong tie <span class="math inline">\(A-B\)</span> and <span class="math inline">\(A-C\)</span>, then there is a strong or weak tie <span class="math inline">\(B-C\)</span>. Another theory based on Network Closure is the Cognitive Balance, the propensity of two individuals to want to try the same things toward an entities that unites them. If the triad is not closed, then the people connected want to close thi triad to achieve closure in the relationship. In a social network a strong triadic closure occurs with a high probability because they have many things in common and they can create a link. It can predict the development of ties in a network and show the progression of connectivity.</p>
+<p><em>Proximity/Propinquity</em> is the tendency for actors to have more links with others who are geographically close, measured with geolocation information. For example, two people living on the same floor have a higher propensity to establish relationships than those living on different floors.</p>
+</div>
+<div id="distribution-metrics" class="section level2">
+<h2><span class="header-section-number">4.2</span> Distribution Metrics</h2>
+<!-- Metrics:
+    
+     * Bridges;
+     * Centrality;
+     * Density;
+     * Distance;
+     * Structural Holes;
+     * Strength of a Tie. -->
+<p><em>Centrality</em> is a group of metrics that aim to quantify the importance or influence of a particular node in a network. In Graph Theory it identifies the most important vertices, in a Social Network the most influential people. The general case is called <em>Degree Centrality</em>, the risk of a node to catch whatever is flowing through the network (in the graph theory is the degree of a vertex): <span class="math inline">\(c_D(v) = d(v)\)</span>. In a directed graph is necessary to explicit the in-degree and out-degree. It is possible to normalize the degree centrality, computed as:</p>
+<p><span class="math display">\[\overline{c_D} = \frac{c_D(v)}{n - 1}\]</span></p>
+<p>In a connected graph the <em>Closeness Centrality</em> <span class="math inline">\(c_C(v)\)</span> is the reciprocal of the sum of the distances from <span class="math inline">\(v\)</span> to all other nodes:</p>
+<p><span class="math display">\[c_C(v) = \frac{1}{\sum_u d(v, u)}\]</span></p>
+<p>The Normalized version is expressed as <span class="math inline">\(\overline{c_C}(v) = (n-1) c_C(v)\)</span>.</p>
+<p>The <em>Betweennes Centrality</em> <span class="math inline">\(c_B(v)\)</span> is the sum of the number of the shortest path between each pair that cross the vertex (<span class="math inline">\(\sigma_{st}(v)\)</span>) divided by the number of shortest paths between each pair of vertices in a graph (<span class="math inline">\(\sigma_{st}\)</span>):</p>
+<p><span class="math display">\[c_B(v) = \sum_{s \ne t \ne v} \frac{\sigma_{st}(v)}{\sigma_{st}}\]</span></p>
+<p>It is possible to compute the Normalized Betweennes Centrality as the <span class="math inline">\(c_B(v)\)</span> divided by the maximum possible number of geodesics crossing node <span class="math inline">\(v\)</span> (<span class="math inline">\(2c_B(v)\)</span> for undirected graphs):</p>
+<p><span class="math display">\[\overline{c_B}(v) = \frac{c_B(v)}{(n - 1)(n - 2)}\]</span></p>
+<p><em>Delta Centrality</em> is the importance of a node in the entire network, calculated by comparing the performance <span class="math inline">\(P(G)\)</span> (as the number of edges) to the performance <span class="math inline">\(P(G&#39;)\)</span> obtained deactivating the node <span class="math inline">\(v\)</span>:</p>
+<p><span class="math display">\[C_{\Delta} = \frac{P(G) - P(G&#39;)}{P(G)}\]</span></p>
+<p>It is possible to calculate the Delta Centrality using Efficiency, measured as the inverse of their distance <span class="math inline">\(d(v_i, v_j)\)</span>. The efficiency of a graph is:</p>
+<p><span class="math display">\[E(G) = \frac{1}{n(n - 1)} \sum^n_{i, j = 1} \frac{1}{d(v_i, v_j)}\]</span></p>
+<p><em>Density</em> is the percentage of effective links in a network out of the total possible number. A dense graph is a graph in which the number of effective edges approaches the number of potential edges, while a sparse graph the number with few edges than the potential ones. The degree is measured as follow (<span class="math inline">\(2|E(G)|\)</span> if undirected graph):</p>
+<p><span class="math display">\[D(G) \frac{|E(G)|}{n(n - 1)}\]</span></p>
+<p>Other Distribution Metrics are:</p>
+<ul>
+<li><em>Distance</em> is the minimum number of ties necessary to connect two people;</li>
+<li><em>Structural Holes</em> is the absence of links between two parts of a network;</li>
+<li><em>Strength of a Tie</em> is the linear combination of time, emotional intensity, intimacy, reciprocity, ect.</li>
+</ul>
+</div>
+<div id="segmentation-metrics" class="section level2">
+<h2><span class="header-section-number">4.3</span> Segmentation Metrics</h2>
+<!-- Metrics:
+    
+     * Count of Cliques and Social Circles;
+     * Clustering Coefficient;
+     * Cohesion. -->
+<p>There are two different type of Counting:</p>
+<ul>
+<li><em>Counting of Cliques</em>, if each individual is directly related to each other individual;</li>
+<li><em>Counting of Social Circles</em>, groups of individuals less closely linked than in a clique.</li>
+</ul>
+<p>The <em>Cohesion</em> is the degree of actors directly related connected to each other cohesive bonds. An important metric is the <em>Structural Cohesion</em>, defined as the minimum number of people or ties of a Social Network that must be removed to disconnect the group (identical to Connectivity).</p>
+<!-- Lecture 04/11/2020 -->
+</div>
+</div>
+<div id="community-detection" class="section level1">
+<h1><span class="header-section-number">5</span> Community Detection</h1>
+<p>Preferential Attachment is a property of some network where the great majority of new edges are connected to nodes with an already high degree, compared to others. The result is a network with very few nodes with an high degree of connection.</p>
+<!-- Preferential Attachment Image-->
+<p><img src="Immagini/Preferential-Attachment.png" width="75%" style="display: block; margin: auto;" />
+It can happen because people want to be associated with popular people, ideas, etc, increasing their <em>popularity</em>; <em>quality</em>, evaluating people based on objective quality criteria, so higher nodes will attract more attention; <em>mixed model</em>, among nodes of similar attribute.</p>
+<p>A <em>Community</em> is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Networks communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.</p>
+<!-- Overlapping Disjoint Communities Image-->
+<p><img src="Immagini/Overlapping-Disjoint-Communities.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The Link Prediction is the prediction of which nodes are likely get connected given a Social Network; the output is a list of ranked pairs of nodes.</p>
+<p>The Community Detection is confused for clustering, but in the first data is linked in a graph and network data tends to be discrete, leading algorithm using the graph property directly.</p>
+<!-- Different Categories of Community Detection -->
+<p>Community Detection methods can be divided into 4 main categories:</p>
+<ul>
+<li><em>Node-centric Community</em>, each node in a group satisfies certain properties:
+<ul>
+<li>Complete Mutuality, nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than <span class="math inline">\(k - 1\)</span></li>
+<li>Reachability of Members, searching communities where all nodes in the group should be reachable in k-jumps. The <em>k-clique</em> approach aims to find a maximal subgraph in which the largest distance between any nodes less than <span class="math inline">\(k\)</span> (shortest path given a subgraph). The <em>k-club</em> approach aims to find a substructure of diameter <span class="math inline">\(&lt;= k\)</span></li>
+<li>Nodal Degrees;</li>
+</ul></li>
+<li><em>Group-centric Community</em>, which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if</li>
+</ul>
+<p><span class="math display">\[\frac{2|E_s|}{|V_s|(|V_s| - 1)} \geq \gamma\]</span></p>
+<p>A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.</p>
+<ul>
+<li><em>Network-centric Community</em>, aims to find communities considering the connection of nodes globally and divide network into disjoint set.</li>
+<li><em>Hierarchy-centric Community</em></li>
+</ul>
 </div>
             </section>
 
