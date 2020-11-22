@@ -339,6 +339,7 @@ where:
 
 It is possible to select the top-$k$ singular values obtaining a low rank approximation of the original matrix $X$. Instead of multiplying these matrices, it is useful to make only use of the matrix $U$. Each row of $U$ contains a $k$-dimensional vector representing a word in the vocabulary.
 
+<!-- Singular Value Decomposition Image -->
 ```{r Singular Value Decomposition, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("Immagini/SVD.png")
 ```
@@ -446,12 +447,104 @@ The Supervised Learning is a generic learning algorithm used to train a classifi
 In order to generate a vector based representation for a set of documents, there are 3 main steps:
 
 1. *Feature Extraction* by topic, a set of features that coincide with the set of words occurring in the training set (Unigram model). An alternative is make the set of features coincide with the set of character $n$-grams occurring in the document. The choice of features is different for classification tasks;
-2. *Feature Selection*, identifying the most discriminative features discarding the others. The filter approach consists in measuring the discriminative power of each feature and retaining only the top-scoring features. A typical choice is Mutual Information, measuring the mutual dependence between two variables:
+2. *Feature Selection*, identifying the most discriminative features discarding the others. The filter approach consists in measuring the discriminative power of each feature and retaining only the top-scoring features. A typical choice is Mutual Information, measuring the mutual dependence between two variables. It can be used also with matrix decomposition like SVD, PCA, aggregating different features:
 
 $$MI(t_k, c_i) = \sum \sum \mathbb{P}(t, c) \log_2 \frac{\mathbb{P}(t, c)}{\mathbb{P}(t) \mathbb{P}(c)}$$
-
-  It can be used also with matrix decomposition like SVD, PCA, aggregating different features.
 
 3. Feature weighting means attributing a value to feature in the vector that represents document. This value can be binary, numeric obtained in a unsupervised or supervised classes.
 
 <!-- Lecture 13: 09/11/2020-->
+The classical way to represent documents is the vector space model, where documents are converted into vectors in a common vector space. It is constituted by terms (axes) and documents are points in the vector space. To represent the similarity of a document is possible to use the cosine similarity:
+
+$$\mathbb{sim}(d_1, d_2) = \frac{\sum_{i=1}^k w_{i1}w_{i2}}{\sqrt{\sum_{i=1}^k w_{i1}^2 \sum_{i=1}^k w_{i2}}^2} \in [0, 1]$$
+
+## Supervised Classification
+For binary classification, essentially any supervised learning algorithm can be used for training a classifier. One of the most important method is ***S***upport ***V***ector ***M***achine (**SVM**), which aims to find the separating surface that maximizes the margin between hyperplane and training points. Often classification problems are not linearly separable, but it can become linear separable once mapped to an high-dimensional space using kernels. The trained classifiers often depend on one or more parameters, but they need to be optimized with a $k$-fold cross-validation on the training set.
+
+## Evaluations
+There two important aspects to evaluate a classifier: *Efficiency*, which refers to the consumption of computational resources (training and classification), while Effectiveness (*Accuracy*) refers to how frequently classification decisions taken by a classifier are correct. For binary classification it is possible to evaluate accuracy with confusion matrix:
+
+$$Accuracy = \frac{TN + TP}{TN + FN + FP + TP}$$
+
+Another measure is $F_1$, robust to the presence of imbalance in the test set. It is defined as the harmonic mean of Precision and Recall:
+
+$$F_1 = \frac{\pi \rho}{\pi + \rho} = \frac{2 TP}{2 TP + FP + FN}$$
+
+For multi-label multi-class classification, $F_1$ must be averaged across the classes according to micro-averaging, or macro-averaging.
+
+For single-label multi-class classification, the most used measure is the Accuracy.
+
+<!-- Lecture 14: 12/11/2020 -->
+# Text Clustering
+The Document Clustering is the process of grouping a set of documents into classes of similar object. It is an unsupervised learning, so clusters are formed from data without human input. In particular:
+
+* Object *within* a cluster should be similar;
+* Object *from different* clusters should be dissimilar.
+
+It is possible to use Cluster Analysis with documents because objects in the same cluster behave similarly with respect to relevance to information needs. There are different types of clustering structure:
+
+* *Partitional*, a division of the set of data objects into non-overlapping subsets (clusters) such that each data object is in exactly one subset vs *Hierarchical*, sub-clusters organized as a tree.
+* *Exclusive*, each data is assigned to a single cluster vs *Overlapping*, data can be assigned in more than one cluster.
+* *Complete*, every data is assigned to a cluster vs *Partial*, where every data is not necessary assigned to a cluster.
+
+## Flat Clustering
+*Flat Clustering*, known also as Prototype-Based Clustering, is a clustering algorithm in which any object is closer to the prototype that defines the cluster to which it belongs to than to the prototype of any other cluster.
+
+The goal of this algorithm is compute an assignment $\gamma : D \rightarrow \{w_1, \dots, w_k\}$ that minimize the objective function (in term of similarity or distance) given a set of documents $D$, a desired number of clusters $k$. *k-means* defines a prototype in terms of a centroid, which is usually the mean (average squared Euclidean Distance) of the documents in the real-valued space. The $k$-means algorithm is defined as follows:
+
+1. Select $k$ objects as centroids;
+2. Form $k$ clusters and assign each document to closest centroid;
+3. Compute the centroid for each cluster;
+4. Go to **1.** until centroid do not change.
+
+<!-- Lecture 15: 16/11/2020 -->
+## Hierarchical Clustering
+*Hierarchical Clustering* is a clustering algorithm in which sub-clusters are organized as a tree. It also does not require to specify the number of clusters. It can be:
+
+* *Agglomerative*, where all single objects are merged into the closest pair of cluster (by proximity);
+* *Divisive*, where an all-inclusive cluster is splitted in different clusters until only single clusters of individual object remain using a flat clustering algorithm (it is necessary to specify which cluster to split and the cut of the dendrogram).
+
+Hierarchical Clustering is often displayed graphically using a tree-like diagram called *Dendrogram*, which displays the sub-cluster relationships and the order in which the clusters were merged or splitted.
+
+<!-- Dendrogram Image -->
+```{r Dendrogram, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/Dendrogram.png")
+```
+
+There are different ways to define the closest pair of cluster:
+
+* *Single-link*, where the similarity of 2 clusters is the similarity of their most similar members (find the minimum distance between two clusters):
+
+$$\begin{aligned}
+    d(w_i, w_j)            &= min_{x \in w_i, y \in w_j} d(x, y) \\
+    d((w_i \cup w_j), w_k) &= min [d(w_i, w_k), d(w_j, w_k)]
+  \end{aligned}$$
+
+* *Complete-link*, where the similarity of 2 clusters is the similarity of their most dissimilar members (find the maximum distance between the elements):
+
+$$\begin{aligned}
+    S(w_i, w_j)            &= min_{x \in w_i, y \in w_j} S(x, y) \\
+    S((w_i \cup w_j), w_k) &= min [S(w_i, w_k), S(w_j, w_k)]
+  \end{aligned}$$
+
+* Group-average;
+* Centroid.
+
+## Clustering Evaluation
+It is difficult to evaluate the validation of a cluster algorithm. A good clustering will produce high quality clusters in which the external class similarity is high and the internal class similarity is low.
+
+The most important *Internal Evaluation* index is the Silhouette Coefficient, that measures how well an observation is clustered and estimates the average distance between clusters. It is defined as follows:
+
+$$S_i = \frac{b_i - a_i}{\max(a_i, b_i)} \in [-1, +1]$$
+
+* $a_i$ is the average distance of the $i$-th object to all other objects in its cluster;
+* $b_i$ is the minimum of the average distances of the $i$-th object to all the objects in each given cluster.
+
+The most important *External Measure* is the Purity, defined as the ratio between the dominant class and the size of the cluster:
+
+$$Purity(w_i) = \frac{1}{n_i} \max_j (n_{ij}) \in [0, 1]$$
+
+Other external measures are:
+
+* Rand Index, defined as the percentage of correct assigment to a cluster: $RI = \frac{TP + TN}{N} \in [0, 1]$;
+* Precision, Recall and $F$-measure.

@@ -10,12 +10,89 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Sistemi Informativi
-Per *Sistema Informativo* si intende l'insieme delle informazioni utilizzate, memorizzate ed elaborate in una organizzazione per perseguire i propri fini. Per *Sistema Organizzativo*, invece, si intende l'insieme delle risorse e regole per l'utilizzo coordinato di queste risorse.
+> I Sistemi Informativi di oggi rendono certamente possibili i Big Data, che in realtà si iscrivono nel costante tentativo dell'uomo di misurare,comprendere e analizzare il mondo. La rivoluzione dell'IT è evidente in molti aspetti della nostra vita, ma l'enfasi è stata posta quasi sempre sulla T di Tecnologia. Adesso è ora di rifocalizzarci sulla *I* di Informazioni.
 
-cliclo di vita dei dati
+Per *Sistema Informativo* si intende l'insieme delle informazioni utilizzate, memorizzate ed elaborate in una organizzazione per perseguire i propri fini. Per *Sistema Organizzativo*, invece, si intende l'insieme delle risorse e regole per l'utilizzo coordinato di queste risorse. Per *Sistema Informatico* si intende quella parte del sistema informativo le cui informazioni sono raccolte, elaborate e scambiate mediante l'uso delle tecnologie della informazione e della comunicazione.
+
+Gli elementi primari di una organizzazione aziendale sono:
+
+* *Risorsa Organizzativa*, tutto ciò con cui l'organizzazione opera per perseguire i propri obiettivi (Es: prodotti, servizi, materiali);
+* *Processo*, insieme delle attività che l'organizzazione svolge per gestire il ciclo di vita delle risorse.
+
+La ***B***usiness ***I***ntelligence (**BI**) è l'insieme dei metodi e tecniche basate su tecnologie di elaborazione di informazione per analisi di dati business, effettuati su fatti caratteristici (Es: prestazione, vendite, costi) osservati sotto diverse dimensioni. Le *Business Analytics* sono tecnologie basate su competenze e tecnologie applicative per una continua esplorazione e studio delle performance del business passato per conoscere e pianificare il business del futuro.
+
+Le soluzioni principali della BI sono:
+
+* Reporting, in modo da accedere in tempi veloci ai dati nei Data Warehouse per rispondere a domande specifiche;
+* Cubi Multidimensionali e Analisi OLAP, ai fini di una navigazione dei dati secondo logiche dinamiche e gerarchiche
+* Dashboard, fornendo informazioni grafiche e sintetiche allo studio in questione
+* Alerting, per segnalare allarmi azionati da regole determinate ed avvisare il superamento di alcuni valori di prestazione.
+
+Le soluzioni principali, invece, per la Business Analytics sono:
+
+* Forecast, studio di serie storiche per individuare la tendenza e stagionalità di valori;
+* Prediction, metodi di Data Mining con l'obiettivo di identificare le relazioni tra le variabili esplicative e la variabile target (Es: classificazione, regressione, clustering);
+* Optimization, che permettono di identificare la decisione ottimale da effettuare in un'ampia scelta di azioni alternative (Es: massimizzazione ricavi e minimizzazione costi).
+
+L'organizzazione deve avere delle tecniche che permettono di ottenere risposte rapide alle domande ottenendo informazioni immediatamente ed analizzare in termini efficaci le informazioni dei diversi dipartimenti.
+
+Il valore della BI di una azienda dipende principalmente da 3 fattori:
+
+* Livello di Disponibilità delle soluzioni all'interno dell'organizzazione;
+* Livello di Responsabilizzazione, numero di utenti autorizzati ad effettuare richieste specifiche;
+* Propensione Culturale a superare i compartimenti stagni della organizzazione.
+
+# Decision Making
+L'azienda è vista come un sistema decisionale articolato su:
+
+1. Processi fisici, produttivi e distributivi;
+2. Decisioni operative che controllano le operazioni ordinarie (processi fisici);
+3. Decisioni che valutano il risultato delle decisioni operative e che ne variano le regole.
+
+La Griglia di Scott Morton prende spunto dalla suddivisione delle tipologie decisionali di della piramide di Simon e la semplifica in tre classi:
+
+* Decisioni Strutturate, le principali azioni operative predefinite che hanno un basso intervento umano;
+* Decisione semi-Strutturate, le principali azioni tattiche che richiedono l'intervento umano su dati strutturati;
+* Decisioni non Strutturate, le principali azioni strategiche che richiedono un elevato intervento umano che richiedono una alta complessità decisionale.
+
+<!-- Immagine Griglia Scott Morton -->
+```{r Griglia Scott Morton}
+knitr::include_graphics("Immagini/Griglia-Scott-Morton.png")
+```
+
+<!-- Evoluzione del Web -->
+
+# Big Data
+Per Big Data si intende il processo di elaborazione veloce di grandi moli di dati di diverse tipologie e provenienti da diverse sorgenti.  Esistono diversi servizi tecnologici e cloud all'interno di una azienda:
+
+* *PAAS*, che fornisce ed opera su alcuni software tipicamente organizzate, gestite e mantenute su cloud;
+* *IAAS*, che possiede ed opera su applicazioni che risiedono su server remoti e gestite in cloud;
+* *SAAS*, che possiede ed opera su software che risiedono tramite *pay per use* gestite in cloud.
+
+<!-- Immagine Big Data -->
+```{r Big Data}
+knitr::include_graphics("Immagini/Big-Data.png")
+```
+
+<!-- Capire differenza prima e dopo i Big Data -->
+
+I task principali dei Big Data sono:
+
+* *Data Availability*, il livello di disponibilità dei dati e se sono disponibili;
+* *Data Quality*, la rilevanza e consistenza dei dati, il livello di copertura e quanto sono aggiornati;
+* *Data Discovery*, individuare una qualità di dati alta da una vasta collezione di essi;
+* *Completezza dei Dati*, aree con poche informazioni;
+* *Privacy*, estrazione di informazioni personali sufficienti ad effettuare analisi a supporto dei clienti senza compromettere la privacy.
+
+## Data Process
+La Data Ingestion è il processo di estrazione ed importazione di dati dal Web in un database. In base come vengono importati i dati esistono diversi tipi di estrazioni dati:
+
+* *Scraping*, estrazioni di dati strutturati di una parte della pagina Web. I problemi principali di questo processo sono la bassa scalabilità e il continuo aggiustamento dei dati;
+* *Crawling*, estrazione della completa pagina Web (in pratica è il download in formato HTML). I problemi sono la presenza di dati non strutturati e di conseguenza il rumore per l'estrazione dei dati di interesse;
+* *API*, estrazione di dati direttamente collegato al database sorgente. Il vantaggio principale dell'utilizzo delle API rispetto allo scraping è la possibilità di scaricare enormi quantità di dati in poco tempo, in più i dati sono scalabili, in quanto strutturati e con una alta qualità. I problemi riguardano gli accordi tra le parti, utente che richiede l'utilizzo ed azienda, e le differenti strutture dei dati e la conseguente sistemazione dei dati
 
 # Data Driven Economy
-Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per milgiorare i servizi e prodotti delle aziende.
+Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per migliorare i servizi e prodotti delle aziende.
 
 <!-- Lecture 6: 17/10/2020 -->
 # Esercitazione SQL
@@ -255,7 +332,7 @@ SELECT pc.product_class_id,
  GROUP BY pc.product_class_id;
 ```
 
-<!--Lezione 9: 28/10/2020-->
+<!-- Lezione 9: 28/10/2020 -->
 # Data Warehouse
 Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L'obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato. 
 
@@ -266,13 +343,82 @@ La costruzione di un sistema di Data Warehouse non comporta l'inserimento di nuo
 ## Architettura
 L'elaborazione analitica e transazionale devono essere mantenute il più possibile separate, 
 
+<!-- Lezione 12: 06/11/2020 -->
+# Data Quality
+Per *Dato* si intende una rappresentazione elettronica della informazione, immagazzinato in diverse modalità:
+
+* Strutturato, memorizzati in formato tabellare in un database;
+* Semi-Strutturato, memorizzato in formato non tabellare ma associato un tag (XML o HTML);
+* Non Strutturato, memorizzato in formato non tabellare e senza tag (Word).
+
+## Applicazioni
+Si applicano diverse procedure di *Qualità dei Dati* in quanto per analizzare un fenomeno specifico è necessario che siano completi (no dati mancanti), non anomali (no errori o anomalie tipo valori multipli o refusi) e consistenti (no incongruenze tra diversi database). Una dimensione della qualità del dato cattura e descrive un aspetto particolare dello stesso. Esse sono una metrica qualitativa che descrivono una proprietà di interesse. Inoltre sono dipendenti tra di loro (correlazioni positive e negative). I dati possono essere analizzati secondo diversi livelli:
+
+<!-- Livelli Dati:
+        
+        * Istanza
+        * Schema
+        * Formato -->
+
+### Istanza
+Il livello di Istanza identifica le righe di un database. I problemi possono avvenire su singoli record (Es: valori nulli, anomali e ambigui) oppure su record multipli (valori duplicati, contraddittori e non strutturati).
+
+<!-- Dimensioni:
+        
+        * Accuracy
+        * Completeness
+        * Time Related
+        * Consistency -->
+
+### Schema
+Il livello di Schema identifica la progettazione logica del database, alla struttura che conterrà i dati. I RDBMS definiscono una struttura che permette di evitare i problemi di data quality (Es: valori nulli, multipli e categorizzazione dati). Problemi di questo tipo portano anche a problemi di qualità nelle istanze; di conseguenza è necessario costruire un database duraturo e consistente per ottenere un miglioramento della qualità.
+
+<!-- Dimensioni:
+        
+        * Contenuto
+        * Copertura
+        * Composizione
+        * Consistenza
+        * Dettaglio
+        * Cambiamento -->
+
+### Formato
+
+<!-- Dimensioni:
+        
+        * Appropriatezza
+        * Interpretabilità
+        * Portabilità
+        * Precisione
+        * Flessibilità
+        * Rappresentazione dei Valori Nulli
+        * Uso efficiente Memoria -->
+
+## Metodi di Miglioramento
+### Dati
+
+<!-- Metodi:
+        
+        * Confronto con Controparte Reale
+        * Database Bashing
+        * Business Rule -->
+
+### Processi
+Il principale svantaggio dei metodi per il miglioramento della qualità dei dati basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I *Metodi basati sui Processi* prevedono invece un'analisi dei processi per individuare e correggere le cause di errore. 
+
+<!-- Metodi:
+        
+        * Controllo e Miglioramento
+        * Reingegnerizzazione
+        * Business Rule -->
+
 # Graph DB
 Un *Graph Database* è un database utilizzato per lo storage efficiente di dati semi-strutturati. Permette di modellare le relazioni sociali tramite un modello a grafo. <!-- Ricordare la teoria dei grafi in SMA -->
 
 Un nodo, rappresentato da una osservazione, può contenere diverse proprietà che specificano delle entità. Le relazioni, invece, rappresentano la connessione di entità. Devono obbligatoriamente avere un nome ed una direzione e devono avere un inizio ed una fine. Inoltre, anch'esse possono contenere delle proprietà, in modo tale da comprendere meglio la relazione.
 
-<!-- Immagine Grafo -->
-```{r Grafo}
+<!-- Immagine Grafo Skills -->
+```{r Grafo Skills}
 knitr::include_graphics("Immagini/Graph-DB.png")
 ```
 
@@ -304,10 +450,23 @@ CREATE (p)-[r:INTERESTED_IN]->(s)
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
-"file:/skill.csv" AS row
-FIELDTERMINATOR ';'
+"file:/skill.csv" AS row FIELDTERMINATOR ';'
+
 CREATE (:skill
 		{name: row.name});
+```
+
+* Eliminare indice dal grafo:
+
+```Cypher
+drop index [nome_indice]
+```
+
+* Schema del grafo:
+
+```Cypher
+:schema
+CALL db.schema.visualization
 ```
 
 # Esercitazione Graph DB
@@ -320,8 +479,8 @@ Creazione Entità `person`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
-"file:/person.csv" AS row
-FIELDTERMINATOR ';'
+"file:/person.csv" AS row FIELDTERMINATOR ';'
+
 CREATE (:person
 		{name: row.name,
 		gender: row.gender
@@ -333,8 +492,8 @@ Creazione Entità `skill`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
-"file:/skill.csv" AS row
-FIELDTERMINATOR ';'
+"file:/skill.csv" AS row FIELDTERMINATOR ';'
+
 CREATE (:skill
 		{name: row.name});
 ```
@@ -345,6 +504,7 @@ Creazione Relazione `INTERESTED_IN`:
 ```Cypher
 LOAD CSV WITH HEADERS FROM
 "file:/interested_in.csv" as row FIELDTERMINATOR ";" 
+
 MATCH (a:person), (b:skill)
 WHERE a.name = row.from AND b.name = row.to
 CREATE (a)-[:INTERESTED_IN]->(b)
@@ -355,8 +515,8 @@ Creazione Entità `project`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
-"file:/projects.csv" AS row
-FIELDTERMINATOR ';'
+"file:/projects.csv" AS row FIELDTERMINATOR ';'
+
 CREATE (:project
 		{name: row.name});
 ```
@@ -367,6 +527,7 @@ Creazione Relazione `WORKED_ON`:
 ```Cypher
 LOAD CSV WITH HEADERS FROM
 "file:/worked_on.csv" as row FIELDTERMINATOR ";" 
+
 MATCH (a:person), (b:project)
 WHERE a.name = row.from AND b.name = row.to
 CREATE (a)-[:WORKED_ON]->(b)
@@ -376,8 +537,8 @@ Creazione Entità `company`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
-"file:/company.csv" AS row
-FIELDTERMINATOR ';'
+"file:/company.csv" AS row FIELDTERMINATOR ';'
+
 CREATE (:company
 		{name: row.name});
 ```
@@ -388,7 +549,143 @@ Creazione Relazione `WORKS_FOR`:
 ```Cypher
 LOAD CSV WITH HEADERS FROM
 "file:/works_for.csv" as row FIELDTERMINATOR ";" 
+
 MATCH (a:person), (b:company)
 WHERE a.name = row.from AND b.name = row.to
 CREATE (a)-[:WORKS_FOR]->(b)
 ```
+<!-- Lezione 13: 11/11/2020 -->
+## Esercizio 2
+Costruire il grafo dal seguente modello *E-R*:
+
+<!-- Immagine Grafo Tweets -->
+```{r Grafo Tweets}
+knitr::include_graphics("Immagini/Graph-Tweets.png")
+```
+
+### 2.1
+Creare il nodo `users`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/expo_users.csv" AS row FIELDTERMINATOR ';'
+
+CREATE (:users
+		    {user_id: row.user_id,
+         friends_count: row.user_friends_count,
+         follow_count: row.user_followers_count,
+         statuses_count: row.user_statuses_count,
+         created_at: row.user_created_at,
+         mentions: row.tweet_user_mentions,
+         user_name: row.user_screen_name});
+```
+
+### 2.2
+Creare il nodo `hashtags`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/hashtag_distinct.csv" AS row FIELDTERMINATOR ';'
+
+CREATE (:hashtags
+		    {tweet_id: row.tweet_id,
+         hashtags: row.tweet_hashtag});
+```
+
+### 2.3
+Creare il nodo `tweets`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/expo_streaming.csv" AS row FIELDTERMINATOR ';'
+
+CREATE (:tweets
+		    {tweet_id: row.tweet_id,
+         retweet_count: row.tweet_retweet_count,
+         created_at: row.tweet_created_at,
+         tweet: row.tweet_text,
+         hashtags: row.tweet_hashtags,
+         mentions: row.tweet_user_mentions,
+         user_id: row.user_id});
+```
+
+### 2.4
+Creare indici sui nodi:
+
+```Cypher
+CREATE INDEX ON :users(user_id);
+
+CREATE INDEX ON :tweets(tweets_id);
+```
+
+### 2.5
+Creare la relazione `posts`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/expo_streaming.csv" AS row FIELDTERMINATOR ';'
+
+MATCH (u:users), (t:tweets)
+WHERE u.user_id = row.user_id AND t.tweet_id = row.tweet_id
+CREATE (u)-[:posts]->(t)
+```
+
+### 2.5
+Creare la relazione `contains`:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM
+"file:/expo_users.csv" AS row FIELDTERMINATOR ';'
+
+MATCH (t:tweets), (h:hashtags)
+WHERE row.tweet_hashtags = h.hashtags AND row.tweet_id = h.tweet_id
+CREATE (t)-[:contains]->(h)
+```
+
+Creare la relazione retweet:
+
+controllo dei numeri di retweet (882)
+MATCH (t:tweet)
+WHERE t.retweet_status_text = ""
+RETURN count(t) 
+
+si crea original tweet
+
+MATCH (t:tweet)
+WHERE t.retweet_status_id = ""
+SET t:original_tweet
+
+generalizzazione dei tweet:
+match (t:tweet)
+return count(t)
+
+retweet specifico:
+match (t:tweet:retweet)
+return count(t)
+
+# BI
+* Data Scientist
+* Data analyst
+* Data Engineer
+
+
+with, simile a return ma mantiene la lista e raggruppa in una lista
+
+
+  match (n:tweet)
+  return date(substring(n.created_at, 0, 10)) as date
+
+
+vedere numero di tweet per giorno:
+
+
+match (n:tweet)
+with n.date as data, size(collect(n.date)) as cont
+return data, cont
+
+
+numero di tweet da un utente
+
+match (n:tweet)
+with n.user_id as user, size(collect(n.tweet_id)) as n_tweet, collect(n.text) as text
+return user, n_tweet, text

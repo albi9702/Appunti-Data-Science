@@ -484,7 +484,7 @@ knitr::include_graphics("Immagini/Preferential-Attachment.png")
 ```
 It can happen because people want to be associated with popular people, ideas, etc, increasing their *popularity*; *quality*, evaluating people based on objective quality criteria, so higher nodes will attract more attention; *mixed model*, among nodes of similar attribute.
 
-A *Community* is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Networks communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.
+A *Community* is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Network communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.
 
 <!-- Overlapping Disjoint Communities Image-->
 ```{r Overlapping Disjoint Communities, echo = FALSE, out.width = "75%"}
@@ -498,15 +498,165 @@ The Community Detection is confused for clustering, but in the first data is lin
 <!-- Different Categories of Community Detection -->
 Community Detection methods can be divided into 4 main categories:
 
-* *Node-centric Community*, each node in a group satisfies certain properties:
-  + Complete Mutuality, nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than $k - 1$
-  + Reachability of Members, searching communities where all nodes in the group should be reachable in k-jumps. The *k-clique* approach aims to find a maximal subgraph in which the largest distance between any nodes less than $k$ (shortest path given a subgraph). The *k-club* approach aims to find a substructure of diameter $<= k$
-  + Nodal Degrees;
-* *Group-centric Community*, which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if 
+<!-- Categories: 
 
-$$\frac{2|E_s|}{|V_s|(|V_s| - 1)} \geq \gamma$$
+      * Node-centric Community 
+      * Group-centric Community
+      * Network-centric Community
+      * Hierarchy-centric Community -->
 
-  A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.
+## Node-centric Community
+The *Node-centric Community* is a community in which each node in a group satisfies certain properties:
+  
+* *Complete Mutuality*, where nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than $k - 1$;
+* *Reachability of Members*, in which communities where all nodes in the group should be reachable in k-jumps. The *k*-clique approach aims to find a maximal subgraph in which the largest distance between any nodes less than $k$ (shortest path given a subgraph). The *k*-club approach aims to find a substructure of diameter $\leq k$;
+* *Nodal Degrees* (<!-- non pervenuto-->).
 
-* *Network-centric Community*, aims to find communities considering the connection of nodes globally and divide network into disjoint set.
-* *Hierarchy-centric Community*
+## Group-centric Community
+The *Group-centric Community* is a community which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if 
+
+$$\frac{2 |E_s|}{|V_s| (|V_s| - 1)} \geq \gamma$$
+
+A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.
+
+<!-- Lecture 11: 11/11/2020 -->
+## Network-centric Community
+*Network-centric Community* aims to find communities considering global connection of nodes and divide network into disjoint set. The main approaches are:
+  
+<!-- Approaches: 
+
+      * Node Similarity
+      * Latent Space Model (Spectrum)
+      * Modularity Maximization -->
+
+*Node Similarity* measures how similar their interaction patterns are. Two nodes are structurally equivalent if they connect to the same set of nodes (they share the same set of neighbors). This definition is too strict because rarely occur in a large scale and is difficult to compute. To resolve this it is possible to use vector similarity, creating a matrix of connections and calculate the Cosine Similarity or Jaccard Similarity:
+
+$$\begin{aligned}
+    cos(\theta) &= \frac{A B}{\|A\| \|B\|}
+    J(A, B)     &= \frac{|A \cap B|}{|A \cup B|}
+  \end{aligned}$$
+
+It is useful for huge network for computing the vertex similarity and applying $k$-means clustering algorithm: each cluster is associated with a centroid and each node is assigned to the cluster with the closest centroid (recompute the centroid of each cluster).
+  
+Another possible approach is the *Spectral Clustering*, representing a similarity graph as a matrix and analyse the spectrum (= eigenvalues $\lambda$) of the matrix:
+
+$$\begin{bmatrix}
+    w_{11} & \dots & w_{1n} \\
+    \vdots & \dots & \vdots \\
+    w_{n1} & \dots & w_{nn} \\
+  \end{bmatrix}
+  \times
+  \begin{bmatrix}
+    w_{11} \\
+    \vdots \\
+    w_{n1} \\
+  \end{bmatrix} =
+  \lambda
+  \begin{bmatrix}
+    x_{1} \\
+    \vdots \\
+    x_{n} \\
+  \end{bmatrix}$$
+
+The goal is embed points in a low-dimensional space, in which cluster denoting communities are more easy to find. It is necessary to compute the Adjacency matrix and compute the Laplacian matrix:
+
+  $$A_{ij} = 
+    \begin{cases}
+      w_{ij} \text{ weight of edge } (i, j) \\
+      0      \text{otherwise}
+    \end{cases}$$
+
+So the basic stages of spectral clustering are:
+
+1. Pre-processing: Construct a matrix representation of the dataset;
+2. Decomposition: compute eigenvalues and eigenvectors of the matrix and map each point to a lower dimension based on 1 or more eigenvectors.
+3. Grouping: assign points to 2 or more clusters based non the new representation.
+
+*Modularity Maximization* tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection. In a network with $E$ edges, for two nodes $d_i$ and $d_j$ the expected random connection between them is
+$\frac{d_i d_j}{2E}$. The modularity of a group is
+
+$$\sum(A_{ij} - \frac{d_i d_j}{2E})$$
+
+and is necessary to maximize:
+
+$$\frac{1}{2E} \sum_C \sum_{i,j \in C} (A_{ij} - \frac{d_i d_j}{2E})z_{ij}$$
+
+where $z_{ij}$ defines if two edges are in the same group (0 otherwise). If $A_ij$ is very close to the expected random network, the relationship between two nodes is weak ($A_ij$ matrix considered as random). Finally it is possible to compute the spectral clustering and using $k$-means approach to select the communities.
+
+## Hierarchy-centric Community
+*Hierarchy-centric Community* aims to build a hierarchical structure of communities based on network topology. It facilitates the analysis of different resolutions. There are two approaches:
+
+<!-- Approaches: 
+
+      * Divisive Hierarchical Clustering
+      * Agglomerative Hierarchical Clustering -->
+
+The *Divisive Hierarchical Clustering* divides the nodes into several set, where each set is further partitioned into a smaller set. To determine these partition it is possible to use Network-centric Methods. One particular example is based on edge-betweenness, called Girvan-Newman Algorithm (repeat until all edges are removed):
+
+1. Compute the edge-betweenness for all edges in the graph;
+2. Remove the edge with the highest betweenness;
+3. Re-compute betweenness for all edges affected by the edge removal;
+
+*Agglomerative Hierarchical Clustering* initializes each node as a community. It chooses two communities satisfying certain criteria and merges into larger one. It is possible to use Maximum Node Similarity or Maximum Modularity Increase.
+
+<!-- Lecture 14: 13/11/2020 -->
+## Evaluation
+The perfect communities would be objects of the same type in the same community, but this is simply impossible. There are two types of evaluation:
+
+* *With Ground Truth*, partial knowledge of what communities look like and it is given the correct community assignments. Measures are:
+  + Precision;
+  + Recall;
+* *Without Ground Truth*, in a matter of analyzing attributes, such as posts, profile information, of community members to see if there is a coherency among them. It is possibile to use word frequency and wordclouds to find the top topics discussed by communities. Measures are:
+  + SSE;
+  + Community Detection algorithms.
+
+Communities also expand, shirk or dissolve in dynamic networks:
+
+<!-- Community Evolution Image-->
+```{r Community Evolution, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Community-Evolution.png")
+```
+
+# Assortativity and Dynamics
+In some cases hubs connect to hubs and sometimes they avoid each other, it depends on the structural properties. This pattern is a general property of real networks: it is a phenomenon known as *Degree Correlation* $e$, defined as the probability to find a node with degree $i$ and $j$ at the two ends of a randomly selected link ($E$ is the number of edges between two elements).
+
+$$e = \frac{E}{\|E\|}$$
+
+The probability $q_k$ that there is a degree-$k$ node at the end of the randomly selected link is the following ($p_k$ is the degree probability):
+
+$$q_k = \frac{k p_k}{\overline k}$$
+
+Hubs are expected to link to each other on how many links they have. They can be:
+
+* *Assortative*, hubs show a tendency to link to each other. $e_{ij}$ is high along the main diagonal so nodes of comparable degree tend to link to each other;
+* *Neutral*, nodes connected to each other with the expected random probabilities. The density of links is symmetric around the average degree, so nodes link to each other randomly;
+* Disarsortative, hubs tend to avoid linking to each other. $e_{ij}$ is high along the secondary diagonal, so hubs tend to connect to small degree nodes.
+
+<!-- Hubs Hubs Image-->
+```{r Hubs Hubs, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Hubs-Hubs.jpg")
+```
+
+If the networks has no degree correlations, $e_{jk} = q_j q_k$, otherwise the magnitude of the correlation is captured by $\sum_{j, k} jk (e_{jk} - q_j q_k)$. This is expected to be:
+
+* $> 0$ for assortative networks;
+* $= 0$ for neutral networks;
+* $< 0$ for dissasortative networks.
+
+To compare different network, it is possible to normalize the degree correlation coefficient:
+
+$$r = \frac{\sum_{j, k} jk (e_{jk} - q_j q_k)$}{\sum_k [k^2 - q_k - (\sum_k k q_k)^2]} \in [-1, +1]$$
+
+<!-- Degree Correlation Image-->
+```{r Degree Correlation, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Degree-Correlation.png")
+```
+
+An important property of a random network is the emergence of a phase transition at $<k> = 1$, marking the appearance of the *Giant Component*. For Assortative networks, the transition happens to a lower value of $<k>$, hence a giant component emerges for $<k> < 1$ because it easer to start it if the high-degree nodes seek out <!-- cercarsi --> each other. Otherwise, for Disassortative networks the transition is delayed since the hubs tend to connect to small degree nodes and have difficulty to form the giant component.
+
+<!-- Finish Resilience -->
+Alteration of the giant component have implications for network robustness. The *Network Resilience* is the effects of node and edge removal. In Assortative networks hub removal makes less damage because the hubs form a core group, while in disassortative networks is more damaging because hubs are connected to many small degree nodes. It is related to *Percolation* <!-- filtration -->, when a giant component is formed.
+
+<!-- Lecture 15: 20/11/2020 -->
+<!-- Lecture 16: 25/11/2020 -->
+<!-- Lecture 17: 27/11/2020 -->
