@@ -90,7 +90,21 @@
 <li class="chapter" data-level="5" data-path=""><a href="#text-classification"><i class="fa fa-check"></i><b>5</b> Text Classification</a><ul>
 <li class="chapter" data-level="5.1" data-path=""><a href="#applications"><i class="fa fa-check"></i><b>5.1</b> Applications</a></li>
 <li class="chapter" data-level="5.2" data-path=""><a href="#supervised-learning"><i class="fa fa-check"></i><b>5.2</b> Supervised Learning</a></li>
+<li class="chapter" data-level="5.3" data-path=""><a href="#supervised-classification"><i class="fa fa-check"></i><b>5.3</b> Supervised Classification</a></li>
+<li class="chapter" data-level="5.4" data-path=""><a href="#evaluations"><i class="fa fa-check"></i><b>5.4</b> Evaluations</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path=""><a href="#text-clustering"><i class="fa fa-check"></i><b>6</b> Text Clustering</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#flat-clustering"><i class="fa fa-check"></i><b>6.1</b> Flat Clustering</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#hierarchical-clustering"><i class="fa fa-check"></i><b>6.2</b> Hierarchical Clustering</a></li>
+<li class="chapter" data-level="6.3" data-path=""><a href="#clustering-evaluation"><i class="fa fa-check"></i><b>6.3</b> Clustering Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#topic-modeling"><i class="fa fa-check"></i><b>7</b> Topic Modeling</a><ul>
+<li class="chapter" data-level="7.1" data-path=""><a href="#latent-semantic-analysis"><i class="fa fa-check"></i><b>7.1</b> Latent Semantic Analysis</a></li>
+<li class="chapter" data-level="7.2" data-path=""><a href="#latent-dirichlet-analysis"><i class="fa fa-check"></i><b>7.2</b> Latent Dirichlet Analysis</a></li>
+<li class="chapter" data-level="7.3" data-path=""><a href="#evaluation"><i class="fa fa-check"></i><b>7.3</b> Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path=""><a href="#topic-classification"><i class="fa fa-check"></i><b>8</b> Topic Classification</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#text-summarization"><i class="fa fa-check"></i><b>9</b> Text Summarization</a></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
 
@@ -325,6 +339,7 @@ PPMI_{\alpha}(w, c) = \max [(PMI_{\alpha}(w, c), 0]\]</span></p>
 <li><span class="math inline">\(V^t\)</span> is an <span class="math inline">\(m \times c\)</span> matrix with <span class="math inline">\(c\)</span> features of the original matrix <span class="math inline">\(X\)</span> and <span class="math inline">\(m\)</span> singular values rows.S</li>
 </ul>
 <p>It is possible to select the top-<span class="math inline">\(k\)</span> singular values obtaining a low rank approximation of the original matrix <span class="math inline">\(X\)</span>. Instead of multiplying these matrices, it is useful to make only use of the matrix <span class="math inline">\(U\)</span>. Each row of <span class="math inline">\(U\)</span> contains a <span class="math inline">\(k\)</span>-dimensional vector representing a word in the vocabulary.</p>
+<!-- Singular Value Decomposition Image -->
 <p><img src="Immagini/SVD.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><span class="math display">\[\underset{w \times c}{X} \approx  \underset{w \times k}{U}
                                     \times \underset{m \times k}{S} 
@@ -407,15 +422,200 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 <p>In order to generate a vector based representation for a set of documents, there are 3 main steps:</p>
 <ol style="list-style-type: decimal">
 <li><em>Feature Extraction</em> by topic, a set of features that coincide with the set of words occurring in the training set (Unigram model). An alternative is make the set of features coincide with the set of character <span class="math inline">\(n\)</span>-grams occurring in the document. The choice of features is different for classification tasks;</li>
-<li><em>Feature Selection</em>, identifying the most discriminative features discarding the others. The filter approach consists in measuring the discriminative power of each feature and retaining only the top-scoring features. A typical choice is Mutual Information, measuring the mutual dependence between two variables:</li>
+<li><em>Feature Selection</em>, identifying the most discriminative features discarding the others. The filter approach consists in measuring the discriminative power of each feature and retaining only the top-scoring features. A typical choice is Mutual Information, measuring the mutual dependence between two variables. It can be used also with matrix decomposition like SVD, PCA, aggregating different features:</li>
 </ol>
 <p><span class="math display">\[MI(t_k, c_i) = \sum \sum \mathbb{P}(t, c) \log_2 \frac{\mathbb{P}(t, c)}{\mathbb{P}(t) \mathbb{P}(c)}\]</span></p>
-<p>It can be used also with matrix decomposition like SVD, PCA, aggregating different features.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Feature weighting means attributing a value to feature in the vector that represents document. This value can be binary, numeric obtained in a unsupervised or supervised classes.</li>
 </ol>
 <!-- Lecture 13: 09/11/2020-->
+<p>The classical way to represent documents is the vector space model, where documents are converted into vectors in a common vector space. It is constituted by terms (axes) and documents are points in the vector space. To represent the similarity of a document is possible to use the cosine similarity:</p>
+<p><span class="math display">\[\mathbb{sim}(d_1, d_2) = \frac{\sum_{i=1}^k w_{i1}w_{i2}}{\sqrt{\sum_{i=1}^k w_{i1}^2 \sum_{i=1}^k w_{i2}}^2} \in [0, 1]\]</span></p>
 </div>
+<div id="supervised-classification" class="section level2">
+<h2><span class="header-section-number">5.3</span> Supervised Classification</h2>
+<p>For binary classification, essentially any supervised learning algorithm can be used for training a classifier. One of the most important method is <strong><em>S</em></strong>upport <strong><em>V</em></strong>ector <strong><em>M</em></strong>achine (<strong>SVM</strong>), which aims to find the separating surface that maximizes the margin between hyperplane and training points. Often classification problems are not linearly separable, but it can become linear separable once mapped to an high-dimensional space using kernels. The trained classifiers often depend on one or more parameters, but they need to be optimized with a <span class="math inline">\(k\)</span>-fold cross-validation on the training set.</p>
+</div>
+<div id="evaluations" class="section level2">
+<h2><span class="header-section-number">5.4</span> Evaluations</h2>
+<p>There two important aspects to evaluate a classifier: <em>Efficiency</em>, which refers to the consumption of computational resources (training and classification), while Effectiveness (<em>Accuracy</em>) refers to how frequently classification decisions taken by a classifier are correct. For binary classification it is possible to evaluate accuracy with confusion matrix:</p>
+<p><span class="math display">\[Accuracy = \frac{TN + TP}{TN + FN + FP + TP}\]</span></p>
+<p>Another measure is <span class="math inline">\(F_1\)</span>, robust to the presence of imbalance in the test set. It is defined as the harmonic mean of Precision and Recall:</p>
+<p><span class="math display">\[F_1 = \frac{\pi \rho}{\pi + \rho} = \frac{2 TP}{2 TP + FP + FN}\]</span></p>
+<p>For multi-label multi-class classification, <span class="math inline">\(F_1\)</span> must be averaged across the classes according to micro-averaging, or macro-averaging.</p>
+<p>For single-label multi-class classification, the most used measure is the Accuracy.</p>
+<!-- Lecture 14: 12/11/2020 -->
+</div>
+</div>
+<div id="text-clustering" class="section level1">
+<h1><span class="header-section-number">6</span> Text Clustering</h1>
+<p>The Document Clustering is the process of grouping a set of documents into classes of similar object. It is an unsupervised learning, so clusters are formed from data without human input. In particular:</p>
+<ul>
+<li>Object <em>within</em> a cluster should be similar;</li>
+<li>Object <em>from different</em> clusters should be dissimilar.</li>
+</ul>
+<p>It is possible to use Cluster Analysis with documents because objects in the same cluster behave similarly with respect to relevance to information needs. There are different types of clustering structure:</p>
+<ul>
+<li><em>Partitional</em>, a division of the set of data objects into non-overlapping subsets (clusters) such that each data object is in exactly one subset vs <em>Hierarchical</em>, sub-clusters organized as a tree.</li>
+<li><em>Exclusive</em>, each data is assigned to a single cluster vs <em>Overlapping</em>, data can be assigned in more than one cluster.</li>
+<li><em>Complete</em>, every data is assigned to a cluster vs <em>Partial</em>, where every data is not necessary assigned to a cluster.</li>
+</ul>
+<div id="flat-clustering" class="section level2">
+<h2><span class="header-section-number">6.1</span> Flat Clustering</h2>
+<p><em>Flat Clustering</em>, known also as Prototype-Based Clustering, is a clustering algorithm in which any object is closer to the prototype that defines the cluster to which it belongs to than to the prototype of any other cluster.</p>
+<p>The goal of this algorithm is compute an assignment <span class="math inline">\(\gamma : D \rightarrow \{w_1, \dots, w_k\}\)</span> that minimize the objective function (in term of similarity or distance) given a set of documents <span class="math inline">\(D\)</span>, a desired number of clusters <span class="math inline">\(k\)</span>. <em>k-means</em> defines a prototype in terms of a centroid, which is usually the mean (average squared Euclidean Distance) of the documents in the real-valued space. The <span class="math inline">\(k\)</span>-means algorithm is defined as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Select <span class="math inline">\(k\)</span> objects as centroids;</li>
+<li>Form <span class="math inline">\(k\)</span> clusters and assign each document to closest centroid;</li>
+<li>Compute the centroid for each cluster;</li>
+<li>Go to <strong>1.</strong> until centroid do not change.</li>
+</ol>
+<!-- Lecture 15: 16/11/2020 -->
+</div>
+<div id="hierarchical-clustering" class="section level2">
+<h2><span class="header-section-number">6.2</span> Hierarchical Clustering</h2>
+<p><em>Hierarchical Clustering</em> is a clustering algorithm in which sub-clusters are organized as a tree. It also does not require to specify the number of clusters. It can be:</p>
+<ul>
+<li><em>Agglomerative</em>, where all single objects are merged into the closest pair of cluster (by proximity);</li>
+<li><em>Divisive</em>, where an all-inclusive cluster is splitted in different clusters until only single clusters of individual object remain using a flat clustering algorithm (it is necessary to specify which cluster to split and the cut of the dendrogram).</li>
+</ul>
+<p>Hierarchical Clustering is often displayed graphically using a tree-like diagram called <em>Dendrogram</em>, which displays the sub-cluster relationships and the order in which the clusters were merged or splitted.</p>
+<!-- Dendrogram Image -->
+<p><img src="Immagini/Dendrogram.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>There are different ways to define the closest pair of cluster:</p>
+<ul>
+<li><em>Single-link</em>, where the similarity of 2 clusters is the similarity of their most similar members (find the minimum distance between two clusters):</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+    d(w_i, w_j)            &amp;= min_{x \in w_i, y \in w_j} d(x, y) \\
+    d((w_i \cup w_j), w_k) &amp;= min [d(w_i, w_k), d(w_j, w_k)]
+  \end{aligned}\]</span></p>
+<ul>
+<li><em>Complete-link</em>, where the similarity of 2 clusters is the similarity of their most dissimilar members (find the maximum distance between the elements):</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+    S(w_i, w_j)            &amp;= min_{x \in w_i, y \in w_j} S(x, y) \\
+    S((w_i \cup w_j), w_k) &amp;= min [S(w_i, w_k), S(w_j, w_k)]
+  \end{aligned}\]</span></p>
+<ul>
+<li>Group-average;</li>
+<li>Centroid.</li>
+</ul>
+</div>
+<div id="clustering-evaluation" class="section level2">
+<h2><span class="header-section-number">6.3</span> Clustering Evaluation</h2>
+<p>It is difficult to evaluate the validation of a cluster algorithm. A good clustering will produce high quality clusters in which the external class similarity is high and the internal class similarity is low.</p>
+<p>The most important <em>Internal Evaluation</em> index is the Silhouette Coefficient, that measures how well an observation is clustered and estimates the average distance between clusters. It is defined as follows:</p>
+<p><span class="math display">\[S_i = \frac{b_i - a_i}{\max(a_i, b_i)} \in [-1, +1]\]</span></p>
+<ul>
+<li><span class="math inline">\(a_i\)</span> is the average distance of the <span class="math inline">\(i\)</span>-th object to all other objects in its cluster;</li>
+<li><span class="math inline">\(b_i\)</span> is the minimum of the average distances of the <span class="math inline">\(i\)</span>-th object to all the objects in each given cluster.</li>
+</ul>
+<p>The most important <em>External Measure</em> is the Purity, defined as the ratio between the dominant class and the size of the cluster:</p>
+<p><span class="math display">\[Purity(w_i) = \frac{1}{n_i} \max_j (n_{ij}) \in [0, 1]\]</span></p>
+<p>Other external measures are:</p>
+<ul>
+<li>Rand Index, defined as the percentage of correct assigment to a cluster: <span class="math inline">\(RI = \frac{TP + TN}{N} \in [0, 1]\)</span>;</li>
+<li>Precision, Recall and <span class="math inline">\(F\)</span>-measure.</li>
+</ul>
+<!-- Lecture 16: 19/11/2020 -->
+</div>
+</div>
+<div id="topic-modeling" class="section level1">
+<h1><span class="header-section-number">7</span> Topic Modeling</h1>
+<p>Topic Modeling is an unsupervised machine learning tecnique aimed at scanning a set of documents, detect words and phrases patterns within them and automatically clustering word groups which best characterize a set of documents. It provides a set of words that makes sense together (<em>topic</em>).</p>
+<!-- Text Clustering Vs Topic Modelling -->
+<p>The main differences between Text Clustering and Topic Modelling is that the first procedure groups documents into different clusters based on similarity (or distance) measures, while the second one groups words into different clusters where each word have a probability of occurrence for the given topic.</p>
+<!-- Techniques:
+     
+     * Latent Semantic Analysis (LSA)
+     * Latent Dirichlet Analysis (LDA) -->
+<div id="latent-semantic-analysis" class="section level2">
+<h2><span class="header-section-number">7.1</span> Latent Semantic Analysis</h2>
+<p>The <strong><em>L</em></strong>atent <strong><em>S</em></strong>emantic <strong><em>A</em></strong>nalysis (<strong>LSA</strong>) is a Topic Modeling Technique which computes how frequently words occur in the documents and assumes that similar documents will contain the same distribution of word frequencies. The main idea is decompose the Document Term Matrix into a Document Topic and Topic Term matrix.</p>
+<p>The standard method for computing word frequencies is the Tf-Idf for each term in a document. It can be decomposed using SVD:</p>
+<p><span class="math display">\[X = \underset{\text{Document Topic}}{U} \times
+      \underset{\text{Potential Topic}}{S} \times
+      \underset{\text{Term Topic}}{V^t}\]</span></p>
+<!-- Cons -->
+<p>The problem of dimensionality reduction is that cannot have an interpretable meaning in the natural language. Furthermore LSA can onlu capture partially polysemy, but this is not a problem because it can find the predominant sense in a document.</p>
+<!-- Alternative -->
+<p>An alternative of this techniques is the <em>Probabilistic LSA</em> (<strong>pLSA</strong>), which identifies and distinguishes words in different contexts whithout using the dictionary. In particular, it allows to disambiguate polysemy and discloses topical similarities grouping together words sharing the same context.</p>
+<p>It finds a probabilistic model with hidden (or latent) topic that can generate the observed data in the Document Term Matrix. pLSA expresses data in three different variables:</p>
+<ul>
+<li><em>Documents</em> observed variables: <span class="math inline">\(d = \{d_1, \dots, d_N \} \in D\)</span>;</li>
+<li><em>Words</em> observed variables: <span class="math inline">\(w = \{w_1, \dots, w_M \} \in W\)</span>;</li>
+<li><em>Topics</em> hidden variables: <span class="math inline">\(z = \{z_1, \dots, z_K \} \in Z\)</span>.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+    \mathbb{P}(D, W) &amp;= \prod_{(d, w)} \mathbb{P}(d, w) \\
+                     &amp;= \sum_{Z \in z} \mathbb{P}(z)\mathbb{P}(d|z)\mathbb{P}(w|z) \\
+    \implies A       &amp;\approx U_kS_kV_k^t
+  \end{aligned}\]</span></p>
+<!-- Lecture 17: 23/11/2020 -->
+</div>
+<div id="latent-dirichlet-analysis" class="section level2">
+<h2><span class="header-section-number">7.2</span> Latent Dirichlet Analysis</h2>
+<p>The <strong><em>L</em></strong>atent <strong><em>D</em></strong>irichlet <strong><em>A</em></strong>nalysis (<strong>LDA</strong>) is the Bayesian version of pLSA. It categorizes documents, treated as bag of Words, by topic via a generative probabilistic model assuming they are produced from a mixture of topics. Dirichlets distributions is better in finding the assignment of documents to a general topic.</p>
+<p>In a corpus of <span class="math inline">\(M\)</span> documents, it is necessary to choose <span class="math inline">\(k\)</span> topics to discover. LDA outputs the topic model and the <span class="math inline">\(M\)</span> documents expressed a combination of topics finding the weight of connections between documents and topics and words. The algorithm creates an intermediate layer with topics and finds the weights. In this case documents are no longer connected to words but to topics.</p>
+<p>A Dirchlet distribution <span class="math inline">\(Dir(p)\)</span> is a probability funtion which gives probabilities for discrete random variables. It includes the concentration parameter <span class="math inline">\(p\)</span> that rules the trend of the distribution:</p>
+<ul>
+<li>Sparse, producing a real life distribution: <span class="math inline">\(p &lt; 1\)</span>;</li>
+<li>Uniform, producing a random distribution: <span class="math inline">\(p = 1\)</span>;</li>
+<li>Concetrated: <span class="math inline">\(p &gt; 1\)</span>.</li>
+</ul>
+<!-- Dirchlet Distribution Image -->
+<p><img src="Immagini/Dirchlet-Distribution.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>In LM there are two probability functions:</p>
+<ul>
+<li><span class="math inline">\(\theta_d \approx Dir(\alpha)\)</span>, the probability of topic <span class="math inline">\(k\)</span> occurring in document <span class="math inline">\(d\)</span>;</li>
+<li><span class="math inline">\(psi_k \approx Dir(\beta)\)</span>, the probability of word <span class="math inline">\(w\)</span> occurring in topic <span class="math inline">\(k\)</span>.</li>
+</ul>
+<!-- LSA vs LDA -->
+<p>The main differnce between LSA and LSA is the assumption of the Dirchlet distribution, while the second does not assume any distribution. LSA works better than pLSA because it can generalize to new documents.</p>
+</div>
+<div id="evaluation" class="section level2">
+<h2><span class="header-section-number">7.3</span> Evaluation</h2>
+<p>There are different approaches evaluating topic modeling:</p>
+<ul>
+<li>Eye Balling Models, identifying the top <span class="math inline">\(n\)</span> words in a documents;</li>
+<li>Intrinsic Evaluation Metrics, using the <em>Perplexity</em>, a measure of uncertainty, and the <em>Coherence</em>, measuring the semantic similarity between top words whitin the topic. They help to distinguish topics in an interpretable topics from topics that are artifacts of statistical inference;</li>
+<li>Human Judgments, so what is a topic;</li>
+<li>Extrinsic Evaluation Metrics, so if the model is good at performing task, such as classification.</li>
+</ul>
+</div>
+</div>
+<div id="topic-classification" class="section level1">
+<h1><span class="header-section-number">8</span> Topic Classification</h1>
+<p>Topic Classification is a supervised Machine Learning technique in which there are a list of predefined topic for a set of texts. There are many approaches:</p>
+<ul>
+<li>Rule-based Systems, programming a set of hand made rules based on the content of the documents</li>
+<li>Machine Learning Systems, like ML;</li>
+<li>Hybrid Systems, a mixture of the previuous two.</li>
+</ul>
+</div>
+<div id="text-summarization" class="section level1">
+<h1><span class="header-section-number">9</span> Text Summarization</h1>
+<p><em>Text Summariztion</em> is the process of finding the most important information from a source to produce an abridged version of a text for a user. Main advantages are the reduced reading time and the easy research of a document. Automatic summarization improves the effectiveness of indexing. There are different dimension of the Text Summarization:</p>
+<ul>
+<li><em>Based on Input Type</em>, the process of summarizing the text, given a single document (or a group of documents);</li>
+<li><em>Based on the Purposes</em>, that can be:
+<ul>
+<li>Generic, no assumptions about the content of the text to be summarized (it is a generic summarization);</li>
+<li>Domain-Specific, using a domain knowledge forming a more accurate summary;</li>
+<li>Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.</li>
+</ul></li>
+<li><em>Based on Output Type</em>, that can be:
+<ul>
+<li>Extractive Summarization, which selects some important phrases from the input text. This summarization has 3 different tasks:
+<ol style="list-style-type: decimal">
+<li>Create an intermediate representation of the input text capturing the key aspects. There is Topic Representation, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. There is also Indicator Representation, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document).</li>
+<li>Scoring sentences based on the representation, where each sentence is assigned to a scoe indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;</li>
+<li>Selecting a summary consisting of several scored sentences. It is possible to show the best <span class="math inline">\(n\)</span> approaches or the maximal marginale relevance approaches;</li>
+</ol></li>
+<li>Abstractive Summarization, which captures the meaning of the text and producing a summary based on its own prhases (more appealing).</li>
+</ul></li>
+</ul>
 </div>
             </section>
 

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="it" xml:lang="it">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Business Intelligence</title>
+  <meta name="description" content="Business Intelligence" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Business Intelligence" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Business Intelligence" />
+  
+  
+  
+
+<meta name="author" content="Alberto Filosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a > Business Intelligence </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#sistemi-informativi"><i class="fa fa-check"></i><b>1</b> Sistemi Informativi</a></li>
+<li class="chapter" data-level="2" data-path=""><a href="#decision-making"><i class="fa fa-check"></i><b>2</b> Decision Making</a></li>
+<li class="chapter" data-level="3" data-path=""><a href="#big-data"><i class="fa fa-check"></i><b>3</b> Big Data</a><ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#data-process"><i class="fa fa-check"></i><b>3.1</b> Data Process</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#dark-side"><i class="fa fa-check"></i><b>3.2</b> Dark Side</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#database"><i class="fa fa-check"></i><b>4</b> Database</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#modello-entità-relazioni"><i class="fa fa-check"></i><b>4.1</b> Modello Entità Relazioni</a></li>
+<li class="chapter" data-level="4.2" data-path=""><a href="#structured-query-language"><i class="fa fa-check"></i><b>4.2</b> Structured Query Language</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#data-warehouse"><i class="fa fa-check"></i><b>5</b> Data Warehouse</a><ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#architettura"><i class="fa fa-check"></i><b>5.1</b> Architettura</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path=""><a href="#data-quality"><i class="fa fa-check"></i><b>6</b> Data Quality</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#applicazioni"><i class="fa fa-check"></i><b>6.1</b> Applicazioni</a><ul>
+<li class="chapter" data-level="6.1.1" data-path=""><a href="#istanza"><i class="fa fa-check"></i><b>6.1.1</b> Istanza</a></li>
+<li class="chapter" data-level="6.1.2" data-path=""><a href="#schema"><i class="fa fa-check"></i><b>6.1.2</b> Schema</a></li>
+<li class="chapter" data-level="6.1.3" data-path=""><a href="#formato"><i class="fa fa-check"></i><b>6.1.3</b> Formato</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#metodi-di-miglioramento"><i class="fa fa-check"></i><b>6.2</b> Metodi di Miglioramento</a><ul>
+<li class="chapter" data-level="6.2.1" data-path=""><a href="#dati"><i class="fa fa-check"></i><b>6.2.1</b> Dati</a></li>
+<li class="chapter" data-level="6.2.2" data-path=""><a href="#processi"><i class="fa fa-check"></i><b>6.2.2</b> Processi</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#graph-db"><i class="fa fa-check"></i><b>7</b> Graph DB</a></li>
+<li class="divider"></li>
+<li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Business Intelligence</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Business Intelligence</h1>
+<p class="author"><em>Alberto Filosa</em></p>
+<p class="date"><em>30/9/2020</em></p>
+</div>
+<div id="sistemi-informativi" class="section level1">
+<h1><span class="header-section-number">1</span> Sistemi Informativi</h1>
+<blockquote>
+<p>I Sistemi Informativi di oggi rendono certamente possibili i Big Data, che in realtà si iscrivono nel costante tentativo dell’uomo di misurare,comprendere e analizzare il mondo. La rivoluzione dell’IT è evidente in molti aspetti della nostra vita, ma l’enfasi è stata posta quasi sempre sulla T di Tecnologia. Adesso è ora di rifocalizzarci sulla <em>I</em> di Informazioni.</p>
+</blockquote>
+<p>Per <em>Sistema Informativo</em> si intende l’insieme delle informazioni utilizzate, memorizzate ed elaborate in una organizzazione per perseguire i propri fini. Per <em>Sistema Organizzativo</em>, invece, si intende l’insieme delle risorse e regole per l’utilizzo coordinato di queste risorse. Per <em>Sistema Informatico</em> si intende quella parte del sistema informativo le cui informazioni sono raccolte, elaborate e scambiate mediante l’uso delle tecnologie della informazione e della comunicazione.</p>
+<p>Gli elementi primari di una organizzazione aziendale sono:</p>
+<ul>
+<li><em>Risorsa Organizzativa</em>, tutto ciò con cui l’organizzazione opera per perseguire i propri obiettivi (Es: prodotti, servizi, materiali);</li>
+<li><em>Processo</em>, insieme delle attività che l’organizzazione svolge per gestire il ciclo di vita delle risorse.</li>
+</ul>
+<p>La <strong><em>B</em></strong>usiness <strong><em>I</em></strong>ntelligence (<strong>BI</strong>) è l’insieme dei metodi e tecniche basate su tecnologie di elaborazione di informazione per analisi di dati business, effettuati su fatti caratteristici (Es: prestazione, vendite, costi) osservati sotto diverse dimensioni. Le <em>Business Analytics</em> sono tecnologie basate su competenze e tecnologie applicative per una continua esplorazione e studio delle performance del business passato per conoscere e pianificare il business del futuro.</p>
+<p>Le soluzioni principali della BI sono:</p>
+<ul>
+<li>Reporting, in modo da accedere in tempi veloci ai dati nei Data Warehouse per rispondere a domande specifiche;</li>
+<li>Cubi Multidimensionali e Analisi OLAP, ai fini di una navigazione dei dati secondo logiche dinamiche e gerarchiche</li>
+<li>Dashboard, fornendo informazioni grafiche e sintetiche allo studio in questione</li>
+<li>Alerting, per segnalare allarmi azionati da regole determinate ed avvisare il superamento di alcuni valori di prestazione.</li>
+</ul>
+<p>Le soluzioni principali, invece, per la Business Analytics sono:</p>
+<ul>
+<li>Forecast, studio di serie storiche per individuare la tendenza e stagionalità di valori;</li>
+<li>Prediction, metodi di Data Mining con l’obiettivo di identificare le relazioni tra le variabili esplicative e la variabile target (Es: classificazione, regressione, clustering);</li>
+<li>Optimization, che permettono di identificare la decisione ottimale da effettuare in un’ampia scelta di azioni alternative (Es: massimizzazione ricavi e minimizzazione costi).</li>
+</ul>
+<p>L’organizzazione deve avere delle tecniche che permettono di ottenere risposte rapide alle domande ottenendo informazioni immediatamente ed analizzare in termini efficaci le informazioni dei diversi dipartimenti.</p>
+<p>Il valore della BI di una azienda dipende principalmente da 3 fattori:</p>
+<ul>
+<li>Livello di Disponibilità delle soluzioni all’interno dell’organizzazione;</li>
+<li>Livello di Responsabilizzazione, numero di utenti autorizzati ad effettuare richieste specifiche;</li>
+<li>Propensione Culturale a superare i compartimenti stagni della organizzazione.</li>
+</ul>
+</div>
+<div id="decision-making" class="section level1">
+<h1><span class="header-section-number">2</span> Decision Making</h1>
+<p>L’azienda è vista come un sistema decisionale articolato su:</p>
+<ol style="list-style-type: decimal">
+<li>Processi fisici, produttivi e distributivi;</li>
+<li>Decisioni operative che controllano le operazioni ordinarie (processi fisici);</li>
+<li>Decisioni che valutano il risultato delle decisioni operative e che ne variano le regole.</li>
+</ol>
+<p>La Griglia di Scott Morton prende spunto dalla suddivisione delle tipologie decisionali di della piramide di Simon e la semplifica in tre classi:</p>
+<ul>
+<li>Decisioni Strutturate, le principali azioni operative predefinite che hanno un basso intervento umano;</li>
+<li>Decisione semi-Strutturate, le principali azioni tattiche che richiedono l’intervento umano su dati strutturati;</li>
+<li>Decisioni non Strutturate, le principali azioni strategiche che richiedono un elevato intervento umano che richiedono una alta complessità decisionale.</li>
+</ul>
+<!-- Immagine Griglia Scott Morton -->
+<p><img src="Immagini/Griglia-Scott-Morton.png" width="75%" style="display: block; margin: auto;" /></p>
+<!-- Evoluzione del Web -->
+</div>
+<div id="big-data" class="section level1">
+<h1><span class="header-section-number">3</span> Big Data</h1>
+<p>Per Big Data si intende il processo di elaborazione veloce di grandi moli di dati di diverse tipologie e provenienti da diverse sorgenti. Esistono diversi servizi tecnologici e cloud all’interno di una azienda:</p>
+<ul>
+<li><em>PaaS</em>, che fornisce ed opera su alcuni software tipicamente organizzate, gestite e mantenute su cloud;</li>
+<li><em>IaaS</em>, che possiede ed opera su applicazioni che risiedono su server remoti e gestite in cloud;</li>
+<li><em>SaaS</em>, che possiede ed opera su software che risiedono tramite <em>pay per use</em> gestite in cloud.</li>
+</ul>
+<!-- Immagine Big Data -->
+<p><img src="Immagini/Big-Data.png" width="75%" style="display: block; margin: auto;" /></p>
+<!-- Capire differenza prima e dopo i Big Data -->
+<p>Prima dei Big Data gran parte parte delle fonti da cui si attingono i dati (prevalentemente strutturati) erano interne all’azienda, si applicano delle applicazioni <strong><em>E</em></strong>xtraction <strong><em>T</em></strong>ransformation <strong><em>L</em></strong>oading (<strong>ETL</strong>) e si immagazzinano in un Data Warehouse, solitamente con uno schema a stella. Sostanzialmente è un approccio Top-Down, che genera la possibilità di identificare in termini deduttivi le modalità con cui si interviene sui dati.</p>
+<p>Prima dei Big Data le analisi si limitavano a testare un numero limitato di ipotesi predefinite prima della raccolta dati. Adesso è possibile far emergere collegamenti inaspettati tra le variabili. Ad esempio, alcuni fondi speculativi consultano Twitter per prevedere le performance del mercato azionario.</p>
+<p>Dopo i Big Data è possibile intraprendere la strada precedentemente analizzata, oppure estrarre da diversi fonti di dati, principalmente sul Web e spesso non strutturati, e creare un Data Lake che immagazzina i dati nel loro formato naturale. Successivamente verranno utilizzate tecniche di manipolazione di dati per lo storage in un Data Warehouse e per elaborati. Questo è un approccio Bottom-Up, che genera la possibilità di identificare in termini induttivi le modalità di intervento dei dati (si parte dal dato per formulare domande che il dato genera).</p>
+<p>I task principali dei Big Data sono:</p>
+<ul>
+<li><em>Data Availability</em>, il livello di disponibilità dei dati e se sono disponibili;</li>
+<li><em>Data Quality</em>, la rilevanza e consistenza dei dati, il livello di copertura e quanto sono aggiornati;</li>
+<li><em>Data Discovery</em>, individuare una qualità di dati alta da una vasta collezione di essi;</li>
+<li><em>Completezza dei Dati</em>, aree con poche informazioni;</li>
+<li><em>Privacy</em>, estrazione di informazioni personali sufficienti ad effettuare analisi a supporto dei clienti senza compromettere la privacy.</li>
+</ul>
+<div id="data-process" class="section level2">
+<h2><span class="header-section-number">3.1</span> Data Process</h2>
+<p>La Data Ingestion è il processo di estrazione ed importazione di dati dal Web in un database. In base come vengono importati i dati esistono diversi tipi di estrazioni dati:</p>
+<ul>
+<li><em>Scraping</em>, estrazioni di dati strutturati di una parte della pagina Web. I problemi principali di questo processo sono la bassa scalabilità e il continuo aggiustamento dei dati;</li>
+<li><em>Crawling</em>, estrazione della completa pagina Web (in pratica è il download in formato HTML). I problemi sono la presenza di dati non strutturati e di conseguenza il rumore per l’estrazione dei dati di interesse;</li>
+<li><em>API</em>, estrazione di dati direttamente collegato al database sorgente. Il vantaggio principale dell’utilizzo delle API rispetto allo scraping è la possibilità di scaricare enormi quantità di dati in poco tempo, in più i dati sono scalabili, in quanto strutturati e con una alta qualità. I problemi riguardano gli accordi tra le parti, utente che richiede l’utilizzo ed azienda, e le differenti strutture dei dati e la conseguente sistemazione dei dati.</li>
+</ul>
+</div>
+<div id="dark-side" class="section level2">
+<h2><span class="header-section-number">3.2</span> Dark Side</h2>
+<p>Sono stati accumulati anni di esperienza nello studio del comportamento umano, oggi una delle domande principali riguardo i Big Data è come è possibile regolamentare un algoritmo. Dalla nascita della informatica sono state regolamentate azioni per la tutela della privacy. Con i Big Data gli utenti condividono volentieri le informazioni on-line. Un altro problema principale è passare dalla privacy alla probabilità, ad esempio la probabilità di commettere un crimine ed arrestare preventivamente il soggetto. Inoltre, bisogna domandarsi quale sarà il ruolo della libertà e volontà rispetto alla dittatura dei dati e quale sarà il ruolo dell’intuito e della intercetta in contraddizione al dato empirico.</p>
+<!-- # Data Driven Economy
+Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per migliorare i servizi e prodotti delle aziende. -->
+</div>
+</div>
+<div id="database" class="section level1">
+<h1><span class="header-section-number">4</span> Database</h1>
+<p>Un modello di dati è un insieme di concetti utilizzati per organizzare i dati di interesse e descriverne la struttura in modo da risultare comprensibile a tutti. Il modello relazionale dei dati, attualmente il più diffuso, permette di definire tipi per mezzo della relazione, che consente di organizzare i dati in insiemi di record e struttura fissa.</p>
+<p>I Database relazionali organizzano dati in tabelle e successivamente queste possono essere unite tra loro tramite delle chiavi primarie (<em>ID Primary Key</em>). I dati al loro interno sono organizzati in colonne e ogni riga indica un singolo elemento di informazione. L’obiettivo principale dei DBMS è quella di trasformare i dati in informazione.</p>
+<p>Le fasi della progettazione di un Database sono divise in:</p>
+<ul>
+<li><em>Progettazione Concettuale</em>, nella quale si rappresentano i dati nella realtà di interesse ad alto livello indipendentemente dal DBMS costruendo uno schema concettuale (Es: Modello Entità-Relazioni);</li>
+<li><em>Progettazione Logica</em>, nella quale si rappresentano i dati in termini dei costrutti logici di una classe di DBMS. Lo schema del Database viene interpretato da una macchina, il DBMS per l’appunto. Si costruisce uno schema logico rappresentando i dati in un modello logico (Es: Modello Relazionale);</li>
+<li><em>Progettazione Fisica</em>, rappresentando i dati attraverso strutture dati di uno specifico DBMS. Si costruisce uno schema fisico che consiste in uno schema logico con alcune scelte di ottimizzazione per implementare il DBMS (Es: Modello Relazionale con strutture fisiche).</li>
+</ul>
+<p>Una delle peculiarità dei modelli concettuali è l’astrazione, la capacità di individuare caratteristiche comuni in un insieme di oggetti. Le principali astrazioni di base per la rappresentazione della conoscenza sono:</p>
+<ul>
+<li>Classificazione, la capacità di definire classi di oggetti, caratterizzati da una proprietà comune, o fatti del mondo reale;</li>
+<li>Aggregazione, classi di oggetti incluse in altre classi;</li>
+<li>Generalizzazione, costruzione di gerarchie tra elementi di due o più classi.</li>
+</ul>
+<div id="modello-entità-relazioni" class="section level2">
+<h2><span class="header-section-number">4.1</span> Modello Entità Relazioni</h2>
+<p>Il <em>Modello Entità Relazioni</em> è un modello concettuale di dati che fornisce una serie di costrutti che descrivono la realtà di interesse in maniera comprensibile astraendo i concetti di organizzazione dei dati nei calcolatori. Per <em>Entità</em> si intende una classe di oggetti (o di fatti) che hanno proprietà comuni rilevanti per l’applicazione. Ognuna di essa può essere caratterizzata da proprietà, chiamati <em>Attributi</em>. Per distinguere le istante bisogna definire un insieme di attributi univoci per ogni istanza, chiamate chiavi. Essi possono essere:</p>
+<ul>
+<li>Scalari, associato solo un solo valore;</li>
+<li>Multipli, associati <span class="math inline">\(n\)</span> valori.</li>
+</ul>
+<p>Alle volte è utile decomporre concettualmente una entità in gerarchia di entità con diverso livello di dettaglio. Si tratta di gerarchia di <em>Generalizzazione</em> tra le entità, che può essere parziale o totale. In questo modo il diagramma è più comprensibile e si osserva il legame tra la classe padre e figlia.</p>
+<p>Una <em>Relazione</em> rappresenta un legame logico tra due o più entità di interesse. Ognuna di essa presenta una cardinalità, ovvero un vincolo sul numero di istanze con cui un’entità partecipa ad una relazione</p>
+<!-- Immagine Modello Entità Relazioni -->
+<p><img src="Immagini/Modello-ER.png" width="75%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="structured-query-language" class="section level2">
+<h2><span class="header-section-number">4.2</span> Structured Query Language</h2>
+<p>Lo <strong><em>S</em></strong>tructured <strong><em>Q</em></strong>uery <strong><em>L</em></strong>anguage (<strong>SQL</strong>) è un linguaggio di interrogazione dati dei database relazionali. I dati sono organizzati in tabelle, ognuna composta da attributi, nome delle colonne, e da tuple, le osservazioni. Il software che gestisce i dati strutturati è chiamato DBMS, che può gestire più database contemporaneamente.</p>
+<p>Una <em>chiave primaria</em> nel modello relazionale delle basi di dati è un insieme di attributi che permette di individuare univocamente un record in una tabella. Una <em>chiave esterna</em>, invece, è un insieme di attributi che fa riferimento a una chiave di un’altra tabella per unire tramite una join due tabelle diverse. Una tabella deve obbligatoriamente possedere una e una sola chiave primaria, e nessun record nella tabella può lo stesso valore di un altro record: questo vincolo è chiamato vincolo di unicità.</p>
+<!-- Operatori SQL -->
+<p>Gli operatori principali di una interrogazione SQL sono:</p>
+<ul>
+<li>Proiezione (<span class="math inline">\(\pi\)</span>), selezione di alcuni attributi di una tabella (<em>Select</em>);</li>
+<li>Selezione (<span class="math inline">\(\sigma\)</span>), selezione di alcune tuple di una tabella (<em>Where</em>);</li>
+<li>Prodotto Cartesiano (<span class="math inline">\(x\)</span>), l’insieme delle di tutte le possibili coppie ordinate di elementi.</li>
+<li>Join (<span class="math inline">\(⨝\)</span>), combinazione delle tuple di due o più relazioni di un database (Operatore composta da Proiezione e Selezione).</li>
+</ul>
+<p>Una interrogazione di una tabella SQL avviene nel seguente modo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a>  <span class="kw">SELECT</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>tabella<span class="op">/</span>e<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">WHERE</span> <span class="op">&lt;</span>condizione<span class="op">/</span>i<span class="op">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span> <span class="kw">ASC</span><span class="op">/</span><span class="kw">DESC</span>;</span></code></pre></div>
+<p>Il comando <em>Select</em> ha il compito di selezionare le colonne di una o più colonne all’interno di un DataBase. Se sono presenti due colonne da tabelle diverse, è necessario specificare da quale tabella è stata presa. Il comando <em>Where</em> specifica una condizione di ricerca per filtrare le righe selezionate nella <em>Select</em>: tramite operatori logici è possibile utilizzare più condizioni. Il comando <em>Group by</em> è utilizzato assieme alla select per raggruppare le righe di una tabella. Se si vogliono fare delle condizioni sul raggruppamento, si utilizza il comando <em>Having</em>.</p>
+<!-- Lecture 9: 28/10/2020 -->
+</div>
+</div>
+<div id="data-warehouse" class="section level1">
+<h1><span class="header-section-number">5</span> Data Warehouse</h1>
+<p>Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L’obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato.</p>
+<blockquote>
+<p>Il Data Warehouse è una collezione di dati di supporto al processo decisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell’evoluzione temporale e non volatile (accessibile in sola lettura).</p>
+</blockquote>
+<p>La costruzione di un sistema di Data Warehouse non comporta l’inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.</p>
+<div id="architettura" class="section level2">
+<h2><span class="header-section-number">5.1</span> Architettura</h2>
+<p>L’elaborazione analitica e transazionale devono essere mantenute il più possibile separate,</p>
+<!-- Lezione 12: 06/11/2020 -->
+</div>
+</div>
+<div id="data-quality" class="section level1">
+<h1><span class="header-section-number">6</span> Data Quality</h1>
+<p>Per <em>Dato</em> si intende una rappresentazione elettronica della informazione, immagazzinato in diverse modalità:</p>
+<ul>
+<li>Strutturato, memorizzati in formato tabellare in un database;</li>
+<li>Semi-Strutturato, memorizzato in formato non tabellare ma associato un tag (XML o HTML);</li>
+<li>Non Strutturato, memorizzato in formato non tabellare e senza tag (Word).</li>
+</ul>
+<div id="applicazioni" class="section level2">
+<h2><span class="header-section-number">6.1</span> Applicazioni</h2>
+<p>Si applicano diverse procedure di <em>Qualità dei Dati</em> in quanto per analizzare un fenomeno specifico è necessario che siano completi (no dati mancanti), non anomali (no errori o anomalie tipo valori multipli o refusi) e consistenti (no incongruenze tra diversi database). Una dimensione della qualità del dato cattura e descrive un aspetto particolare dello stesso. Esse sono una metrica qualitativa che descrivono una proprietà di interesse. Inoltre sono dipendenti tra di loro (correlazioni positive e negative). I dati possono essere analizzati secondo diversi livelli:</p>
+<!-- Livelli Dati:
+        
+        * Istanza
+        * Schema
+        * Formato -->
+<div id="istanza" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Istanza</h3>
+<p>Il livello di Istanza identifica le righe di un database. I problemi possono avvenire su singoli record (Es: valori nulli, anomali e ambigui) oppure su record multipli (valori duplicati, contraddittori e non strutturati).</p>
+<!-- Dimensioni:
+        
+        * Accuracy
+        * Completeness
+        * Time Related
+        * Consistency -->
+</div>
+<div id="schema" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Schema</h3>
+<p>Il livello di Schema identifica la progettazione logica del database, alla struttura che conterrà i dati. I RDBMS definiscono una struttura che permette di evitare i problemi di data quality (Es: valori nulli, multipli e categorizzazione dati). Problemi di questo tipo portano anche a problemi di qualità nelle istanze; di conseguenza è necessario costruire un database duraturo e consistente per ottenere un miglioramento della qualità.</p>
+<!-- Dimensioni:
+        
+        * Contenuto
+        * Copertura
+        * Composizione
+        * Consistenza
+        * Dettaglio
+        * Cambiamento -->
+</div>
+<div id="formato" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Formato</h3>
+<!-- Dimensioni:
+        
+        * Appropriatezza
+        * Interpretabilità
+        * Portabilità
+        * Precisione
+        * Flessibilità
+        * Rappresentazione dei Valori Nulli
+        * Uso efficiente Memoria -->
+</div>
+</div>
+<div id="metodi-di-miglioramento" class="section level2">
+<h2><span class="header-section-number">6.2</span> Metodi di Miglioramento</h2>
+<div id="dati" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Dati</h3>
+<!-- Metodi:
+        
+        * Confronto con Controparte Reale
+        * Database Bashing
+        * Business Rule -->
+</div>
+<div id="processi" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Processi</h3>
+<p>Il principale svantaggio dei metodi per il miglioramento della qualità dei dati basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I <em>Metodi basati sui Processi</em> prevedono invece un’analisi dei processi per individuare e correggere le cause di errore.</p>
+<!-- Metodi:
+        
+        * Controllo e Miglioramento
+        * Reingegnerizzazione
+        * Business Rule -->
+</div>
+</div>
+</div>
+<div id="graph-db" class="section level1">
+<h1><span class="header-section-number">7</span> Graph DB</h1>
+<p>Un <em>Graph Database</em> è un database utilizzato per lo storage efficiente di dati semi-strutturati. Permette di modellare le relazioni sociali tramite un modello a grafo. <!-- Ricordare la teoria dei grafi in SMA --></p>
+<p>Un nodo, rappresentato da una osservazione, può contenere diverse proprietà che specificano delle entità. Le relazioni, invece, rappresentano la connessione di entità. Devono obbligatoriamente avere un nome ed una direzione e devono avere un inizio ed una fine. Inoltre, anch’esse possono contenere delle proprietà, in modo tale da comprendere meglio la relazione.</p>
+<!-- Immagine Grafo Skills -->
+<p><img src="Immagini/Graph-DB.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Il linguaggio utilizzato in Neo4j è chiamato <strong><em>C</em></strong>ypher <strong><em>Q</em></strong>uery <strong><em>L</em></strong>anguage (<strong>CQL</strong>), di tipo dichiarativo, perciò si descrive quello che si vuole, non come. Le principali funzioni sono tipo aggregativo e di ordinamento; inoltre, è possibile creare, aggiornare o eliminare elementi al grafo.</p>
+<ul>
+<li>Struttura query:</li>
+</ul>
+<pre class="cypher"><code>MATCH pattern_grafo
+WHERE condizione/i
+RETURN risultato</code></pre>
+<ul>
+<li>Creazione nodo:</li>
+</ul>
+<pre class="cypher"><code>CREATE (:Person {name: &quot;Charlie&quot;})</code></pre>
+<ul>
+<li>Creazione relazione:</li>
+</ul>
+<pre class="cypher"><code>MATCH (p:person), (s:skill)
+WHERE p.name = &#39;charlie&#39; AND s.name = &#39;medicine&#39;
+CREATE (p)-[r:INTERESTED_IN]-&gt;(s)</code></pre>
+<ul>
+<li>Caricare dati da CSV:</li>
+</ul>
+<pre class="cypher"><code>LOAD CSV WITH HEADERS FROM
+&quot;file:/skill.csv&quot; AS row FIELDTERMINATOR &#39;;&#39;
+
+CREATE (:skill
+        {name: row.name});</code></pre>
+<ul>
+<li>Eliminare indice dal grafo:</li>
+</ul>
+<pre class="cypher"><code>drop index [nome_indice]</code></pre>
+<ul>
+<li>Schema del grafo:</li>
+</ul>
+<pre class="cypher"><code>:schema
+CALL db.schema.visualization</code></pre>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,12 +1,51 @@
 ---
-title: "Untitled"
+title: "Business Intelligence"
 author: "Alberto Filosa"
 date: "30/9/2020"
-output: html_document
+email: "a.filosa1@campus.unimib.it"
+documentclass: article
+lang: it
+fontsize: 11pt
+geometry: margin = 0.5in
+classoption: twocolumn
+output:
+  bookdown::gitbook:
+    keep_md: false
+    css: style.css
+    split_by: rmd
+    config:
+      toc:
+        collapse: subsection
+        before: |
+          <li><a > Business Intelligence </a></li>
+        after: |
+          <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+      download: ["pdf", "epub"]
+      fontsettings:
+        theme: white
+        family: sans
+        size: 2
+      sharing:
+        github: yes
+        linkedin: yes
+        twitter: no
+        facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,
+                      out.width = "75%",
+                      fig.align = "center")
 ```
 
 # Sistemi Informativi
@@ -65,9 +104,9 @@ knitr::include_graphics("Immagini/Griglia-Scott-Morton.png")
 # Big Data
 Per Big Data si intende il processo di elaborazione veloce di grandi moli di dati di diverse tipologie e provenienti da diverse sorgenti.  Esistono diversi servizi tecnologici e cloud all'interno di una azienda:
 
-* *PAAS*, che fornisce ed opera su alcuni software tipicamente organizzate, gestite e mantenute su cloud;
-* *IAAS*, che possiede ed opera su applicazioni che risiedono su server remoti e gestite in cloud;
-* *SAAS*, che possiede ed opera su software che risiedono tramite *pay per use* gestite in cloud.
+* *PaaS*, che fornisce ed opera su alcuni software tipicamente organizzate, gestite e mantenute su cloud;
+* *IaaS*, che possiede ed opera su applicazioni che risiedono su server remoti e gestite in cloud;
+* *SaaS*, che possiede ed opera su software che risiedono tramite *pay per use* gestite in cloud.
 
 <!-- Immagine Big Data -->
 ```{r Big Data}
@@ -75,6 +114,11 @@ knitr::include_graphics("Immagini/Big-Data.png")
 ```
 
 <!-- Capire differenza prima e dopo i Big Data -->
+Prima dei Big Data gran parte parte delle fonti da cui si attingono i dati (prevalentemente strutturati) erano interne all'azienda, si applicano delle applicazioni ***E***xtraction ***T***ransformation ***L***oading (**ETL**) e si immagazzinano in un Data Warehouse, solitamente con uno schema a stella. Sostanzialmente è un approccio Top-Down, che genera la possibilità di identificare in termini deduttivi le modalità con cui si interviene sui dati.
+
+Prima dei Big Data le analisi si limitavano a testare un numero limitato di ipotesi predefinite prima della raccolta dati. Adesso è possibile far emergere collegamenti inaspettati tra le variabili. Ad esempio, alcuni fondi speculativi consultano Twitter per prevedere le performance del mercato azionario.
+
+Dopo i Big Data è possibile intraprendere la strada precedentemente analizzata, oppure estrarre da diversi fonti di dati, principalmente sul Web e spesso non strutturati, e creare un Data Lake che immagazzina i dati nel loro formato naturale. Successivamente verranno utilizzate tecniche di manipolazione di dati per lo storage in un Data Warehouse e per elaborati. Questo è un approccio Bottom-Up, che genera la possibilità di identificare in termini induttivi le modalità di intervento dei dati (si parte dal dato per formulare domande che il dato genera).
 
 I task principali dei Big Data sono:
 
@@ -89,254 +133,76 @@ La Data Ingestion è il processo di estrazione ed importazione di dati dal Web i
 
 * *Scraping*, estrazioni di dati strutturati di una parte della pagina Web. I problemi principali di questo processo sono la bassa scalabilità e il continuo aggiustamento dei dati;
 * *Crawling*, estrazione della completa pagina Web (in pratica è il download in formato HTML). I problemi sono la presenza di dati non strutturati e di conseguenza il rumore per l'estrazione dei dati di interesse;
-* *API*, estrazione di dati direttamente collegato al database sorgente. Il vantaggio principale dell'utilizzo delle API rispetto allo scraping è la possibilità di scaricare enormi quantità di dati in poco tempo, in più i dati sono scalabili, in quanto strutturati e con una alta qualità. I problemi riguardano gli accordi tra le parti, utente che richiede l'utilizzo ed azienda, e le differenti strutture dei dati e la conseguente sistemazione dei dati
+* *API*, estrazione di dati direttamente collegato al database sorgente. Il vantaggio principale dell'utilizzo delle API rispetto allo scraping è la possibilità di scaricare enormi quantità di dati in poco tempo, in più i dati sono scalabili, in quanto strutturati e con una alta qualità. I problemi riguardano gli accordi tra le parti, utente che richiede l'utilizzo ed azienda, e le differenti strutture dei dati e la conseguente sistemazione dei dati.
 
-# Data Driven Economy
-Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per migliorare i servizi e prodotti delle aziende.
+## Dark Side
+Sono stati accumulati anni di esperienza nello studio del comportamento umano, oggi una delle domande principali riguardo i Big Data è come è possibile regolamentare un algoritmo. Dalla nascita della informatica sono state regolamentate azioni per la tutela della privacy. Con i Big Data gli utenti condividono volentieri le informazioni on-line. Un altro problema principale è passare dalla privacy alla probabilità, ad esempio la probabilità di commettere un crimine ed arrestare preventivamente il soggetto. Inoltre, bisogna domandarsi quale sarà il ruolo della libertà e volontà rispetto alla dittatura dei dati e quale sarà il ruolo dell'intuito e della intercetta in contraddizione al dato empirico.
 
-<!-- Lecture 6: 17/10/2020 -->
-# Esercitazione SQL
+<!-- # Data Driven Economy
+Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per migliorare i servizi e prodotti delle aziende. -->
 
-## Esercizio 1
-### 1.1 
-Visualizzare solo il contenuto degli attributi titolo, tipo, prezzo della tabella libri:
+# Database
+Un modello di dati è un insieme di concetti utilizzati per organizzare i dati di interesse e descriverne la struttura in modo da risultare comprensibile a tutti. Il modello relazionale dei dati, attualmente il più diffuso, permette di definire tipi per mezzo della relazione, che consente di organizzare i dati in insiemi di record e struttura fissa.
 
-```SQL
-SELECT titolo,
-       tipo,
-       prezzo
-  FROM libri;
+I Database relazionali organizzano dati in tabelle e successivamente queste possono essere unite tra loro tramite delle chiavi primarie (*ID Primary Key*). I dati al loro interno sono organizzati in colonne e ogni riga indica un singolo elemento di informazione. L'obiettivo principale dei DBMS è quella di trasformare i dati in informazione.
+
+Le fasi della progettazione di un Database sono divise in:
+
+* *Progettazione Concettuale*, nella quale si rappresentano i dati nella realtà di interesse ad alto livello indipendentemente dal DBMS costruendo uno schema concettuale (Es: Modello Entità-Relazioni);
+* *Progettazione Logica*, nella quale si rappresentano i dati in termini dei costrutti logici di una classe di DBMS. Lo schema del Database viene interpretato da una macchina, il DBMS per l'appunto. Si costruisce uno schema logico rappresentando i dati in un modello logico (Es: Modello Relazionale);
+* *Progettazione Fisica*, rappresentando i dati attraverso strutture dati di uno specifico DBMS. Si costruisce uno schema fisico che consiste in uno schema logico con alcune scelte di ottimizzazione per implementare il DBMS (Es: Modello Relazionale con strutture fisiche).
+
+Una delle peculiarità dei modelli concettuali è l'astrazione, la capacità di individuare caratteristiche comuni in un insieme di oggetti. Le principali astrazioni di base per la rappresentazione della conoscenza sono:
+
+* Classificazione, la capacità di definire classi di oggetti, caratterizzati da una proprietà comune, o fatti del mondo reale;
+* Aggregazione, classi di oggetti incluse in altre classi;
+* Generalizzazione, costruzione di gerarchie tra elementi di due o più classi.
+
+## Modello Entità Relazioni
+Il *Modello Entità Relazioni* è un modello concettuale di dati che fornisce una serie di costrutti che descrivono la realtà di interesse in maniera comprensibile astraendo i concetti di organizzazione dei dati nei calcolatori. Per *Entità* si intende una classe di oggetti (o di fatti) che hanno proprietà comuni rilevanti per l'applicazione. Ognuna di essa può essere caratterizzata da proprietà, chiamati *Attributi*. Per distinguere le istante bisogna definire un insieme di attributi univoci per ogni istanza, chiamate chiavi. Essi possono essere:
+
+* Scalari, associato solo un solo valore;
+* Multipli, associati $n$ valori.
+
+Alle volte è utile decomporre concettualmente una entità in gerarchia di entità con diverso livello di dettaglio. Si tratta di gerarchia di *Generalizzazione* tra le entità, che può essere parziale o totale. In questo modo il diagramma è più comprensibile e si osserva il legame tra la classe padre e figlia.
+
+Una *Relazione* rappresenta un legame logico tra due o più entità di interesse. Ognuna di essa presenta una cardinalità, ovvero un vincolo sul numero di istanze con cui un'entità partecipa ad una relazione
+
+<!-- Immagine Modello Entità Relazioni -->
+```{r Modello Entità Relazioni}
+knitr::include_graphics("Immagini/Modello-ER.png")
 ```
 
-### 1.2
-Visualizzare titolo e prezzo dei libri che costano meno di 10 euro:
+## Structured Query Language
+Lo ***S***tructured ***Q***uery ***L***anguage (**SQL**) è un linguaggio di interrogazione dati dei database relazionali. I dati sono organizzati in tabelle, ognuna composta da attributi, nome delle colonne, e da tuple, le osservazioni. Il software che gestisce i dati strutturati è chiamato DBMS, che può gestire più database contemporaneamente.
+
+Una *chiave primaria* nel modello relazionale delle basi di dati è un insieme di attributi che permette di individuare univocamente un record in una tabella. Una *chiave esterna*, invece, è un insieme di attributi  che fa riferimento a una chiave di un'altra tabella per unire tramite una join due tabelle diverse. Una tabella deve obbligatoriamente possedere una e una sola chiave primaria, e nessun record nella tabella può lo stesso valore di un altro record: questo vincolo è chiamato vincolo di unicità.
+
+<!-- Operatori SQL -->
+Gli operatori principali di una interrogazione SQL sono:
+
+* Proiezione ($\pi$), selezione di alcuni attributi di una tabella (*Select*);
+* Selezione ($\sigma$), selezione di alcune tuple di una tabella (*Where*);
+* Prodotto Cartesiano ($x$), l'insieme delle di tutte le possibili coppie ordinate di elementi. 
+* Join ($⨝$), combinazione delle tuple di due o più relazioni di un database (Operatore composta da Proiezione e Selezione).
+
+Una interrogazione di una tabella SQL avviene nel seguente modo:
 
 ```SQL
-SELECT titolo,
-       prezzo
-  FROM libri
- WHERE prezzo < 10;
+  SELECT <attributo/i>
+  FROM <tabella/e>
+  WHERE <condizione/i>
+  GROUP BY <attributo/i>
+  ORDER BY <attributo/i> ASC/DESC;
 ```
 
-### 1.3
-Visualizzare le informazioni dei libri di informatica (`CS`):
+Il comando *Select* ha il compito di selezionare le colonne di una o più colonne all'interno di un DataBase. Se sono presenti due colonne da tabelle diverse, è necessario specificare da quale tabella è stata presa. Il comando *Where* specifica una condizione di ricerca per filtrare le righe selezionate nella *Select*: tramite operatori logici è possibile utilizzare più condizioni. Il comando *Group by* è utilizzato assieme alla select per raggruppare le righe di una tabella. Se si vogliono fare delle condizioni sul raggruppamento, si utilizza il comando *Having*.
 
-```SQL
-SELECT titolo,
-       tipo
-  FROM libri
- WHERE tipo = "CS";
-```
-
-### 1.4
-Visualizzare con un’unica query le informazioni sia dei libri di informatica sia dei libri di fiction (`CS` e `FIC`):
-
-```SQL
-SELECT titolo,
-       tipo
-  FROM libri
- WHERE tipo = "CS" OR 
-       tipo = "FIC";
-```
-
-### 1.5
-Visualizzare per ogni libro, il titolo del libro e l'editore:
-
-```SQL
-SELECT titolo,
-       nome
-  FROM editori,
-       libri
- WHERE editori.codice = libri.codice_editore;
-```
-
-### 1.6
-Visualizzare per ogni libro il titolo, il prezzo e la descrizione del formato:
-
-```SQL
-SELECT titolo,
-       prezzo,
-       descrizione
-  FROM libri AS l
-       JOIN
-       formato AS f ON f.codice = l.cod_format;
-```
-
-### 1.7
-Visualizzare (per ogni libro della tabella libri) il titolo del libro e il cognome dell'autore che lo ha scritto:
-
-```SQL
-SELECT titolo,
-       cognome
-  FROM libri AS l
-       JOIN
-       hascritto AS hs ON l.codice = hs.codice_libro
-       JOIN
-       autori AS a ON hs.codice_autore = a.codice_autore;
-```
-
-### 1.8
-Come il punto precedente, ma stampare solamente i libri scritti da Kafka:
-
-```SQL
-SELECT titolo,
-       cognome
-  FROM libri AS l
-       JOIN
-       hascritto AS hs ON l.codice = hs.codice_libro
-       JOIN
-       autori AS a ON hs.codice_autore = a.codice_autore
- WHERE cognome = "Kafka";
-```
-
-### 1.9
-Come il punto precedente, ma stampare solamente i libri scritti da Kafka o da Agata Christie:
-
-```SQL
-SELECT titolo,
-       cognome
-  FROM libri AS l
-       JOIN
-       hascritto AS hs ON l.codice = hs.codice_libro
-       JOIN
-       autori AS a ON hs.codice_autore = a.codice_autore
- WHERE cognome = "Kafka" OR 
-       cognome = "Christie";
-```
-
-### 1.10
-Stampate il nome e la sede delle librerie dove è in vendita il libro `dBASE Programming`:
-
-```SQL
-SELECT nome,
-       sede
-  FROM negozi AS n
-       JOIN
-       scorte AS s ON n.codice_negozio = s.codice_negozio
-       JOIN
-       libri AS l ON s.codice_libro = l.codice
- WHERE titolo = "dBASE Programming";
-```
-
-## Esercizio 2
-### 2.1
-Visualizzare il numero totale di clienti con nome `Charles`, `Patricia` e `Sharon`:
-
-```SQL
-SELECT count( * ) AS Conteggio
-  FROM customer
- WHERE fname = 'Charles' OR 
-       fname = 'Patricia' OR 
-       fname = 'Sharon'
- GROUP BY fname;
-```
-
-### 2.2
-Visualizzare il numero totale di carte stratificate per tipo di carta:
-
-```SQL
-SELECT mc.description,
-       COUNT( * ) 
-  FROM customer AS c
-       JOIN
-       member_card AS mc ON c.card_type_id = mc.card_type_id
- GROUP BY mc.card_type_id;
-```
-
-### 2.3
-Visualizzare il numero degli scontrini dei client `Clyde Dixon` e `Bonnie Emerson`:
-
-```SQL
-SELECT *
-  FROM bill AS b
-       JOIN
-       customer AS c ON b.customer_id = c.customer_id
- WHERE c.fname = 'Clyde' AND 
-       c.lname = 'Dixon';
-```
-
-### 2.4
-Visualizzare il nome ed il cognome dei clienti, per i quali sono stati emessi scontrini che singolarmente riportano un totale superiore a 307 dollari:
-
-```SQL
-SELECT *
-  FROM bill AS b
-       JOIN
-       customer AS c ON b.customer_id = c.customer_id
- WHERE b.total > 307;
-```
-
-### 2.5
-Visualizzare il cognome ed il nome di tutti i clienti che hanno acquistato il prodotto `Great Muffins`:
-
-```SQL
-SELECT c.lname,
-       c.fname
-  FROM bill AS b
-       JOIN
-       customer AS c ON c.customer_id = b.customer_id
-       JOIN
-       item_in_bill AS i ON b.bill_id = i.bill_id
-       JOIN
-       product AS p ON i.product_id = p.product_id
- WHERE p.product_name = 'Great Muffins'
- ORDER BY c.lname;
-```
-
-### 2.6
-Visualizzate il cognome e il nome di tutti i clienti che hanno acquistato prodotti forniti dall’azienda `Bravo`:
-
-```SQL
-SELECT c.lname,
-       c.fname,
-       p.product_name,
-       b.date
-  FROM bill AS b
-       JOIN
-       customer AS c ON c.customer_id = b.customer_id
-       JOIN
-       item_in_bill AS i ON b.bill_id = i.bill_id
-       JOIN
-       product AS p ON i.product_id = p.product_id
-       JOIN
-       supplier AS s ON p.supplier_id = s.supplier_id
- WHERE s.name = 'Bravo';
-```
-
-### 2.7
-Per ogni prodotto con `product_id` < 20, visualizzare la quantità di prodotto venduta:
-
-```SQL
-SELECT p.product_id,
-       p.product_name,
-       sum(i.quantity) 
-  FROM product AS p
-       JOIN
-       item_in_bill AS i ON p.product_id = i.product_id
- WHERE p.product_id < 20
- GROUP BY p.product_id;
-```
-
-### 2.8
-Eseguire delle query per individuare la classe di prodotti che vende di più, sia in termini di quantità, sia in termini di ricavo:
-
-```SQL
-SELECT pc.product_class_id,
-       pc.product_subcategory,
-       sum(i.quantity) as Quantita
-  FROM item_in_bill AS i
-       JOIN
-       product AS p ON i.product_id = p.product_id
-       JOIN
-       product_class AS pc ON p.product_class_id = pc.product_class_id
- GROUP BY pc.product_class_id;
-```
-
-<!-- Lezione 9: 28/10/2020 -->
+<!-- Lecture 9: 28/10/2020 -->
 # Data Warehouse
 Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L'obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato. 
 
-> Il Data Warehouse è una collezione di dati di supporto al processo deisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell'evoluzione temporale e non volatile (accessibile in sola lettura).
+> Il Data Warehouse è una collezione di dati di supporto al processo decisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell'evoluzione temporale e non volatile (accessibile in sola lettura).
 
 La costruzione di un sistema di Data Warehouse non comporta l'inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.
 
@@ -468,224 +334,3 @@ drop index [nome_indice]
 :schema
 CALL db.schema.visualization
 ```
-
-# Esercitazione Graph DB
-
-## Esercizio 1
-Costruire il grafo della immagine precedente:
-
-### 1.1
-Creazione Entità `person`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/person.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:person
-		{name: row.name,
-		gender: row.gender
-});
-```
-
-### 1.2
-Creazione Entità `skill`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/skill.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:skill
-		{name: row.name});
-```
-
-### 1.3
-Creazione Relazione `INTERESTED_IN`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/interested_in.csv" as row FIELDTERMINATOR ";" 
-
-MATCH (a:person), (b:skill)
-WHERE a.name = row.from AND b.name = row.to
-CREATE (a)-[:INTERESTED_IN]->(b)
-```
-
-### 1.4
-Creazione Entità `project`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/projects.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:project
-		{name: row.name});
-```
-
-### 1.5
-Creazione Relazione `WORKED_ON`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/worked_on.csv" as row FIELDTERMINATOR ";" 
-
-MATCH (a:person), (b:project)
-WHERE a.name = row.from AND b.name = row.to
-CREATE (a)-[:WORKED_ON]->(b)
-```
-### 1.5
-Creazione Entità `company`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/company.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:company
-		{name: row.name});
-```
-
-### 1.6
-Creazione Relazione `WORKS_FOR`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/works_for.csv" as row FIELDTERMINATOR ";" 
-
-MATCH (a:person), (b:company)
-WHERE a.name = row.from AND b.name = row.to
-CREATE (a)-[:WORKS_FOR]->(b)
-```
-<!-- Lezione 13: 11/11/2020 -->
-## Esercizio 2
-Costruire il grafo dal seguente modello *E-R*:
-
-<!-- Immagine Grafo Tweets -->
-```{r Grafo Tweets}
-knitr::include_graphics("Immagini/Graph-Tweets.png")
-```
-
-### 2.1
-Creare il nodo `users`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/expo_users.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:users
-		    {user_id: row.user_id,
-         friends_count: row.user_friends_count,
-         follow_count: row.user_followers_count,
-         statuses_count: row.user_statuses_count,
-         created_at: row.user_created_at,
-         mentions: row.tweet_user_mentions,
-         user_name: row.user_screen_name});
-```
-
-### 2.2
-Creare il nodo `hashtags`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/hashtag_distinct.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:hashtags
-		    {tweet_id: row.tweet_id,
-         hashtags: row.tweet_hashtag});
-```
-
-### 2.3
-Creare il nodo `tweets`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/expo_streaming.csv" AS row FIELDTERMINATOR ';'
-
-CREATE (:tweets
-		    {tweet_id: row.tweet_id,
-         retweet_count: row.tweet_retweet_count,
-         created_at: row.tweet_created_at,
-         tweet: row.tweet_text,
-         hashtags: row.tweet_hashtags,
-         mentions: row.tweet_user_mentions,
-         user_id: row.user_id});
-```
-
-### 2.4
-Creare indici sui nodi:
-
-```Cypher
-CREATE INDEX ON :users(user_id);
-
-CREATE INDEX ON :tweets(tweets_id);
-```
-
-### 2.5
-Creare la relazione `posts`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/expo_streaming.csv" AS row FIELDTERMINATOR ';'
-
-MATCH (u:users), (t:tweets)
-WHERE u.user_id = row.user_id AND t.tweet_id = row.tweet_id
-CREATE (u)-[:posts]->(t)
-```
-
-### 2.5
-Creare la relazione `contains`:
-
-```Cypher
-LOAD CSV WITH HEADERS FROM
-"file:/expo_users.csv" AS row FIELDTERMINATOR ';'
-
-MATCH (t:tweets), (h:hashtags)
-WHERE row.tweet_hashtags = h.hashtags AND row.tweet_id = h.tweet_id
-CREATE (t)-[:contains]->(h)
-```
-
-Creare la relazione retweet:
-
-controllo dei numeri di retweet (882)
-MATCH (t:tweet)
-WHERE t.retweet_status_text = ""
-RETURN count(t) 
-
-si crea original tweet
-
-MATCH (t:tweet)
-WHERE t.retweet_status_id = ""
-SET t:original_tweet
-
-generalizzazione dei tweet:
-match (t:tweet)
-return count(t)
-
-retweet specifico:
-match (t:tweet:retweet)
-return count(t)
-
-# BI
-* Data Scientist
-* Data analyst
-* Data Engineer
-
-
-with, simile a return ma mantiene la lista e raggruppa in una lista
-
-
-  match (n:tweet)
-  return date(substring(n.created_at, 0, 10)) as date
-
-
-vedere numero di tweet per giorno:
-
-
-match (n:tweet)
-with n.date as data, size(collect(n.date)) as cont
-return data, cont
-
-
-numero di tweet da un utente
-
-match (n:tweet)
-with n.user_id as user, size(collect(n.tweet_id)) as n_tweet, collect(n.text) as text
-return user, n_tweet, text

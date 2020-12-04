@@ -20,7 +20,7 @@ output:
     df_print: kable
     highlight: monochrome
   bookdown::gitbook:
-    keep_md: true
+    keep_md: false
     css: style.css
     split_by: rmd
     config:
@@ -43,7 +43,8 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo = FALSE,
+                      out.width = "75%",
                       fig.align = "center")
 ```
 
@@ -461,3 +462,41 @@ Range Search, data la misura di similarità, è possibile calcolare la distanza 
 
 <!-- Lecture 16: 24/11/2020 -->
 ## Performance Evaluation
+Per valutare un sistema *CBIR* è necessario definire un insieme di immagini come dataset di test. Per ogni query si ottiene un giudizio di rilevanza (relevance judgement) e si comparano i risultati ottenuti rispetto ai documenti rilevanti per una determinata query. Per misurare le performance si utilizzano:
+
+* *Recall*, definito come il rapporto tra i documenti rilevanti nella collezione;
+* *Precision*, definito come il rapporto tra i documenti rilevanti predette ed il total dei documenti rilevanti.
+
+Tipicamente, precision e recall sono combinati tra loro formando la metrica chiamata *F-Score*, calcolata come media armonica tra le due metriche:
+
+$$F_1 = \frac{2rp}{r + p}$$
+
+I vettori di feature (feature vector) vengono confrontati con una metrica di distanza (Es: Euclidea, Manhattan, Mahalanobis):
+
+$$d(x, y) = \sqrt[r]{\sum^n_{k = 1}|x_k - y_k|^r}$$
+
+Per individuare se due immagini sono simili si confrontano tutti i feature vector calcolando la distanza tra di esse:
+
+$$d(X, Y) \sum_{i = 1}^n w_i d_i (x_i, y_i)$$
+
+I problemi principali di questa metrica è che i valori potrebbero essere molto alti, di conseguenza le immagini sono molto diverse, è necessario scegliere la distanza migliore per ogni feature e i pesi devono essere scelti accuratamente. Per risolvere questi problemi è possibile normalizzare le feature in un range $[0, 1]$ e calcolare indici come la *Mean* o *Gaussian Normalization*.
+
+Le immagini devono avere le seguenti proprietà:
+
+* Similarità Percettiva, la distanza della feature tra due immagini è largo solamente se le immagini non sono simili;
+* Efficienza, velocemente computabili;
+* Economia, le immagini devono avere una dimensione ridotta;
+* Scalabilità, le performance del sistema non deve essere influenzata dalla grandezza del database;
+* Robustezza, non hanno effetti sulle performance di retrieval cambiando l'immagine.
+
+Per ottenere una migliore robustezza della immagine è possibile dividere in regioni più piccole l'immagine stessa. In questo modo è possibile estrarre delle feature creando un Bag of Word, ottenendo informazioni riguardo la presenza di testi in esse ($\delta = 1$ se coppie simili, 0 altrimenti).
+
+$$\begin{aligned}
+    l(x_1, x_2, \delta) &= \delta l_P(d_D(x_1, x_2)) + (1 - \delta) l_N(d_D(x_1, x_2))
+                        &= \delta d_D(x_1, x_2) + \max (0, m - d_D(x_1, x_2))
+  \end{aligned}$$
+
+Per apprendere una miglior rappresentazione della similarità tra immagini è possibile utilizzare il *Network Siamese*. La rete neurale traina una funzione che mappa i pattern di input in uno spazio che approssima la distanza semantica nella spazio di input. La funzione di perdita utilizzata è chiamata *Triplet Loss*, che minimizza a distanza tra la query di ricerca ed i valori positivi e massimizza la distanza tra la query e il negativo.
+
+<!-- Lecture 18: 1/12/2020 -->
+# GAN

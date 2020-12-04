@@ -9,18 +9,8 @@ fontsize: 11pt
 geometry: margin = 0.5in
 classoption: twocolumn
 output: 
-  pdf_document:
-    latex_engine: xelatex
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
-    df_print: kable
-    highlight: monochrome
   bookdown::gitbook:
-    keep_md: true
+    keep_md: false
     css: style.css
     split_by: rmd
     config:
@@ -40,6 +30,16 @@ output:
         linkedin: yes
         twitter: no
         facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
 ---
 
 ```{r setup, include = FALSE}
@@ -548,3 +548,97 @@ Other external measures are:
 
 * Rand Index, defined as the percentage of correct assigment to a cluster: $RI = \frac{TP + TN}{N} \in [0, 1]$;
 * Precision, Recall and $F$-measure.
+
+<!-- Lecture 16: 19/11/2020 -->
+# Topic Modeling
+Topic Modeling is an unsupervised machine learning tecnique aimed at scanning a set of documents, detect words and phrases patterns within them and automatically clustering word groups which best characterize a set of documents. It provides a set of words that makes sense together (*topic*).
+
+<!-- Text Clustering Vs Topic Modelling -->
+The main differences between Text Clustering and Topic Modelling is that the first procedure groups documents into different clusters based on similarity (or distance) measures, while the second one groups words into different clusters where each word have a probability of occurrence for the given topic.
+
+<!-- Techniques:
+     
+     * Latent Semantic Analysis (LSA)
+     * Latent Dirichlet Analysis (LDA) -->
+     
+## Latent Semantic Analysis
+The ***L***atent ***S***emantic ***A***nalysis (**LSA**) is a Topic Modeling Technique which computes how frequently words occur in the documents and assumes that similar documents will contain the same distribution of word frequencies. The main idea is decompose the Document Term Matrix into a Document Topic and Topic Term matrix.
+
+The standard method for computing word frequencies is the Tf-Idf for each term in a document. It can be decomposed using SVD: 
+
+$$X = \underset{\text{Document Topic}}{U} \times
+      \underset{\text{Potential Topic}}{S} \times
+      \underset{\text{Term Topic}}{V^t}$$
+
+<!-- Cons -->
+The problem of dimensionality reduction is that cannot have an interpretable meaning in the natural language. Furthermore LSA can onlu capture partially polysemy, but this is not a problem because it can find the predominant sense in a document.
+
+<!-- Alternative -->
+An alternative of this techniques is the *Probabilistic LSA* (**pLSA**), which identifies and distinguishes words in different contexts whithout using the dictionary. In particular, it allows to disambiguate polysemy and discloses topical similarities grouping together words sharing the same context.
+
+It finds a probabilistic model with hidden (or latent) topic that can generate the observed data in the Document Term Matrix. pLSA expresses data in three different variables:
+
+* *Documents* observed variables: $d = \{d_1, \dots, d_N \} \in D$;
+* *Words* observed variables: $w = \{w_1, \dots, w_M \} \in W$;
+* *Topics* hidden variables: $z = \{z_1, \dots, z_K \} \in Z$.
+
+$$\begin{aligned}
+    \mathbb{P}(D, W) &= \prod_{(d, w)} \mathbb{P}(d, w) \\
+                     &= \sum_{Z \in z} \mathbb{P}(z)\mathbb{P}(d|z)\mathbb{P}(w|z) \\
+    \implies A       &\approx U_kS_kV_k^t
+  \end{aligned}$$
+  
+<!-- Lecture 17: 23/11/2020 -->
+## Latent Dirichlet Analysis
+The ***L***atent ***D***irichlet ***A***nalysis (**LDA**) is the Bayesian version of pLSA. It categorizes documents, treated as bag of Words, by topic via a generative probabilistic model assuming they are produced from a mixture of topics. Dirichlets distributions is better in finding the assignment of documents to a general topic.
+
+In a corpus of $M$ documents, it is necessary to choose $k$ topics to discover. LDA outputs the topic model and the $M$ documents expressed a combination of topics finding the weight of connections between documents and topics and words. The algorithm creates an intermediate layer with topics and finds the weights. In this case documents are no longer connected to words but to topics.
+
+A Dirchlet distribution $Dir(p)$ is a probability funtion which gives probabilities for discrete random variables. It includes the concentration parameter $p$ that rules the trend of the distribution:
+
+* Sparse, producing a real life distribution: $p < 1$;
+* Uniform, producing a random distribution: $p = 1$;
+* Concetrated: $p > 1$.
+
+<!-- Dirchlet Distribution Image -->
+```{r Dirchlet Distribution, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("Immagini/Dirchlet-Distribution.png")
+```
+
+In LM there are two probability functions:
+
+* $\theta_d \approx Dir(\alpha)$, the probability of topic $k$ occurring in document $d$;
+* $psi_k \approx Dir(\beta)$, the probability of word $w$ occurring in topic $k$.
+
+<!-- LSA vs LDA -->
+The main differnce between LSA and LSA is the assumption of the Dirchlet distribution, while the second does not assume any distribution. LSA works better than pLSA because it can generalize to new documents.
+
+## Evaluation
+There are different approaches evaluating topic modeling:
+
+* Eye Balling Models, identifying the top $n$ words in a documents;
+* Intrinsic Evaluation Metrics, using the *Perplexity*, a measure of uncertainty, and the *Coherence*, measuring the semantic similarity between top words whitin the topic. They help to distinguish topics in an interpretable topics from topics that are artifacts of statistical inference;
+* Human Judgments, so what is a topic;
+* Extrinsic Evaluation Metrics, so if the model is good at performing task, such as classification.
+
+# Topic Classification
+Topic Classification is a supervised Machine Learning technique in which there are a list of predefined topic for a set of texts. There are many approaches:
+
+* Rule-based Systems, programming a set of hand made rules based on the content of the documents
+* Machine Learning Systems, like ML;
+* Hybrid Systems, a mixture of the previuous two.
+
+# Text Summarization
+*Text Summariztion* is the process of finding the most important information from a source to produce an abridged version of a text for a user. Main advantages are the reduced reading time and the easy research of a document. Automatic summarization improves the effectiveness of indexing. There are different dimension of the Text Summarization:
+     
+* *Based on Input Type*, the process of summarizing the text, given a single document (or a group of documents);
+* *Based on the Purposes*, that can be:
+  + Generic, no assumptions about the content of the text to be summarized (it is a generic summarization);
+  + Domain-Specific, using a domain knowledge forming a more accurate summary;
+  + Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.
+* *Based on Output Type*, that can be:
+  + Extractive Summarization, which selects some important phrases from the input text. This summarization has 3 different tasks:
+    1. Create an intermediate representation of the input text capturing the key aspects. There is Topic Representation, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. There is also Indicator Representation, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document).
+    2. Scoring sentences based on the representation, where each sentence is assigned to a scoe indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;
+    3. Selecting a summary consisting of several scored sentences. It is possible to show the best $n$ approaches or the maximal marginale relevance approaches;
+  + Abstractive Summarization, which captures the meaning of the text and producing a summary based on its own prhases (more appealing).

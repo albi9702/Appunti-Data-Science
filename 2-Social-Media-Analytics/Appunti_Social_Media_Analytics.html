@@ -92,7 +92,17 @@
 <li class="chapter" data-level="4.2" data-path=""><a href="#distribution-metrics"><i class="fa fa-check"></i><b>4.2</b> Distribution Metrics</a></li>
 <li class="chapter" data-level="4.3" data-path=""><a href="#segmentation-metrics"><i class="fa fa-check"></i><b>4.3</b> Segmentation Metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path=""><a href="#community-detection"><i class="fa fa-check"></i><b>5</b> Community Detection</a></li>
+<li class="chapter" data-level="5" data-path=""><a href="#community-detection"><i class="fa fa-check"></i><b>5</b> Community Detection</a><ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#node-centric-community"><i class="fa fa-check"></i><b>5.1</b> Node-centric Community</a></li>
+<li class="chapter" data-level="5.2" data-path=""><a href="#group-centric-community"><i class="fa fa-check"></i><b>5.2</b> Group-centric Community</a></li>
+<li class="chapter" data-level="5.3" data-path=""><a href="#network-centric-community"><i class="fa fa-check"></i><b>5.3</b> Network-centric Community</a></li>
+<li class="chapter" data-level="5.4" data-path=""><a href="#hierarchy-centric-community"><i class="fa fa-check"></i><b>5.4</b> Hierarchy-centric Community</a></li>
+<li class="chapter" data-level="5.5" data-path=""><a href="#evaluation"><i class="fa fa-check"></i><b>5.5</b> Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path=""><a href="#assortativity-and-dynamics"><i class="fa fa-check"></i><b>6</b> Assortativity and Dynamics</a></li>
+<li class="chapter" data-level="7" data-path=""><a href="#sentiment-analysis"><i class="fa fa-check"></i><b>7</b> Sentiment Analysis</a><ul>
+<li class="chapter" data-level="7.1" data-path=""><a href="#semantic-ambiguity"><i class="fa fa-check"></i><b>7.1</b> Semantic Ambiguity</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
 
@@ -475,28 +485,194 @@
 <!-- Preferential Attachment Image-->
 <p><img src="Immagini/Preferential-Attachment.png" width="75%" style="display: block; margin: auto;" />
 It can happen because people want to be associated with popular people, ideas, etc, increasing their <em>popularity</em>; <em>quality</em>, evaluating people based on objective quality criteria, so higher nodes will attract more attention; <em>mixed model</em>, among nodes of similar attribute.</p>
-<p>A <em>Community</em> is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Networks communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.</p>
+<p>A <em>Community</em> is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Network communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.</p>
 <!-- Overlapping Disjoint Communities Image-->
 <p><img src="Immagini/Overlapping-Disjoint-Communities.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>The Link Prediction is the prediction of which nodes are likely get connected given a Social Network; the output is a list of ranked pairs of nodes.</p>
 <p>The Community Detection is confused for clustering, but in the first data is linked in a graph and network data tends to be discrete, leading algorithm using the graph property directly.</p>
 <!-- Different Categories of Community Detection -->
 <p>Community Detection methods can be divided into 4 main categories:</p>
+<!-- Categories: 
+
+      * Node-centric Community 
+      * Group-centric Community
+      * Network-centric Community
+      * Hierarchy-centric Community -->
+<div id="node-centric-community" class="section level2">
+<h2><span class="header-section-number">5.1</span> Node-centric Community</h2>
+<p>The <em>Node-centric Community</em> is a community in which each node in a group satisfies certain properties:</p>
 <ul>
-<li><em>Node-centric Community</em>, each node in a group satisfies certain properties:
-<ul>
-<li>Complete Mutuality, nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than <span class="math inline">\(k - 1\)</span></li>
-<li>Reachability of Members, searching communities where all nodes in the group should be reachable in k-jumps. The <em>k-clique</em> approach aims to find a maximal subgraph in which the largest distance between any nodes less than <span class="math inline">\(k\)</span> (shortest path given a subgraph). The <em>k-club</em> approach aims to find a substructure of diameter <span class="math inline">\(&lt;= k\)</span></li>
-<li>Nodal Degrees;</li>
-</ul></li>
-<li><em>Group-centric Community</em>, which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if</li>
+<li><em>Complete Mutuality</em>, where nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than <span class="math inline">\(k - 1\)</span>;</li>
+<li><em>Reachability of Members</em>, in which communities where all nodes in the group should be reachable in k-jumps. The <em>k</em>-clique approach aims to find a maximal subgraph in which the largest distance between any nodes less than <span class="math inline">\(k\)</span> (shortest path given a subgraph). The <em>k</em>-club approach aims to find a substructure of diameter <span class="math inline">\(\leq k\)</span>;</li>
+<li><em>Nodal Degrees</em> (<!-- non pervenuto-->).</li>
 </ul>
-<p><span class="math display">\[\frac{2|E_s|}{|V_s|(|V_s| - 1)} \geq \gamma\]</span></p>
+</div>
+<div id="group-centric-community" class="section level2">
+<h2><span class="header-section-number">5.2</span> Group-centric Community</h2>
+<p>The <em>Group-centric Community</em> is a community which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if</p>
+<p><span class="math display">\[\frac{2 |E_s|}{|V_s| (|V_s| - 1)} \geq \gamma\]</span></p>
 <p>A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.</p>
+<!-- Lecture 11: 11/11/2020 -->
+</div>
+<div id="network-centric-community" class="section level2">
+<h2><span class="header-section-number">5.3</span> Network-centric Community</h2>
+<p><em>Network-centric Community</em> aims to find communities considering global connection of nodes and divide network into disjoint set. The main approaches are:</p>
+<!-- Approaches: 
+
+      * Node Similarity
+      * Latent Space Model (Spectrum)
+      * Modularity Maximization -->
+<p><em>Node Similarity</em> measures how similar their interaction patterns are. Two nodes are structurally equivalent if they connect to the same set of nodes (they share the same set of neighbors). This definition is too strict because rarely occur in a large scale and is difficult to compute. To resolve this it is possible to use vector similarity, creating a matrix of connections and calculate the Cosine Similarity or Jaccard Similarity:</p>
+<p><span class="math display">\[\begin{aligned}
+    cos(\theta) &amp;= \frac{A B}{\|A\| \|B\|}
+    J(A, B)     &amp;= \frac{|A \cap B|}{|A \cup B|}
+  \end{aligned}\]</span></p>
+<p>It is useful for huge network for computing the vertex similarity and applying <span class="math inline">\(k\)</span>-means clustering algorithm: each cluster is associated with a centroid and each node is assigned to the cluster with the closest centroid (recompute the centroid of each cluster).</p>
+<p>Another possible approach is the <em>Spectral Clustering</em>, representing a similarity graph as a matrix and analyse the spectrum (= eigenvalues <span class="math inline">\(\lambda\)</span>) of the matrix:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    w_{11} &amp; \dots &amp; w_{1n} \\
+    \vdots &amp; \dots &amp; \vdots \\
+    w_{n1} &amp; \dots &amp; w_{nn} \\
+  \end{bmatrix}
+  \times
+  \begin{bmatrix}
+    w_{11} \\
+    \vdots \\
+    w_{n1} \\
+  \end{bmatrix} =
+  \lambda
+  \begin{bmatrix}
+    x_{1} \\
+    \vdots \\
+    x_{n} \\
+  \end{bmatrix}\]</span></p>
+<p>The goal is embed points in a low-dimensional space, in which cluster denoting communities are more easy to find. It is necessary to compute the Adjacency matrix and compute the Laplacian matrix:</p>
+<p><span class="math display">\[A_{ij} = 
+    \begin{cases}
+      w_{ij} \text{ weight of edge } (i, j) \\
+      0      \text{otherwise}
+    \end{cases}\]</span></p>
+<p>So the basic stages of spectral clustering are:</p>
+<ol style="list-style-type: decimal">
+<li>Pre-processing: Construct a matrix representation of the dataset;</li>
+<li>Decomposition: compute eigenvalues and eigenvectors of the matrix and map each point to a lower dimension based on 1 or more eigenvectors.</li>
+<li>Grouping: assign points to 2 or more clusters based non the new representation.</li>
+</ol>
+<p><em>Modularity Maximization</em> tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection. In a network with <span class="math inline">\(E\)</span> edges, for two nodes <span class="math inline">\(d_i\)</span> and <span class="math inline">\(d_j\)</span> the expected random connection between them is
+<span class="math inline">\(\frac{d_i d_j}{2E}\)</span>. The modularity of a group is</p>
+<p><span class="math display">\[\sum(A_{ij} - \frac{d_i d_j}{2E})\]</span></p>
+<p>and is necessary to maximize:</p>
+<p><span class="math display">\[\frac{1}{2E} \sum_C \sum_{i,j \in C} (A_{ij} - \frac{d_i d_j}{2E})z_{ij}\]</span></p>
+<p>where <span class="math inline">\(z_{ij}\)</span> defines if two edges are in the same group (0 otherwise). If <span class="math inline">\(A_ij\)</span> is very close to the expected random network, the relationship between two nodes is weak (<span class="math inline">\(A_ij\)</span> matrix considered as random). Finally it is possible to compute the spectral clustering and using <span class="math inline">\(k\)</span>-means approach to select the communities.</p>
+</div>
+<div id="hierarchy-centric-community" class="section level2">
+<h2><span class="header-section-number">5.4</span> Hierarchy-centric Community</h2>
+<p><em>Hierarchy-centric Community</em> aims to build a hierarchical structure of communities based on network topology. It facilitates the analysis of different resolutions. There are two approaches:</p>
+<!-- Approaches: 
+
+      * Divisive Hierarchical Clustering
+      * Agglomerative Hierarchical Clustering -->
+<p>The <em>Divisive Hierarchical Clustering</em> divides the nodes into several set, where each set is further partitioned into a smaller set. To determine these partition it is possible to use Network-centric Methods. One particular example is based on edge-betweenness, called Girvan-Newman Algorithm (repeat until all edges are removed):</p>
+<ol style="list-style-type: decimal">
+<li>Compute the edge-betweenness for all edges in the graph;</li>
+<li>Remove the edge with the highest betweenness;</li>
+<li>Re-compute betweenness for all edges affected by the edge removal;</li>
+</ol>
+<p><em>Agglomerative Hierarchical Clustering</em> initializes each node as a community. It chooses two communities satisfying certain criteria and merges into larger one. It is possible to use Maximum Node Similarity or Maximum Modularity Increase.</p>
+<!-- Lecture 14: 13/11/2020 -->
+</div>
+<div id="evaluation" class="section level2">
+<h2><span class="header-section-number">5.5</span> Evaluation</h2>
+<p>The perfect communities would be objects of the same type in the same community, but this is simply impossible. There are two types of evaluation:</p>
 <ul>
-<li><em>Network-centric Community</em>, aims to find communities considering the connection of nodes globally and divide network into disjoint set.</li>
-<li><em>Hierarchy-centric Community</em></li>
+<li><em>With Ground Truth</em>, partial knowledge of what communities look like and it is given the correct community assignments. Measures are:
+<ul>
+<li>Precision;</li>
+<li>Recall;</li>
+</ul></li>
+<li><em>Without Ground Truth</em>, in a matter of analyzing attributes, such as posts, profile information, of community members to see if there is a coherency among them. It is possibile to use word frequency and wordclouds to find the top topics discussed by communities. Measures are:
+<ul>
+<li>SSE;</li>
+<li>Community Detection algorithms.</li>
+</ul></li>
 </ul>
+<p>Communities also expand, shirk or dissolve in dynamic networks:</p>
+<!-- Community Evolution Image-->
+<p><img src="Immagini/Community-Evolution.png" width="75%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="assortativity-and-dynamics" class="section level1">
+<h1><span class="header-section-number">6</span> Assortativity and Dynamics</h1>
+<p>In some cases hubs connect to hubs and sometimes they avoid each other, it depends on the structural properties. This pattern is a general property of real networks: it is a phenomenon known as <em>Degree Correlation</em> <span class="math inline">\(e\)</span>, defined as the probability to find a node with degree <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> at the two ends of a randomly selected link (<span class="math inline">\(E\)</span> is the number of edges between two elements).</p>
+<p><span class="math display">\[e = \frac{E}{\|E\|}\]</span></p>
+<p>The probability <span class="math inline">\(q_k\)</span> that there is a degree-<span class="math inline">\(k\)</span> node at the end of the randomly selected link is the following (<span class="math inline">\(p_k\)</span> is the degree probability):</p>
+<p><span class="math display">\[q_k = \frac{k p_k}{\overline k}\]</span></p>
+<p>Hubs are expected to link to each other on how many links they have. They can be:</p>
+<ul>
+<li><em>Assortative</em>, hubs show a tendency to link to each other. <span class="math inline">\(e_{ij}\)</span> is high along the main diagonal so nodes of comparable degree tend to link to each other;</li>
+<li><em>Neutral</em>, nodes connected to each other with the expected random probabilities. The density of links is symmetric around the average degree, so nodes link to each other randomly;</li>
+<li>Disarsortative, hubs tend to avoid linking to each other. <span class="math inline">\(e_{ij}\)</span> is high along the secondary diagonal, so hubs tend to connect to small degree nodes.</li>
+</ul>
+<!-- Hubs Hubs Image-->
+<p><img src="Immagini/Hubs-Hubs.jpg" width="75%" style="display: block; margin: auto;" /></p>
+<p>If the networks has no degree correlations, <span class="math inline">\(e_{jk} = q_j q_k\)</span>, otherwise the magnitude of the correlation is captured by <span class="math inline">\(\sum_{j, k} jk (e_{jk} - q_j q_k)\)</span>. This is expected to be:</p>
+<ul>
+<li><span class="math inline">\(&gt; 0\)</span> for assortative networks;</li>
+<li><span class="math inline">\(= 0\)</span> for neutral networks;</li>
+<li><span class="math inline">\(&lt; 0\)</span> for dissasortative networks.</li>
+</ul>
+<p>To compare different network, it is possible to normalize the degree correlation coefficient:</p>
+<p><span class="math display">\[r = \frac{\sum_{j, k} jk (e_{jk} - q_j q_k)}{\sum_k [k^2 - q_k - (\sum_k k q_k)^2]} \in [-1, +1]\]</span></p>
+<!-- Degree Correlation Image-->
+<p><img src="Immagini/Degree-Correlation.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>An important property of a random network is the emergence of a phase transition at <span class="math inline">\(&lt;k&gt; = 1\)</span>, marking the appearance of the <em>Giant Component</em>. For Assortative networks, the transition happens to a lower value of <span class="math inline">\(&lt;k&gt;\)</span>, hence a giant component emerges for <span class="math inline">\(&lt;k&gt; &lt; 1\)</span> because it easer to start it if the high-degree nodes seek out <!-- cercarsi --> each other. Otherwise, for Disassortative networks the transition is delayed since the hubs tend to connect to small degree nodes and have difficulty to form the giant component.</p>
+<!-- Finish Resilience -->
+<p>Alteration of the giant component have implications for network robustness. The <em>Network Resilience</em> is the effects of node and edge removal. In Assortative networks hub removal makes less damage because the hubs form a core group, while in disassortative networks is more damaging because hubs are connected to many small degree nodes. It is related to <em>Percolation</em> <!-- filtration -->, when a giant component is formed.</p>
+<!-- Lecture 15: 18/11/2020 -->
+</div>
+<div id="sentiment-analysis" class="section level1">
+<h1><span class="header-section-number">7</span> Sentiment Analysis</h1>
+<p>From Social Network is possible to extract information about a given argument and analyzed them to make decisions (e.g. predicting market data, better quality of life). This is not so simple because it is necessary to transform data from unstructured (cannot be displayed in rows, requires more storage and are more difficult to manage) to structured data, displayed in rows-columns and requires less storage.</p>
+<!-- Structured VsUnstructured Image-->
+<p><img src="Immagini/Structured-Vs-Unstructured.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The transformation is necessary to extract some important information like emotion, polarity, topic and the language of the user.</p>
+<p>In order to extract some useful information, it is necessary to set some basic components for SMA:</p>
+<ul>
+<li>Identify the <em>Opinion Holder</em> (User) that holds a specific opinion;</li>
+<li>Identify the <em>Object</em> on which an opinion is expressed;</li>
+<li>Identify the Aspect of the object;</li>
+<li>Identify the <em>Opinion</em> on an object from a user.</li>
+</ul>
+<p>Social Media Analytics should be able to interpret natural language to discover if an information is subjective and determine the corresponding polarity. A text is <em>objective</em> if a post presents factual information about the world, while <em>subjective</em> if expresses feeling, emotions or beliefs. An <em>explicit</em> opinion is a subjective statement giving an opinion, while <em>implicit</em> implies an opinion. An <em>ironic</em> post is a communicative way expressing the opposite what is literally said. Emotions are complex reaction pattern involving experiential and physiological elements in which a person attempt to deal with.</p>
+<p>The process of SMA is constituted by:</p>
+<ol style="list-style-type: decimal">
+<li><em>Collect</em> real time expressions or opinion on-line or off-line;</li>
+<li><em>Represent</em> text from qualitative to quantitative data to measure compare and learn. The pre-processing techniques are remove stopwords, numbers and punctuation and apply the stemmatization. Furthermore, it is possible to represent in a vector space model the text. It is possible also to use the Word2vec model; <!-- Recall to Text Mining -->.</li>
+<li><em>Classify</em> measuring, compare and learn sentiments. It is possible to classify in different ways:</li>
+</ol>
+<ul>
+<li>Lexicon-based Approach, for each sentence the process identifies term belonging to the list containing positive and negative terms with different weights. This lists is contained in a lexicon and one of the most important is the Liu lexicon opinion. The polarity of a text is given by the number of the positive and negative terms. For example, if <span class="math inline">\(\text{Word}_{\text{positive}} &gt; \text{Word}_{\text{negative}}\)</span> the word is positive;</li>
+<li>Supervised Learning, an approach in which some text are labeled and it is possible to learn a model in order to predict new texts with the corresponding polarity. To deal with negation is possible to add <em>NOT_</em> to every word between negation.</li>
+<li>Semi-Supervised Learning uses a small amount of information (e.g. few labeled examples and hand-built patterns) to enrich the lexicon predefined. It is possible to label a seed set of words and expand it to conjoined adjectives and cluster into two partition (positive and negative). Another possible approach is extract a phrasal lexicon from reviews using Part of Speech Tagging, identify and quantify the polarity and rate a reviews by the average polarity of phrases using Mutual and Point-wise Mutual Information <!-- Recall to Text Mining -->;</li>
+<li>Unsupervised Learning, suitable for aspect-based sentiment analysis.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><em>Predict</em>;</li>
+<li><em>Decide</em>.</li>
+</ol>
+<!-- Lecture 18: 02/12/2020 -->
+<div id="semantic-ambiguity" class="section level2">
+<h2><span class="header-section-number">7.1</span> Semantic Ambiguity</h2>
+<p>The Named Entity Recognition (<strong>NER</strong>) is the task to find and classify text fragments into predefined labels. The most important model is the conditional random fields, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.</p>
+<p><span class="math display">\[\mathbb{P}(y | x) = \frac{e^{\sum_{t = 1}^T(\sum_i \lambda_i f_i(y_t, x) + \sum_j u_j g_j (y_t, t_{t - 1}, x))}}{Z(x)}\]</span></p>
+<p>where:</p>
+<ul>
+<li>Feature Function: <span class="math inline">\(f_i(y_t, x)\)</span></li>
+<li>Transition Feature Function: <span class="math inline">\(g_j (y_t, t_{t - 1}, x)\)</span></li>
+</ul>
+<p><span class="math inline">\(\lambda_i\)</span> and <span class="math inline">\(u_j\)</span> are parameters to be estimated maximizing the log-likelihood of a given training set (Quasi Newton Method).</p>
+<p>The second part is to find the most probable sequence of hidden states: <span class="math inline">\(y^* = max_y \mathbb{P}(y | x)\)</span>. It is possible probability of a g</p>
+</div>
 </div>
             </section>
 

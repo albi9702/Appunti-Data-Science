@@ -11,18 +11,8 @@ classoption: twocolumn
 header-includes:
   - \usepackage{longtable}
 output: 
-  pdf_document:
-    latex_engine: xelatex
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
-    df_print: kable
-    highlight: monochrome
   bookdown::gitbook:
-    keep_md: true
+    keep_md: false
     css: style.css
     split_by: rmd
     config:
@@ -42,6 +32,16 @@ output:
         linkedin: yes
         twitter: no
         facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
 ---
 
 ```{r setup, include = FALSE}
@@ -645,7 +645,7 @@ If the networks has no degree correlations, $e_{jk} = q_j q_k$, otherwise the ma
 
 To compare different network, it is possible to normalize the degree correlation coefficient:
 
-$$r = \frac{\sum_{j, k} jk (e_{jk} - q_j q_k)$}{\sum_k [k^2 - q_k - (\sum_k k q_k)^2]} \in [-1, +1]$$
+$$r = \frac{\sum_{j, k} jk (e_{jk} - q_j q_k)}{\sum_k [k^2 - q_k - (\sum_k k q_k)^2]} \in [-1, +1]$$
 
 <!-- Degree Correlation Image-->
 ```{r Degree Correlation, echo = FALSE, out.width = "75%"}
@@ -657,6 +657,49 @@ An important property of a random network is the emergence of a phase transition
 <!-- Finish Resilience -->
 Alteration of the giant component have implications for network robustness. The *Network Resilience* is the effects of node and edge removal. In Assortative networks hub removal makes less damage because the hubs form a core group, while in disassortative networks is more damaging because hubs are connected to many small degree nodes. It is related to *Percolation* <!-- filtration -->, when a giant component is formed.
 
-<!-- Lecture 15: 20/11/2020 -->
-<!-- Lecture 16: 25/11/2020 -->
-<!-- Lecture 17: 27/11/2020 -->
+<!-- Lecture 15: 18/11/2020 -->
+# Sentiment Analysis
+From Social Network is possible to extract information about a given argument and analyzed them to make decisions (e.g. predicting market data, better quality of life). This is not so simple because it is necessary to transform data from unstructured (cannot be displayed in rows, requires more storage and are more difficult to manage) to structured data, displayed in rows-columns and requires less storage.
+
+<!-- Structured VsUnstructured Image-->
+```{r Structured Vs Unstructured, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("Immagini/Structured-Vs-Unstructured.png")
+```
+
+The transformation is necessary to extract some important information like emotion, polarity, topic and the language of the user. 
+
+In order to extract some useful information, it is necessary to set some basic components for SMA:
+
+* Identify the *Opinion Holder* (User) that holds a specific opinion;
+* Identify the *Object* on which an opinion is expressed;
+* Identify the Aspect of the object;
+* Identify the *Opinion* on an object from a user.
+
+Social Media Analytics should be able to interpret natural language to discover if an information is subjective and determine the corresponding polarity. A text is *objective* if a post presents factual information about the world, while *subjective* if expresses feeling, emotions or beliefs. An *explicit* opinion is a subjective statement giving an opinion, while *implicit* implies an opinion. An *ironic* post is a communicative way expressing the opposite what is literally said. Emotions are complex reaction pattern involving experiential and physiological elements in which a person attempt to deal with.
+
+The process of SMA is constituted by:
+
+1. *Collect* real time expressions or opinion on-line or off-line;
+2. *Represent* text from qualitative to quantitative data to measure compare and learn. The pre-processing techniques are remove stopwords, numbers and punctuation and apply the stemmatization. Furthermore, it is possible to represent in a vector space model the text. It is possible also to use the Word2vec model; <!-- Recall to Text Mining -->.
+3. *Classify* measuring, compare and learn sentiments. It is possible to classify in different ways:
+  + Lexicon-based Approach, for each sentence the process identifies term belonging to the list containing positive and negative terms with different weights. This lists is contained in a lexicon and one of the most important is the Liu lexicon opinion. The polarity of a text is given by the number of the positive and negative terms. For example, if $\text{Word}_{\text{positive}} > \text{Word}_{\text{negative}}$ the word is positive;
+  + Supervised Learning, an approach in which some text are labeled and it is possible to learn a model in order to predict new texts with the corresponding polarity. To deal with negation is possible to add *NOT_* to every word between negation.
+  + Semi-Supervised Learning uses a small amount of information (e.g. few labeled examples and hand-built patterns) to enrich the lexicon predefined. It is possible to label a seed set of words and expand it to conjoined adjectives and cluster into two partition (positive and negative). Another possible approach is extract a phrasal lexicon from reviews using Part of Speech Tagging, identify and quantify the polarity and rate a reviews by the average polarity of phrases using Mutual and Point-wise Mutual Information <!-- Recall to Text Mining -->;
+  + Unsupervised Learning, suitable for aspect-based sentiment analysis.
+4. *Predict*;
+5. *Decide*.
+
+<!-- Lecture 18: 02/12/2020 -->
+## Semantic Ambiguity
+The Named Entity Recognition (**NER**) is the task to find and classify text fragments into predefined labels. The most important model is the conditional random fields, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.
+
+$$\mathbb{P}(y | x) = \frac{e^{\sum_{t = 1}^T(\sum_i \lambda_i f_i(y_t, x) + \sum_j u_j g_j (y_t, t_{t - 1}, x))}}{Z(x)}$$
+
+where: 
+
+* Feature Function: $f_i(y_t, x)$
+* Transition Feature Function: $g_j (y_t, t_{t - 1}, x)$
+
+$\lambda_i$ and $u_j$ are parameters to be estimated maximizing the log-likelihood of a given training set (Quasi Newton Method).
+
+The second part is to find the most probable sequence of hidden states: $y^* = max_y \mathbb{P}(y | x)$. It is possible probability of a g
