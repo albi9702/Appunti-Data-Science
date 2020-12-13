@@ -76,17 +76,19 @@ knitr::include_graphics("Immagini/Digital-Report.png")
 ```
 
 ## Internet
-*Internet* is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The ***W***orld ***W***ide **W**eb (**WWW**) is one of the major service of Internet. The proposal was designed to provide more effective communication system within *CERN*. It allows to browser through web pages and services accessible to all or a selected part of users.
+*Internet* is the global system to connect computers around the world. TCP/IP protocols allow devices connected through internet to communicate with each other. The ***W***orld ***W***ide **W**eb (**WWW**) is one of the major service of Internet. The proposal was designed to provide more effective communication system within *CERN*. It allows to browse through web pages and services accessible to all or a selected part of users.
 
 ***U***niform ***R***esource ***I***dentifier (**URI**) is a sequence of characters that uniquely identifies a generic resource, such as web address (URL), documents, images, etc.
 
 There are different type of data:
 
 * *Structured*: data are stored in databases and organized in a rigid schemes and tables (Relational Scheme);
-* *Semi-Structured*: data aren't stored in a tabular structure, but it contains tags to separate semantic elements (HTML, XML, JSON);
+* *Semi-Structured*: data aren't stored in a tabular structure, but it contains tags to separate semantic elements (E.g. HTML, XML, JSON);
 * *Unstructured*: data are stored without any scheme (Narrative Text).
 
 <!-- REMEMBER: HTML vs XML -->
+*HTML* is a computer language that uses tags to define elements in a document. It is human readable, so it also contains standard words.
+Other semi-structured data formats are *XML*, designed to store and transport data, and *JSON*, a syntax to store and exchanging data.
 
 <!-- Lecture 2: 02/10/2020 -->
 # Social Media
@@ -109,33 +111,33 @@ One of the most important theory about Social Media is the *Theory of Social Pre
 
 > The higher the social presence, the larger the social influence that the communication partners have on each other’s behavior.
 
-The *Media Richness Theory* is based on the assumption that the goal of any communication is the resolution of ambiguity and the reduction of uncertainty. The media differs in the degree of information richness they have. The concept of *Self Presentation* states that in any type of social interaction people have a desire to control the impressions of other people. This concept is related to self-disclosure
+The *Media Richness Theory* is based on the assumption that the goal of any communication is the resolution of ambiguity and the reduction of uncertainty. The media differs in the degree of information richness (quantity and quality information transmitted in a given time period) they have. The concept of *Self Presentation* states that in any type of social interaction people have a desire to control the impressions of other people. This concept is related to self-disclosure.
 
 > Social Media are **interactive computer-mediated** technologies that facilitate the **creation and sharing of information**, ideas, career interests and other forms of expression via **virtual communities** and networks.
 
-A ***U***ser-***G***enerated ***C***ontent (**UGC**) is any form of content created by users of online system made available on social media. The reason for creating UGC are:
+A ***U***ser-***G***enerated ***C***ontent (**UGC**) is any form of content created by users in an online system made available on social media. The reason for creating UGC are:
 
-* *Implicit Incentives*, not based on anything tangible, not directly monetizable. Social Incentives are the most common form; a user feels as active user of the community, also through the interaction of friends. It also improve the customer experience when purchasing a product;
-* *Explicit Incentives*, referred to tangible rewards. They are easily understood by most people and have immediate value regardless of the size of the community (contest, voucher, etc.). The main disadvantage is they can make user believe that the only reason of participating is explicit incentive, reducing the influence of other type of interactions.
+* *Implicit Incentives*, not based on anything tangible, not directly monetizable. Social Incentives are the most common form. A user feels as active user of the community, also through the interaction of friends. It also improves the customer experience when purchasing a product;
+* *Explicit Incentives*, referred to tangible rewards. They are easily understood by most people and have immediate value regardless of the size of the community (E.g. contest or voucher). The main disadvantage is they can make believe the user that the only reason of participating is explicit incentive, reducing the influence of other type of interactions.
 
 A *Virtual Community* is made up of Social Network of individuals who interact through means of communication, crossing any kind of boundaries in order to pursue mutual interests.
 
-A *Social Network* is a social structure made up of a set of individuals, a series of dyadic links and other social interactions of social actors. There are many methods to analyze the structure of social entities, called ***S***ocial ***N***etwork ***A***nalysis (**SNA**), to identify local and global patterns and examine network dynamics.
+A *Social Network* is a social structure made up of a set of individuals, a series of dyadic links and other social interactions. There are many methods to analyze the structure of social entities, called ***S***ocial ***N***etwork ***A***nalysis (**SNA**), to identify local and global patterns and examine network dynamics.
 
 <!-- The evolution of Social Media -->
 
 There are many type of Social Media:
 
 * *Blog*, a website containing one or more chronological posts that interactively discuss a certain topic;
-* *Microblog*, publicational textual or multimedial content on the net;
-* *News Sites*, the paper edition of the main newspaper. In these sites is possible to interact with other people;
+* *Microblog*, publicational textual or multimedial content on Internet;
+* *News Sites*, the paper edition of main newspapers. In these sites is possible to interact with other people;
 * *Forums*, discussion sections in an IT platform or single sections;
 * *Social Networking Sites*;
 * *Virtual Game Worlds*;
 * *Virtual Social Worlds*;
 * *Content Communities*.
 
-These sites produce different type of data:
+These sites produce different types of data:
 
 * *Articles*, mainly form news sites;
 * *Posts*, generally blog and Social Networking Sites;
@@ -155,16 +157,13 @@ It is possible to divide the analyzes into two main categories:
 * Social Network Analysis;
 * Social Content Analysis.
 
-SMA in the *business* context is the process of measuring, analyzing and interpreting interactions and conversations in Social Media regarding a brand, product, service or a topic of interest. The analysis is based on elements that influences the customer behavior, the perception and feelings of the customer respect to a brand end their level of engagement.
-
-There are many business objectives:
+SMA in the *business* context is the process of measuring, analyzing and interpreting interactions and conversations in Social Media regarding a brand, product, service or a topic of interest. The analysis is based on elements that influences the customer behavior, the perception and feelings of the customer respect to a brand end their level of engagement. There are many business objectives:
 
 * *Brand Advocacy*, an indicator that expresses the highest degree of brand loyalty, so a customer can recommend the brand to other people;
 * *Business Reputation Management*, constantly monitoring and managing the company's online presence and how the brand is perceived in a positive light and allowing to gain new customers;
 * *Community Management*, the process of building an authentic community through various interactions;
 * *Demand Generation*, the strategy of various marketing programs aimed at certain interest in the products/services of a company.
 
-<!-- Sistemare questa parte -->
 To plan an analysis activity is necessary to answer at these questions:
 
 * *Why*: the reasons that should lead to online analysis;
@@ -183,18 +182,16 @@ The phases of Social Media Analysis are:
 
 <!-- Lecture 4: 09/10/2020 -->
 # Network and Graph Theory
-*Network Theory* is the study of structures representing symmetrical or asymmetrical relationships between objects. It is also a part of Graph Theory: a graph is composed by nodes (also known as vertices) connected through link (edges).
-
-Other examples of networks are:
+*Network Theory* is the study of structures representing symmetrical or asymmetrical relationships between objects. It is also a part of Graph Theory: a graph is composed by nodes (also known as vertices) connected through links (edges). Examples of networks are:
 
 * Technological networks, designed for distribution of goods, resources and services (e.g. Internet);
 * Information networks, made up of data and information linked together in some way (e.g. ***W***orld ***W***ide ***W***eb);
 * Biological networks, representing the interaction patterns between biological elements (e.g. Neural Network);
 * Social networks, where vertices represent people of groups connected by some form of social interaction, such as friendship.
 
-In particular, ***S***ocial ***N***etwork ***A***nalysis (**SNA**) is the process of investigating social structures through the use of networks and *Graph Theory*. These networks are usually visualized in sociograms (also known as social network graph) where vertices are represented as points and edges as lines.
+In particular, ***S***ocial ***N***etwork ***A***nalysis (**SNA**) is the process of investigating social structures through the use of networks and *Graph Theory*. These networks are usually visualized in sociograms (also known as Social Network Graph) where vertices are represented as points and edges as lines.
 
-A *Graph* is a pair of vertices ($V$) and edges ($E$), $G = (V, E)$, such that $E \subseteq [V]^2$. The set of *vertices* of a graph is denoted as $V(G) = {v_1, v_2, \dots, v_n}$, while the set of *Edges* is denoted as $E(G) = {e_1, e_2, \dots, e_n}$. The representation is drawing a point for each vertex and join these points with lines if there's a connection:
+A *Graph* is a pair of vertices ($V$) and edges ($E$), $G = (V, E)$, such that $E \subseteq [V]^2$. The set of *vertices* of a graph is denoted as $V(G) = {v_1, v_2, \dots, v_n}$, while the set of *Edges* is denoted as $E(G) = {e_1, e_2, \dots, e_n}$. The representation is to draw a point for each vertex and join these points with lines if there's a connection:
 
 <!-- Graph Image -->
 ```{r Graph, echo = FALSE, out.width ="75%"}
@@ -202,7 +199,7 @@ knitr::include_graphics("Immagini/Graph.png")
 ```
 
 ## Undirected Graph
-An *Undirected* graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge $e = (a,b)$, $e$ is called *Outgoing* edge from $a$, denoted as direct *Predecessor*, and *Ingoing* edge in $b$, known as direct *Successor*. Given a vertex $a$ of a directed graph $G$, $E^+(a)$ is the set of outgoing edges from $a$ and $E^-(a)$ the set of incoming edges in $a$. A *Sink* vertex is a vertex with only incoming edges, while with only outgoing edges is called *Source* vertex.
+A graph is *Undirected* if edges are directed from one vertex to another (e.g. Twitter). Given the edge $e = (a, b)$, $a$ and $b$ are called *Extreme* and *Adjacent* vertices of $e$, called the *incident* edge. $a$ is called *Neighbor* of $b$ in $G$ and vice versa. Two edges $e, f$ are *Adjacent* if they have a common vertex. The *Neighborhood* of $a$, $N(a)$, is the set of vertices adjacent to $a$. The *Star* of $a$, $s(a)$, is the set of edges incident in $a$.
 
 <!-- Undirected Graph Image -->
 ```{r Undirected Graph, echo = FALSE, out.width = "75%"}
@@ -216,6 +213,8 @@ The *Degree* of a vertex, $d(v)$ is the number of edge incident to a node, equiv
 knitr::include_graphics("Immagini/Degree.png")
 ```
 
+$$d(G) = \frac{1}{|V|} \sum_{v \in V} d(v) = 2|E(G)| = m$$
+
 There are many different type of graphs:
 
 * *Null* graph, made up of only isolated graphs;
@@ -223,7 +222,7 @@ There are many different type of graphs:
 * *Complete* graph, in which each pair of distinct vertices are adjacent;
 
 ## Directed Graph
-A graph is *Directed* if edges are directed from one vertex to another (e.g. Twitter). Given the edge $e = (a, b)$, $a$ and $b$ are called *Extreme* and *Adjacent* vertices of $e$, called the *incident* edge. $a$ is called *Neighbor* of $b$ in $G$ and vice versa. Two edges $e, f$ are *Adjacent* if they have a common vertex. The *Neighborhood* of $a$, $N(a)$, is the set of vertices adjacent to $a$. The *Star* of $a$, $s(a)$, is the set of edges incident in $a$.
+A *Directed* graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge $e = (a,b)$, $e$ is called *Outgoing* edge from $a$, denoted as direct *Predecessor*, and *Ingoing* edge in $b$, known as direct *Successor*. Given a vertex $a$ of a directed graph $G$, $E^+(a)$ is the set of outgoing edges from $a$ and $E^-(a)$ the set of incoming edges in $a$. A *Sink* vertex is a vertex with only incoming edges, while with only outgoing edges is called *Source* vertex.
 
 <!-- Directed Graph Image -->
 ```{r Directed Graph, echo = FALSE, out.width = "75%"}
@@ -240,7 +239,7 @@ knitr::include_graphics("Immagini/Out-In-Degree.png")
 The *Degree* $d(v)$ of a vertex $v$ is the sum of the number of its incoming and outgoing edges.
 
 ## Subgraph
-A *Subgraph* of a graph $G = (V, E)$ is a graph included with in the main graph that contains all vertices and edges in $G$. It is possible to obtain subgraphs by removing some vertices and/or edges from $G$.
+A *Subgraph* of a graph $G = (V, E)$ is a graph included within the main graph that contains all vertices and edges in $G$. It is possible to obtain subgraphs by removing some vertices and/or edges from $G$.
 
 Given a graph $G = (V, E)$ with $V = \{v_1, \dots, v_n \}$ and $E = \{e_1, \dots, e_n \}$, a *Walk* is a finite (or infinite) alternating sequence of vertices and edges. A walk is called *Simple* if edges and vertices of the walk are all distinct, otherwise it is *Not Simple*. In particular, there are many different types of walks:
 
@@ -402,7 +401,7 @@ There are three main families of metrics:
      * Network Closure;
      * Proximity/Propinquity. -->
 
-*Homophily* is the tendency of individuals to associate and tie with each other similar one, sharing common characteristics (e.g. gender or age) that facilitate communication and relationship formation. Social Media favors homophilic relationships because it shows similar posts of your interest by your user profile examined with likes and interactions personalizing your content. The perception of interpersonal similarity improves coordination and the expected payoff of interaction and helps people access information forming opinions and threads, but can translate in a limited social worlds forming closed communities or filter bubbles on Social Network sites where people with similar ideologies interact only with each other (Echo Chambers).
+*Homophily* is the tendency of individuals to associate and tie with each other similar one, sharing common characteristics (E.g. gender or age) that facilitate communication and relationship formation. Social Media favors homophilic relationships because it shows similar posts of your interest by your user profile examined with likes and interactions personalizing your content. The perception of interpersonal similarity improves coordination and the expected payoff of interaction and helps people access information forming opinions and threads, but can translate in a limited social worlds forming closed communities or filter bubbles on Social Network sites where people with similar ideologies interact only with each other (Echo Chambers).
 
 *Multiplexity* is the number of relationship levels contained in a link, associated with the strength of the bond.
 
@@ -572,8 +571,7 @@ So the basic stages of spectral clustering are:
 2. Decomposition: compute eigenvalues and eigenvectors of the matrix and map each point to a lower dimension based on 1 or more eigenvectors.
 3. Grouping: assign points to 2 or more clusters based non the new representation.
 
-*Modularity Maximization* tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection. In a network with $E$ edges, for two nodes $d_i$ and $d_j$ the expected random connection between them is
-$\frac{d_i d_j}{2E}$. The modularity of a group is
+*Modularity Maximization* tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection. In a network with $E$ edges, for two nodes $d_i$ and $d_j$ the expected random connection between them is $\frac{d_i d_j}{2E}$. The modularity of a group is
 
 $$\sum(A_{ij} - \frac{d_i d_j}{2E})$$
 
@@ -691,7 +689,7 @@ The process of SMA is constituted by:
 
 <!-- Lecture 18: 02/12/2020 -->
 ## Semantic Ambiguity
-The Named Entity Recognition (**NER**) is the task to find and classify text fragments into predefined labels. The most important model is the conditional random fields, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.
+The ***N***amed ***E***ntity ***R***ecognition (**NER**) is the task to find and classify text fragments into predefined labels. The most important model is the conditional random fields, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.
 
 $$\mathbb{P}(y | x) = \frac{e^{\sum_{t = 1}^T(\sum_i \lambda_i f_i(y_t, x) + \sum_j u_j g_j (y_t, t_{t - 1}, x))}}{Z(x)}$$
 
@@ -700,6 +698,8 @@ where:
 * Feature Function: $f_i(y_t, x)$
 * Transition Feature Function: $g_j (y_t, t_{t - 1}, x)$
 
-$\lambda_i$ and $u_j$ are parameters to be estimated maximizing the log-likelihood of a given training set (Quasi Newton Method).
+The main goal is to estimate the values of the weight vectors. $\lambda_i$ and $u_j$ are parameters to be estimated maximizing the log-likelihood of a given training set (Quasi Newton Method).
 
-The second part is to find the most probable sequence of hidden states: $y^* = max_y \mathbb{P}(y | x)$. It is possible probability of a g
+Once trained the model, it is necessary to find the most probable sequence of hidden states: $y^* = \max_y \mathbb{P}(y | x)$. It is possible to use the Viterbi algorithm, a dynamic programming, or the Shortest Path, an integer linear programming formulation.
+
+Once recognized entity mentions, it is necessary to disambiguate them, using the **Named Entity Linking**. To cho

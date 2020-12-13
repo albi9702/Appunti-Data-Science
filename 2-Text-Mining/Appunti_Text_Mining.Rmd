@@ -631,14 +631,24 @@ Topic Classification is a supervised Machine Learning technique in which there a
 # Text Summarization
 *Text Summariztion* is the process of finding the most important information from a source to produce an abridged version of a text for a user. Main advantages are the reduced reading time and the easy research of a document. Automatic summarization improves the effectiveness of indexing. There are different dimension of the Text Summarization:
      
-* *Based on Input Type*, the process of summarizing the text, given a single document (or a group of documents);
-* *Based on the Purposes*, that can be:
-  + Generic, no assumptions about the content of the text to be summarized (it is a generic summarization);
-  + Domain-Specific, using a domain knowledge forming a more accurate summary;
-  + Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.
-* *Based on Output Type*, that can be:
-  + Extractive Summarization, which selects some important phrases from the input text. This summarization has 3 different tasks:
-    1. Create an intermediate representation of the input text capturing the key aspects. There is Topic Representation, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. There is also Indicator Representation, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document).
-    2. Scoring sentences based on the representation, where each sentence is assigned to a scoe indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;
-    3. Selecting a summary consisting of several scored sentences. It is possible to show the best $n$ approaches or the maximal marginale relevance approaches;
-  + Abstractive Summarization, which captures the meaning of the text and producing a summary based on its own prhases (more appealing).
+The Text Summarization *Based on Input Type* is the process of summarizing the text, given a single document (or a group of documents).
+
+The Text Summarization  *Based on the Purposes* can be:
+  * Generic, no assumptions about the content of the text to be summarized (it is a generic summarization);
+  * Domain-Specific, using a domain knowledge forming a more accurate summary;
+  * Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.
+
+The Text Summarization *Based on Output Type* can be Extractive, which selects some important phrases from the input text, or Abstractive, which captures the meaning of the text and producing a summary based on its own prhases (more appealing).
+
+The First one has 3 different tasks:
+
+1. Create an intermediate representation of the input text capturing the key aspects. There is *Topic Representation*, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. The importance of a phrase is computed as the number and proprotion of topic signature in the sentence. When assigning weight it is possible to use Word Probability or Tf-Idf. It is possible to use also the SumBasic system to determine the sentence importance. For each sentence in the input, it assign a weight equal to the average probabilty of the words in the sentence:
+
+$$g(s_j) = \frac{\sum_{w_i \in s_j} \mathbb{P}(w_i)}{|w_i | w_i \in s_j|}$$
+
+  The algorithm the selects the best scoring sentence containing the highest probability word. After this, the probability of each word apeeared is adjusted (for example, the probability of a word occurring in a summary is lower than a word occurring one time).
+
+  There is also *Indicator Representation*, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document);
+2. Scoring sentences based on the representation, where each sentence is assigned to a scoe indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;
+3. Selecting a summary consisting of several scored sentences. It is possible to show the best $n$ approaches or the maximal marginale relevance approaches;
+
