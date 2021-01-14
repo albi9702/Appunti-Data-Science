@@ -9,6 +9,16 @@ fontsize: 11pt
 geometry: margin = 0.5in
 classoption: twocolumn
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
   bookdown::gitbook:
     keep_md: false
     css: style.css
@@ -30,16 +40,6 @@ output:
         linkedin: yes
         twitter: no
         facebook: no
-  pdf_document:
-    latex_engine: xelatex
-    toc: true
-    toc_depth: 2
-    number_sections: true
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
-    df_print: kable
-    highlight: monochrome
 ---
 
 ```{r setup, include = FALSE}
@@ -200,14 +200,62 @@ Il comando *Select* ha il compito di selezionare le colonne di una o più colonn
 
 <!-- Lecture 9: 28/10/2020 -->
 # Data Warehouse
-Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L'obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato. 
+La disponibilità di enormi quantità di dati rende molto complicato estrarre informazioni importanti. Il fenomeno del Data Warehousing nasce dall'enorme accumulo di dati ed utilizzarli per scopi che superino quelli legati all'elaborazione giornaliera. L'obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato. 
 
 > Il Data Warehouse è una collezione di dati di supporto al processo decisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell'evoluzione temporale e non volatile (accessibile in sola lettura).
 
 La costruzione di un sistema di Data Warehouse non comporta l'inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.
 
 ## Architettura
-L'elaborazione analitica e transazionale devono essere mantenute il più possibile separate, 
+Le principali caratteristiche di un Data Warehouse sono:
+
+* Separazione, l'elaborazione analitica e transazionale devono essere mantenute il più possibile separate;
+* Scalabilità, le componenti hardware devono essere ridimensionati in base alla variazione dei dati;
+* Estendibilità, integrabilità di nuove applicazioni senza riprogettare il sistema;
+* Sicurezza, gli accessi devono essere controllati
+* Amministrabilità, la complessità dell'amministrazione del sistema non deve essere troppo elevata.
+
+Generalmente un Data Warehouse è composto da 3 livelli:
+
+1. Livello delle Sorgenti, i database delle transazione dei processi operativi per estrarre i dati e caricarli nel Data Warehouse;
+2. Livello del Warehouse, il livello di costruzione della base di dati che è capace di integrare i dati da diverse sorgenti;
+3. Livello di analisi, gli strumenti di reportistica ed OLAP multidimensionale.
+
+In particolare, è possibile introdurre il Data Warehouse, un *Data Mart*, ovvero un sottoinsieme di dati contenenti informazioni rilevanti per una particolare area, ed i *Metadati*, dei dati che spiegano il dato considerato (in un DW indicano sorgenti, valori ed uso dei dati memorizzati). Essi descrivono come i dati sono alterati e trasformati durante i passaggi attraverso i livelli dell'architettura.
+
+<!-- Immagine Data Warehouse -->
+```{r Data Warehouse}
+knitr::include_graphics("Immagini/DW.png")
+```
+
+Il Data Warehouse si basa sul concetto di *multidimensionalità* dei dati: una volta che i dati sono stati ripuliti, integrati e trasformati bisogna capire come trarne il massimo vantaggio. Gli oggetti che influenzano le decisione sono **Fatti** del mondo di interesse, le occorrenze di esse corrispondono ad un **Evento** e per ciascun fatto interessano i valori di un insieme di **Misure** che descrivono quantitativamente gli eventi in diverse **Dimensioni**.
+
+Esistono due tipologie di modelli per il DW:
+
+* Modello Logico, utilizzando un modello a Stella, ovvero costruito da una tabella centrale di Fatti che referenzia su diverse tabelle di dimensioni, oppure un modello a Fiocco di Neve, che possiede un livello di normalizzazione delle tabelle maggiore ed una tabella delle dimensione può essere ulteriormente scomposta in un'altra tabella.
+* Modello Operazionale, utilizzando un Data Cube che descrive tutte le possibili aggregazioni effettuabili in base al tipo di dimensioni selezionate.
+
+I fatti di interesse sono rappresentati in *cubi* in cui ogni cella contiene misure che quantificano il fatto da diversi punti di vista, ogni asse una dimensione di interesse e ogni dimensione può essere la radice di una gerarchia di attributi per integrare i dati memorizzati in cubi base.
+Le informazioni sono categorizzate e le categorie seguono delle gerarchie in base alle proprie esigenze.
+Inoltre, si possono compiere operazioni di aggregazione dei dati per successive analisi. Le funzioni base di uno strumento OLAP sono diverse:
+
+* *Pivoting*: operazione di rotazione delle dimensioni di analisi per analizzare i dati in dimensioni diverse;
+* *Slicing*: riduzione della dimensionalità del cubo fissando un valore per ogni dimensione;
+* *Dicing*: riduzione della dimensionalità del cubo attraverso un criterio di selezione;
+* *Roll-up*: aumenta l'aggregazione dei dati eliminando un livello di dettaglio da una gerarchia;
+* *Drill-accross*: collegamento tra 2 o più cubi per comparare i dati;
+* *Drill-down*: diminuzione di aggregazione dei dati aumentando il livello di dettaglio di una gerarchia.
+
+# Data Lake
+Un *Data Lake* è un repository utilizzato per analizzare grandi quantità di dati in diversi formati nel loro formato nativo; la sua architettura è basata per contenere tutti i tipi di dati, come i dati prodotti dalle macchine, dalle persone e da quelli tradizionali.
+Infatti, lo schema ed i requisiti dei dati non sono definiti in partenza, ma vengono delineati al momento dell'interrogazione, processo chiamato *schema on read*.
+In questo modo si riduce la quantità di dati inseriti nel Data Warehouse.
+Il Data Lake può essere utilizzato come un'area di atterraggio per la fase di store dei dati nel DWS.
+Per implementare un data lake si possono utilizzare diverse tecnologie, come HDFS che è la più utilizzata, NoSQL, ecc. Lo schema di un Data Lake è il seguente:
+
+* I dati sono presi ed immagazzinati nel loro formato nativo (*schema on read*);
+* I dati vengono analizzati per determinare il proprio valore in base al tipo di analisi che si vuole fare con processi scalabili paralleli;
+* Si catturano i dati originali e li si memorizzano sotto forma di analisi usata precedentemente (*schema on write*).
 
 <!-- Lezione 12: 06/11/2020 -->
 # Data Quality
@@ -236,6 +284,22 @@ Il livello di Istanza identifica le righe di un database. I problemi possono avv
         * Time Related
         * Consistency -->
 
+Per **Accuracy** si intende la vicinanza tra la rappresentazione $v$ e quella corretta del fenomeno $v'$ che si intende rappresentare. Essa può essere *sintattica*, ovvero la vicinanza tra due rappresentazioni contenuti in un dominio finito, oppure *semantica*, confrontando la rappresentazione con la controparte reale. Essa fornisce una valutazione dicotoma. La accuratezza può essere espressa a diversi livelli di granularità: ad un singolo valore di un attributo, ad una colonna, ad una relazione od all'intero Database:
+
+Per **Completeness** si intende la completezza di informazioni di un dato. La completezza è caratterizzata secondo la presenza di valori nulli, ovvero valori non disponibili, non osservati o persi. Ne esistono di 3 tipologie:
+
+* Relativo allo Schema, quanto i concetti sono modellati nello schema;
+* Relativo alla Colonna, valutando i valori mancanti per una proprietà all'interno di una tabella;
+* Relativa alla popolazione di riferimento.
+
+Per **Currency**, **Timeless** e **Volatility** si intendono le dimensioni correlate con il tempo. In particolare:
+
+* Currency descrive la velocità di aggiornamento di un dato
+* Timeless descrive l'appropriatezza dei dati per i propri scopi;
+* Volatility descrive la frequenza di aggiornamento di un dato.
+
+Per **Consistenza** si intende l'insieme delle regole semantiche definite all'interno di un Database relazionale, ad esempio i vincoli, le dipendenze funzioni e le chiavi primarie-esterne.
+
 ### Schema
 Il livello di Schema identifica la progettazione logica del database, alla struttura che conterrà i dati. I RDBMS definiscono una struttura che permette di evitare i problemi di data quality (Es: valori nulli, multipli e categorizzazione dati). Problemi di questo tipo portano anche a problemi di qualità nelle istanze; di conseguenza è necessario costruire un database duraturo e consistente per ottenere un miglioramento della qualità.
 
@@ -248,7 +312,30 @@ Il livello di Schema identifica la progettazione logica del database, alla strut
         * Dettaglio
         * Cambiamento -->
 
+Il **Contenuto** è definito secondo i seguenti termini:
+
+* Rilevanza, per i contesto di utilizzo;
+* Ottenibilità, quanto i dati sono disponibili;
+* Chiarezza, ad esempio la adozione di regole per eliminare ambiguità all'interno di un Database.
+
+La **Copertura** deve essere:
+
+* Comprensibile, lo schema deve soddisfare i requisiti dei potenziali utenti;
+* Essenziale,  lo schema deve soddisfare i soli requisiti dei potenziali utenti.
+
+La **Composizione** di uno schema deve essere:
+
+* Naturale, ovvero fatti correlati tra loro;
+* Identificabile, necessita di una chiave primaria;
+* Omogeneo, gli attributi devono essere applicati a tutte le entità di uno stesso tipo;
+* Ridondanza Minima, i termini devono essere ripetuti solo necessariamente.
+
+La **Consistenza** è definita in termini semantici e strutturali.
+
+Il **Livello di Dettaglio** è definito in termini di granularità dell'attributo, in base alla disponibilità delle informazioni, ed alla precisione dei domini.
+
 ### Formato
+Il Formato comprende 7 differenti dimensioni:
 
 <!-- Dimensioni:
         
@@ -260,14 +347,31 @@ Il livello di Schema identifica la progettazione logica del database, alla strut
         * Rappresentazione dei Valori Nulli
         * Uso efficiente Memoria -->
 
+* Appropriatezza, rispetto alle esigenze dell'utente;
+* Interpretabilità, quanto è comprensibile un dato;
+* Portabilità, la semiotica del dato;
+* Precisione;
+* Flessibilità rispetto ai requisiti dell'utente;
+* Rappresentazione dei Valori Nulli;
+* Uso efficiente Memoria.
+
 ## Metodi di Miglioramento
+I metodi per migliorare la qualità di un Database possono essere applicati sui dati oppure sui processi.
+
 ### Dati
+Per quanto riguarda i dati, i metodi si basano su:
 
 <!-- Metodi:
         
         * Confronto con Controparte Reale
         * Database Bashing
-        * Business Rule -->
+        * Business Rule
+        * Metadati -->
+
+* *Confronto con Controparte Reale*, il metodo più efficacie, ma anche quello più costoso in quanto richiede un controllo periodico;
+* *Database Bashing*, che prevede il confronto di record in due o più Database interni con la tecnica di *Record Matching*, identificando se rappresentano la stessa entità;
+* *Business Rule*, che prevede la verifica che i record rispettino determinati vincoli di business o semantici. Esso è il più conveniente in quanto più efficacie del Database Bashing e meno costoso del confronto con la controparte reale.
+* Utilizzo dei *Metadati*, per memorizzare i valore delle dimensioni di qualità calcolati utilizzando approcci precedenti
 
 ### Processi
 Il principale svantaggio dei metodi per il miglioramento della qualità dei dati basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I *Metodi basati sui Processi* prevedono invece un'analisi dei processi per individuare e correggere le cause di errore. 
@@ -276,7 +380,7 @@ Il principale svantaggio dei metodi per il miglioramento della qualità dei dati
         
         * Controllo e Miglioramento
         * Reingegnerizzazione
-        * Business Rule -->
+        -->
 
 # Graph DB
 Un *Graph Database* è un database utilizzato per lo storage efficiente di dati semi-strutturati. Permette di modellare le relazioni sociali tramite un modello a grafo. <!-- Ricordare la teoria dei grafi in SMA -->
@@ -334,3 +438,24 @@ drop index [nome_indice]
 :schema
 CALL db.schema.visualization
 ```
+
+# Explainable AI
+L'Intelligenza Artificale è sempre più utilizzata in tutti gli ambiti lavorativi. La *Explainable AI* è un metodo efficace per far comprendere agli esperti di domini le decisioni prese da un algoritmo di Machine Learning. La necessità di utilizzo nella pratica risiede nella fiducia della decisione da prendere, nella interazione tra uomo e macchina per comprendere la decisione scelta e nella trasparenza delle decisioni.
+
+<!-- Immagine Explainable AI -->
+```{r Explainable AI}
+knitr::include_graphics("Immagini/XAI.png")
+```
+
+Il problema della spiegazione dei modelli è correlata con la previsione della Accuracy. In particolare, i modelli di Neural Network hanno una Accuracy molto più elevata rispetto a semplici modelli, a discapito di una difficile interpretazione in base alla quantità di layer nascosti all'interno di essa.
+
+La interpretabilità può essere determinata in termini:
+
+* *Globale*, sulla rilevanza delle feature del modello considerato l'intero dataset
+* *Locale*, spiegano la decisione effettuata dall'algoritmo sulla singola istanza
+
+## LIME
+Il *LIME* è una tecnica di Explainable AI applicata a livello locale. Essa considera una singola osservazione e tutte le istanze in un intorno dello spazio delle feature (di conseguenza con caratteristiche simili). Successivamente massimizza la *local fidelity* che approssima le decisione del modello più complesso in quell'intorno.
+
+## SHAP
+Lo ***SH***apley ***A***dditive ex***P***lanations è una tecnica di Explainable AI applicata a livello globale che determina quanto la previsione è determinata dalle feature. Per determinare l'importanza di una singola feature, è necessario considerare ogni possibile combinazione di essa per far apprendere un modello per volta. Lo *SHAP value* è calcolato come la somma pesata del contributo ad ogni livello della feature.

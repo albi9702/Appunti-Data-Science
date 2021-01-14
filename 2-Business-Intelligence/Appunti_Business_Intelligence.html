@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Business Intelligence</title>
   <meta name="description" content="Business Intelligence" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Business Intelligence" />
   <meta property="og:type" content="book" />
@@ -50,8 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -148,18 +148,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path=""><a href="#data-warehouse"><i class="fa fa-check"></i><b>5</b> Data Warehouse</a><ul>
 <li class="chapter" data-level="5.1" data-path=""><a href="#architettura"><i class="fa fa-check"></i><b>5.1</b> Architettura</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path=""><a href="#data-quality"><i class="fa fa-check"></i><b>6</b> Data Quality</a><ul>
-<li class="chapter" data-level="6.1" data-path=""><a href="#applicazioni"><i class="fa fa-check"></i><b>6.1</b> Applicazioni</a><ul>
-<li class="chapter" data-level="6.1.1" data-path=""><a href="#istanza"><i class="fa fa-check"></i><b>6.1.1</b> Istanza</a></li>
-<li class="chapter" data-level="6.1.2" data-path=""><a href="#schema"><i class="fa fa-check"></i><b>6.1.2</b> Schema</a></li>
-<li class="chapter" data-level="6.1.3" data-path=""><a href="#formato"><i class="fa fa-check"></i><b>6.1.3</b> Formato</a></li>
+<li class="chapter" data-level="6" data-path=""><a href="#data-lake"><i class="fa fa-check"></i><b>6</b> Data Lake</a></li>
+<li class="chapter" data-level="7" data-path=""><a href="#data-quality"><i class="fa fa-check"></i><b>7</b> Data Quality</a><ul>
+<li class="chapter" data-level="7.1" data-path=""><a href="#applicazioni"><i class="fa fa-check"></i><b>7.1</b> Applicazioni</a><ul>
+<li class="chapter" data-level="7.1.1" data-path=""><a href="#istanza"><i class="fa fa-check"></i><b>7.1.1</b> Istanza</a></li>
+<li class="chapter" data-level="7.1.2" data-path=""><a href="#schema"><i class="fa fa-check"></i><b>7.1.2</b> Schema</a></li>
+<li class="chapter" data-level="7.1.3" data-path=""><a href="#formato"><i class="fa fa-check"></i><b>7.1.3</b> Formato</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path=""><a href="#metodi-di-miglioramento"><i class="fa fa-check"></i><b>6.2</b> Metodi di Miglioramento</a><ul>
-<li class="chapter" data-level="6.2.1" data-path=""><a href="#dati"><i class="fa fa-check"></i><b>6.2.1</b> Dati</a></li>
-<li class="chapter" data-level="6.2.2" data-path=""><a href="#processi"><i class="fa fa-check"></i><b>6.2.2</b> Processi</a></li>
+<li class="chapter" data-level="7.2" data-path=""><a href="#metodi-di-miglioramento"><i class="fa fa-check"></i><b>7.2</b> Metodi di Miglioramento</a><ul>
+<li class="chapter" data-level="7.2.1" data-path=""><a href="#dati"><i class="fa fa-check"></i><b>7.2.1</b> Dati</a></li>
+<li class="chapter" data-level="7.2.2" data-path=""><a href="#processi"><i class="fa fa-check"></i><b>7.2.2</b> Processi</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path=""><a href="#graph-db"><i class="fa fa-check"></i><b>7</b> Graph DB</a></li>
+<li class="chapter" data-level="8" data-path=""><a href="#graph-db"><i class="fa fa-check"></i><b>8</b> Graph DB</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#explainable-ai"><i class="fa fa-check"></i><b>9</b> Explainable AI</a><ul>
+<li class="chapter" data-level="9.1" data-path=""><a href="#lime"><i class="fa fa-check"></i><b>9.1</b> LIME</a></li>
+<li class="chapter" data-level="9.2" data-path=""><a href="#shap"><i class="fa fa-check"></i><b>9.2</b> SHAP</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
 
@@ -326,19 +331,65 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 </div>
 <div id="data-warehouse" class="section level1">
 <h1><span class="header-section-number">5</span> Data Warehouse</h1>
-<p>Le aree di applicazione ormai sono utilizzati in quasi tutti gli ambienti. L’obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato.</p>
+<p>La disponibilità di enormi quantità di dati rende molto complicato estrarre informazioni importanti. Il fenomeno del Data Warehousing nasce dall’enorme accumulo di dati ed utilizzarli per scopi che superino quelli legati all’elaborazione giornaliera. L’obiettivo fondamentale è supportare le decisioni da prendere estraendo le informazioni da un insieme di dati del passato.</p>
 <blockquote>
 <p>Il Data Warehouse è una collezione di dati di supporto al processo decisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell’evoluzione temporale e non volatile (accessibile in sola lettura).</p>
 </blockquote>
 <p>La costruzione di un sistema di Data Warehouse non comporta l’inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.</p>
 <div id="architettura" class="section level2">
 <h2><span class="header-section-number">5.1</span> Architettura</h2>
-<p>L’elaborazione analitica e transazionale devono essere mantenute il più possibile separate,</p>
+<p>Le principali caratteristiche di un Data Warehouse sono:</p>
+<ul>
+<li>Separazione, l’elaborazione analitica e transazionale devono essere mantenute il più possibile separate;</li>
+<li>Scalabilità, le componenti hardware devono essere ridimensionati in base alla variazione dei dati;</li>
+<li>Estendibilità, integrabilità di nuove applicazioni senza riprogettare il sistema;</li>
+<li>Sicurezza, gli accessi devono essere controllati</li>
+<li>Amministrabilità, la complessità dell’amministrazione del sistema non deve essere troppo elevata.</li>
+</ul>
+<p>Generalmente un Data Warehouse è composto da 3 livelli:</p>
+<ol style="list-style-type: decimal">
+<li>Livello delle Sorgenti, i database delle transazione dei processi operativi per estrarre i dati e caricarli nel Data Warehouse;</li>
+<li>Livello del Warehouse, il livello di costruzione della base di dati che è capace di integrare i dati da diverse sorgenti;</li>
+<li>Livello di analisi, gli strumenti di reportistica ed OLAP multidimensionale.</li>
+</ol>
+<p>In particolare, è possibile introdurre il Data Warehouse, un <em>Data Mart</em>, ovvero un sottoinsieme di dati contenenti informazioni rilevanti per una particolare area, ed i <em>Metadati</em>, dei dati che spiegano il dato considerato (in un DW indicano sorgenti, valori ed uso dei dati memorizzati). Essi descrivono come i dati sono alterati e trasformati durante i passaggi attraverso i livelli dell’architettura.</p>
+<!-- Immagine Data Warehouse -->
+<p><img src="Immagini/DW.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Il Data Warehouse si basa sul concetto di <em>multidimensionalità</em> dei dati: una volta che i dati sono stati ripuliti, integrati e trasformati bisogna capire come trarne il massimo vantaggio. Gli oggetti che influenzano le decisione sono <strong>Fatti</strong> del mondo di interesse, le occorrenze di esse corrispondono ad un <strong>Evento</strong> e per ciascun fatto interessano i valori di un insieme di <strong>Misure</strong> che descrivono quantitativamente gli eventi in diverse <strong>Dimensioni</strong>.</p>
+<p>Esistono due tipologie di modelli per il DW:</p>
+<ul>
+<li>Modello Logico, utilizzando un modello a Stella, ovvero costruito da una tabella centrale di Fatti che referenzia su diverse tabelle di dimensioni, oppure un modello a Fiocco di Neve, che possiede un livello di normalizzazione delle tabelle maggiore ed una tabella delle dimensione può essere ulteriormente scomposta in un’altra tabella.</li>
+<li>Modello Operazionale, utilizzando un Data Cube che descrive tutte le possibili aggregazioni effettuabili in base al tipo di dimensioni selezionate.</li>
+</ul>
+<p>I fatti di interesse sono rappresentati in <em>cubi</em> in cui ogni cella contiene misure che quantificano il fatto da diversi punti di vista, ogni asse una dimensione di interesse e ogni dimensione può essere la radice di una gerarchia di attributi per integrare i dati memorizzati in cubi base.
+Le informazioni sono categorizzate e le categorie seguono delle gerarchie in base alle proprie esigenze.
+Inoltre, si possono compiere operazioni di aggregazione dei dati per successive analisi. Le funzioni base di uno strumento OLAP sono diverse:</p>
+<ul>
+<li><em>Pivoting</em>: operazione di rotazione delle dimensioni di analisi per analizzare i dati in dimensioni diverse;</li>
+<li><em>Slicing</em>: riduzione della dimensionalità del cubo fissando un valore per ogni dimensione;</li>
+<li><em>Dicing</em>: riduzione della dimensionalità del cubo attraverso un criterio di selezione;</li>
+<li><em>Roll-up</em>: aumenta l’aggregazione dei dati eliminando un livello di dettaglio da una gerarchia;</li>
+<li><em>Drill-accross</em>: collegamento tra 2 o più cubi per comparare i dati;</li>
+<li><em>Drill-down</em>: diminuzione di aggregazione dei dati aumentando il livello di dettaglio di una gerarchia.</li>
+</ul>
+</div>
+</div>
+<div id="data-lake" class="section level1">
+<h1><span class="header-section-number">6</span> Data Lake</h1>
+<p>Un <em>Data Lake</em> è un repository utilizzato per analizzare grandi quantità di dati in diversi formati nel loro formato nativo; la sua architettura è basata per contenere tutti i tipi di dati, come i dati prodotti dalle macchine, dalle persone e da quelli tradizionali.
+Infatti, lo schema ed i requisiti dei dati non sono definiti in partenza, ma vengono delineati al momento dell’interrogazione, processo chiamato <em>schema on read</em>.
+In questo modo si riduce la quantità di dati inseriti nel Data Warehouse.
+Il Data Lake può essere utilizzato come un’area di atterraggio per la fase di store dei dati nel DWS.
+Per implementare un data lake si possono utilizzare diverse tecnologie, come HDFS che è la più utilizzata, NoSQL, ecc. Lo schema di un Data Lake è il seguente:</p>
+<ul>
+<li>I dati sono presi ed immagazzinati nel loro formato nativo (<em>schema on read</em>);</li>
+<li>I dati vengono analizzati per determinare il proprio valore in base al tipo di analisi che si vuole fare con processi scalabili paralleli;</li>
+<li>Si catturano i dati originali e li si memorizzano sotto forma di analisi usata precedentemente (<em>schema on write</em>).</li>
+</ul>
 <!-- Lezione 12: 06/11/2020 -->
 </div>
-</div>
 <div id="data-quality" class="section level1">
-<h1><span class="header-section-number">6</span> Data Quality</h1>
+<h1><span class="header-section-number">7</span> Data Quality</h1>
 <p>Per <em>Dato</em> si intende una rappresentazione elettronica della informazione, immagazzinato in diverse modalità:</p>
 <ul>
 <li>Strutturato, memorizzati in formato tabellare in un database;</li>
@@ -346,7 +397,7 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <li>Non Strutturato, memorizzato in formato non tabellare e senza tag (Word).</li>
 </ul>
 <div id="applicazioni" class="section level2">
-<h2><span class="header-section-number">6.1</span> Applicazioni</h2>
+<h2><span class="header-section-number">7.1</span> Applicazioni</h2>
 <p>Si applicano diverse procedure di <em>Qualità dei Dati</em> in quanto per analizzare un fenomeno specifico è necessario che siano completi (no dati mancanti), non anomali (no errori o anomalie tipo valori multipli o refusi) e consistenti (no incongruenze tra diversi database). Una dimensione della qualità del dato cattura e descrive un aspetto particolare dello stesso. Esse sono una metrica qualitativa che descrivono una proprietà di interesse. Inoltre sono dipendenti tra di loro (correlazioni positive e negative). I dati possono essere analizzati secondo diversi livelli:</p>
 <!-- Livelli Dati:
         
@@ -354,7 +405,7 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
         * Schema
         * Formato -->
 <div id="istanza" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Istanza</h3>
+<h3><span class="header-section-number">7.1.1</span> Istanza</h3>
 <p>Il livello di Istanza identifica le righe di un database. I problemi possono avvenire su singoli record (Es: valori nulli, anomali e ambigui) oppure su record multipli (valori duplicati, contraddittori e non strutturati).</p>
 <!-- Dimensioni:
         
@@ -362,9 +413,23 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
         * Completeness
         * Time Related
         * Consistency -->
+<p>Per <strong>Accuracy</strong> si intende la vicinanza tra la rappresentazione <span class="math inline">\(v\)</span> e quella corretta del fenomeno <span class="math inline">\(v&#39;\)</span> che si intende rappresentare. Essa può essere <em>sintattica</em>, ovvero la vicinanza tra due rappresentazioni contenuti in un dominio finito, oppure <em>semantica</em>, confrontando la rappresentazione con la controparte reale. Essa fornisce una valutazione dicotoma. La accuratezza può essere espressa a diversi livelli di granularità: ad un singolo valore di un attributo, ad una colonna, ad una relazione od all’intero Database:</p>
+<p>Per <strong>Completeness</strong> si intende la completezza di informazioni di un dato. La completezza è caratterizzata secondo la presenza di valori nulli, ovvero valori non disponibili, non osservati o persi. Ne esistono di 3 tipologie:</p>
+<ul>
+<li>Relativo allo Schema, quanto i concetti sono modellati nello schema;</li>
+<li>Relativo alla Colonna, valutando i valori mancanti per una proprietà all’interno di una tabella;</li>
+<li>Relativa alla popolazione di riferimento.</li>
+</ul>
+<p>Per <strong>Currency</strong>, <strong>Timeless</strong> e <strong>Volatility</strong> si intendono le dimensioni correlate con il tempo. In particolare:</p>
+<ul>
+<li>Currency descrive la velocità di aggiornamento di un dato</li>
+<li>Timeless descrive l’appropriatezza dei dati per i propri scopi;</li>
+<li>Volatility descrive la frequenza di aggiornamento di un dato.</li>
+</ul>
+<p>Per <strong>Consistenza</strong> si intende l’insieme delle regole semantiche definite all’interno di un Database relazionale, ad esempio i vincoli, le dipendenze funzioni e le chiavi primarie-esterne.</p>
 </div>
 <div id="schema" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> Schema</h3>
+<h3><span class="header-section-number">7.1.2</span> Schema</h3>
 <p>Il livello di Schema identifica la progettazione logica del database, alla struttura che conterrà i dati. I RDBMS definiscono una struttura che permette di evitare i problemi di data quality (Es: valori nulli, multipli e categorizzazione dati). Problemi di questo tipo portano anche a problemi di qualità nelle istanze; di conseguenza è necessario costruire un database duraturo e consistente per ottenere un miglioramento della qualità.</p>
 <!-- Dimensioni:
         
@@ -374,9 +439,30 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
         * Consistenza
         * Dettaglio
         * Cambiamento -->
+<p>Il <strong>Contenuto</strong> è definito secondo i seguenti termini:</p>
+<ul>
+<li>Rilevanza, per i contesto di utilizzo;</li>
+<li>Ottenibilità, quanto i dati sono disponibili;</li>
+<li>Chiarezza, ad esempio la adozione di regole per eliminare ambiguità all’interno di un Database.</li>
+</ul>
+<p>La <strong>Copertura</strong> deve essere:</p>
+<ul>
+<li>Comprensibile, lo schema deve soddisfare i requisiti dei potenziali utenti;</li>
+<li>Essenziale, lo schema deve soddisfare i soli requisiti dei potenziali utenti.</li>
+</ul>
+<p>La <strong>Composizione</strong> di uno schema deve essere:</p>
+<ul>
+<li>Naturale, ovvero fatti correlati tra loro;</li>
+<li>Identificabile, necessita di una chiave primaria;</li>
+<li>Omogeneo, gli attributi devono essere applicati a tutte le entità di uno stesso tipo;</li>
+<li>Ridondanza Minima, i termini devono essere ripetuti solo necessariamente.</li>
+</ul>
+<p>La <strong>Consistenza</strong> è definita in termini semantici e strutturali.</p>
+<p>Il <strong>Livello di Dettaglio</strong> è definito in termini di granularità dell’attributo, in base alla disponibilità delle informazioni, ed alla precisione dei domini.</p>
 </div>
 <div id="formato" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Formato</h3>
+<h3><span class="header-section-number">7.1.3</span> Formato</h3>
+<p>Il Formato comprende 7 differenti dimensioni:</p>
 <!-- Dimensioni:
         
         * Appropriatezza
@@ -386,31 +472,49 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
         * Flessibilità
         * Rappresentazione dei Valori Nulli
         * Uso efficiente Memoria -->
+<ul>
+<li>Appropriatezza, rispetto alle esigenze dell’utente;</li>
+<li>Interpretabilità, quanto è comprensibile un dato;</li>
+<li>Portabilità, la semiotica del dato;</li>
+<li>Precisione;</li>
+<li>Flessibilità rispetto ai requisiti dell’utente;</li>
+<li>Rappresentazione dei Valori Nulli;</li>
+<li>Uso efficiente Memoria.</li>
+</ul>
 </div>
 </div>
 <div id="metodi-di-miglioramento" class="section level2">
-<h2><span class="header-section-number">6.2</span> Metodi di Miglioramento</h2>
+<h2><span class="header-section-number">7.2</span> Metodi di Miglioramento</h2>
+<p>I metodi per migliorare la qualità di un Database possono essere applicati sui dati oppure sui processi.</p>
 <div id="dati" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Dati</h3>
+<h3><span class="header-section-number">7.2.1</span> Dati</h3>
+<p>Per quanto riguarda i dati, i metodi si basano su:</p>
 <!-- Metodi:
         
         * Confronto con Controparte Reale
         * Database Bashing
-        * Business Rule -->
+        * Business Rule
+        * Metadati -->
+<ul>
+<li><em>Confronto con Controparte Reale</em>, il metodo più efficacie, ma anche quello più costoso in quanto richiede un controllo periodico;</li>
+<li><em>Database Bashing</em>, che prevede il confronto di record in due o più Database interni con la tecnica di <em>Record Matching</em>, identificando se rappresentano la stessa entità;</li>
+<li><em>Business Rule</em>, che prevede la verifica che i record rispettino determinati vincoli di business o semantici. Esso è il più conveniente in quanto più efficacie del Database Bashing e meno costoso del confronto con la controparte reale.</li>
+<li>Utilizzo dei <em>Metadati</em>, per memorizzare i valore delle dimensioni di qualità calcolati utilizzando approcci precedenti</li>
+</ul>
 </div>
 <div id="processi" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> Processi</h3>
+<h3><span class="header-section-number">7.2.2</span> Processi</h3>
 <p>Il principale svantaggio dei metodi per il miglioramento della qualità dei dati basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I <em>Metodi basati sui Processi</em> prevedono invece un’analisi dei processi per individuare e correggere le cause di errore.</p>
 <!-- Metodi:
         
         * Controllo e Miglioramento
         * Reingegnerizzazione
-        * Business Rule -->
+        -->
 </div>
 </div>
 </div>
 <div id="graph-db" class="section level1">
-<h1><span class="header-section-number">7</span> Graph DB</h1>
+<h1><span class="header-section-number">8</span> Graph DB</h1>
 <p>Un <em>Graph Database</em> è un database utilizzato per lo storage efficiente di dati semi-strutturati. Permette di modellare le relazioni sociali tramite un modello a grafo. <!-- Ricordare la teoria dei grafi in SMA --></p>
 <p>Un nodo, rappresentato da una osservazione, può contenere diverse proprietà che specificano delle entità. Le relazioni, invece, rappresentano la connessione di entità. Devono obbligatoriamente avere un nome ed una direzione e devono avere un inizio ed una fine. Inoltre, anch’esse possono contenere delle proprietà, in modo tale da comprendere meglio la relazione.</p>
 <!-- Immagine Grafo Skills -->
@@ -449,6 +553,26 @@ CREATE (:skill
 </ul>
 <pre class="cypher"><code>:schema
 CALL db.schema.visualization</code></pre>
+</div>
+<div id="explainable-ai" class="section level1">
+<h1><span class="header-section-number">9</span> Explainable AI</h1>
+<p>L’Intelligenza Artificale è sempre più utilizzata in tutti gli ambiti lavorativi. La <em>Explainable AI</em> è un metodo efficace per far comprendere agli esperti di domini le decisioni prese da un algoritmo di Machine Learning. La necessità di utilizzo nella pratica risiede nella fiducia della decisione da prendere, nella interazione tra uomo e macchina per comprendere la decisione scelta e nella trasparenza delle decisioni.</p>
+<!-- Immagine Explainable AI -->
+<p><img src="Immagini/XAI.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Il problema della spiegazione dei modelli è correlata con la previsione della Accuracy. In particolare, i modelli di Neural Network hanno una Accuracy molto più elevata rispetto a semplici modelli, a discapito di una difficile interpretazione in base alla quantità di layer nascosti all’interno di essa.</p>
+<p>La interpretabilità può essere determinata in termini:</p>
+<ul>
+<li><em>Globale</em>, sulla rilevanza delle feature del modello considerato l’intero dataset</li>
+<li><em>Locale</em>, spiegano la decisione effettuata dall’algoritmo sulla singola istanza</li>
+</ul>
+<div id="lime" class="section level2">
+<h2><span class="header-section-number">9.1</span> LIME</h2>
+<p>Il <em>LIME</em> è una tecnica di Explainable AI applicata a livello locale. Essa considera una singola osservazione e tutte le istanze in un intorno dello spazio delle feature (di conseguenza con caratteristiche simili). Successivamente massimizza la <em>local fidelity</em> che approssima le decisione del modello più complesso in quell’intorno.</p>
+</div>
+<div id="shap" class="section level2">
+<h2><span class="header-section-number">9.2</span> SHAP</h2>
+<p>Lo <strong><em>SH</em></strong>apley <strong><em>A</em></strong>dditive ex<strong><em>P</em></strong>lanations è una tecnica di Explainable AI applicata a livello globale che determina quanto la previsione è determinata dalle feature. Per determinare l’importanza di una singola feature, è necessario considerare ogni possibile combinazione di essa per far apprendere un modello per volta. Lo <em>SHAP value</em> è calcolato come la somma pesata del contributo ad ogni livello della feature.</p>
+</div>
 </div>
             </section>
 

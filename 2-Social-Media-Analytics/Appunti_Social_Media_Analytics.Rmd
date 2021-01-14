@@ -191,7 +191,7 @@ The phases of Social Media Analysis are:
 
 In particular, ***S***ocial ***N***etwork ***A***nalysis (**SNA**) is the process of investigating social structures through the use of networks and *Graph Theory*. These networks are usually visualized in sociograms (also known as Social Network Graph) where vertices are represented as points and edges as lines.
 
-A *Graph* is a pair of vertices ($V$) and edges ($E$), $G = (V, E)$, such that $E \subseteq [V]^2$. The set of *vertices* of a graph is denoted as $V(G) = {v_1, v_2, \dots, v_n}$, while the set of *Edges* is denoted as $E(G) = {e_1, e_2, \dots, e_n}$. The representation is to draw a point for each vertex and join these points with lines if there's a connection:
+A *Graph* is a pair of vertices ($V$) and edges ($E$), $G = (V, E)$, such that $E \subseteq [V]^2$. The set of *vertices* of a graph is denoted as $V(G) = \{v_1, v_2, \dots, v_n\}$, while the set of *Edges* is denoted as $E(G) = \{e_1, e_2, \dots, e_n\}$. The representation is to draw a point for each vertex and join these points with lines if there's a connection:
 
 <!-- Graph Image -->
 ```{r Graph, echo = FALSE, out.width ="75%"}
@@ -199,21 +199,21 @@ knitr::include_graphics("Immagini/Graph.png")
 ```
 
 ## Undirected Graph
-A graph is *Undirected* if edges are directed from one vertex to another (e.g. Twitter). Given the edge $e = (a, b)$, $a$ and $b$ are called *Extreme* and *Adjacent* vertices of $e$, called the *incident* edge. $a$ is called *Neighbor* of $b$ in $G$ and vice versa. Two edges $e, f$ are *Adjacent* if they have a common vertex. The *Neighborhood* of $a$, $N(a)$, is the set of vertices adjacent to $a$. The *Star* of $a$, $s(a)$, is the set of edges incident in $a$.
+An *Undirected* graph is a graph with all bidirectional edges (E.g. Facebook). Given the edge $e = (a, b)$, $a$ and $b$ are called *Extreme* and *Adjacent* vertices of $e$, called the *incident* edge. $a$ is called *Neighbor* of $b$ in $G$ and vice versa. Two edges $e, f$ are *Adjacent* if they have a common vertex. The *Neighborhood* of $a$, $N(a)$, is the set of vertices adjacent to $a$. The *Star* of $a$, $s(a)$, is the set of edges incident in $a$.
 
 <!-- Undirected Graph Image -->
 ```{r Undirected Graph, echo = FALSE, out.width = "75%"}
 knitr::include_graphics("Immagini/Undirected-Graph.png")
 ```
 
-The *Degree* of a vertex, $d(v)$ is the number of edge incident to a node, equivalent to the number of neighbors of $v$; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value $\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}$ is the minimum degree, while the value $\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}$ is the maximum degree:
+The *Degree* of a vertex, $d(v)$ is the number of edge incident to a node, equivalent to the number of neighbors of $v$; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value $\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}$ is the minimum degree of a vertex, while the value $\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}$ is the maximum degree:
 
 <!-- Degree of a Graph Image -->
 ```{r Degree of Graph, echo = FALSE, out.width = "75%"}
 knitr::include_graphics("Immagini/Degree.png")
 ```
 
-$$d(G) = \frac{1}{|V|} \sum_{v \in V} d(v) = 2|E(G)| = m$$
+$$d(G) = \frac{1}{|V|} \sum_{v \in V} d(v) = \frac{1}{|V|} 2|E(G)| = \frac{2m}{|V|}$$
 
 There are many different type of graphs:
 
@@ -222,7 +222,7 @@ There are many different type of graphs:
 * *Complete* graph, in which each pair of distinct vertices are adjacent;
 
 ## Directed Graph
-A *Directed* graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge $e = (a,b)$, $e$ is called *Outgoing* edge from $a$, denoted as direct *Predecessor*, and *Ingoing* edge in $b$, known as direct *Successor*. Given a vertex $a$ of a directed graph $G$, $E^+(a)$ is the set of outgoing edges from $a$ and $E^-(a)$ the set of incoming edges in $a$. A *Sink* vertex is a vertex with only incoming edges, while with only outgoing edges is called *Source* vertex.
+A graph is *Directed* if edges are directed from one vertex to another (E.g. Twitter). Given the edge $e = (a,b)$, $e$ is called *Outgoing* edge from $a$, denoted as direct *Predecessor*, and *Ingoing* edge in $b$, known as direct *Successor*. Given a vertex $a$ of a directed graph $G$, $E^+(a)$ is the set of outgoing edges from $a$ and $E^-(a)$ the set of incoming edges in $a$. A *Sink* vertex is a vertex with only incoming edges, while with only outgoing edges is called *Source* vertex.
 
 <!-- Directed Graph Image -->
 ```{r Directed Graph, echo = FALSE, out.width = "75%"}
@@ -267,7 +267,7 @@ A *Clique* is a set of vertices $C$ totally connected in a graph $G$. It usually
 knitr::include_graphics("Immagini/Clique.png")
 ```
 
-The *Clustering Coefficient* is the measure of the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:
+The *Clustering Coefficient* is the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:
 
 * *Local Clustering Coefficient*: given a set of neighbors $N(v)$, it is the number of edges between the members of neighbors divided by the number of potential edges between them ($k = d(v)$):
 

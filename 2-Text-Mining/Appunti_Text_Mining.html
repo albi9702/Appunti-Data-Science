@@ -80,18 +80,16 @@
 <li class="chapter" data-level="3.1.1" data-path=""><a href="#part-of-speech-tagging"><i class="fa fa-check"></i><b>3.1.1</b> Part Of Speech Tagging</a></li>
 <li class="chapter" data-level="3.1.2" data-path=""><a href="#named-entity-recognition"><i class="fa fa-check"></i><b>3.1.2</b> Named Entity Recognition</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#language-models"><i class="fa fa-check"></i><b>3.2</b> Language Models</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path=""><a href="#language-models"><i class="fa fa-check"></i><b>4</b> Language Models</a><ul>
-<li class="chapter" data-level="4.1" data-path=""><a href="#world-embedding"><i class="fa fa-check"></i><b>4.1</b> World Embedding</a><ul>
-<li class="chapter" data-level="4.1.1" data-path=""><a href="#count-based-models"><i class="fa fa-check"></i><b>4.1.1</b> Count-Based Models</a></li>
-</ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#world-embedding"><i class="fa fa-check"></i><b>4</b> World Embedding</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#count-based-models"><i class="fa fa-check"></i><b>4.1</b> Count-Based Models</a></li>
 <li class="chapter" data-level="4.2" data-path=""><a href="#predictive-models"><i class="fa fa-check"></i><b>4.2</b> Predictive Models</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path=""><a href="#text-classification"><i class="fa fa-check"></i><b>5</b> Text Classification</a><ul>
-<li class="chapter" data-level="5.1" data-path=""><a href="#applications"><i class="fa fa-check"></i><b>5.1</b> Applications</a></li>
-<li class="chapter" data-level="5.2" data-path=""><a href="#supervised-learning"><i class="fa fa-check"></i><b>5.2</b> Supervised Learning</a></li>
-<li class="chapter" data-level="5.3" data-path=""><a href="#supervised-classification"><i class="fa fa-check"></i><b>5.3</b> Supervised Classification</a></li>
-<li class="chapter" data-level="5.4" data-path=""><a href="#evaluations"><i class="fa fa-check"></i><b>5.4</b> Evaluations</a></li>
+<li class="chapter" data-level="5.1" data-path=""><a href="#supervised-learning"><i class="fa fa-check"></i><b>5.1</b> Supervised Learning</a></li>
+<li class="chapter" data-level="5.2" data-path=""><a href="#supervised-classification"><i class="fa fa-check"></i><b>5.2</b> Supervised Classification</a></li>
+<li class="chapter" data-level="5.3" data-path=""><a href="#evaluations"><i class="fa fa-check"></i><b>5.3</b> Evaluations</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path=""><a href="#text-clustering"><i class="fa fa-check"></i><b>6</b> Text Clustering</a><ul>
 <li class="chapter" data-level="6.1" data-path=""><a href="#flat-clustering"><i class="fa fa-check"></i><b>6.1</b> Flat Clustering</a></li>
@@ -104,7 +102,10 @@
 <li class="chapter" data-level="7.3" data-path=""><a href="#evaluation"><i class="fa fa-check"></i><b>7.3</b> Evaluation</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path=""><a href="#topic-classification"><i class="fa fa-check"></i><b>8</b> Topic Classification</a></li>
-<li class="chapter" data-level="9" data-path=""><a href="#text-summarization"><i class="fa fa-check"></i><b>9</b> Text Summarization</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#text-summarization"><i class="fa fa-check"></i><b>9</b> Text Summarization</a><ul>
+<li class="chapter" data-level="9.1" data-path=""><a href="#evaluation-1"><i class="fa fa-check"></i><b>9.1</b> Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path=""><a href="#information-access"><i class="fa fa-check"></i><b>10</b> Information Access</a></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
 
@@ -257,43 +258,43 @@ In the same way, a program have to rebuild the message and compare it whit a bas
 <!-- Lecture 7: 22/10/2020 -->
 </div>
 </div>
-</div>
-<div id="language-models" class="section level1">
-<h1><span class="header-section-number">4</span> Language Models</h1>
-<p>A <em>Language Model</em> (<strong>LM</strong>) is a formal representation of a specific language, generating a probability distribution of the words in topics. A probability to a sequence words can be used for:
-<a href="mailto:iaeQ45YB@sYwv&amp;pell" class="email">iaeQ45YB@sYwv&amp;pell</a> Correction;</p>
+<div id="language-models" class="section level2">
+<h2><span class="header-section-number">3.2</span> Language Models</h2>
+<p>A <em>Language Model</em> (<strong>LM</strong>) is a formal representation of a specific language, generating a probability distribution of the words in topics. A probability to a sequence words can be used for:</p>
 <ul>
+<li>Spell Correction;</li>
 <li>Speech Recognition;</li>
 <li>Text Categorization;</li>
 <li>Information Retrieval;</li>
 <li>Summarization.</li>
 </ul>
-<p>The main task is to compute the probability of a sentence (or a sequence of words), <span class="math inline">\(\mathbb{P}(W) = \mathbb{P}(w_1, w_2, \dots, w_n)\)</span>, while the related task is the probability of an upcoming word: <span class="math inline">\(\mathbb{P}(w_{n + 1} | w_1, \dots, w_n)\)</span>. Any model which computes any of these procedure is called a language model.</p>
-<p>The joint probability is computed relying on the chain rule of probability:</p>
+<p>Main tasks are computing the probability of a sentence (or a sequence of words), <span class="math inline">\(\mathbb{P}(W) = \mathbb{P}(w_1, w_2, \dots, w_n)\)</span> and the probability of an upcoming word: <span class="math inline">\(\mathbb{P}(w_{n + 1} | w_1, \dots, w_n)\)</span>. Any model which computes any of these procedure is called a Language Model.</p>
+<p>The joint probability is computed relying on the <em>Chain Rule</em> of probability:</p>
 <p><span class="math display">\[\begin{aligned}
-    \mathbb{P}(w_1, w_2, \dots, w_n) &amp;= \mathbb{P}(w_1)\mathbb{P}(w_2 | w_1) \dots \mathbb{P}(w_n | w_1, \dots, w_{n-1}) \\
-                                     &amp;= \prod_{i = 1}^n \mathbb{P}(w_i | w_1, \dots, w_{i-1})
+    \mathbb{P}(w_1, w_2, \dots, w_n) &amp;= \mathbb{P}(w_1)\mathbb{P}(w_2 | w_1) \dots \mathbb{P}(w_n | w_1, \dots, w_{n - 1}) \\
+                                     &amp;= \prod_{i = 1}^n \mathbb{P}(w_i | w_1, \dots, w_{i - 1})
   \end{aligned}\]</span></p>
-<p>but so many product could lead the number to decay pretty fast. A solution is the Markov Assumption, an approximation of the joint probability in which considers the probability of one or two words preceding the word:</p>
-<p><span class="math display">\[\mathbb{P}(w_1, w_2, \dots, w_n) \approx \prod_{i = 1}^n \mathbb{P}(w_i | w_{i - k} \dots w_{i-1}\]</span></p>
-<p>In this case is possible to construct an <em>Unigram Language Model</em>, the probability distribution over the words in a language, or <em>N-gram Language Model</em>, where probabilities depend on previous words. For example a Bigram LM is the probability of a word in a sequence where considering the previous word.</p>
-<p>The Maximum Likelihood Estimate of a Bigram LM is the following:</p>
-<p><span class="math display">\[\mathbb{P}(w_i | w_{i-1}) = \frac{c(w_{i-1}, w_i)}{w_{i-1}}\]</span></p>
+<p>but so many product could lead the number to decay pretty fast. A solution is the <em>Markov Assumption</em>, an approximation of the joint probability in which considers the probability of one or two words preceding the word:</p>
+<p><span class="math display">\[\mathbb{P}(w_1, w_2, \dots, w_n) \approx \prod_{i = 1}^n \mathbb{P}(w_i | w_{i - k} \dots w_{i - 1})\]</span></p>
+<p>In this case is possible to construct an <em>Unigram Language Model</em>, the probability distribution over the words in a language, or <em>N-gram Language Model</em>, where probabilities depend on previous words. For example, a Bigram LM is the probability of a word in a sequence where considering the previous word. The Maximum Likelihood Estimate of a Bigram Language Model is the following:</p>
+<p><span class="math display">\[\mathbb{P}(w_i | w_{i - 1}) = \frac{c(w_{i - 1}, w_i)}{w_{i - 1}}\]</span></p>
 <p>For example, look at this repository:</p>
 <pre><code>&lt;s&gt; I am Sam &lt;/s&gt;
 &lt;s&gt; Sam I am &lt;/s&gt;
 &lt;s&gt; I do not like green eggs and ham &lt;/s&gt;</code></pre>
-<p>The probability of <code>I</code> at the start of the sentence is <span class="math inline">\(\mathbb{P}(I | &lt;s&gt; = 2/3 = 0.67\)</span>, while the probability of Sam in as the last word is <span class="math inline">\(\mathbb{P}(Sam | &lt;s&gt; = 1/3 = 0.33\)</span>.</p>
-<p>The evaluation of a language model is the same as most important models: the dataset is splitted in training set and test set, testing the model’s performance on unseen data. The best evaluation for comparing models is compare the accuracy of those. An important metric evaluation is <em>perplexity</em>, the inverse probability of the test set normalized by number of word (minimizing perplexity is the same as maximizing probability):</p>
-<p><span class="math display">\[PP(W) = \sqrt[N]{\prod_{i = 1}^N \frac{1}{\mathbb{P}(w_i | w_1 \dots w_{i-1})}}\]</span></p>
+<p>The probability of <code>I</code> at the start of the sentence is <span class="math inline">\(\mathbb{P}(I | &lt;s&gt;) = 2/3 = 0.67\)</span>, while the probability of Sam in as the last word is <span class="math inline">\(\mathbb{P}(Sam | &lt;s&gt;) = 1/3 = 0.33\)</span>.</p>
+<p>The evaluation of a Language Model is the same as most important models: the dataset is splitted in Training set and test set, Testing the model’s performance on unseen data. The best evaluation for comparing models is compare the accuracy of those. An important metric evaluation is <em>Perplexity</em>, the inverse probability of the test set normalized by number of word (minimizing perplexity is the same as maximizing probability):</p>
+<p><span class="math display">\[PP(W) = \sqrt[N]{\prod_{i = 1}^N \frac{1}{\mathbb{P}(w_i | w_1 \dots w_{i - 1})}}\]</span></p>
 <!-- Lecture 8: 29/10/2020 -->
-<div id="world-embedding" class="section level2">
-<h2><span class="header-section-number">4.1</span> World Embedding</h2>
+</div>
+</div>
+<div id="world-embedding" class="section level1">
+<h1><span class="header-section-number">4</span> World Embedding</h1>
 <p><em>World Embedding</em> indicates a set of techniques in a NLP where words from a vocabulary are mapped to vectors of real numbers. It involves a mathematical embedding from a space with many dimensions per word to a vector space with a lower dimension. This model can be used to check similarity between either or words and check topic similarity and words usage per topic (worlds can be represented as vectors too).</p>
 <p>Each document is represented by a vector of words, with a binary representation, the frequency of the words or the weighted representation (TF-Idf).</p>
-<p>Usually, the similarity is not computed by using term-document representation, because two words are similar if their context vectors are similar. To represent words as vectors, it is possible to build a <span class="math inline">\(V \times V\)</span> <em>1-hot</em> matrix (also known as <em>Local Representation</em>) in which each word has all values equal to 0 except for the corresponding colum, equal to 1. This is a very sparse matrix, with no information between similar words. To solve these problems, the idea is associate <span class="math inline">\(k\)</span> context dimensions representing properties of the words in the vocabulary, also known as <em>Distributed Representation</em>. Distributed vectors allow to group similar words together depending on the considered context.</p>
+<p>Usually, the Similarity is not computed by using term-document representation, because two words are similar if their context vectors are similar. To represent words as vectors, it is possible to build a <span class="math inline">\(V \times V\)</span> <em>1-hot</em> matrix (also known as <em>Local Representation</em>) in which each word has all values equal to 0 except for the corresponding colum, equal to 1. This is a very sparse matrix, with no information between similar words. To solve these problems, the idea is associate <span class="math inline">\(k\)</span> context dimensions representing properties of the words in the vocabulary, also known as <em>Distributed Representation</em>. Distributed vectors allow to group similar words together depending on the considered context.</p>
 <p>The difference between Local and Distributed representation is in the matrix: in particular, in LR every term in a vocabulary <span class="math inline">\(T\)</span> is represented by a binary vector, while in DR every term is represented by a real-valued vector.</p>
-<p>For simple scenarios it is possible create a <span class="math inline">\(k\)</span>-dimensional mapping for a simple example vocabulary y manually choosing contextual dimensions that make sense. This is not a simple task, in particular manual assignment of vector would be impossibly. The <em>Distributional Hypothesis</em> aims to represent each words by some context. It is possible to use different granularities of context, such as documents and sentences.</p>
+<p>For simple scenarios it is possible create a <span class="math inline">\(k\)</span>-dimensional mapping for a simple example vocabulary and manually choosing contextual dimensions that make sense. This is not a simple task, in particular manual assignment of vector would be impossibly. The <em>Distributional Hypothesis</em> aims to represent each words by some context. It is possible to use different granularities of context, such as documents and sentences.</p>
 <p>The <em>Window-based Co-occurence Matrix</em> counts the number of times each context words co-occurs inside a windows of a particular size with the word of interest. It generates an <span class="math inline">\(X = |V| \times |V|\)</span> co-occurence matrix. The frequency is not a good representation, it is possible to use weights, TF-IDF or <strong><em>P</em></strong>ointwise <strong><em>M</em></strong>utual <strong><em>I</em></strong>nformation (<strong>PMI</strong>):</p>
 <p><span class="math display">\[PMI(w_1, w_2) = \log_2 \frac{\mathbb{P}(w_1, w_2)}{\mathbb{P}(w_1)\mathbb{P}(w_2)} \in (- \infty, + \infty)\]</span></p>
 <p>To have better estimation, only positive estimation are taken:</p>
@@ -316,17 +317,19 @@ In the same way, a program have to rebuild the message and compare it whit a bas
 ## Pineapple       0.00 0.00  0.05  0.000  0.05
 ## Digital         0.11 0.05  0.05  0.050  0.00
 ## Information     0.05 0.32  0.00  0.021  0.05</code></pre>
-<p>Rare words and apax produce higher scores, that risks to bias the analysis: probabilities of <span class="math inline">\(w\)</span> and <span class="math inline">\(c\)</span> are modified or a <span class="math inline">\(k\)</span>-smoothing is used to reduced those scores with a value <span class="math inline">\(\alpha \in [0, 1]\)</span> (usually <span class="math inline">\(\alpha = 0.75\)</span>):</p>
-<p><span class="math display">\[PMI_{\alpha}(w, c) = \log_2 \frac{\mathbb{P}(w, c)}{\mathbb{P}(w)\mathbb{P}_{\alpha}(c)} \in (- \infty, + \infty)
-\implies
-PPMI_{\alpha}(w, c) = \max [(PMI_{\alpha}(w, c), 0]\]</span></p>
+<p>Rare words produce higher scores, that risks to bias the analysis: probabilities of <span class="math inline">\(w\)</span> and <span class="math inline">\(c\)</span> are modified or a <span class="math inline">\(k\)</span>-smoothing is used to reduced those scores with a value <span class="math inline">\(\alpha \in [0, 1]\)</span> (usually <span class="math inline">\(\alpha = 0.75\)</span>):</p>
+<p><span class="math display">\[\begin{aligned}
+    PMI_{\alpha}(w, c) = \log_2 \frac{\mathbb{P}(w, c)}{\mathbb{P}(w)\mathbb{P}_{\alpha}(c)} \in (- \infty, + \infty) \\
+    \implies
+    PPMI_{\alpha}(w, c) = \max [PMI_{\alpha}(w, c), 0]
+    \end{aligned}\]</span></p>
 <p>with</p>
 <p><span class="math display">\[P_{\alpha}(c) = \frac{\text{count}(c)^{\alpha}}{\sum_c \text{count}^{\alpha}}\]</span></p>
 <!-- Lecture 10: 02/11/2020 -->
 <p>A Co-occurrence Matrix in reality is constituted by a very large number of words. For each word, Tf-Idf and PPMI vectors are long (<span class="math inline">\(|V| \approx 50&#39;000\)</span>) and sparse (most elements <span class="math inline">\(= 0\)</span>). There are techniques to learn lower-dimensional vectors for words, which are Short and Sense. These dense vectors in a latent space are called <em>Embedding</em>.</p>
 <!-- Two type of learning embedding models -->
-<div id="count-based-models" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Count-Based Models</h3>
+<div id="count-based-models" class="section level2">
+<h2><span class="header-section-number">4.1</span> Count-Based Models</h2>
 <p><em>Count-Based Models</em> computes the statistic of how often some words co-occurs with its neighbor words in a large text corpus. Then it is possible to reduce the dimensionality the vector in an small and dense array for each word. The lower-dimensional matrix of words and features represent a dense vector for each word.</p>
 <p>The most popular model is the <strong><em>S</em></strong>ingular <strong><em>V</em></strong>alue <strong><em>D</em></strong>ecomposition (<strong>SVD</strong>), a dimensionality reduction techniques used in Text Mining. Any rectangular <span class="math inline">\(w \times c\)</span> matrix <span class="math inline">\(X\)</span> can be expressed as the product of 3 matrices:</p>
 <p><span class="math display">\[\underset{w \times c}{X} = \underset{w \times m}{U}
@@ -370,7 +373,6 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 <p>The two sets of vectors captures similar co-occurence information. The best solution is to simply sum them up:</p>
 <p><span class="math display">\[X_{final} = U + V\]</span></p>
 </div>
-</div>
 <div id="predictive-models" class="section level2">
 <h2><span class="header-section-number">4.2</span> Predictive Models</h2>
 <p><em>Predictive Models</em> predict a word from its neighbors obtaining a small, dense embedding vectors. The most popular models is the <em>Word2Vec</em> model, which creates collections of similar concept automatically on raw texts (supervised training data) and without advanced language skills. Very good performance are obtained by employing very large (<span class="math inline">\(\approx 10\)</span>M words) text including as many different words as possible.</p>
@@ -397,7 +399,7 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 </div>
 <div id="text-classification" class="section level1">
 <h1><span class="header-section-number">5</span> Text Classification</h1>
-<p><em>Text Classification</em> is the activity of predicting to which data items belongs to a predefined finite set of classes. In text classification, data items can be textual (news articles, e-mail, etc.) or partly textual (web pages).</p>
+<p><em>Text Classification</em> is the activity of predicting which data items belongs to a predefined finite set of classes. In Text Classification, data items can be textual (E.g: news articles, e-mail, etc.) or partly textual (web pages).</p>
 <p><span class="math display">\[h : D \rightarrow C\]</span></p>
 <p>There are many types of classification:</p>
 <ul>
@@ -406,18 +408,15 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 <li><em>Multi Label Multi Class Classification</em>, where each item may belong to zero, one or several classes together;</li>
 <li><em>Ordinal Classification</em>, similar to <em>SLMC</em>, but classification are ordered respectably to some quality.</li>
 </ul>
-<p>The previous definitions denote hard classification (training soft classifier with a score and picking a threshold <span class="math inline">\(t\)</span>). Soft classification aims to predict a score for each pair <span class="math inline">\((d, c)\)</span> where the score denotes the probability that d belong to c, where scores are used for ranking.</p>
-<div id="applications" class="section level2">
-<h2><span class="header-section-number">5.1</span> Applications</h2>
+<p>The previous definitions denote hard classification (training a soft classifier with a score and picking a threshold <span class="math inline">\(t\)</span>). Soft classification aims to predict a score for each pair <span class="math inline">\((d, c)\)</span> where the score denotes the probability that <span class="math inline">\(d\)</span> belong to <span class="math inline">\(c\)</span>, where scores are used for ranking.</p>
 <p>There are many applications:</p>
 <ul>
-<li><em>Knowledge Organization</em>, conferring structure to an otherwise unstructured body of knowledge (e.g. classifying news articles);</li>
-<li><em>Filtering</em>, blocking a set of non relevant items from a dynamic stream. It is a binary classification (e.g. spam filtering detecting unsuitable content);</li>
+<li><em>Knowledge Organization</em>, conferring structure to an otherwise unstructured body of knowledge (E.g: classifying news articles);</li>
+<li><em>Filtering</em>, blocking a set of non relevant items from a dynamic stream. It is a binary classification (E.g: spam filtering detecting unsuitable content);</li>
 <li><em>Empowering</em>, improving the effectiveness of other tasks in Information Retrieval or Natural Language Process.</li>
 </ul>
-</div>
 <div id="supervised-learning" class="section level2">
-<h2><span class="header-section-number">5.2</span> Supervised Learning</h2>
+<h2><span class="header-section-number">5.1</span> Supervised Learning</h2>
 <p>The Supervised Learning is a generic learning algorithm used to train a classifier from a set of manually classified examples. The classifiers learns the characteristics that a new text should have in order to be assigned to class <span class="math inline">\(c\)</span>.</p>
 <p>In order to generate a vector based representation for a set of documents, there are 3 main steps:</p>
 <ol style="list-style-type: decimal">
@@ -426,18 +425,18 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 </ol>
 <p><span class="math display">\[MI(t_k, c_i) = \sum \sum \mathbb{P}(t, c) \log_2 \frac{\mathbb{P}(t, c)}{\mathbb{P}(t) \mathbb{P}(c)}\]</span></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Feature weighting means attributing a value to feature in the vector that represents document. This value can be binary, numeric obtained in a unsupervised or supervised classes.</li>
+<li><em>Feature weighting</em> means attributing a value to feature in the vector that represents document. This value can be binary, numeric obtained in a unsupervised or supervised classes.</li>
 </ol>
 <!-- Lecture 13: 09/11/2020-->
 <p>The classical way to represent documents is the vector space model, where documents are converted into vectors in a common vector space. It is constituted by terms (axes) and documents are points in the vector space. To represent the similarity of a document is possible to use the cosine similarity:</p>
 <p><span class="math display">\[\mathbb{sim}(d_1, d_2) = \frac{\sum_{i=1}^k w_{i1}w_{i2}}{\sqrt{\sum_{i=1}^k w_{i1}^2 \sum_{i=1}^k w_{i2}}^2} \in [0, 1]\]</span></p>
 </div>
 <div id="supervised-classification" class="section level2">
-<h2><span class="header-section-number">5.3</span> Supervised Classification</h2>
+<h2><span class="header-section-number">5.2</span> Supervised Classification</h2>
 <p>For binary classification, essentially any supervised learning algorithm can be used for training a classifier. One of the most important method is <strong><em>S</em></strong>upport <strong><em>V</em></strong>ector <strong><em>M</em></strong>achine (<strong>SVM</strong>), which aims to find the separating surface that maximizes the margin between hyperplane and training points. Often classification problems are not linearly separable, but it can become linear separable once mapped to an high-dimensional space using kernels. The trained classifiers often depend on one or more parameters, but they need to be optimized with a <span class="math inline">\(k\)</span>-fold cross-validation on the training set.</p>
 </div>
 <div id="evaluations" class="section level2">
-<h2><span class="header-section-number">5.4</span> Evaluations</h2>
+<h2><span class="header-section-number">5.3</span> Evaluations</h2>
 <p>There two important aspects to evaluate a classifier: <em>Efficiency</em>, which refers to the consumption of computational resources (training and classification), while Effectiveness (<em>Accuracy</em>) refers to how frequently classification decisions taken by a classifier are correct. For binary classification it is possible to evaluate accuracy with confusion matrix:</p>
 <p><span class="math display">\[Accuracy = \frac{TN + TP}{TN + FN + FP + TP}\]</span></p>
 <p>Another measure is <span class="math inline">\(F_1\)</span>, robust to the presence of imbalance in the test set. It is defined as the harmonic mean of Precision and Recall:</p>
@@ -538,9 +537,9 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
       \underset{\text{Potential Topic}}{S} \times
       \underset{\text{Term Topic}}{V^t}\]</span></p>
 <!-- Cons -->
-<p>The problem of dimensionality reduction is that cannot have an interpretable meaning in the natural language. Furthermore LSA can onlu capture partially polysemy, but this is not a problem because it can find the predominant sense in a document.</p>
+<p>The problem of dimensionality reduction is that cannot have an interpretable meaning in the natural language. Furthermore LSA can only capture partially polysemy, but this is not a problem because it can find the predominant sense in a document.</p>
 <!-- Alternative -->
-<p>An alternative of this techniques is the <em>Probabilistic LSA</em> (<strong>pLSA</strong>), which identifies and distinguishes words in different contexts whithout using the dictionary. In particular, it allows to disambiguate polysemy and discloses topical similarities grouping together words sharing the same context.</p>
+<p>An alternative of this techniques is the <em>Probabilistic LSA</em> (<strong>pLSA</strong>), which identifies and distinguishes words in different contexts without using the dictionary. In particular, it allows to disambiguate polysemy and discloses topical similarities grouping together words sharing the same context.</p>
 <p>It finds a probabilistic model with hidden (or latent) topic that can generate the observed data in the Document Term Matrix. pLSA expresses data in three different variables:</p>
 <ul>
 <li><em>Documents</em> observed variables: <span class="math inline">\(d = \{d_1, \dots, d_N \} \in D\)</span>;</li>
@@ -556,30 +555,30 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 </div>
 <div id="latent-dirichlet-analysis" class="section level2">
 <h2><span class="header-section-number">7.2</span> Latent Dirichlet Analysis</h2>
-<p>The <strong><em>L</em></strong>atent <strong><em>D</em></strong>irichlet <strong><em>A</em></strong>nalysis (<strong>LDA</strong>) is the Bayesian version of pLSA. It categorizes documents, treated as bag of Words, by topic via a generative probabilistic model assuming they are produced from a mixture of topics. Dirichlets distributions is better in finding the assignment of documents to a general topic.</p>
-<p>In a corpus of <span class="math inline">\(M\)</span> documents, it is necessary to choose <span class="math inline">\(k\)</span> topics to discover. LDA outputs the topic model and the <span class="math inline">\(M\)</span> documents expressed a combination of topics finding the weight of connections between documents and topics and words. The algorithm creates an intermediate layer with topics and finds the weights. In this case documents are no longer connected to words but to topics.</p>
-<p>A Dirchlet distribution <span class="math inline">\(Dir(p)\)</span> is a probability funtion which gives probabilities for discrete random variables. It includes the concentration parameter <span class="math inline">\(p\)</span> that rules the trend of the distribution:</p>
+<p>The <strong><em>L</em></strong>atent <strong><em>D</em></strong>irichlet <strong><em>A</em></strong>nalysis (<strong>LDA</strong>) is the Bayesian version of pLSA. It categorizes documents, treated as Bag of Words, by topic via a generative probabilistic model assuming they are produced from a mixture of topics. Dirichlets distributions is better in finding the assignment of documents to a general topic.</p>
+<p>In a corpus of <span class="math inline">\(M\)</span> documents, it is necessary to discover <span class="math inline">\(k\)</span> topics. LDA outputs the topic model and the <span class="math inline">\(M\)</span> documents expressed a combination of topics finding the weight of connections between documents and topics and words. The algorithm creates an intermediate layer with topics and finds the weights. In this case documents are no longer connected to words but to topics.</p>
+<p>A Dirichlet distribution <span class="math inline">\(Dir(p)\)</span> is a probability function which gives probabilities for discrete random variables. It includes the concentration parameter <span class="math inline">\(p\)</span> that rules the trend of the distribution:</p>
 <ul>
 <li>Sparse, producing a real life distribution: <span class="math inline">\(p &lt; 1\)</span>;</li>
 <li>Uniform, producing a random distribution: <span class="math inline">\(p = 1\)</span>;</li>
-<li>Concetrated: <span class="math inline">\(p &gt; 1\)</span>.</li>
+<li>Concentrated: <span class="math inline">\(p &gt; 1\)</span>.</li>
 </ul>
-<!-- Dirchlet Distribution Image -->
+<!-- Dirichlet Distribution Image -->
 <p><img src="Immagini/Dirchlet-Distribution.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>In LM there are two probability functions:</p>
 <ul>
 <li><span class="math inline">\(\theta_d \approx Dir(\alpha)\)</span>, the probability of topic <span class="math inline">\(k\)</span> occurring in document <span class="math inline">\(d\)</span>;</li>
-<li><span class="math inline">\(psi_k \approx Dir(\beta)\)</span>, the probability of word <span class="math inline">\(w\)</span> occurring in topic <span class="math inline">\(k\)</span>.</li>
+<li><span class="math inline">\(\psi_k \approx Dir(\beta)\)</span>, the probability of word <span class="math inline">\(w\)</span> occurring in topic <span class="math inline">\(k\)</span>.</li>
 </ul>
 <!-- LSA vs LDA -->
-<p>The main differnce between LSA and LSA is the assumption of the Dirchlet distribution, while the second does not assume any distribution. LSA works better than pLSA because it can generalize to new documents.</p>
+<p>The main difference between LSA and LSA is the assumption of the Dirichlet distribution, while the second does not assume any distribution. LSA works better than pLSA because it can better generalize new documents.</p>
 </div>
 <div id="evaluation" class="section level2">
 <h2><span class="header-section-number">7.3</span> Evaluation</h2>
 <p>There are different approaches evaluating topic modeling:</p>
 <ul>
 <li>Eye Balling Models, identifying the top <span class="math inline">\(n\)</span> words in a documents;</li>
-<li>Intrinsic Evaluation Metrics, using the <em>Perplexity</em>, a measure of uncertainty, and the <em>Coherence</em>, measuring the semantic similarity between top words whitin the topic. They help to distinguish topics in an interpretable topics from topics that are artifacts of statistical inference;</li>
+<li>Intrinsic Evaluation Metrics, using the <em>Perplexity</em>, a measure of uncertainty, and the <em>Coherence</em>, measuring the semantic similarity between top words within the topic. They help to distinguish topics in an interpretable topics from topics that are artifacts of statistical inference;</li>
 <li>Human Judgments, so what is a topic;</li>
 <li>Extrinsic Evaluation Metrics, so if the model is good at performing task, such as classification.</li>
 </ul>
@@ -591,31 +590,49 @@ $P_{ij} = P(j|i) = \frac{X_{ij}}{X_i}$ is the probability that word $j$ appears 
 <ul>
 <li>Rule-based Systems, programming a set of hand made rules based on the content of the documents</li>
 <li>Machine Learning Systems, like ML;</li>
-<li>Hybrid Systems, a mixture of the previuous two.</li>
+<li>Hybrid Systems, a mixture of the previous two.</li>
 </ul>
 </div>
 <div id="text-summarization" class="section level1">
 <h1><span class="header-section-number">9</span> Text Summarization</h1>
-<p><em>Text Summariztion</em> is the process of finding the most important information from a source to produce an abridged version of a text for a user. Main advantages are the reduced reading time and the easy research of a document. Automatic summarization improves the effectiveness of indexing. There are different dimension of the Text Summarization:</p>
-<ul>
-<li><em>Based on Input Type</em>, the process of summarizing the text, given a single document (or a group of documents);</li>
-<li><em>Based on the Purposes</em>, that can be:
-<ul>
-<li>Generic, no assumptions about the content of the text to be summarized (it is a generic summarization);</li>
-<li>Domain-Specific, using a domain knowledge forming a more accurate summary;</li>
-<li>Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.</li>
-</ul></li>
-<li><em>Based on Output Type</em>, that can be:
-<ul>
-<li>Extractive Summarization, which selects some important phrases from the input text. This summarization has 3 different tasks:
+<p><em>Text Summarization</em> is the process of finding the most important information from a source to produce an abridged version of a text for a user. Main advantages are the reduced reading time and the easy research of a document. Automatic summarization improves the effectiveness of indexing. There are different dimension of the Text Summarization:</p>
+<!-- Text Summarization Image -->
+<p><img src="Immagini/Text-Summarization.png" width="100%" style="display: block; margin: auto;" /></p>
+<!-- Dimensions:
+      
+      * Based on Input Type
+      * Based on the Purposes
+      * Based on Output Type -->
+<p>The Text Summarization <em>Based on Input Type</em> is the process of summarizing the text, given a single document (or a group of documents). Given a multiple document, it is possible to produce a gist <!-- concetto --> of the content (E.g: series of news stories on the same event).</p>
+<p>The Text Summarization <em>Based on the Purposes</em> can be:
+* Generic, with no assumptions about the content of the text to be summarized (a generic summarization);
+* Domain-Specific, using a domain knowledge forming a more accurate summary;
+* Query-Based, summarizes a document to an information need expressed in a query. Sometimes there is also a snippet summarizing a Web page.</p>
+<p>The Text Summarization <em>Based on Output Type</em> can be <em>Extractive</em>, which selects some important phrases from the input text, or <em>Abstractive</em>, which captures the meaning of the text and producing a summary based on its own phrases (more appealing).</p>
+<p>The Extractive Summarization has 3 different tasks:</p>
 <ol style="list-style-type: decimal">
-<li>Create an intermediate representation of the input text capturing the key aspects. There is Topic Representation, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. There is also Indicator Representation, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document).</li>
-<li>Scoring sentences based on the representation, where each sentence is assigned to a scoe indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;</li>
-<li>Selecting a summary consisting of several scored sentences. It is possible to show the best <span class="math inline">\(n\)</span> approaches or the maximal marginale relevance approaches;</li>
-</ol></li>
-<li>Abstractive Summarization, which captures the meaning of the text and producing a summary based on its own prhases (more appealing).</li>
+<li>Create an intermediate representation of the input text capturing the key aspects. There two main approaches:
+<ul>
+<li><em>Topic Representation</em>, an intermediate representation capturing topic in the input text and sentences are scored for the importance <!-- considera i punteggi in base all'importanza -->. It is possible to use topic words (table of words and corresponding weights), LSA or LDA. The importance of a phrase is computed as the number and proportion of topic signature in the sentence. When assigning weight it is possible to use Word Probability or Tf-Idf. It is possible to use also the SumBasic system to determine the sentence importance. For each sentence in the input, it assign a weight equal to the average probability of the words in the sentence:
+<span class="math display">\[g(s_j) = \frac{\sum_{w_i \in s_j} \mathbb{P}(w_i)}{|w_i | w_i \in s_j|}\]</span>
+The algorithm selects the best scoring sentence containing the highest probability word. After this, the probability of each word appeared is adjusted (for example, the probability of a word occurring in a summary is lower than a word occurring one time).</li>
+<li><em>Indicator Representation</em>, where the text is represented by different set of possible indicators of importance. <!-- considera i punteggi in base a degli indicatori --> It is possible to represent each sentence as a list of indicators of importance (E.g. sentence length and location in the document). Graph-based methods and Machine Learning techniques are employed to determine the important sentences included in the summary;</li>
 </ul></li>
+<li>Scoring sentences based on the representation, where each sentence is assigned to a score indicating its importance. The weights of each sentence is determined combining different indicators using Machine Learning techniques;</li>
+<li>Selecting a summary consisting of several scored sentences. It is possible to show the best <span class="math inline">\(n\)</span> approaches or the maximal marginal relevance approaches;</li>
+</ol>
+<div id="evaluation-1" class="section level2">
+<h2><span class="header-section-number">9.1</span> Evaluation</h2>
+<p>It is difficult to evaluate a summary because there isn’t an ideal summary for a document. Only human summarizers have low agreement for evaluating and producing summaries. There are also metrics to automatically evaluate summaries. One of the most important is the <em>ROUGE</em> metric, evaluating the quality of the summary comparing it to human summaries. There are several variation of ROUGE:</p>
+<ul>
+<li>ROUGE-<span class="math inline">\(n\)</span>, based on comparison of <span class="math inline">\(n\)</span>-gram of the candidate summary and the other extracted from the reference summary only;</li>
+<li>ROUGE-<span class="math inline">\(L\)</span>, based on the Longest Common Subsequence between two sequences. The longer LCS between two summary sentence, the more similar they are;</li>
+<li>ROUGE-<span class="math inline">\(S\)</span>, allowing insertions of words between the first and last words of the bi-grams (they don’t need to be consecutive sequences of words).</li>
 </ul>
+</div>
+</div>
+<div id="information-access" class="section level1">
+<h1><span class="header-section-number">10</span> Information Access</h1>
 </div>
             </section>
 
