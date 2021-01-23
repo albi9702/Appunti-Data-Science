@@ -20,7 +20,7 @@ output:
     df_print: kable
     highlight: monochrome
   bookdown::gitbook:
-    keep_md: true
+    keep_md: false
     css: style.css
     split_by: rmd
     config:
@@ -43,7 +43,8 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo = FALSE,
+                      out.width = "75%",
                       fig.align = "center")
 ```
 
@@ -405,10 +406,9 @@ $$L(v) = \sum_{j = 1}^n [(y_j - f_w(x_j)]^2 + \frac{\lambda}{2} \sum_{j = 1}^n w
 ## Convolutional Neural Network
 Le ***C***onvolutional ***N***eural ***N***etwork (**CNN**) sono delle Neural Network utilizzate quotidianamente nel modificare immagini aggiungendo dei filtri, ad esempio per la sfocatura di una immagine. Le CNN aiutano a ridurre i parametri focalizzandosi sulla connessione locale e costruendo i Convolutional Layer. Non tutti i neuroni sono completamente collegati, ma lo sono in un sottoinsieme nel layer successivo. Inoltre, i pesi vengono anche condivisi lungo la posizione spaziale.
 
-<!--sistemare questa parte-->
-Le CNN sono estrattori di feature in termini *feed-foward*, ovvero da un input di osservazioni si produce l'output. Inoltre, vengono trainate in maniera supervisionata sfruttando filtri convoluzioni ed utilizzando la Back Propagation sugli errori. Le CNN presentano i seguenti layer:
+Le CNN sono estrattori di feature in termini *feed-forward*, ovvero da un input di osservazioni si produce l'output. Inoltre, vengono trainate in maniera supervisionata sfruttando filtri convoluzioni ed utilizzando la Back Propagation sugli errori. Le CNN presentano i seguenti layer:
 
-* *Layer Convoluzionale*, dei filtri lineari, locali (porziona l'immagine comprimendola), invarianti per traslazione. Vengono usati molti filtri per ottenere una rapresentazione più ricca dei dati. Così facendo si produce una nuova mappa di attivazione tramite la banca di filtri:
+* *Layer Convoluzionale*, dei filtri lineari, locali (porziona l'immagine comprimendola), invarianti per traslazione. Vengono usati molti filtri per ottenere una rappresentazione più ricca dei dati. Così facendo si produce una nuova mappa di attivazione tramite la banca di filtri:
 
 $$Y_{ijq} = y_q + \sum_{u = 0}^{H - 1}\sum_{v = 0}^{W - 1}\sum_{k = 1}^{K} x_{u + i, v + j, k} F_{u, v, k, q}$$
 
@@ -422,13 +422,81 @@ $$y = \frac{1}{1 + e^{-x}}$$
 * *Local Response Normalization*, nella quale si applica una normalizzazione del contrasto. In questo modo è possibile migliorare l'invarianza e la sparsità delle reti. L'LRN può essere applicato all'interno di un canale, normalizzando singoli canali vicini, oppure tra i canali, normalizzando i gruppi dei canali.
 
 <!-- Lecture 12: 10/11/2020 -->
-<!-- rivedere parte 1 -->
+### Training
+Per Training di una CNN si intende identificare i pesi $w$ per minimizzare gli errori interni alla rete. In particolare, si utilizza una funzione di *Score* che mappa i pixel della immagine per ciascuna delle varie classi. Successivamente si calcola la funzione di perdita  tra le etichette di ground truth e le etichette stimate tramite il metodo di *Stochastic Gradient Descent*. Il processo si basa su due processi:
+
+1. Forward Propagation, il processo che calcola output dato dalla rete dato il suo input;
+2. Backward Propagation, il processo che calcola il gradiente della Loss Function rispetto a tutti gli altri parametri della rete neurale.
+
+Uno dei problemi principali delle CNN è, vista la presenza di numerosi parametri nella rete neurale, prevenire l'overfitting del modello. Per farlo è possibile penalizzare la magnitudine dei pesi, spegnere casualmente singoli neuroni (Dropout), oppure compiere il processo di Data Augmentation. In particolare, si aumenta il numero di osservazioni nel training set utilizzando degli esempi jitterati, un set di trasformazioni (diverso per ogni task) applicate in maniera casuale alle immagini mantenendo la label del dato originale. Infine si confrontano i modelli osservando il learning rate per individuare quello che ha la minor funzione di perdita.
 
 ## Transfer Learning
-Tutte le architutture CNN hanno milioni di parametri da trainare, in più è necessario avere un gigantesco dataset. Se non è possibile, si può compiere un pre-training dei dati con un grande dataset ed utilizzare la CNN come fine-tuning oppure come feature extraction per l'obiettivo di interesse. 
+Tutte le architetture CNN hanno milioni di parametri da trainare, in più è necessario avere un gigantesco dataset. Se non è possibile, si può compiere un pre-training dei dati con un grande dataset ed utilizzare la CNN come fine-tuning oppure come feature extraction per l'obiettivo di interesse. 
 
-Si suppone di voler addestare un modello, dopodichè si prende la parte iniziale della rete eliminando la parte finale e si inserisce la porzione di interesse. Durante il training, i pesi dei layer più vicini all'input non vengono conteggiati, quindi si stimano meno i parametri.
-
+Si suppone di voler addestrare un modello, dopodiché si prende la parte iniziale della rete eliminando la parte finale e si inserisce la porzione di interesse. Durante il training, i pesi dei layer più vicini all'input non vengono conteggiati, quindi si stimano meno i parametri.
 
 <!-- Lecture 14: 17/11/2020 -->
+
+<!-- Applicazioni CNN -->
+Una importante applicazione delle CNN è lo *Speaker Recognition*, ovvero identificare la persona che sta parlando da una registrazione audio.
+
+# Content Based Image Retrieval
+Il Content Based Image Retrieval è un processo nel quale data una immagine di query si vuole generare una lista di immagini ordinata, dalle più inerenti a quelle minori. In particolare, si vuole confrontare con una metrica di similarità la rappresentazione della query con tutte quelle nel dataset ed ordinarla in base alla similarità.
+
+Problemi:
+
+* Tipologia del dataset;
+* Tipologia di query;
+* Definizione di similarità tra immagini;
+* Valutazione quantitativa delle performance;
+* Come rendere efficiente la ricerca di una query.
+
+Esistono due tipi di domini di immagini principali:
+
+* Narrow Domain, ovvero bassa variabilità nell'aspetto tra le immagini
+* Broad Domain, la variabilità dell'apparenza delle immagini è poco prevedibile.
+
+Per quanto riguarda la tipologia di ricerche, è necessario individuare il soggetto nella immagine (Target Search). In particolare, bisogna capire se il soggetto è presente nella immagine, sia scalata che ruotata. Seconda possibilità è la category search, ovvero individuare se i soggetti appartengono alla stessa categoria (Category Search). Terza possibilità è la ricerca per associazione (Search by Association), data l'immagine di query, si vuole individuare i soggetti nelle foto con la maggior similarità. Per individuare cosa vuole l'utente è possibile far uscire una foto in base a delle keyword (Google Immagini) oppure in base ad una immagine far tirare fuori le immagini più rilevanti (Query by Example). Molte volte è possibile anche formulare una query con più di una immagine per estrarre le feature richieste. Altre volte è possibile raffinare la ricerca raffigurare l'identikit della immagine richiesta (Query by Sketch).
+
+Range Search, data la misura di similarità, è possibile calcolare la distanza di similarità e si vuole individuare tutte le immagini in un range. Un'altra possibilità di ricerca è con il k-NN, che identifica le k immagini che hanno la miglior similarità data la query.
+
 <!-- Lecture 16: 24/11/2020 -->
+## Performance Evaluation
+Per valutare un sistema *CBIR* è necessario definire un insieme di immagini come dataset di test. Per ogni query si ottiene un giudizio di rilevanza (relevance judgement) e si comparano i risultati ottenuti rispetto ai documenti rilevanti per una determinata query. Per misurare le performance si utilizzano:
+
+* *Recall*, definito come il rapporto tra i documenti rilevanti nella collezione;
+* *Precision*, definito come il rapporto tra i documenti rilevanti predette ed il total dei documenti rilevanti.
+
+Tipicamente, precision e recall sono combinati tra loro formando la metrica chiamata *F-Score*, calcolata come media armonica tra le due metriche:
+
+$$F_1 = \frac{2rp}{r + p}$$
+
+I vettori di feature (feature vector) vengono confrontati con una metrica di distanza (Es: Euclidea, Manhattan, Mahalanobis):
+
+$$d(x, y) = \sqrt[r]{\sum^n_{k = 1}|x_k - y_k|^r}$$
+
+Per individuare se due immagini sono simili si confrontano tutti i feature vector calcolando la distanza tra di esse:
+
+$$d(X, Y) \sum_{i = 1}^n w_i d_i (x_i, y_i)$$
+
+I problemi principali di questa metrica è che i valori potrebbero essere molto alti, di conseguenza le immagini sono molto diverse, è necessario scegliere la distanza migliore per ogni feature e i pesi devono essere scelti accuratamente. Per risolvere questi problemi è possibile normalizzare le feature in un range $[0, 1]$ e calcolare indici come la *Mean* o *Gaussian Normalization*.
+
+Le immagini devono avere le seguenti proprietà:
+
+* Similarità Percettiva, la distanza della feature tra due immagini è largo solamente se le immagini non sono simili;
+* Efficienza, velocemente computabili;
+* Economia, le immagini devono avere una dimensione ridotta;
+* Scalabilità, le performance del sistema non deve essere influenzata dalla grandezza del database;
+* Robustezza, non hanno effetti sulle performance di retrieval cambiando l'immagine.
+
+Per ottenere una migliore robustezza della immagine è possibile dividere in regioni più piccole l'immagine stessa. In questo modo è possibile estrarre delle feature creando un Bag of Word, ottenendo informazioni riguardo la presenza di testi in esse ($\delta = 1$ se coppie simili, 0 altrimenti).
+
+$$\begin{aligned}
+    l(x_1, x_2, \delta) &= \delta l_P(d_D(x_1, x_2)) + (1 - \delta) l_N(d_D(x_1, x_2))
+                        &= \delta d_D(x_1, x_2) + \max (0, m - d_D(x_1, x_2))
+  \end{aligned}$$
+
+Per apprendere una miglior rappresentazione della similarità tra immagini è possibile utilizzare il *Network Siamese*. La rete neurale traina una funzione che mappa i pattern di input in uno spazio che approssima la distanza semantica nella spazio di input. La funzione di perdita utilizzata è chiamata *Triplet Loss*, che minimizza a distanza tra la query di ricerca ed i valori positivi e massimizza la distanza tra la query e il negativo.
+
+<!-- Lecture 18: 1/12/2020 -->
+# GAN
