@@ -190,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="author"><em>Alberto Filosa</em></p>
 <p class="date"><em>30/9/2020</em></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div id="sistemi-informativi" class="section level1">
 <h1><span class="header-section-number">1</span> Sistemi Informativi</h1>
 <blockquote>
@@ -205,8 +206,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Le soluzioni principali della BI sono:</p>
 <ul>
 <li>Reporting, in modo da accedere in tempi veloci ai dati nei Data Warehouse per rispondere a domande specifiche;</li>
-<li>Cubi Multidimensionali e Analisi OLAP, ai fini di una navigazione dei dati secondo logiche dinamiche e gerarchiche</li>
-<li>Dashboard, fornendo informazioni grafiche e sintetiche allo studio in questione</li>
+<li>Cubi Multidimensionali e Analisi OLAP, ai fini di una navigazione dei dati secondo logiche dinamiche e gerarchiche;</li>
+<li>Dashboard, fornendo informazioni grafiche e sintetiche allo studio in questione;</li>
 <li>Alerting, per segnalare allarmi azionati da regole determinate ed avvisare il superamento di alcuni valori di prestazione.</li>
 </ul>
 <p>Le soluzioni principali, invece, per la Business Analytics sono:</p>
@@ -252,9 +253,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- Immagine Big Data -->
 <p><img src="Immagini/Big-Data.png" width="75%" style="display: block; margin: auto;" /></p>
 <!-- Capire differenza prima e dopo i Big Data -->
-<p>Prima dei Big Data gran parte parte delle fonti da cui si attingono i dati (prevalentemente strutturati) erano interne all’azienda, si applicano delle applicazioni <strong><em>E</em></strong>xtraction <strong><em>T</em></strong>ransformation <strong><em>L</em></strong>oading (<strong>ETL</strong>) e si immagazzinano in un Data Warehouse, solitamente con uno schema a stella. Sostanzialmente è un approccio Top-Down, che genera la possibilità di identificare in termini deduttivi le modalità con cui si interviene sui dati.</p>
+<p>Prima dei Big Data gran parte delle fonti da cui si attingono i dati (prevalentemente strutturati) erano interne all’azienda, si applicano delle applicazioni di <strong><em>E</em></strong>xtraction <strong><em>T</em></strong>ransformation <strong><em>L</em></strong>oading (<strong>ETL</strong>) e si immagazzinano in un Data Warehouse, solitamente con uno schema a stella. Sostanzialmente è un approccio Top-Down, che genera la possibilità di identificare in termini deduttivi le modalità con cui si interviene sui dati.</p>
 <p>Prima dei Big Data le analisi si limitavano a testare un numero limitato di ipotesi predefinite prima della raccolta dati. Adesso è possibile far emergere collegamenti inaspettati tra le variabili. Ad esempio, alcuni fondi speculativi consultano Twitter per prevedere le performance del mercato azionario.</p>
-<p>Dopo i Big Data è possibile intraprendere la strada precedentemente analizzata, oppure estrarre da diversi fonti di dati, principalmente sul Web e spesso non strutturati, e creare un Data Lake che immagazzina i dati nel loro formato naturale. Successivamente verranno utilizzate tecniche di manipolazione di dati per lo storage in un Data Warehouse e per elaborati. Questo è un approccio Bottom-Up, che genera la possibilità di identificare in termini induttivi le modalità di intervento dei dati (si parte dal dato per formulare domande che il dato genera).</p>
+<p>Dopo i Big Data è possibile intraprendere la strada precedentemente analizzata, oppure estrarre da diversi fonti di dati, principalmente sul Web e spesso non strutturati, e creare un Data Lake che immagazzina i dati nel loro formato naturale. Successivamente verranno utilizzate tecniche di manipolazione di dati per lo storage in un Data Warehouse e per elaborali. Questo è un approccio Bottom-Up, che genera la possibilità di identificare in termini induttivi le modalità di intervento dei dati (si parte dal dato per formulare domande che il dato genera).</p>
 <p>I task principali dei Big Data sono:</p>
 <ul>
 <li><em>Data Availability</em>, il livello di disponibilità dei dati e se sono disponibili;</li>
@@ -265,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="data-process" class="section level2">
 <h2><span class="header-section-number">3.1</span> Data Process</h2>
-<p>La Data Ingestion è il processo di estrazione ed importazione di dati dal Web in un database. In base come vengono importati i dati esistono diversi tipi di estrazioni dati:</p>
+<p>La Data Ingestion è il processo di estrazione ed importazione di dati dal Web in un database. In base all’importazione dei dati esistono diversi tipi di estrazioni dati:</p>
 <ul>
 <li><em>Scraping</em>, estrazioni di dati strutturati di una parte della pagina Web. I problemi principali di questo processo sono la bassa scalabilità e il continuo aggiustamento dei dati;</li>
 <li><em>Crawling</em>, estrazione della completa pagina Web (in pratica è il download in formato HTML). I problemi sono la presenza di dati non strutturati e di conseguenza il rumore per l’estrazione dei dati di interesse;</li>
@@ -274,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="dark-side" class="section level2">
 <h2><span class="header-section-number">3.2</span> Dark Side</h2>
-<p>Sono stati accumulati anni di esperienza nello studio del comportamento umano, oggi una delle domande principali riguardo i Big Data è come è possibile regolamentare un algoritmo. Dalla nascita della informatica sono state regolamentate azioni per la tutela della privacy. Con i Big Data gli utenti condividono volentieri le informazioni on-line. Un altro problema principale è passare dalla privacy alla probabilità, ad esempio la probabilità di commettere un crimine ed arrestare preventivamente il soggetto. Inoltre, bisogna domandarsi quale sarà il ruolo della libertà e volontà rispetto alla dittatura dei dati e quale sarà il ruolo dell’intuito e della intercetta in contraddizione al dato empirico.</p>
+<p>Sono stati accumulati anni di esperienza nello studio del comportamento umano, oggi una delle domande principali riguardo i Big Data è come è possibile regolamentare un algoritmo. Dalla nascita della informatica sono state regolamentate azioni per la tutela della privacy. Con i Big Data gli utenti condividono volentieri le informazioni on-line. Un altro problema principale è passare dalla privacy alla probabilità, ad esempio la probabilità di commettere un crimine ed arrestare preventivamente il soggetto. Inoltre, bisogna domandarsi quale sarà il ruolo della libertà e volontà rispetto alla dittatura dei dati e quale sarà il ruolo dell’intuito e della incertezza in contraddizione al dato empirico.</p>
 <!-- # Data Driven Economy
 Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia digitale per rinnovare tecnologicamente i lavori basandosi su Big Data e Cloud Computing. L'idea è quella di sviluppare innovazioni digitali grazie all'utilizzo di infrastrutture tecnologiche avanzate per migliorare i servizi e prodotti delle aziende. -->
 </div>
@@ -282,7 +283,6 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <div id="database" class="section level1">
 <h1><span class="header-section-number">4</span> Database</h1>
 <p>Un modello di dati è un insieme di concetti utilizzati per organizzare i dati di interesse e descriverne la struttura in modo da risultare comprensibile a tutti. Il modello relazionale dei dati, attualmente il più diffuso, permette di definire tipi per mezzo della relazione, che consente di organizzare i dati in insiemi di record e struttura fissa.</p>
-<p>I Database relazionali organizzano dati in tabelle e successivamente queste possono essere unite tra loro tramite delle chiavi primarie (<em>ID Primary Key</em>). I dati al loro interno sono organizzati in colonne e ogni riga indica un singolo elemento di informazione. L’obiettivo principale dei DBMS è quella di trasformare i dati in informazione.</p>
 <p>Le fasi della progettazione di un Database sono divise in:</p>
 <ul>
 <li><em>Progettazione Concettuale</em>, nella quale si rappresentano i dati nella realtà di interesse ad alto livello indipendentemente dal DBMS costruendo uno schema concettuale (Es: Modello Entità-Relazioni);</li>
@@ -297,13 +297,13 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 </ul>
 <div id="modello-entità-relazioni" class="section level2">
 <h2><span class="header-section-number">4.1</span> Modello Entità Relazioni</h2>
-<p>Il <em>Modello Entità Relazioni</em> è un modello concettuale di dati che fornisce una serie di costrutti che descrivono la realtà di interesse in maniera comprensibile astraendo i concetti di organizzazione dei dati nei calcolatori. Per <em>Entità</em> si intende una classe di oggetti (o di fatti) che hanno proprietà comuni rilevanti per l’applicazione. Ognuna di essa può essere caratterizzata da proprietà, chiamati <em>Attributi</em>. Per distinguere le istante bisogna definire un insieme di attributi univoci per ogni istanza, chiamate chiavi. Essi possono essere:</p>
+<p>Il <em>Modello Entità Relazioni</em> è un modello concettuale di dati che fornisce una serie di costrutti che descrivono la realtà di interesse in maniera comprensibile astraendo i concetti di organizzazione dei dati nei calcolatori. Per <em>Entità</em> si intende una classe di oggetti (o di fatti) che hanno proprietà comuni rilevanti per l’applicazione. Ognuna di essa può essere caratterizzata da proprietà, chiamati <em>Attributi</em>. Per distinguere le istanze bisogna definire un insieme di attributi univoci per ogni istanza, chiamate chiavi. Essi possono essere:</p>
 <ul>
-<li>Scalari, associato solo un solo valore;</li>
+<li>Scalari, associato un solo valore;</li>
 <li>Multipli, associati <span class="math inline">\(n\)</span> valori.</li>
 </ul>
 <p>Alle volte è utile decomporre concettualmente una entità in gerarchia di entità con diverso livello di dettaglio. Si tratta di gerarchia di <em>Generalizzazione</em> tra le entità, che può essere parziale o totale. In questo modo il diagramma è più comprensibile e si osserva il legame tra la classe padre e figlia.</p>
-<p>Una <em>Relazione</em> rappresenta un legame logico tra due o più entità di interesse. Ognuna di essa presenta una cardinalità, ovvero un vincolo sul numero di istanze con cui un’entità partecipa ad una relazione</p>
+<p>Una <em>Relazione</em> rappresenta un legame logico tra due o più entità di interesse. Ognuna di essa presenta una cardinalità, ovvero un vincolo sul numero di istanze con cui un’entità partecipa ad una relazione.</p>
 <!-- Immagine Modello Entità Relazioni -->
 <p><img src="Immagini/Modello-ER.png" width="75%" style="display: block; margin: auto;" /></p>
 </div>
@@ -316,7 +316,7 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <ul>
 <li>Proiezione (<span class="math inline">\(\pi\)</span>), selezione di alcuni attributi di una tabella (<em>Select</em>);</li>
 <li>Selezione (<span class="math inline">\(\sigma\)</span>), selezione di alcune tuple di una tabella (<em>Where</em>);</li>
-<li>Prodotto Cartesiano (<span class="math inline">\(x\)</span>), l’insieme delle di tutte le possibili coppie ordinate di elementi.</li>
+<li>Prodotto Cartesiano (<span class="math inline">\(x\)</span>), l’insieme delle di tutte le possibili coppie ordinate di elementi;</li>
 <li>Join (<span class="math inline">\(⨝\)</span>), combinazione delle tuple di due o più relazioni di un database (Operatore composta da Proiezione e Selezione).</li>
 </ul>
 <p>Una interrogazione di una tabella SQL avviene nel seguente modo:</p>
@@ -324,7 +324,8 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>tabella<span class="op">/</span>e<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">WHERE</span> <span class="op">&lt;</span>condizione<span class="op">/</span>i<span class="op">&gt;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span> <span class="kw">ASC</span><span class="op">/</span><span class="kw">DESC</span>;</span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="op">&lt;</span>attributo<span class="op">/</span>i<span class="op">&gt;</span> <span class="kw">ASC</span><span class="op">/</span><span class="kw">DESC</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">HAVING</span> <span class="op">&lt;</span>condizione<span class="op">/</span>i<span class="op">&gt;</span>;</span></code></pre></div>
 <p>Il comando <em>Select</em> ha il compito di selezionare le colonne di una o più colonne all’interno di un DataBase. Se sono presenti due colonne da tabelle diverse, è necessario specificare da quale tabella è stata presa. Il comando <em>Where</em> specifica una condizione di ricerca per filtrare le righe selezionate nella <em>Select</em>: tramite operatori logici è possibile utilizzare più condizioni. Il comando <em>Group by</em> è utilizzato assieme alla select per raggruppare le righe di una tabella. Se si vogliono fare delle condizioni sul raggruppamento, si utilizza il comando <em>Having</em>.</p>
 <!-- Lecture 9: 28/10/2020 -->
 </div>
@@ -336,6 +337,7 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <p>Il Data Warehouse è una collezione di dati di supporto al processo decisionale orientata ai soggetti di interesse, integrata e consistente, rappresentativa dell’evoluzione temporale e non volatile (accessibile in sola lettura).</p>
 </blockquote>
 <p>La costruzione di un sistema di Data Warehouse non comporta l’inserimento di nuove informazioni, bensì la riorganizzazione di quelli esistenti.</p>
+<p>Le principali differenze tra un Database ed un Data Warehouse è che il primo è una collezione di dati che rappresenta alcuni elementi, mentre il secondo permette l’immagazzinamento storico dei dati da diverse sorgenti. Inoltre, nei Database le unioni di tabelle sono complicate in quanto normalizzate, mentre nei Data Warehouse no.</p>
 <div id="architettura" class="section level2">
 <h2><span class="header-section-number">5.1</span> Architettura</h2>
 <p>Le principali caratteristiche di un Data Warehouse sono:</p>
@@ -343,22 +345,22 @@ Il concetto di Data Driven Economy è nato nel 2013 per introdurre l'economia di
 <li>Separazione, l’elaborazione analitica e transazionale devono essere mantenute il più possibile separate;</li>
 <li>Scalabilità, le componenti hardware devono essere ridimensionati in base alla variazione dei dati;</li>
 <li>Estendibilità, integrabilità di nuove applicazioni senza riprogettare il sistema;</li>
-<li>Sicurezza, gli accessi devono essere controllati</li>
+<li>Sicurezza, gli accessi devono essere controllati;</li>
 <li>Amministrabilità, la complessità dell’amministrazione del sistema non deve essere troppo elevata.</li>
 </ul>
 <p>Generalmente un Data Warehouse è composto da 3 livelli:</p>
 <ol style="list-style-type: decimal">
-<li>Livello delle Sorgenti, i database delle transazione dei processi operativi per estrarre i dati e caricarli nel Data Warehouse;</li>
+<li>Livello delle Sorgenti, i database delle transazione (una sequenza di operazioni che produce una variazione nello stato di un Database) dei processi operativi per estrarre i dati e caricarli nel Data Warehouse;</li>
 <li>Livello del Warehouse, il livello di costruzione della base di dati che è capace di integrare i dati da diverse sorgenti;</li>
 <li>Livello di analisi, gli strumenti di reportistica ed OLAP multidimensionale.</li>
 </ol>
-<p>In particolare, è possibile introdurre il Data Warehouse, un <em>Data Mart</em>, ovvero un sottoinsieme di dati contenenti informazioni rilevanti per una particolare area, ed i <em>Metadati</em>, dei dati che spiegano il dato considerato (in un DW indicano sorgenti, valori ed uso dei dati memorizzati). Essi descrivono come i dati sono alterati e trasformati durante i passaggi attraverso i livelli dell’architettura.</p>
+<p>In particolare, è possibile introdurre nel Data Warehouse uno (o più) <em>Data Mart</em>, ovvero un sottoinsieme di dati contenenti informazioni rilevanti per una particolare area, ed i <em>Metadati</em>, dei dati che spiegano il dato considerato (in un DW indicano sorgenti, valori ed uso dei dati memorizzati). Essi descrivono come i dati sono alterati e trasformati durante i passaggi attraverso i livelli dell’architettura.</p>
 <!-- Immagine Data Warehouse -->
 <p><img src="Immagini/DW.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>Il Data Warehouse si basa sul concetto di <em>multidimensionalità</em> dei dati: una volta che i dati sono stati ripuliti, integrati e trasformati bisogna capire come trarne il massimo vantaggio. Gli oggetti che influenzano le decisione sono <strong>Fatti</strong> del mondo di interesse, le occorrenze di esse corrispondono ad un <strong>Evento</strong> e per ciascun fatto interessano i valori di un insieme di <strong>Misure</strong> che descrivono quantitativamente gli eventi in diverse <strong>Dimensioni</strong>.</p>
 <p>Esistono due tipologie di modelli per il DW:</p>
 <ul>
-<li>Modello Logico, utilizzando un modello a Stella, ovvero costruito da una tabella centrale di Fatti che referenzia su diverse tabelle di dimensioni, oppure un modello a Fiocco di Neve, che possiede un livello di normalizzazione delle tabelle maggiore ed una tabella delle dimensione può essere ulteriormente scomposta in un’altra tabella.</li>
+<li>Modello Logico, utilizzando un modello a Stella, ovvero costruito da una tabella centrale di Fatti che referenzia su diverse tabelle di dimensioni, oppure un modello a Fiocco di Neve, che possiede un livello di normalizzazione delle tabelle maggiore ed una tabella delle dimensione può essere ulteriormente scomposta in un’altra tabella;</li>
 <li>Modello Operazionale, utilizzando un Data Cube che descrive tutte le possibili aggregazioni effettuabili in base al tipo di dimensioni selezionate.</li>
 </ul>
 <p>I fatti di interesse sono rappresentati in <em>cubi</em> in cui ogni cella contiene misure che quantificano il fatto da diversi punti di vista, ogni asse una dimensione di interesse e ogni dimensione può essere la radice di una gerarchia di attributi per integrare i dati memorizzati in cubi base.
@@ -422,7 +424,7 @@ Per implementare un data lake si possono utilizzare diverse tecnologie, come HDF
 </ul>
 <p>Per <strong>Currency</strong>, <strong>Timeless</strong> e <strong>Volatility</strong> si intendono le dimensioni correlate con il tempo. In particolare:</p>
 <ul>
-<li>Currency descrive la velocità di aggiornamento di un dato</li>
+<li>Currency descrive la velocità di aggiornamento di un dato;</li>
 <li>Timeless descrive l’appropriatezza dei dati per i propri scopi;</li>
 <li>Volatility descrive la frequenza di aggiornamento di un dato.</li>
 </ul>
@@ -498,18 +500,23 @@ Per implementare un data lake si possono utilizzare diverse tecnologie, come HDF
 <ul>
 <li><em>Confronto con Controparte Reale</em>, il metodo più efficacie, ma anche quello più costoso in quanto richiede un controllo periodico;</li>
 <li><em>Database Bashing</em>, che prevede il confronto di record in due o più Database interni con la tecnica di <em>Record Matching</em>, identificando se rappresentano la stessa entità;</li>
-<li><em>Business Rule</em>, che prevede la verifica che i record rispettino determinati vincoli di business o semantici. Esso è il più conveniente in quanto più efficacie del Database Bashing e meno costoso del confronto con la controparte reale.</li>
-<li>Utilizzo dei <em>Metadati</em>, per memorizzare i valore delle dimensioni di qualità calcolati utilizzando approcci precedenti</li>
+<li><em>Business Rule</em>, che prevede la verifica che i record rispettino determinati vincoli di business o semantici. Esso è il più conveniente in quanto più efficacie del Database Bashing e meno costoso del confronto con la controparte reale;</li>
+<li>Utilizzo dei <em>Metadati</em>, per memorizzare i valore delle dimensioni di qualità calcolati utilizzando approcci precedenti.</li>
 </ul>
 </div>
 <div id="processi" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Processi</h3>
-<p>Il principale svantaggio dei metodi per il miglioramento della qualità dei dati basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I <em>Metodi basati sui Processi</em> prevedono invece un’analisi dei processi per individuare e correggere le cause di errore.</p>
+<p>Il principale svantaggio dei metodi per il miglioramento della qualità basati sui dati è il non correggere le cause degli errori, perciò di non prevenire da errori futuri. I <em>Metodi basati sui Processi</em> prevedono invece un’analisi dei processi per individuare e correggere le cause di errore.</p>
 <!-- Metodi:
         
         * Controllo e Miglioramento
         * Reingegnerizzazione
         -->
+<ul>
+<li><em>Controllo e Miglioramento</em>, controllo dei dati sui processi ed migliorare quelle parti del Database dove avvengono delle transazioni (metodo conservativo);</li>
+<li><em>Reingegnerizzazione</em>, che prevede la ricostruzione dei processi delle transazioni dei dati (metodo radicale).</li>
+</ul>
+<p>Per migliorare i processi è necessario individuare chi è il <em>Process Owner</em>, responsabile dei dati manipolati dal processo (Es: ministero delle finanza per accertamento fiscale), e chi è il <em>Data Steward</em>, responsabile dei processi di data governance. In questo modo è possibile individuare chi è responsabile nei processi.</p>
 </div>
 </div>
 </div>
@@ -537,6 +544,12 @@ RETURN risultato</code></pre>
 WHERE p.name = &#39;charlie&#39; AND s.name = &#39;medicine&#39;
 CREATE (p)-[r:INTERESTED_IN]-&gt;(s)</code></pre>
 <ul>
+<li>Eliminare relazione e nodi:</li>
+</ul>
+<pre class="cypher"><code>match ()-[r:friends]-() delete r
+
+match (n:person) delete n</code></pre>
+<ul>
 <li>Caricare dati da CSV:</li>
 </ul>
 <pre class="cypher"><code>LOAD CSV WITH HEADERS FROM
@@ -556,18 +569,18 @@ CALL db.schema.visualization</code></pre>
 </div>
 <div id="explainable-ai" class="section level1">
 <h1><span class="header-section-number">9</span> Explainable AI</h1>
-<p>L’Intelligenza Artificale è sempre più utilizzata in tutti gli ambiti lavorativi. La <em>Explainable AI</em> è un metodo efficace per far comprendere agli esperti di domini le decisioni prese da un algoritmo di Machine Learning. La necessità di utilizzo nella pratica risiede nella fiducia della decisione da prendere, nella interazione tra uomo e macchina per comprendere la decisione scelta e nella trasparenza delle decisioni.</p>
+<p>L’Intelligenza Artificiale è sempre più utilizzata in tutti gli ambiti lavorativi. La <em>Explainable AI</em> è un metodo efficace per far comprendere agli esperti di domini le decisioni prese da un algoritmo di Machine Learning. La necessità di utilizzo nella pratica risiede nella fiducia della decisione da prendere, nella interazione tra uomo e macchina per comprendere la decisione scelta e nella trasparenza delle decisioni.</p>
 <!-- Immagine Explainable AI -->
 <p><img src="Immagini/XAI.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>Il problema della spiegazione dei modelli è correlata con la previsione della Accuracy. In particolare, i modelli di Neural Network hanno una Accuracy molto più elevata rispetto a semplici modelli, a discapito di una difficile interpretazione in base alla quantità di layer nascosti all’interno di essa.</p>
 <p>La interpretabilità può essere determinata in termini:</p>
 <ul>
-<li><em>Globale</em>, sulla rilevanza delle feature del modello considerato l’intero dataset</li>
-<li><em>Locale</em>, spiegano la decisione effettuata dall’algoritmo sulla singola istanza</li>
+<li><em>Globale</em>, sulla rilevanza delle feature del modello considerato l’intero dataset;</li>
+<li><em>Locale</em>, spiegano la decisione effettuata dall’algoritmo sulla singola istanza.</li>
 </ul>
 <div id="lime" class="section level2">
 <h2><span class="header-section-number">9.1</span> LIME</h2>
-<p>Il <em>LIME</em> è una tecnica di Explainable AI applicata a livello locale. Essa considera una singola osservazione e tutte le istanze in un intorno dello spazio delle feature (di conseguenza con caratteristiche simili). Successivamente massimizza la <em>local fidelity</em> che approssima le decisione del modello più complesso in quell’intorno.</p>
+<p>Il <em>LIME</em> è una tecnica di Explainable AI applicata a livello locale. Essa considera una singola osservazione e tutte le istanze in un intorno dello spazio delle feature (di conseguenza con caratteristiche simili). Il modello prevede lo spazio non lineare, campiona i punti vicini ed identifica un modello lineare che può essere fedele localmente. Successivamente massimizza la <em>local fidelity</em> che approssima le decisione del modello più complesso in quell’intorno.</p>
 </div>
 <div id="shap" class="section level2">
 <h2><span class="header-section-number">9.2</span> SHAP</h2>

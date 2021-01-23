@@ -47,6 +47,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.align = 'center')
 ```
 
+\newpage 
+
 <!-- Lecture 1: 29/09/2020 -->
 # Introduction
 > Text mining is a burgeoning new field that attempts to glean meaningful information from natural language text. It may be loosely characterized as the process of analyzing text to extract information that is useful for particular purposes.
@@ -667,4 +669,147 @@ It is difficult to evaluate a summary because there isn't an ideal summary for a
 * ROUGE-$L$, based on the Longest Common Subsequence between two sequences. The longer LCS between two summary sentence, the more similar they are;
 * ROUGE-$S$, allowing insertions of words between the first and last words of the bi-grams (they don't need to be consecutive sequences of words).
 
-# Information Access
+# Information Retrieval
+*Information Retrieval* is an old problem in computer science: its main purpose is to find a documents on the Web. The main problem is the fact that documents are distributed between servers and not stored on the same computer; but also the quantity of data (and how to reach as many pages as possible) that are constantly updating can be very difficult to manage. Documents are managed in different ways, according to various criteria. Information Retrieval is done by *search engines*.
+
+It is important to understand user's needs, to interpret the context and to yield documents that answer the query, according to its relevance. First, Search Engines considered only topic relevance: it was not important to interpret a user query but just to yield relevance documents. Now the idea is to give a better user experience: the search process considers other variables such as geographical location and previous query done by the user; it can also be done without a user query (*Information Filtering Systems*) just filtering a stream of documents in real time.
+
+In a search engine the query is usually not written in a formal language (but in a natural language): conditions have to be extrapolated from the text to reduce number of results. Information can be extrapolated from supports of different kinds: there are a lot of technical (due to different formats) and semantic (information is synthesized and represented preserving its meaning) problems.
+
+A search engine is composed by two aspects (off-line and on-line): in the first part (offline) documents have to be indexed (and updated regularly by sub-parts of the archive) and represented in a formal way so that query can be done; than in the online part, the query is parsed to represent it in a logical language and than the match is made, according to classic set theory (binary matching) or using a similarity index on a vector space (cosine similarity, proximity and so on, that permit a fuzzy match).
+
+## Indexing
+Documents have to be indexed to retreive them easily: this process extracts a small portion of text that will be used to search a document. This process is extremely resource expensive, so are implemented in a particular way to optimize the process. Each document is characterized by a different set of terms weighted in a different way: documents are indexed to reduce the dimensionality of the matrix so that the number of terms will be lower than the number of documents.
+The resulting matrix is inverted so that documents are on columns and terms on rows: retrieving a file is just as easy as checking in which document the term is present. The data structure used in practise is a dictionary in which the key is the term, the value is a list of tuples \verb|<document; weight>| so that looking for a document will not scan useless documents.
+
+There are cases in which index can not be stored on RAM due to amount of documents: in this case the use of a column-storage database system is required.
+In fact this strategy garantees both efficent management of a sparse matrix and scalability on a cluster of machines.
+
+## Matching
+The query the user ask to the search engine is represented in a formal way to compare it with the (indexed) database.
+To speed up the process, the database is inverted (inverted-index) so that documents are indexed basing on terms, ordered by relevance (if available) or by progressive number (if the scoring is abstent or done *on-the-fly*).
+
+### Boolean matching
+Boolean matching is based on set theory:
+
+$$R(d_j) := \{t_i | w_{ij} = 1\} \hspace{15pt} w_{ij} \in \{0, 1\}$$
+the document is a set of terms, so relevance is modeled as a binary property (a document is either relevant or not, ranking is not permitted). A query is formally represented by boolean operations like \verb|AND|, \verb|OR| or \verb|NOT|. Using the inverted representation the matching process returns a sub-set of documents that satisfy user's query. Evaluations order of operations must be clearly specified because a different order can produce different results. In general operations are a priority order pre-imposed in the representation process.
+
+The evaluation is made using a recursive algorithm on a binary tree (the formal representation of the query) starting from leaves, with some optimizations that evaluate longer list for lasts (to save memory).
+
+This matching model is fast and simple, but it is not able to produce a ranking of results: in some cases it is not sufficient for accomplish the task.
+
+### Vector Space matching
+To solve problems of the Boolean model, the Vector Space model is presented: documents  are presented as vectors (defined by a word-embedding algorithm) in a space with a number of dimensions equal to vocabulary size $|V|$.
+Documents are represented using some indices (like presence-absence of the term, ($\log$ or normalized) frequency, $tf$, $tf\text{-}idf$ value...) as vectors (points) in this space.
+In general, are used:
+
+$$\begin{aligned}
+  w_{t, d} &= \frac{tf_{t,d}}{\displaystyle \max_{t_i \in d} tf_{t_i, d}} \\
+  w_{t, d} &= \frac{tf_{t, d}}{|d|} \\
+  w_{t, d} &= \begin{cases}
+                1 + \log(tf_{t, d}) \hspace{10pt} &tf_{t, d} > 0 \\
+                0 & \text{otherwise}
+              \end{cases}
+\end{aligned}$$
+
+Also the query is presented as a vector, so that the matching problem is just as easy as compute similarity between vectors or using a KDTree to cache documents.
+
+# Web Search
+As its name says, the Web is structured as a graph, dynamic and oriented.
+Edges reachable in both direction ($A \to B$ e $B \to A$) are told *Strong connected spaces*: the whole structure is often abstracted as a set of Strong Connected Spaces instead of pages.
+In this way the graph assumes a *papillon* structure: there is a *source component* (from which it is easy to reach other pages but difficult to access), a *huge component* (that represent the majority of documents) and a *shaft component* (easily reachable but from which it is difficult to exit); there are also some noisy documents isolated or random linked. To retrieve a document, a web search engine must had indexed it: documents not retrievable by search engines belong to *deep web*.
+Those documents represent the majority of the web and include dynamic web pages (which content changes according to a input), private pages (hidden by CAPTCHAs or login) or just because there are no incoming links.
+
+Web search can be done by browsing (using links between pages), direct link (if the address is known) or using a Web Search Engine.
+First generation of Web Search Engine considered only documents word frequency, but then also links are considered to rank documents by authority.
+*Semantic Web* considers also the meaning of the documents to improve user experience.
+
+## Updating documents: Gathering
+*Gathering* is the process of index updating by a search engine: due to mutability of documents in the web, index have to be constantly updated to include new documents or to update existing ones.
+This process can be automatically done asking the search engine to update the document manually, but is ofen done in an automatic way using *crawlers*: bots that surf the net following links and storing documents.
+A *crawler* starts its search process with a set seed of reliable pages (such as public organization) taken randomly; then it checks the presence of unseen links in the text, stores them and opens one (per thread) so that a server is not filled of requests at the same time (latency is given by *politeness rules* in the \verb|robot.txt| file).
+Then the document is processed and usfull information (such as url, title and content) are stored in a column-based database.
+The process goes on until there are no more links to visit or the disk is full.
+
+During the process, also metadata are stored, according to politiness rules (written on a sitemap file called \verb|robots.txt|): those meta-data include importance, update log and frequency for each page, latency of requests and so on.
+Documents are then cleaned to parse text: it is considered 
+
+## Ranking
+Pages are retrieved by a score calculated on relevance to the query, popularity and position in the Web structure.
+The main idea is that a good document (a document with high authority) is linked to many other good documents (*Hub Score*: analyzing the Web graph it is possible to estimate a document authority to improve the search.
+
+### Pagerank
+It is Google algorithm: the main idea is to simulate a *Random walk* across the web: a user, every fixed time, goes to a random page on the web (with a very low probability of $\lambda$) or follows a link in the current document.
+The score given by *PageRank* is the probability that in a random moment the user is reading that page.
+
+$$PR(p) = Kd + K(1 - d)\sum \frac{PR(p_i)}{C(p_i)}$$
+
+where $K$ is a normalization constant, $d$ depends on the system and $C(p)$ is the number of documents of the page $p$.
+The fact that $PR$ is in both side of the formula means that it is computed recoursively until convergence.
+
+### HITS
+This algorithm estimates both authority and Hub Scores for each page: the process is iterative and converges after a small number of passages (depending on graph size); during estimation only graph structure is considered.
+The algorithm initialize each document with both scores equal to $1$ and for each iteration updates them according to formulas:
+
+$$\begin{aligned}
+  A(p) &= \sum_{q \to p} H(q) \\
+  H(p) &= \sum_{q \to p} A(q)
+\end{aligned}$$
+
+# Recommender Systems
+A *Recommender Systems* is a push technology: it provides the user with contents without a query; it suggests other contents according to user's behaviour and previous queries.
+A good recommender system should not suggest common objects but unknown items that users do not know but might like.
+The system should consider user's feedback and not only contents that he or she had actually searched: a relevance score is extracted during the retrieval process.
+In general the systems are based on *Information Filtering*: contents are monitored producing data (virtually in real-time) that have to be filtered to inform the user.
+
+A recommender system can follow different paradigms, and there are also hybrid approaches.
+Assumptions of a recommender system are that users rate and catalog items and that a person will not change tastes during time.
+This second assumption is too strong for a real environment: techinques were developed to update a user profile making the process dynamic (computing users embeddings in a never-ending learning pipeline).
+
+
+## Collaborative filtering
+In this architecture the user is clusterized and contents are suggested according to the belonging cluster (a not-seen content is presented if is appreciated in the cluster).
+This approach is based to data provided by users: to get more data, some indicators are stored (such as web-surfing behaviour) to improve the process, although the behaviour can be misunderstood.
+
+At beginning there are no user information: so he or she is forced to rate a set of items, demographic data are used to do some assumptions or a default set is presented.
+
+In this paradigms, an important part is to compute the *User-item Matrix*: the output is a numerical prediction that indicates if user will like a certain item or not.
+So a top $N$ list can be extracted.
+That matrix is a sparse matrix with users stored as rows and items as columns.
+
+Given a *target user* $a$, an item $i$ not yet seen by $a$ is suggested after that procedure:
+
+* Is extracted a subset of users $U_{a, i}$ similar to $a$ that have reted item $i$;
+* A model (machine learning or an heuristics) is provided to compute a rating $\hat{r}_{a, i}$ for item $i$ according to $U_{a, i}$;
+* If $\hat{r}_{a, i}$ is greater a certain value, $i$ is suggested to $a$.
+
+The subset $U_{a, i}$ is extracted computing the Pearson correlation $\varrho$ between ratings of $a$ and each other user $U_{a, i} = \{ b | \varrho_{a, b} \geq r \hspace{5pt} \forall b \in \text{Users} \}$.
+A common predicting function for $\hat{r}_{a, i}$ is:
+
+$$\hat{r}(a, i) = \overline{r}_a + \frac{\sum_{b \in U_{a, i}} sim(a, b) \cdot (r_{b, i} - \overline{r}_b)}{\sum_{b \in U_{a, i}} sim(a, b)}$$
+
+This process have scalability issues: number of users is much higher than number of items $U >> I$, so computing similarity between users can be very expensive.
+In addiction, operating with very sparse matrices, is very difficult to have a match between users.
+
+To respond to those problems, other approaches are used: for example, an item-item matrix is computed, so that the prediction $\hat{r}_{a, i}$ is computed with the formula:
+
+$$\begin{aligned}
+  sim(\vec{a}, \vec{b}) &= \frac{\sum_{u \in U}(r_{u, a} - \overline{r}_u)(r_{u, b} - \overline{r}_u)}{\sqrt{\sum_{u \in U}(r_{u, a} - \overline{r}_u)^2} \cdot \sqrt{\sum_{u \in U}(r_{u, b} - \overline{r}_u)^2}} \\
+  \hat{r}_{a, i} &= \frac{\sum_{p \in R_u} sim(\vec{p}, \vec{i}) \cdot r_{u, p}}{\sum_{p \in R_u} sim(\vec{p}, \vec{i})}
+\end{aligned}$$
+
+where $R_u$ is the set of items rated by the user $u$.
+
+A machine learning model (trained on a subset of users) can be used to predict future ratings; this approach requires regular updating of the model.
+
+## Content-based filtering
+The algorithm considers only features of all the items and the user profile (with contextual parameters): a similarity measure is than used to match the profile with items.
+This approach is not based on a community, so it works even with a few users.
+The content can be presented in a structured or unstructured way, and is used to compute the Cosine Similarity $sim(\vec{i}, \vec{u})$ between user behaviour and item.
+
+Another simpler approach is to use a Nearest Neighbors approach: given a set $I_a$ of items rated by the user $a$, the $k$ not-yet-seen nearest items $i \in (I - I_a)$ are presented to the user (according to cosine similarity).
+Users' rating can be also used as additional information to improve rating performance.
+
+## Knowledge-based filtering
+This approach is similar to the previous one but products are stored in a knowledge base that should improve the item embedding and filtering.

@@ -108,7 +108,7 @@ SELECT titolo,
 ```
 
 ### 1.10
-Stampate il nome e la sede delle librerie dove è in vendita il libro `dBASE Programming`:
+Stampate il nome e la sede delle librerie dove ï¿½ in vendita il libro `dBASE Programming`:
 
 ```SQL
 SELECT nome,
@@ -207,7 +207,7 @@ SELECT c.lname,
 ```
 
 ### 2.7
-Per ogni prodotto con `product_id` < 20, visualizzare la quantità di prodotto venduta:
+Per ogni prodotto con `product_id` < 20, visualizzare la quantitï¿½ di prodotto venduta:
 
 ```SQL
 SELECT p.product_id,
@@ -221,7 +221,7 @@ SELECT p.product_id,
 ```
 
 ### 2.8
-Eseguire delle query per individuare la classe di prodotti che vende di più, sia in termini di quantità, sia in termini di ricavo:
+Eseguire delle query per individuare la classe di prodotti che vende di piï¿½, sia in termini di quantitï¿½, sia in termini di ricavo:
 
 ```SQL
 SELECT pc.product_class_id,
@@ -241,7 +241,7 @@ SELECT pc.product_class_id,
 Costruire il grafo della immagine precedente:
 
 ### 1.1
-Creazione Entità `person`:
+Creazione Entitï¿½ `person`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
@@ -254,7 +254,7 @@ CREATE (:person
 ```
 
 ### 1.2
-Creazione Entità `skill`:
+Creazione Entitï¿½ `skill`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
@@ -277,7 +277,7 @@ CREATE (a)-[:INTERESTED_IN]->(b)
 ```
 
 ### 1.4
-Creazione Entità `project`:
+Creazione Entitï¿½ `project`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
@@ -299,7 +299,7 @@ WHERE a.name = row.from AND b.name = row.to
 CREATE (a)-[:WORKED_ON]->(b)
 ```
 ### 1.5
-Creazione Entità `company`:
+Creazione Entitï¿½ `company`:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM
@@ -407,47 +407,3 @@ MATCH (t:tweets), (h:hashtags)
 WHERE row.tweet_hashtags = h.hashtags AND row.tweet_id = h.tweet_id
 CREATE (t)-[:contains]->(h)
 ```
-
-Creare la relazione retweet:
-
-controllo dei numeri di retweet (882)
-MATCH (t:tweet)
-WHERE t.retweet_status_text = ""
-RETURN count(t) 
-
-si crea original tweet
-
-MATCH (t:tweet)
-WHERE t.retweet_status_id = ""
-SET t:original_tweet
-
-generalizzazione dei tweet:
-match (t:tweet)
-return count(t)
-
-retweet specifico:
-match (t:tweet:retweet)
-return count(t)
-
-
-
-with, simile a return ma mantiene la lista e raggruppa in una lista
-
-
-  match (n:tweet)
-  return date(substring(n.created_at, 0, 10)) as date
-
-
-vedere numero di tweet per giorno:
-
-
-match (n:tweet)
-with n.date as data, size(collect(n.date)) as cont
-return data, cont
-
-
-numero di tweet da un utente
-
-match (n:tweet)
-with n.user_id as user, size(collect(n.tweet_id)) as n_tweet, collect(n.text) as text
-return user, n_tweet, text
