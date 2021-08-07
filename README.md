@@ -17,3 +17,5 @@ Appunti del corso di studi di Data Science presso l'Università degli Studi Mila
 * [Social Media Analytics](2-Social-Media-Analytics/Appunti_Social_Media_Analytics.pdf)
 * [Text Mining and Search](2-Text-Mining/Appunti_Text_Mining.pdf)
 * [Streaming Data Management and Time Series Analysis](2-Time-Series-Analysis/Appunti_Streaming_Time_Series.pdf)
+
+Se trovi questa scrittura vuol dire che Git su Vs Code ha funzionato
