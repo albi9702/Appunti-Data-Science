@@ -1,0 +1,57 @@
+---
+title: "Industry Lab"
+author: "Alberto Filosa"
+date: "02/03/2021"
+email: "a.filosa1@campus.unimib.it"
+documentclass: article
+lang: it
+fontsize: 11pt
+geometry: margin = 0.5in
+classoption: twocolumn
+output:
+  bookdown::gitbook:
+    keep_md: false
+    css: style.css
+    split_by: rmd
+    config:
+      toc:
+        collapse: subsection
+        before: |
+          <li><a > Industry Lab </a></li>
+        after: |
+          <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
+      download: ["pdf", "epub"]
+      fontsettings:
+        theme: white
+        family: sans
+        size: 2
+      sharing:
+        github: yes
+        linkedin: yes
+        twitter: no
+        facebook: no
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: kable
+    highlight: monochrome
+---
+
+# Industry Lab
+
+## Exlainable AI
+L'Intelligenza Artificiale è sempre più utilizzata in tutti gli ambiti lavorativi. La *Explainable AI* è un metodo efficace per far comprendere agli esperti di domini le decisioni prese da un algoritmo di Machine Learning. La necessità di utilizzo nella pratica risiede nella fiducia della decisione da prendere, nella interazione tra uomo e macchina per comprendere la decisione scelta e nella trasparenza delle decisioni.
+
+Di conseguenza, più un modello è spiegabile, maggiori saranno le performance dello stesso. La XAI permette anche di automatizzare quei processi ripetitivi e standard che se compiuti dalla macchina sarebbero sicuramente meno soggetti all'errore e più veloci.
+
+* Interpretability, Explainability;
+* Opacity Vs Transparency (Support di Auto-ML);
+* *Algorithmic Transparency*: per trasparenza algoritmica si intende quanto è chiaro, di facile interpretazione ed accettato a livello etico ciò che sta allenando un algoritmo in fase di training (Es: Algoritmo Foodora);
+* *Black Box* Vs *White Box*: conoscenza di tutti i processi che accadono durante l'allenamento e che producono un output;
+* Fairness, Inclusiveness, Bias, Discrimination;
+* *Accountability* (Responsabilità).

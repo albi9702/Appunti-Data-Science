@@ -92,16 +92,20 @@
 <li class="chapter" data-level="4.2" data-path=""><a href="#distribution-metrics"><i class="fa fa-check"></i><b>4.2</b> Distribution Metrics</a></li>
 <li class="chapter" data-level="4.3" data-path=""><a href="#segmentation-metrics"><i class="fa fa-check"></i><b>4.3</b> Segmentation Metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path=""><a href="#community-detection"><i class="fa fa-check"></i><b>5</b> Community Detection</a><ul>
-<li class="chapter" data-level="5.1" data-path=""><a href="#node-centric-community"><i class="fa fa-check"></i><b>5.1</b> Node-centric Community</a></li>
-<li class="chapter" data-level="5.2" data-path=""><a href="#group-centric-community"><i class="fa fa-check"></i><b>5.2</b> Group-centric Community</a></li>
-<li class="chapter" data-level="5.3" data-path=""><a href="#network-centric-community"><i class="fa fa-check"></i><b>5.3</b> Network-centric Community</a></li>
-<li class="chapter" data-level="5.4" data-path=""><a href="#hierarchy-centric-community"><i class="fa fa-check"></i><b>5.4</b> Hierarchy-centric Community</a></li>
-<li class="chapter" data-level="5.5" data-path=""><a href="#evaluation"><i class="fa fa-check"></i><b>5.5</b> Evaluation</a></li>
+<li class="chapter" data-level="5" data-path=""><a href="#online-interactions-and-privacy-issues"><i class="fa fa-check"></i><b>5</b> Online Interactions and Privacy Issues</a><ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#privacy-and-social-media"><i class="fa fa-check"></i><b>5.1</b> Privacy and Social Media</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path=""><a href="#assortativity-and-dynamics"><i class="fa fa-check"></i><b>6</b> Assortativity and Dynamics</a></li>
-<li class="chapter" data-level="7" data-path=""><a href="#sentiment-analysis"><i class="fa fa-check"></i><b>7</b> Sentiment Analysis</a><ul>
-<li class="chapter" data-level="7.1" data-path=""><a href="#semantic-ambiguity"><i class="fa fa-check"></i><b>7.1</b> Semantic Ambiguity</a></li>
+<li class="chapter" data-level="6" data-path=""><a href="#community-detection"><i class="fa fa-check"></i><b>6</b> Community Detection</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#node-centric-community"><i class="fa fa-check"></i><b>6.1</b> Node-centric Community</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#group-centric-community"><i class="fa fa-check"></i><b>6.2</b> Group-centric Community</a></li>
+<li class="chapter" data-level="6.3" data-path=""><a href="#network-centric-community"><i class="fa fa-check"></i><b>6.3</b> Network-centric Community</a></li>
+<li class="chapter" data-level="6.4" data-path=""><a href="#hierarchy-centric-community"><i class="fa fa-check"></i><b>6.4</b> Hierarchy-centric Community</a></li>
+<li class="chapter" data-level="6.5" data-path=""><a href="#evaluation"><i class="fa fa-check"></i><b>6.5</b> Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#assortativity-and-dynamics"><i class="fa fa-check"></i><b>7</b> Assortativity and Dynamics</a></li>
+<li class="chapter" data-level="8" data-path=""><a href="#sentiment-analysis"><i class="fa fa-check"></i><b>8</b> Sentiment Analysis</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#semantic-ambiguity"><i class="fa fa-check"></i><b>9</b> Semantic Ambiguity</a><ul>
+<li class="chapter" data-level="9.1" data-path=""><a href="#word-sense-disambiguation"><i class="fa fa-check"></i><b>9.1</b> Word Sense Disambiguation</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href = "https://github.com/rstudio/bookdown" target = "blank">Published with bookdown</a></li>
@@ -131,7 +135,7 @@
 <!-- Lecture 1: 30/09/2020 -->
 <div id="scenario" class="section level1">
 <h1><span class="header-section-number">1</span> Scenario</h1>
-<p>Huge amount of data are exchanged on social media through various devices. Information process is fully integrated within object and activities.</p>
+<p>Huge amount of data are exchanged on Social Media through various devices. Information process is fully integrated within object and activities.</p>
 <p>Information is provided in real time on various social platform:</p>
 <ul>
 <li>Entities: books, records, etc.;</li>
@@ -142,7 +146,7 @@
 <p>When collecting data, it is necessary to transform information, organized in classified data, in to knowledge, awareness and understanding in which info can be useful.</p>
 <p><strong><em>S</em></strong>ocial <strong><em>M</em></strong>edia <strong><em>A</em></strong>nalytics (<strong>SMA</strong>) has a complex process of identifying relevant, valid, new and potentially useful information which can be transformed into knowledge used by different actors and purpose. The main applications of SMA are:</p>
 <ul>
-<li>Life quality, for transaction;</li>
+<li>Life quality, for transactions;</li>
 <li>Brand reputation (awareness of the brand, sentiment, bad comments, consoling reputation, ect.);</li>
 <li>Forecasting the performance of finance markets.</li>
 </ul>
@@ -160,8 +164,8 @@
 <li><em>Unstructured</em>: data are stored without any scheme (Narrative Text).</li>
 </ul>
 <!-- REMEMBER: HTML vs XML -->
-<p><em>HTML</em> is a computer language that uses tags to define elements in a document. It is human readable, so it also contains standard words.
-Other semi-structured data formats are <em>XML</em>, designed to store and transport data, and <em>JSON</em>, a syntax to store and exchanging data.</p>
+<p><em>HTML</em> is a markup language, a computer language that uses tags to define elements in a document. It is human readable, so it also contains standard words. There is the head of the page, containing the title and other part, and the body, containing the divisors and paragraph of the text. Other semi-structured data format is <em>XML</em>, designed to store and transport data. The basic unit of XML documents are elements, a specific block of text marked with a pair of tags at the end and at the beginning of the element. The organization follows a hierarchical structure (or a tree structure) including a main element, called root element. The Document Type Definition define the components allowed in the building of an XML document, defining legal attributes and elements in the document and the structure of each element. Finally, <em>JSON</em> is schema-less representation of structured data based on a key-value pairs. It is used to store and exchanging data. JSON and XML are human-readable, have a hierarchical structure and can be parsed and used by lots of programming languages. Main differences are that JSON doesn’t use the end tag, so it is shorten and more readable, is quicker to read and write than XML and can us arrays.</p>
+<!-- Inserire parte WEB??? -->
 <!-- Lecture 2: 02/10/2020 -->
 </div>
 </div>
@@ -176,19 +180,24 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 </ul>
 <p>Social Media has specific characteristics:</p>
 <ul>
-<li>Interactive web 2.0 applications;</li>
-<li>Contents are generated by the users (posts, comments, etc.);</li>
+<li>It is an Interactive Web 2.0 application;</li>
+<li>Contents are generated by users (posts, comments, etc.);</li>
 <li>Users create service-specific profiles;</li>
 <li>Social Media facilitates the development of online social networks.</li>
 </ul>
 <p>One of the most important theory about Social Media is the <em>Theory of Social Presence</em>. It states that media differ in degree of social presence between the influence of the degree of intimacy and immediacy of the means of communication.</p>
 <blockquote>
-<p>The higher the social presence, the larger the social influence that the communication partners have on each other’s behavior.</p>
+<p>The higher the social presence, the larger is the social influence that the communication partners have on each other’s behavior.</p>
 </blockquote>
 <p>The <em>Media Richness Theory</em> is based on the assumption that the goal of any communication is the resolution of ambiguity and the reduction of uncertainty. The media differs in the degree of information richness (quantity and quality information transmitted in a given time period) they have. The concept of <em>Self Presentation</em> states that in any type of social interaction people have a desire to control the impressions of other people. This concept is related to self-disclosure.</p>
 <blockquote>
 <p>Social Media are <strong>interactive computer-mediated</strong> technologies that facilitate the <strong>creation and sharing of information</strong>, ideas, career interests and other forms of expression via <strong>virtual communities</strong> and networks.</p>
 </blockquote>
+<p><span class="math display">\[\begin{matrix}
+    \mathbf{Low}                  &amp; \mathbf{Medium}            &amp; \mathbf{High}                  \\
+    \text{Blogs}                  &amp; \text{Social Networks}     &amp; \text{Virtual Social Networks} \\
+    \text{Collaborative Projects} &amp; \text{Content Communities} &amp; \text{Virtual Game Worlds}
+  \end{matrix}\]</span></p>
 <p>A <strong><em>U</em></strong>ser-<strong><em>G</em></strong>enerated <strong><em>C</em></strong>ontent (<strong>UGC</strong>) is any form of content created by users in an online system made available on social media. The reason for creating UGC are:</p>
 <ul>
 <li><em>Implicit Incentives</em>, not based on anything tangible, not directly monetizable. Social Incentives are the most common form. A user feels as active user of the community, also through the interaction of friends. It also improves the customer experience when purchasing a product;</li>
@@ -200,8 +209,8 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <p>There are many type of Social Media:</p>
 <ul>
 <li><em>Blog</em>, a website containing one or more chronological posts that interactively discuss a certain topic;</li>
-<li><em>Microblog</em>, publicational textual or multimedial content on Internet;</li>
-<li><em>News Sites</em>, the paper edition of main newspapers. In these sites is possible to interact with other people;</li>
+<li><em>Microblog</em>, a textual or multimedia publications content on Internet;</li>
+<li><em>News Sites</em>, the digital identity of the paper edition of main newspapers. In these sites is possible to interact with other people;</li>
 <li><em>Forums</em>, discussion sections in an IT platform or single sections;</li>
 <li><em>Social Networking Sites</em>;</li>
 <li><em>Virtual Game Worlds</em>;</li>
@@ -212,7 +221,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <ul>
 <li><em>Articles</em>, mainly form news sites;</li>
 <li><em>Posts</em>, generally blog and Social Networking Sites;</li>
-<li><em>Tweets</em>, Twitter’s content</li>
+<li><em>Tweets</em>, Twitter’s content;</li>
 <li><em>Threads</em>, a conversation developed between multiple users;</li>
 <li><em>Reviews</em>, ratings left by users;</li>
 <li><em>Images</em> and <em>Videos</em>.</li>
@@ -226,8 +235,8 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 </blockquote>
 <p>It is possible to divide the analyzes into two main categories:</p>
 <ul>
-<li>Social Network Analysis;</li>
-<li>Social Content Analysis.</li>
+<li>Social Network Analysis, for example Centrality Measures and Community Detection;</li>
+<li>Social Content Analysis, such as Natural Language Processing and Text Mining.</li>
 </ul>
 <p>SMA in the <em>business</em> context is the process of measuring, analyzing and interpreting interactions and conversations in Social Media regarding a brand, product, service or a topic of interest. The analysis is based on elements that influences the customer behavior, the perception and feelings of the customer respect to a brand end their level of engagement. There are many business objectives:</p>
 <ul>
@@ -259,24 +268,25 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <h1><span class="header-section-number">3</span> Network and Graph Theory</h1>
 <p><em>Network Theory</em> is the study of structures representing symmetrical or asymmetrical relationships between objects. It is also a part of Graph Theory: a graph is composed by nodes (also known as vertices) connected through links (edges). Examples of networks are:</p>
 <ul>
-<li>Technological networks, designed for distribution of goods, resources and services (e.g. Internet);</li>
-<li>Information networks, made up of data and information linked together in some way (e.g. <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong><em>W</em></strong>eb);</li>
-<li>Biological networks, representing the interaction patterns between biological elements (e.g. Neural Network);</li>
+<li>Technological networks, designed for distribution of goods, resources and services (E.g. Internet);</li>
+<li>Information networks, made up of data and information linked together in some way (E.g. <strong><em>W</em></strong>orld <strong><em>W</em></strong>ide <strong><em>W</em></strong>eb);</li>
+<li>Biological networks, representing the interaction patterns between biological elements (E.g. Neural Network);</li>
 <li>Social networks, where vertices represent people of groups connected by some form of social interaction, such as friendship.</li>
 </ul>
 <p>In particular, <strong><em>S</em></strong>ocial <strong><em>N</em></strong>etwork <strong><em>A</em></strong>nalysis (<strong>SNA</strong>) is the process of investigating social structures through the use of networks and <em>Graph Theory</em>. These networks are usually visualized in sociograms (also known as Social Network Graph) where vertices are represented as points and edges as lines.</p>
-<p>A <em>Graph</em> is a pair of vertices (<span class="math inline">\(V\)</span>) and edges (<span class="math inline">\(E\)</span>), <span class="math inline">\(G = (V, E)\)</span>, such that <span class="math inline">\(E \subseteq [V]^2\)</span>. The set of <em>vertices</em> of a graph is denoted as <span class="math inline">\(V(G) = {v_1, v_2, \dots, v_n}\)</span>, while the set of <em>Edges</em> is denoted as <span class="math inline">\(E(G) = {e_1, e_2, \dots, e_n}\)</span>. The representation is to draw a point for each vertex and join these points with lines if there’s a connection:</p>
+<p>A <em>Graph</em> is a pair of vertices (<span class="math inline">\(V\)</span>) and edges (<span class="math inline">\(E\)</span>), <span class="math inline">\(G = (V, E)\)</span>, such that <span class="math inline">\(E \subseteq [V]^2\)</span>. The set of <em>vertices</em> of a graph is denoted as <span class="math inline">\(V(G) = \{v_1, v_2, \dots, v_n\}\)</span>, while the set of <em>Edges</em> is denoted as <span class="math inline">\(E(G) = \{e_1, e_2, \dots, e_n\}\)</span>. The representation is to draw a point for each vertex and join these points with lines if there’s a connection:</p>
 <!-- Graph Image -->
 <p><img src="Immagini/Graph.png" width="75%" style="display: block; margin: auto;" /></p>
 <div id="undirected-graph" class="section level2">
 <h2><span class="header-section-number">3.1</span> Undirected Graph</h2>
-<p>A graph is <em>Undirected</em> if edges are directed from one vertex to another (e.g. Twitter). Given the edge <span class="math inline">\(e = (a, b)\)</span>, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called <em>Extreme</em> and <em>Adjacent</em> vertices of <span class="math inline">\(e\)</span>, called the <em>incident</em> edge. <span class="math inline">\(a\)</span> is called <em>Neighbor</em> of <span class="math inline">\(b\)</span> in <span class="math inline">\(G\)</span> and vice versa. Two edges <span class="math inline">\(e, f\)</span> are <em>Adjacent</em> if they have a common vertex. The <em>Neighborhood</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(N(a)\)</span>, is the set of vertices adjacent to <span class="math inline">\(a\)</span>. The <em>Star</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(s(a)\)</span>, is the set of edges incident in <span class="math inline">\(a\)</span>.</p>
+<p>An <em>Undirected</em> graph is a graph with all bidirectional edges (E.g. Facebook). Given the edge <span class="math inline">\(e = (a, b)\)</span>, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called <em>Extreme</em> and <em>Adjacent</em> vertices of <span class="math inline">\(e\)</span>, called the <em>incident</em> edge. <span class="math inline">\(a\)</span> is called <em>Neighbor</em> of <span class="math inline">\(b\)</span> in <span class="math inline">\(G\)</span> and vice versa. Two edges <span class="math inline">\(e, f\)</span> are <em>Adjacent</em> if they have a common vertex. The <em>Neighborhood</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(N(a)\)</span>, is the set of vertices adjacent to <span class="math inline">\(a\)</span>. The <em>Star</em> of <span class="math inline">\(a\)</span>, <span class="math inline">\(s(a)\)</span>, is the set of edges incident in <span class="math inline">\(a\)</span>.</p>
 <!-- Undirected Graph Image -->
 <p><img src="Immagini/Undirected-Graph.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>The <em>Degree</em> of a vertex, <span class="math inline">\(d(v)\)</span> is the number of edge incident to a node, equivalent to the number of neighbors of <span class="math inline">\(v\)</span>; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value <span class="math inline">\(\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the minimum degree, while the value <span class="math inline">\(\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the maximum degree:</p>
+<p>The <em>Degree</em> of a vertex, <span class="math inline">\(d(v)\)</span> is the number of edge incident to a node, equivalent to the number of neighbors of <span class="math inline">\(v\)</span>; each loop is counted twice, while a vertex with degree 0 is an isolated vertex. The value <span class="math inline">\(\delta(G) = \min \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the minimum degree of a vertex, while the value <span class="math inline">\(\Delta(G) = \max \{d(v) \text{ } | \text{ } v \in V \}\)</span> is the maximum degree:</p>
 <!-- Degree of a Graph Image -->
 <p><img src="Immagini/Degree.png" width="75%" style="display: block; margin: auto;" /></p>
-<p><span class="math display">\[d(G) = \frac{1}{|V|} \sum_{v \in V} d(v) = 2|E(G)| = m\]</span></p>
+<p>The Average Degree is defined as follows:</p>
+<p><span class="math display">\[d(G) = \frac{1}{|V|} \sum_{v \in V} d(v) = \frac{1}{|V|} 2|E(G)| = \frac{2m}{|V|}\]</span></p>
 <p>There are many different type of graphs:</p>
 <ul>
 <li><em>Null</em> graph, made up of only isolated graphs;</li>
@@ -286,7 +296,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 </div>
 <div id="directed-graph" class="section level2">
 <h2><span class="header-section-number">3.2</span> Directed Graph</h2>
-<p>A <em>Directed</em> graph is a graph with all bidirectional edges (e.g. Facebook). Given the edge <span class="math inline">\(e = (a,b)\)</span>, <span class="math inline">\(e\)</span> is called <em>Outgoing</em> edge from <span class="math inline">\(a\)</span>, denoted as direct <em>Predecessor</em>, and <em>Ingoing</em> edge in <span class="math inline">\(b\)</span>, known as direct <em>Successor</em>. Given a vertex <span class="math inline">\(a\)</span> of a directed graph <span class="math inline">\(G\)</span>, <span class="math inline">\(E^+(a)\)</span> is the set of outgoing edges from <span class="math inline">\(a\)</span> and <span class="math inline">\(E^-(a)\)</span> the set of incoming edges in <span class="math inline">\(a\)</span>. A <em>Sink</em> vertex is a vertex with only incoming edges, while with only outgoing edges is called <em>Source</em> vertex.</p>
+<p>A graph is <em>Directed</em> if edges are directed from one vertex to another (E.g. Twitter). Given the edge <span class="math inline">\(e = (a,b)\)</span>, <span class="math inline">\(e\)</span> is called <em>Outgoing</em> edge from <span class="math inline">\(a\)</span>, denoted as direct <em>Predecessor</em>, and <em>Ingoing</em> edge in <span class="math inline">\(b\)</span>, known as direct <em>Successor</em>. Given a vertex <span class="math inline">\(a\)</span> of a directed graph <span class="math inline">\(G\)</span>, <span class="math inline">\(E^+(a)\)</span> is the set of outgoing edges from <span class="math inline">\(a\)</span> and <span class="math inline">\(E^-(a)\)</span> the set of incoming edges in <span class="math inline">\(a\)</span>. A <em>Sink</em> vertex is a vertex with only incoming edges, while with only outgoing edges is called <em>Source</em> vertex.</p>
 <!-- Directed Graph Image -->
 <p><img src="Immagini/Directed-Graph.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>The <em>In-Degree</em> of a vertex <span class="math inline">\(v\)</span> is the number of edges arriving at the <span class="math inline">\(v\)</span> vertex, while the <em>Out-Degree</em> is the number of edges starting from the vertex <span class="math inline">\(v\)</span>.</p>
@@ -307,10 +317,10 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 </div>
 <div id="connected" class="section level2">
 <h2><span class="header-section-number">3.4</span> Connected</h2>
-<p>Connectivity <span class="math inline">\(k(G)\)</span> is the basic concept of graph theory. It measures the minimum number of elements that must be removed to disconnect the graph. In particular, an <em>Articular</em> point is a vertex whose removal disconnects a component of the graph, while a <em>Bridge</em> is an edge whose removal disconnect a component of the graph.</p>
+<p><em>Connectivity</em> <span class="math inline">\(k(G)\)</span> is the basic concept of graph theory. It measures the minimum number of elements (Vertices and Edges) that must be removed to disconnect the graph. In particular, an <em>Articular</em> point is a vertex whose removal disconnects a component of the graph, while a <em>Bridge</em> is an edge whose removal disconnect a component of the graph.</p>
 <!-- Bridge and Articular Point of a Graph Image -->
 <p><img src="Immagini/Bridge-Articular-Point.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>When <span class="math inline">\(k(G) = 2\)</span>, we talk about <em>Biconnectivity</em> no single edge or vertex removal disconnects the graph and no network failure points compromise the network itself.</p>
+<p>When the number of elements removed are 2, <span class="math inline">\(k(G) = 2\)</span>, it is <em>Biconnectivity</em>, so no single edge or vertex removal disconnects the graph and no network failure points compromise the network itself.</p>
 <!-- Lecture 5: 14/10/2020 -->
 </div>
 <div id="clustering" class="section level2">
@@ -318,7 +328,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <p>A <em>Clique</em> is a set of vertices <span class="math inline">\(C\)</span> totally connected in a graph <span class="math inline">\(G\)</span>. It usually ignores single vertices and vertex connected by an edge. In particular, a <em>Maximal Clique</em> is a clique not extended adding a new adjacent vertex, while a <em>Maximum Clique</em> is the largest clique in a graph.</p>
 <!-- Clique Image -->
 <p><img src="Immagini/Clique.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>The <em>Clustering Coefficient</em> is the measure of the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:</p>
+<p>The <em>Clustering Coefficient</em> is the degree in which nodes tend to be connected to each other. There are 3 different ways to calculate this:</p>
 <ul>
 <li><em>Local Clustering Coefficient</em>: given a set of neighbors <span class="math inline">\(N(v)\)</span>, it is the number of edges between the members of neighbors divided by the number of potential edges between them (<span class="math inline">\(k = d(v)\)</span>):</li>
 </ul>
@@ -331,7 +341,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 </ul>
 <p><span class="math display">\[cc(G) = \frac{1}{|V|} \sum_{i=1}^n cc(v_i)\]</span></p>
 <ul>
-<li><em>Global Clustering Coefficient</em>, based on triples of vertices(Open if 3 nodes are connected by 2 edges and Closed if connected by 3 edges). It is the number of the closed triplet divided by the total number of triplets:</li>
+<li><em>Global Clustering Coefficient</em>, based on triples of vertices (pen if 3 nodes are connected by 2 edges and Closed if connected by 3 edges). It is the number of the closed triplet divided by the total number of triplets:</li>
 </ul>
 <p><span class="math display">\[cc_{\bigtriangleup} = \frac{3 n_{\bigtriangleup}(G)}{n_{\land}(G)} = \frac{\sum_{i=1}^n cc(v_i)w_i}{\sum_{i=1}^n w_i}\]</span></p>
 <!-- Global Clustering Coefficient Image -->
@@ -363,6 +373,11 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <div id="complex-network" class="section level2">
 <h2><span class="header-section-number">3.8</span> Complex Network</h2>
 <p>Interaction networks are complex systems composed of several parts connected to each other and intertwined with each other so that the result is different from the sum of the parts. The structure (Topology) of the contact network is crucial in determining collective behavior.</p>
+<!-- Networks:
+        
+        * Regular Networks
+        * Random Networks
+        * Complex Networks -->
 <p>In <em>Regular Networks</em> each node is connected to a fixed number of nodes. They have regular patterns within the structure, in which they may or not be <span class="math inline">\(k\)</span>-regular graphs and the Entropy <span class="math inline">\(\approx 0\)</span>, the degree of randomness. There are many examples of regular networks:</p>
 <ul>
 <li><em>Linear Network</em>, a linear sequence <span class="math inline">\(L\)</span> of connected vertices: <span class="math inline">\(L = v_1, e_{12}, v_2, e_{23}, v_{3}, \dots, v_{k-1}, e_{(k-1)k}, v_k\)</span>;</li>
@@ -374,7 +389,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <p><span class="math display">\[\begin{matrix}
     \mathbf{Summary}              &amp; \mathbf{Linear}        &amp; \mathbf{Ring}             &amp; \mathbf{Star}                \\
     \text{Order}                  &amp; \|L\| = k              &amp; \|A\| = k                 &amp; \|S\| = k                    \\
-    \text{Degree}                 &amp; 1 \leq d(L) \leq 2     &amp; d(A) 2                    &amp; d(S) = 1                     \\
+    \text{Degree}                 &amp; 1 \leq d(L) \leq 2     &amp; d(A) = 2                    &amp; d(S) = 1                     \\
     \text{Clustering Coefficient} &amp; cc(L) = 0              &amp; cc(A) = 0                 &amp; cc(S) = 0                    \\
     \text{Size}                   &amp; \|L\| = k -1           &amp; \|A\| = k                 &amp; \|S\| = k - 1                \\
     \text{Diameter}               &amp; diam(L) = k - 1        &amp; diam(A) = k/2             &amp; diam(S) = 2                  \\
@@ -395,7 +410,7 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <p>In <em>Random Networks</em> pairs of nodes are randomly connected by a given number of connections. Two nodes are connected by a certain probability. All nodes have approximately the same number of neighbors, which differs slightly from the average value.</p>
 <!-- Random Networks Image -->
 <p><img src="Immagini/Random-Network.png" width="75%" style="display: block; margin: auto;" /></p>
-<p><em>Complex Networks</em> of interactions have substantially different characteristics from both classes. The Complex Network Theory shows non intuitive characteristics and can be made up of millions of units communicating with each other. Mathematical methods are used to extract information from complex networks in a synthetic way. For example,online social networks are complex networks: the personal network of contact is usually composed of a first order area, with an ego-centric network, with direct relationship, a second order and so on, with a socio-centric network.</p>
+<p><em>Complex Networks</em> of interactions have substantially different characteristics from both classes. The Complex Network Theory shows non intuitive characteristics and can be made up of millions of units communicating with each other. Mathematical methods are used to extract information from complex networks in a synthetic way. For example, online social networks are complex networks: the personal network of contact is usually composed of a first order area, with an ego-centric network, with direct relationship, a second order and so on, with a socio-centric network.</p>
 <!-- Ego Socio Networks Image -->
 <p><img src="Immagini/Ego-Socio-Networks.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>There are several phenomena related to the Theory of Complex Networks:</p>
@@ -476,19 +491,32 @@ Other semi-structured data formats are <em>XML</em>, designed to store and trans
 <li><em>Counting of Social Circles</em>, groups of individuals less closely linked than in a clique.</li>
 </ul>
 <p>The <em>Cohesion</em> is the degree of actors directly related connected to each other cohesive bonds. An important metric is the <em>Structural Cohesion</em>, defined as the minimum number of people or ties of a Social Network that must be removed to disconnect the group (identical to Connectivity).</p>
+<!-- Lecture 23/10/2020 -->
+</div>
+</div>
+<div id="online-interactions-and-privacy-issues" class="section level1">
+<h1><span class="header-section-number">5</span> Online Interactions and Privacy Issues</h1>
+<p>Data about users is every day collected, analyzed and possibly shared with/without the consent of the user and made available by the himself. Users, owner of these data, can lose control on what information is collected and how the information is used. <em>Privacy</em> is not only a technological issue and laws vary widely throughout the World.</p>
+<p><em>Personal Information</em> can be collected in the Web in application form or questionnaires and surveys. When a user looks for a new Web page, the URL of the page that the user is currently looking at can be sent along. The referral link field can also reveal personal information. It is used to promote products to new customers through referrals as traditional word of mouth. Every time a browser download a page, this is recorded in a log file on the remote Web server, registering IP address, the time and URL requested. This information can be combined with other log files to discover the actual identity of the user. Privacy can be enhanced by using proxy servers, an intermediaries between a client and a server, or anonymizers, other proxies designed to maintain accesses on the Web hiding IP addresses.</p>
+<p>A <em>Cookie</em> is a small file created by an Internet site to store information on a user’s computer. It allows to identify a user with its preferences, such as language and identifiable information. Only the Web site that created the cookie can read it. Cookies maintain records of browsing habits: it may may include information a web site knows about the user and track users activity form multiple visits.</p>
+<div id="privacy-and-social-media" class="section level2">
+<h2><span class="header-section-number">5.1</span> Privacy and Social Media</h2>
+<p>In recent years, users have played an active role in the Information Society, making their information available themselves. They can stay in contact with people, share own ideas and preferences. Social Media offer definition of a personal profile, sharing preferences and interest, creating a digital identity. With the success of Social Media, millions of individuals have spontaneously chosen to make their personal information available online. So, users publish a tremendous amount of personal and sensitive information.</p>
+<p>Users can at least discover that their data have been used, but data can also be used to harm, profile, or manipulate a user without her being even aware. Once a data item is published on a Social Network, control over it is lost and it is impossible to know how it will be used.</p>
+<p>In 2018 <em>Cambridge Analytica</em> had harvested personal data of millions of people’s Facebook profiles without their consent and used it for political purposes. In 2013 a researcher from Cambridge University created a personality quiz app collecting data of those users’ friends. At the end, the app retrieved data from 87 millions Facebook users. • The retrieved data were shared with Cambridge Analytica, which used them to create physiographical profiles of the respondents segmenting individuals based on their personality. Profile creation was done by analysis of personality test of the 300.000 users and collected Facebook data for the remaining ones. Results of the personality test were matched to the Facebook activity of the same users to create a map. Profiles allowed for identifying the most effective kind of advertisement to persuade a given individual for a political event.</p>
 <!-- Lecture 04/11/2020 -->
 </div>
 </div>
 <div id="community-detection" class="section level1">
-<h1><span class="header-section-number">5</span> Community Detection</h1>
+<h1><span class="header-section-number">6</span> Community Detection</h1>
 <p>Preferential Attachment is a property of some network where the great majority of new edges are connected to nodes with an already high degree, compared to others. The result is a network with very few nodes with an high degree of connection.</p>
 <!-- Preferential Attachment Image-->
 <p><img src="Immagini/Preferential-Attachment.png" width="75%" style="display: block; margin: auto;" />
 It can happen because people want to be associated with popular people, ideas, etc, increasing their <em>popularity</em>; <em>quality</em>, evaluating people based on objective quality criteria, so higher nodes will attract more attention; <em>mixed model</em>, among nodes of similar attribute.</p>
-<p>A <em>Community</em> is a subset of nodes among which there are relatively strong, direct and frequente ties (e.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Network communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.</p>
+<p>A <em>Community</em> is a subset of nodes among which there are relatively strong, direct and frequente ties (E.g. group, cluster). One of the most important task studying network is identifying communities, which allows to discover groups of interacting people, studying interaction between them, inferring missing node values or predicting unobserved connections. In Social Network communities represent groups of nodes (users) that show similar characteristic and interaction among them (link prediction). The definition can be subjective, because it can be densely-knit or each component can be a community. Communities can be overlap, in which some users belong to 2 communities, or disjoint, in which each node belongs exclusively to 1 community.</p>
 <!-- Overlapping Disjoint Communities Image-->
 <p><img src="Immagini/Overlapping-Disjoint-Communities.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>The Link Prediction is the prediction of which nodes are likely get connected given a Social Network; the output is a list of ranked pairs of nodes.</p>
+<p>It is important to detect communities because it is possible to predict the connection among them. The Link Prediction is the prediction of which nodes are likely get connected given a Social Network; the output is a list of ranked pairs of nodes.</p>
 <p>The Community Detection is confused for clustering, but in the first data is linked in a graph and network data tends to be discrete, leading algorithm using the graph property directly.</p>
 <!-- Different Categories of Community Detection -->
 <p>Community Detection methods can be divided into 4 main categories:</p>
@@ -499,23 +527,23 @@ It can happen because people want to be associated with popular people, ideas, e
       * Network-centric Community
       * Hierarchy-centric Community -->
 <div id="node-centric-community" class="section level2">
-<h2><span class="header-section-number">5.1</span> Node-centric Community</h2>
-<p>The <em>Node-centric Community</em> is a community in which each node in a group satisfies certain properties:</p>
+<h2><span class="header-section-number">6.1</span> Node-centric Community</h2>
+<p>The <em>Node-centric Community</em> is a community in which each node in a group satisfies certain properties (generally with networks with small size):</p>
 <ul>
-<li><em>Complete Mutuality</em>, where nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than <span class="math inline">\(k - 1\)</span>;</li>
-<li><em>Reachability of Members</em>, in which communities where all nodes in the group should be reachable in k-jumps. The <em>k</em>-clique approach aims to find a maximal subgraph in which the largest distance between any nodes less than <span class="math inline">\(k\)</span> (shortest path given a subgraph). The <em>k</em>-club approach aims to find a substructure of diameter <span class="math inline">\(\leq k\)</span>;</li>
+<li><em>Complete Mutuality</em>, where nodes belong to just one clique. A clique is a maximal complete subgraph of 3 or more nodes all adjacent to each other. It is possible to find communities for the maximum cliques or all maximal cliques. The brute-force is not recommended, it is necessary to prune nodes with degree equal or less than <span class="math inline">\(k - 1\)</span>. Even with pruning cliques are rare and a single edge removal destroys the clique;</li>
+<li><em>Reachability of Members</em>, in which all nodes in the group is reachable in k-jumps. The <em>k</em>-clique approach aims to find a maximal subgraph in which the largest distance is between any nodes less than <span class="math inline">\(k\)</span> (shortest path given a subgraph). The <em>k</em>-club approach aims to find a substructure of diameter <span class="math inline">\(\leq k\)</span>;</li>
 <li><em>Nodal Degrees</em> (<!-- non pervenuto-->).</li>
 </ul>
 </div>
 <div id="group-centric-community" class="section level2">
-<h2><span class="header-section-number">5.2</span> Group-centric Community</h2>
+<h2><span class="header-section-number">6.2</span> Group-centric Community</h2>
 <p>The <em>Group-centric Community</em> is a community which requires the whole group to satisfy a certain condition. The main concept is the network density, defined as the number of edges in the network over the total number of possible edges between all pairs of nodes. It measures how well connected a network is (perfectly connected network is a clique). A subgraph is a quasi-clique if</p>
 <p><span class="math display">\[\frac{2 |E_s|}{|V_s| (|V_s| - 1)} \geq \gamma\]</span></p>
 <p>A greedy algorithm can be adopted to find a maximal quasi-clique, starting from the node with the largest degree and expanding it with nodes likely contribute to a larger quasi-clique. This method continues until no mode node can be added.</p>
 <!-- Lecture 11: 11/11/2020 -->
 </div>
 <div id="network-centric-community" class="section level2">
-<h2><span class="header-section-number">5.3</span> Network-centric Community</h2>
+<h2><span class="header-section-number">6.3</span> Network-centric Community</h2>
 <p><em>Network-centric Community</em> aims to find communities considering global connection of nodes and divide network into disjoint set. The main approaches are:</p>
 <!-- Approaches: 
 
@@ -527,8 +555,8 @@ It can happen because people want to be associated with popular people, ideas, e
     cos(\theta) &amp;= \frac{A B}{\|A\| \|B\|}
     J(A, B)     &amp;= \frac{|A \cap B|}{|A \cup B|}
   \end{aligned}\]</span></p>
-<p>It is useful for huge network for computing the vertex similarity and applying <span class="math inline">\(k\)</span>-means clustering algorithm: each cluster is associated with a centroid and each node is assigned to the cluster with the closest centroid (recompute the centroid of each cluster).</p>
-<p>Another possible approach is the <em>Spectral Clustering</em>, representing a similarity graph as a matrix and analyse the spectrum (= eigenvalues <span class="math inline">\(\lambda\)</span>) of the matrix:</p>
+<p>It is useful for huge network for computing the vertex similarity and applying <span class="math inline">\(k\)</span>-means clustering algorithm: each cluster is associated with a centroid and each node is assigned to the cluster with the closest centroid (recompute the centroid of each cluster until centroids don’t change).</p>
+<p>Another possible approach is the <em>Spectral Clustering</em>, representing a similarity graph as a matrix and analyse the spectrum (eigenvalues <span class="math inline">\(\lambda\)</span>) of the matrix:</p>
 <p><span class="math display">\[\begin{bmatrix}
     w_{11} &amp; \dots &amp; w_{1n} \\
     \vdots &amp; \dots &amp; \vdots \\
@@ -546,6 +574,7 @@ It can happen because people want to be associated with popular people, ideas, e
     \vdots \\
     x_{n} \\
   \end{bmatrix}\]</span></p>
+<p>The Spectrum of a matrix is a set of ordered eigenvectors of their corresponding eigenvalues: <span class="math inline">\(\Lambda = \{\lambda_1, \lambda_2, \dots, \lambda_n \}\)</span></p>
 <p>The goal is embed points in a low-dimensional space, in which cluster denoting communities are more easy to find. It is necessary to compute the Adjacency matrix and compute the Laplacian matrix:</p>
 <p><span class="math display">\[A_{ij} = 
     \begin{cases}
@@ -554,18 +583,18 @@ It can happen because people want to be associated with popular people, ideas, e
     \end{cases}\]</span></p>
 <p>So the basic stages of spectral clustering are:</p>
 <ol style="list-style-type: decimal">
-<li>Pre-processing: Construct a matrix representation of the dataset;</li>
+<li>Pre-processing: build a matrix representation of the dataset;</li>
 <li>Decomposition: compute eigenvalues and eigenvectors of the matrix and map each point to a lower dimension based on 1 or more eigenvectors.</li>
 <li>Grouping: assign points to 2 or more clusters based non the new representation.</li>
 </ol>
-<p><em>Modularity Maximization</em> tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection. In a network with <span class="math inline">\(E\)</span> edges, for two nodes <span class="math inline">\(d_i\)</span> and <span class="math inline">\(d_j\)</span> the expected random connection between them is <span class="math inline">\(\frac{d_i d_j}{2E}\)</span>. The modularity of a group is</p>
+<p><em>Modularity Maximization</em> tries to maximize the distance of a network from a random network. Modularity measures the group interaction compared with the expected random connection (<span class="math inline">\(M \in (-1, +1)\)</span> and <span class="math inline">\(M = 0\)</span> if all nodes are clustered into one group). In a network with <span class="math inline">\(E\)</span> edges, for two nodes <span class="math inline">\(d_i\)</span> and <span class="math inline">\(d_j\)</span> the expected random connection between them is <span class="math inline">\(\frac{d_i d_j}{2E}\)</span>. The modularity of a group is</p>
 <p><span class="math display">\[\sum(A_{ij} - \frac{d_i d_j}{2E})\]</span></p>
 <p>and is necessary to maximize:</p>
 <p><span class="math display">\[\frac{1}{2E} \sum_C \sum_{i,j \in C} (A_{ij} - \frac{d_i d_j}{2E})z_{ij}\]</span></p>
 <p>where <span class="math inline">\(z_{ij}\)</span> defines if two edges are in the same group (0 otherwise). If <span class="math inline">\(A_ij\)</span> is very close to the expected random network, the relationship between two nodes is weak (<span class="math inline">\(A_ij\)</span> matrix considered as random). Finally it is possible to compute the spectral clustering and using <span class="math inline">\(k\)</span>-means approach to select the communities.</p>
 </div>
 <div id="hierarchy-centric-community" class="section level2">
-<h2><span class="header-section-number">5.4</span> Hierarchy-centric Community</h2>
+<h2><span class="header-section-number">6.4</span> Hierarchy-centric Community</h2>
 <p><em>Hierarchy-centric Community</em> aims to build a hierarchical structure of communities based on network topology. It facilitates the analysis of different resolutions. There are two approaches:</p>
 <!-- Approaches: 
 
@@ -577,23 +606,20 @@ It can happen because people want to be associated with popular people, ideas, e
 <li>Remove the edge with the highest betweenness;</li>
 <li>Re-compute betweenness for all edges affected by the edge removal;</li>
 </ol>
-<p><em>Agglomerative Hierarchical Clustering</em> initializes each node as a community. It chooses two communities satisfying certain criteria and merges into larger one. It is possible to use Maximum Node Similarity or Maximum Modularity Increase.</p>
+<p><em>Agglomerative Hierarchical Clustering</em> initializes each node as a community. It chooses two communities satisfying certain criteria and merges into larger one. It is possible to use Maximum Node Similarity or Maximum Modularity Increase approach.</p>
 <!-- Lecture 14: 13/11/2020 -->
 </div>
 <div id="evaluation" class="section level2">
-<h2><span class="header-section-number">5.5</span> Evaluation</h2>
+<h2><span class="header-section-number">6.5</span> Evaluation</h2>
 <p>The perfect communities would be objects of the same type in the same community, but this is simply impossible. There are two types of evaluation:</p>
 <ul>
 <li><em>With Ground Truth</em>, partial knowledge of what communities look like and it is given the correct community assignments. Measures are:
 <ul>
-<li>Precision;</li>
-<li>Recall;</li>
+<li>Precision, Recall and F-Measure;</li>
+<li>Purity;</li>
+<li>Normalized Mutual Information (NMI).</li>
 </ul></li>
-<li><em>Without Ground Truth</em>, in a matter of analyzing attributes, such as posts, profile information, of community members to see if there is a coherency among them. It is possibile to use word frequency and wordclouds to find the top topics discussed by communities. Measures are:
-<ul>
-<li>SSE;</li>
-<li>Community Detection algorithms.</li>
-</ul></li>
+<li><em>Without Ground Truth</em>, in a matter of analyzing attributes, such as posts, profile information, of community members to see if there is a coherency among them. It is possibile to use word frequency and wordclouds to find the top topics discussed by communities and find any coherence. Another approach is evaluate the communities using clustering quality measures, such as select the best Community Detection algorithms value.</li>
 </ul>
 <p>Communities also expand, shirk or dissolve in dynamic networks:</p>
 <!-- Community Evolution Image-->
@@ -601,7 +627,7 @@ It can happen because people want to be associated with popular people, ideas, e
 </div>
 </div>
 <div id="assortativity-and-dynamics" class="section level1">
-<h1><span class="header-section-number">6</span> Assortativity and Dynamics</h1>
+<h1><span class="header-section-number">7</span> Assortativity and Dynamics</h1>
 <p>In some cases hubs connect to hubs and sometimes they avoid each other, it depends on the structural properties. This pattern is a general property of real networks: it is a phenomenon known as <em>Degree Correlation</em> <span class="math inline">\(e\)</span>, defined as the probability to find a node with degree <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> at the two ends of a randomly selected link (<span class="math inline">\(E\)</span> is the number of edges between two elements).</p>
 <p><span class="math display">\[e = \frac{E}{\|E\|}\]</span></p>
 <p>The probability <span class="math inline">\(q_k\)</span> that there is a degree-<span class="math inline">\(k\)</span> node at the end of the randomly selected link is the following (<span class="math inline">\(p_k\)</span> is the degree probability):</p>
@@ -610,7 +636,7 @@ It can happen because people want to be associated with popular people, ideas, e
 <ul>
 <li><em>Assortative</em>, hubs show a tendency to link to each other. <span class="math inline">\(e_{ij}\)</span> is high along the main diagonal so nodes of comparable degree tend to link to each other;</li>
 <li><em>Neutral</em>, nodes connected to each other with the expected random probabilities. The density of links is symmetric around the average degree, so nodes link to each other randomly;</li>
-<li>Disarsortative, hubs tend to avoid linking to each other. <span class="math inline">\(e_{ij}\)</span> is high along the secondary diagonal, so hubs tend to connect to small degree nodes.</li>
+<li><em>Disassortative</em>, hubs tend to avoid linking to each other. <span class="math inline">\(e_{ij}\)</span> is high along the secondary diagonal, so hubs tend to connect to small degree nodes.</li>
 </ul>
 <!-- Hubs Hubs Image-->
 <p><img src="Immagini/Hubs-Hubs.jpg" width="75%" style="display: block; margin: auto;" /></p>
@@ -618,20 +644,20 @@ It can happen because people want to be associated with popular people, ideas, e
 <ul>
 <li><span class="math inline">\(&gt; 0\)</span> for assortative networks;</li>
 <li><span class="math inline">\(= 0\)</span> for neutral networks;</li>
-<li><span class="math inline">\(&lt; 0\)</span> for dissasortative networks.</li>
+<li><span class="math inline">\(&lt; 0\)</span> for disassortative networks.</li>
 </ul>
 <p>To compare different network, it is possible to normalize the degree correlation coefficient:</p>
 <p><span class="math display">\[r = \frac{\sum_{j, k} jk (e_{jk} - q_j q_k)}{\sum_k [k^2 - q_k - (\sum_k k q_k)^2]} \in [-1, +1]\]</span></p>
 <!-- Degree Correlation Image-->
 <p><img src="Immagini/Degree-Correlation.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>An important property of a random network is the emergence of a phase transition at <span class="math inline">\(&lt;k&gt; = 1\)</span>, marking the appearance of the <em>Giant Component</em>. For Assortative networks, the transition happens to a lower value of <span class="math inline">\(&lt;k&gt;\)</span>, hence a giant component emerges for <span class="math inline">\(&lt;k&gt; &lt; 1\)</span> because it easer to start it if the high-degree nodes seek out <!-- cercarsi --> each other. Otherwise, for Disassortative networks the transition is delayed since the hubs tend to connect to small degree nodes and have difficulty to form the giant component.</p>
+<p>An important property of a random network is the emergence of a phase transition at <span class="math inline">\(\langle k \rangle = 1\)</span>, marking the appearance of the <em>Giant Component</em>. For Assortative networks, the transition happens to a lower value of <span class="math inline">\(\langle k \rangle\)</span>, hence a giant component emerges for <span class="math inline">\(\langle k \rangle &lt; 1\)</span> because it easer to start it if the high-degree nodes seek out <!-- cercarsi --> each other. Otherwise, for Disassortative networks the transition is delayed since the hubs tend to connect to small degree nodes and have difficulty to form the giant component.</p>
 <!-- Finish Resilience -->
-<p>Alteration of the giant component have implications for network robustness. The <em>Network Resilience</em> is the effects of node and edge removal. In Assortative networks hub removal makes less damage because the hubs form a core group, while in disassortative networks is more damaging because hubs are connected to many small degree nodes. It is related to <em>Percolation</em> <!-- filtration -->, when a giant component is formed.</p>
+<p>Alteration of the giant component have implications for network robustness. The <em>Network Resilience</em> is the effects of node and edge removal. In Assortative networks hub removal makes less damage because the hubs form a core group, while in disassortative networks is more damaging because hubs are connected to many small degree nodes. It is related to <em>Percolation</em><!-- filtration -->, when a giant component is formed.</p>
 <!-- Lecture 15: 18/11/2020 -->
 </div>
 <div id="sentiment-analysis" class="section level1">
-<h1><span class="header-section-number">7</span> Sentiment Analysis</h1>
-<p>From Social Network is possible to extract information about a given argument and analyzed them to make decisions (e.g. predicting market data, better quality of life). This is not so simple because it is necessary to transform data from unstructured (cannot be displayed in rows, requires more storage and are more difficult to manage) to structured data, displayed in rows-columns and requires less storage.</p>
+<h1><span class="header-section-number">8</span> Sentiment Analysis</h1>
+<p>From Social Network is possible to extract information about a given argument and analyzed them to make decisions (E.g. predicting market data, better quality of life). This is not so simple because it is necessary to transform data from unstructured (cannot be displayed in rows, requires more storage and are more difficult to manage) to structured data, displayed in rows-columns and requires less storage.</p>
 <!-- Structured VsUnstructured Image-->
 <p><img src="Immagini/Structured-Vs-Unstructured.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>The transformation is necessary to extract some important information like emotion, polarity, topic and the language of the user.</p>
@@ -642,27 +668,30 @@ It can happen because people want to be associated with popular people, ideas, e
 <li>Identify the Aspect of the object;</li>
 <li>Identify the <em>Opinion</em> on an object from a user.</li>
 </ul>
-<p>Social Media Analytics should be able to interpret natural language to discover if an information is subjective and determine the corresponding polarity. A text is <em>objective</em> if a post presents factual information about the world, while <em>subjective</em> if expresses feeling, emotions or beliefs. An <em>explicit</em> opinion is a subjective statement giving an opinion, while <em>implicit</em> implies an opinion. An <em>ironic</em> post is a communicative way expressing the opposite what is literally said. Emotions are complex reaction pattern involving experiential and physiological elements in which a person attempt to deal with.</p>
+<p>Social Media Analytics should be able to interpret Natural Language to discover if an information is subjective and determine the corresponding polarity. A text is <em>objective</em> if a post presents factual information about the world, while <em>subjective</em> if expresses feeling, emotions or beliefs. An <em>explicit</em> opinion is a subjective statement giving an opinion, while <em>implicit</em> implies an opinion. An <em>ironic</em> post is a communicative way expressing the opposite what is literally said. Emotions are complex reaction pattern involving experiential and physiological elements in which a person attempt to deal with.</p>
 <p>The process of SMA is constituted by:</p>
 <ol style="list-style-type: decimal">
 <li><em>Collect</em> real time expressions or opinion on-line or off-line;</li>
-<li><em>Represent</em> text from qualitative to quantitative data to measure compare and learn. The pre-processing techniques are remove stopwords, numbers and punctuation and apply the stemmatization. Furthermore, it is possible to represent in a vector space model the text. It is possible also to use the Word2vec model; <!-- Recall to Text Mining -->.</li>
-<li><em>Classify</em> measuring, compare and learn sentiments. It is possible to classify in different ways:</li>
-</ol>
+<li><em>Represent</em> text from qualitative to quantitative data to measure compare and learn. The pre-processing techniques are remove stopwords, numbers and punctuation and apply the stemmatization. Furthermore, it is possible to represent in a vector space model the text. It is possible also to use the Word2vec, a model used to create a distributed representation of words in a corpus. There are two main algorithm:
+<ul>
+<li>Skip-Gram, predicting the surrounding (context) words based on the current (centered) word. Given a sliding window of a fixed size moving along a sentence, the word in the middle is the target, while near words (in the sliding window) are context words. Then it is trained to predict the probabilities of a word being a context word for the given target. The model is a Neural Network with just one Hidden Layer representing the word embedding of size <span class="math inline">\(N\)</span>. The Input layer <span class="math inline">\(x\)</span> and the Output Layer <span class="math inline">\(y\)</span> are one-hot encoded word representations;</li>
+<li>CBOW, predicting the target word from source context words;</li>
+</ul></li>
+<li><em>Classify</em> measuring, compare and learn sentiments. It is possible to classify in different ways:
 <ul>
 <li>Lexicon-based Approach, for each sentence the process identifies term belonging to the list containing positive and negative terms with different weights. This lists is contained in a lexicon and one of the most important is the Liu lexicon opinion. The polarity of a text is given by the number of the positive and negative terms. For example, if <span class="math inline">\(\text{Word}_{\text{positive}} &gt; \text{Word}_{\text{negative}}\)</span> the word is positive;</li>
 <li>Supervised Learning, an approach in which some text are labeled and it is possible to learn a model in order to predict new texts with the corresponding polarity. To deal with negation is possible to add <em>NOT_</em> to every word between negation.</li>
-<li>Semi-Supervised Learning uses a small amount of information (e.g. few labeled examples and hand-built patterns) to enrich the lexicon predefined. It is possible to label a seed set of words and expand it to conjoined adjectives and cluster into two partition (positive and negative). Another possible approach is extract a phrasal lexicon from reviews using Part of Speech Tagging, identify and quantify the polarity and rate a reviews by the average polarity of phrases using Mutual and Point-wise Mutual Information <!-- Recall to Text Mining -->;</li>
-<li>Unsupervised Learning, suitable for aspect-based sentiment analysis.</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
+<li>Semi-Supervised Learning uses a small amount of information (e.g. few labeled examples and hand-built patterns) to enrich the lexicon predefined. It is possible to label a seed set of words and expand it to conjoined adjectives and cluster into two partition (positive and negative). Another possible approach is extract a phrasal lexicon from reviews using Part of Speech Tagging, identify and quantify the polarity and rate a reviews by the average polarity of phrases using Mutual and Pointwise Mutual Information <!-- Recall to Text Mining -->;</li>
+<li>Unsupervised Learning, suitable for aspect-based Sentiment Analysis.</li>
+</ul></li>
 <li><em>Predict</em>;</li>
 <li><em>Decide</em>.</li>
 </ol>
 <!-- Lecture 18: 02/12/2020 -->
-<div id="semantic-ambiguity" class="section level2">
-<h2><span class="header-section-number">7.1</span> Semantic Ambiguity</h2>
-<p>The <strong><em>N</em></strong>amed <strong><em>E</em></strong>ntity <strong><em>R</em></strong>ecognition (<strong>NER</strong>) is the task to find and classify text fragments into predefined labels. The most important model is the conditional random fields, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.</p>
+</div>
+<div id="semantic-ambiguity" class="section level1">
+<h1><span class="header-section-number">9</span> Semantic Ambiguity</h1>
+<p>The <strong><em>N</em></strong>amed <strong><em>E</em></strong>ntity <strong><em>R</em></strong>ecognition (<strong>NER</strong>) is the task to find and classify text fragments into predefined labels. The most important model is the <em>Conditional Random Fields</em>, an undirected discriminative graphical model trained to maximize the conditional probability to identify the name entity given tokens in a phrase.</p>
 <p><span class="math display">\[\mathbb{P}(y | x) = \frac{e^{\sum_{t = 1}^T(\sum_i \lambda_i f_i(y_t, x) + \sum_j u_j g_j (y_t, t_{t - 1}, x))}}{Z(x)}\]</span></p>
 <p>where:</p>
 <ul>
@@ -671,7 +700,39 @@ It can happen because people want to be associated with popular people, ideas, e
 </ul>
 <p>The main goal is to estimate the values of the weight vectors. <span class="math inline">\(\lambda_i\)</span> and <span class="math inline">\(u_j\)</span> are parameters to be estimated maximizing the log-likelihood of a given training set (Quasi Newton Method).</p>
 <p>Once trained the model, it is necessary to find the most probable sequence of hidden states: <span class="math inline">\(y^* = \max_y \mathbb{P}(y | x)\)</span>. It is possible to use the Viterbi algorithm, a dynamic programming, or the Shortest Path, an integer linear programming formulation.</p>
-<p>Once recognized entity mentions, it is necessary to disambiguate them, using the <strong>Named Entity Linking</strong>. To cho</p>
+<p>Once recognized entity mentions, it is necessary to disambiguate them, using the <strong>Named Entity Linking</strong>. Steps are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Candidate Resource Selection</em>, computing a scoring measuring lexical similarity between an entity and the candidate label and coverage based on the coherence of the entity:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+    KB(e_j, c_k) &amp;= \alpha lex(e_j, l_{c_k}) + (1 - \alpha) (\text{cov}(e_j, c_k)) \\
+    lex(e_j, l_{c_k}) &amp;= lcs(e_j, l_{c_k}) + W_D(\frac{JW(e_j, l_{c_k})}{W_D + 1}) \\
+    \text{cov}(e_j, c_k) &amp;= \text{cos}(e_j, \alpha_{c_k} + R(c_k))
+  \end{aligned}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><em>Entity Linking and Type Classification</em>, ranking recourses by KB score and select the optimal one for an entity;</li>
+<li><em>Entity Boundary Re-Scoping</em>, post processing of entities for filtering noise.</li>
+</ol>
+<div id="word-sense-disambiguation" class="section level2">
+<h2><span class="header-section-number">9.1</span> Word Sense Disambiguation</h2>
+<p>The Language is intrinsically ambiguous and it is difficult to distinguish differente entities connected to a term. There are 3 different approaches:</p>
+<ul>
+<li><em>Knowledge-Based Disambiguation</em>, using an external resources such as dictionaries or lexicons. Classes of this field are:
+<ul>
+<li>Machine readable dictionaries: for each word in the vocabulary, this method provides a list of meanings with its respect definition and an example;</li>
+<li>Thesauruses, adding an explicit synonym relying the meaning of the word;</li>
+<li>Semantic networks, adding semantic relation;</li>
+</ul>
+The Lesk Algorithm identifies sense of words in context using definition overlap. First, we retrieve from MRD all definitions to be disambiguated, the determine the definition overlap for all combination and choose the sense with the highest overlap. When applied this algorithm with more than 2 words there are a lot of combination and it is impossible to choose the optimal sense. It is introduced the Simplified Lesk measuring the overlap between sens definitions of a word and the current context, identifying the correct sens for one word a time.</li>
+<li><em>Supervised Disambiguation</em>, based on labeled training set. The learning system has a training set of feature-encoded inputs and their category;</li>
+<li><em>Unsupervised Disambiguation</em>, trying to overcome the knowledge with no manual tagging, no domain specific knowledge, but the sense of the sentence is defined by its context.</li>
+</ul>
+<!-- Approaches:
+        * Chinese Whispers
+        * Graph-based -->
+<p>One of the most important algorithm is the <em>Chinese Whispers</em> for undirected and unweighted graph. First, all nodes are assigned to a random class equal to the number of nodes (a sort of agglomerative). All nodes are selected in a random order and moved in the class with most connections until a predetermined number of iteration or convergence. This model is efficient because is time linear in the number of edges and it does not have any parameter to specify. Unfortunately, Chinese Whispers is not deterministic due to random order processing and in most of the case the algorithm cannot converge.</p>
+<p>Another approach is the <em>Graph-based</em>. When the sentence is collected about a word, first it is necessary to pre-process the text document (removing stopwords and do the POS tagging). Secondly, we build a word co-occurrence graph in which each word is anode, each edge represents a co-occurrence in a text unit and weights are the frequencies. Then it is necessary to cluster words by wordcloud, so the neighbors of a node form it word cloud. After we compute a Weighted Jaccard Distance to establish the correspondence &lt;Word Graph - Word Metric Space&gt;. Given a node, we define its weighted neighborhood as the multiset;
+Now it is possible to cluster in an agglomerative way.</p>
 </div>
 </div>
             </section>
